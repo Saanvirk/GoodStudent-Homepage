@@ -243,8 +243,10 @@ function Index() {
         </div>
       </nav>
 
+      <div className="slide-stack">
+        <div className="slide-layer hero-layer">
       {/* HERO */}
-      <header className="hero snap-sec" id="top">
+      <header className="hero" id="top">
         <Sparkles className="doodle drift" style={{ top: "14%", left: "6%", color: "var(--amber)" }} size={26} />
         <Star className="doodle spin" style={{ top: "72%", left: "4%", color: "var(--teal)" }} size={18} />
         <Heart className="doodle drift" style={{ top: "22%", right: "5%", color: "#E86A9A" }} size={20} />
@@ -291,6 +293,9 @@ function Index() {
           </div>
         </div>
       </header>
+        </div>
+
+        <div className="slide-layer demo-layer">
 
       {/* DEMO — video placeholder */}
       <section className="demo" id="demo">
@@ -318,6 +323,9 @@ function Index() {
           </div>
         </div>
       </section>
+        </div>
+
+        <div className="slide-layer intro-layer">
 
 
 
@@ -362,6 +370,9 @@ function Index() {
           </div>
         </div>
       </section>
+        </div>
+
+        <div className="slide-layer features-layer">
 
       {/* FEATURES — talking mascot */}
       <section className="features" id="features">
@@ -413,6 +424,9 @@ function Index() {
           </div>
         </div>
       </section>
+        </div>
+
+        <div className="slide-layer honesty-layer">
 
       {/* HONESTY band */}
       <section className="honesty" id="honesty">
@@ -444,6 +458,9 @@ function Index() {
           </div>
         </div>
       </section>
+        </div>
+
+        <div className="slide-layer team-layer">
 
       {/* MEET THE TEAM */}
       <section className="team" id="faq">
@@ -475,6 +492,9 @@ function Index() {
           </div>
         </div>
       </section>
+        </div>
+
+        <div className="slide-layer cta-layer">
 
       {/* CTA */}
       <section className="cta-band">
@@ -492,6 +512,8 @@ function Index() {
           </div>
         </div>
       </section>
+        </div>
+      </div>
 
       {/* FOOTER */}
       <footer>
