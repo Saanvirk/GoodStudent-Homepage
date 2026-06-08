@@ -82,9 +82,12 @@ function Mascot({ className = "" }: { className?: string }) {
       <circle className="ep" cx="96" cy="82" r="5" />
       <circle className="ew" cx="127" cy="80" r="11" />
       <circle className="ep" cx="124" cy="82" r="5" />
-      <circle className="gl" cx="93" cy="80" r="16" />
-      <circle className="gl" cx="127" cy="80" r="16" />
-      <path className="gl" d="M109 78 q1 -3 2 0" />
+      <circle className="gl" cx="93" cy="80" r="17" />
+      <circle className="gl" cx="127" cy="80" r="17" />
+      <path className="gl" d="M109 79 q1 -4 2 0" />
+      <path className="gl" d="M76 78 h-8 M144 78 h8" />
+      <circle className="gh" cx="88" cy="74" r="4" />
+      <circle className="gh" cx="122" cy="74" r="4" />
       <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
       <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
       <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
@@ -117,9 +120,11 @@ function LogoMark({ className = "" }: { className?: string }) {
       <circle cx="34" cy="28" r="3.4" fill="#fff" />
       <circle cx="33.3" cy="28.6" r="1.6" fill="#222F38" />
       {/* glasses */}
-      <circle cx="22" cy="28" r="5" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
-      <circle cx="34" cy="28" r="5" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
-      <path d="M27 28 q1 -1.5 2 0" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      <circle cx="22" cy="28" r="5.6" fill="none" stroke="#46D6AE" strokeWidth="1.7" />
+      <circle cx="34" cy="28" r="5.6" fill="none" stroke="#46D6AE" strokeWidth="1.7" />
+      <path d="M27.5 28 q.5 -1.7 1 0" fill="none" stroke="#46D6AE" strokeWidth="1.7" />
+      <circle cx="20.7" cy="26.3" r="1.2" fill="#fff" opacity=".72" />
+      <circle cx="32.7" cy="26.3" r="1.2" fill="#fff" opacity=".72" />
       {/* cheeks */}
       <ellipse cx="17" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
       <ellipse cx="39" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
