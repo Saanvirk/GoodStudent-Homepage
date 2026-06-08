@@ -506,7 +506,7 @@ function Index() {
           <div className="foot-grid">
             <div className="foot-brand">
               <a className="logo" href="#top">
-                <span className="mk"><Mascot /></span>
+                <LogoMark className="mk" />
                 <span>Good Student</span>
               </a>
               <p>An AI study tutor for Hong Kong students — built to guide, not to do the work for you.</p>
