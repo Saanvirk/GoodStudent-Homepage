@@ -355,10 +355,10 @@ function Index() {
                 body: "One tutor that grows with you, all the way through school.",
               },
               {
-                icon: Tablet,
+                icon: Puzzle,
                 grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
-                title: "Made for iPad",
-                body: "A calm, focused website that feels right on iPad, laptop or phone.",
+                title: "Tutor & playmate",
+                body: "It helps you study — and explores your hobbies, from chess to coding to music.",
               },
             ].map((p) => (
               <div key={p.title} className="pillar">
