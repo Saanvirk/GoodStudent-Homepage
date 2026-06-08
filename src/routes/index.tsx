@@ -134,7 +134,7 @@ function LogoMark({ className = "" }: { className?: string }) {
 /* -------- main -------- */
 function Index() {
   const [stepIdx, setStepIdx] = useState(0);
-  const [, setOpenQ] = useState<number | null>(0); void setOpenQ;
+  
 
   // Scroll progress bar + reveal-on-scroll
   useEffect(() => {
