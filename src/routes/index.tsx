@@ -821,10 +821,10 @@ const STYLES = `
 @keyframes gs-mjump{0%,100%{transform:translateY(0) rotate(0) scale(1)}18%{transform:translateY(0) rotate(-2deg) scaleX(1.04) scaleY(.97)}34%{transform:translateY(-18px) rotate(3deg) scaleX(.99) scaleY(1.03)}50%{transform:translateY(0) rotate(-1deg) scaleX(1.02) scaleY(.98)}66%{transform:translateY(-8px) rotate(2deg) scale(1.01)}82%{transform:translateY(0) rotate(0) scale(1)}}
 @keyframes gs-mshadow{0%,100%{transform:scaleX(1);opacity:.16}34%{transform:scaleX(.76);opacity:.09}66%{transform:scaleX(.88);opacity:.12}}
 
-/* Sticky/snap scroll + scroll reveals — slide-style snapping */
-html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
-body{scroll-snap-type:y mandatory}
-.gs-root section,.gs-root header.hero{scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
+/* Sticky slide scroll — each panel pins while the next slides over it */
+html{scroll-behavior:smooth}
+body{scroll-snap-type:none}
+.gs-root section,.gs-root header.hero{scroll-margin-top:0}
 .gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .gs-root .reveal.in{opacity:1;transform:none}
 .gs-root .hero-mascot{transform:translateY(var(--py,0))}
