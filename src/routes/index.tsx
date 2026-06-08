@@ -772,16 +772,44 @@ const STYLES = `
 .gs-root .a-blink .ms .ew,.gs-root .a-blink .ms .ep{animation:gs-mblink 3.4s ease-in-out infinite}
 .gs-root .a-talk .ms .mo{animation:gs-mtalk .42s ease-in-out infinite}
 .gs-root .a-talk .ms{animation:gs-mbob 3s ease-in-out infinite}
+/* Thinking: tilts head subtly, small mouth, no waving */
+.gs-root .a-think .ms{animation:gs-mthink 4.2s ease-in-out infinite;transform-origin:50% 60%}
+.gs-root .a-think .ms .mo{transform:scaleY(.45)}
+/* Jumping mascot for CTA */
+.gs-root .a-jump .ms{animation:gs-mjump 1.4s cubic-bezier(.5,0,.5,1) infinite;transform-origin:50% 95%}
+.gs-root .a-jump .ms .sh{animation:gs-mshadow 1.4s cubic-bezier(.5,0,.5,1) infinite;transform-origin:center}
 
 @keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes gs-mwave{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-100deg)}}
 @keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+@keyframes gs-mthink{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(4deg) translateY(-4px)}}
+@keyframes gs-mjump{0%,100%{transform:translateY(0) scaleY(1)}15%{transform:translateY(0) scaleY(.86) scaleX(1.08)}45%{transform:translateY(-44px) scaleY(1.06) scaleX(.96)}70%{transform:translateY(-44px) scaleY(1.06) scaleX(.96)}90%{transform:translateY(0) scaleY(.9) scaleX(1.06)}}
+@keyframes gs-mshadow{0%,100%{transform:scaleX(1);opacity:.18}45%,70%{transform:scaleX(.55);opacity:.08}}
 
-/* Sticky/snap scroll + scroll reveals */
-html{scroll-behavior:smooth}
-.gs-root{scroll-snap-type:y proximity}
-.gs-root .snap-sec,.gs-root section{scroll-snap-align:start;scroll-margin-top:80px}
+/* Sticky/snap scroll + scroll reveals — slide-style snapping */
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{scroll-snap-type:y mandatory}
+.gs-root section,.gs-root header.hero{scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
+.gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.gs-root .reveal.in{opacity:1;transform:none}
+.gs-root .hero-mascot{transform:translateY(var(--py,0))}
+.gs-root .blob{transform:translate3d(0,var(--py,0),0)}
+.gs-root .sec-head{position:relative}
+@media(min-width:961px){
+  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{min-height:100vh;display:flex;align-items:center;padding-top:80px;padding-bottom:40px}
+  .gs-root .features{align-items:flex-start;padding-top:100px}
+}
+
+/* TEAM */
+.gs-root .team{padding:80px 0}
+.gs-root .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.gs-root .team-card{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:24px;padding:22px 18px 20px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
+.gs-root .team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--orange-2)}
+.gs-root .team-photo{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(160deg,#FFE0C2,#FFC56B);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.6rem;box-shadow:var(--shadow-sm);overflow:hidden;border:3px solid #fff}
+.gs-root .team-photo .ti.ph{font-size:2rem;opacity:.6;color:var(--orange-deep);background:none}
+.gs-root .team-name{font-family:var(--font-display);font-weight:600;font-size:1.02rem;color:var(--ink)}
+.gs-root .team-role{margin-top:4px;font-size:.84rem;color:var(--ink-soft)}
 .gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .gs-root .reveal.in{opacity:1;transform:none}
 .gs-root .hero-mascot{transform:translateY(var(--py,0))}
