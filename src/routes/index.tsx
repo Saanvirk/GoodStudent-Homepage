@@ -296,7 +296,7 @@ function Index() {
               <div className="hero-mascot a-wave a-blink a-bob"><Mascot /></div>
               <div className="bubble-pop">
                 <b>Hi! I'm Good Student.</b>
-                <span>Let's work it out together — 粵 · EN · 普.</span>
+                <span>Let's work it out together — one good question at a time.</span>
               </div>
               <div className="name-tag">
                 <LogoMark className="nt-ic" />
