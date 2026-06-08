@@ -133,23 +133,38 @@ function LogoMark({ className = "" }: { className?: string }) {
 
 /* -------- main -------- */
 function Index() {
-  const [tab, setTab] = useState<"tools" | "tutors">("tools");
   const [stepIdx, setStepIdx] = useState(0);
   const [openQ, setOpenQ] = useState<number | null>(0);
 
-  // Scroll progress bar
+  // Scroll progress bar + reveal-on-scroll
   useEffect(() => {
     const sb = document.getElementById("gs-sb");
     const onScroll = () => {
       const h = document.documentElement;
       const sh = h.scrollHeight - h.clientHeight;
       if (sb && sh > 0) sb.style.width = (h.scrollTop / sh) * 100 + "%";
+      // parallax for hero stage
+      document.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+        const speed = parseFloat(el.dataset.parallax || "0.15");
+        const r = el.getBoundingClientRect();
+        const off = (r.top + r.height / 2 - window.innerHeight / 2) * speed;
+        el.style.setProperty("--py", `${off}px`);
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    onScroll();
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      io.disconnect();
+    };
   }, []);
 
-  // Auto-cycle feature speech (paused on hover via setStepIdx from card)
+  // Auto-cycle feature speech
   useEffect(() => {
     const t = setInterval(() => setStepIdx((i) => (i + 1) % 4), 4200);
     return () => clearInterval(t);
