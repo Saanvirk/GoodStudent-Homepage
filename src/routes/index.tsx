@@ -273,16 +273,16 @@ function Index() {
             </p>
             <div className="hero-cta up d4">
               <button className="btn btn-primary" onClick={() => scrollTo("features")}>
-                <Sparkles size={18} /> Try a free lesson
+                <Sparkles size={18} /> Explore tools
               </button>
-              <button className="btn btn-ghost" onClick={() => scrollTo("features")}>
+              <button className="btn btn-ghost" onClick={() => scrollTo("demo")}>
                 <Play size={16} /> See how it works
               </button>
             </div>
             <div className="trust up d4">
               <span className="chip"><GraduationCap size={14} /> Built on HKDSE curriculum</span>
               <span className="chip"><Lightbulb size={14} /> AI literacy first</span>
-              <span className="chip"><Heart size={14} /> Powers your learning &amp; hobbies</span>
+              <span className="chip"><Tablet size={14} /> Beautiful on iPad</span>
             </div>
           </div>
 
