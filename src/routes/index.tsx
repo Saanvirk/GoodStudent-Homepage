@@ -776,7 +776,7 @@ const STYLES = `
 .gs-root .cta-card .btn{position:relative;z-index:1;flex-shrink:0}
 
 /* FOOTER */
-.gs-root footer{background:linear-gradient(180deg,var(--cream),var(--cream-2));border-top:1px solid var(--line);padding:60px 0 36px;position:relative;z-index:1}
+.gs-root footer{background:linear-gradient(180deg,var(--cream),var(--cream-2));border-top:1px solid var(--line);padding:60px 0 36px;position:relative;z-index:10}
 .gs-root .foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:40px;margin-bottom:42px}
 .gs-root .foot-brand .logo{margin-bottom:16px}
 .gs-root .foot-brand p{color:var(--ink-soft);max-width:24em;font-size:.94rem}
