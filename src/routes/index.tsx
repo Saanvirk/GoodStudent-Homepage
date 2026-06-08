@@ -234,7 +234,7 @@ function Index() {
             <a href="#features">Tools</a>
             <a href="#tutors">Tutors</a>
             <a href="#honesty">Why us</a>
-            <a href="#faq">FAQ</a>
+            <a href="#faq">Team</a>
           </div>
           <div className="nav-right">
             <button className="btn btn-ghost btn-sm">Log in</button>
@@ -512,7 +512,7 @@ function Index() {
             </div>
             <div className="foot-col">
               <h4>Support</h4>
-              <a href="#faq">FAQ</a>
+              <a href="#faq">Team</a>
               <a href="#">Privacy &amp; safety</a>
               <a href="#">Contact</a>
             </div>
