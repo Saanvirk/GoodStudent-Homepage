@@ -19,14 +19,11 @@ import {
   Music,
   Code2,
   Crown,
-  ChevronDown,
-  ShieldCheck,
   Tablet,
   Play,
   ArrowRight,
   Star,
   Heart,
-  MonitorPlay,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -134,7 +131,7 @@ function LogoMark({ className = "" }: { className?: string }) {
 /* -------- main -------- */
 function Index() {
   const [stepIdx, setStepIdx] = useState(0);
-  const [openQ, setOpenQ] = useState<number | null>(0);
+  
 
   // Scroll progress bar + reveal-on-scroll
   useEffect(() => {
@@ -220,13 +217,6 @@ function Index() {
     },
   ];
 
-  const faqs = [
-    { icon: ShieldCheck, q: "Is it safe for students?", a: "Yes — built for students, no ads, private by design." },
-    { icon: Lightbulb, q: "Will it just give the answers?", a: "No. It guides you to work it out, like a good tutor would." },
-    { icon: TrendingUp, q: "What ages and levels?", a: "Primary 1 through Secondary 6, including the DSE." },
-    { icon: Tablet, q: "What do I need to use it?", a: "Any modern browser — works beautifully on iPad, laptop and phone." },
-    { icon: Languages, q: "Which languages?", a: "Cantonese, English and Mandarin." },
-  ];
 
   return (
     <div className="gs-root">
@@ -244,11 +234,11 @@ function Index() {
             <a href="#features">Tools</a>
             <a href="#tutors">Tutors</a>
             <a href="#honesty">Why us</a>
-            <a href="#faq">FAQ</a>
+            <a href="#faq">Team</a>
           </div>
           <div className="nav-right">
-            <a href="#demo" className="nav-watch"><Play size={13} /> Watch demo</a>
-            <button className="btn btn-primary btn-sm" onClick={() => scrollTo("features")}>Explore tools <ArrowRight size={16} /></button>
+            <button className="btn btn-ghost btn-sm">Log in</button>
+            <button className="btn btn-primary btn-sm">Sign up <ArrowRight size={16} /></button>
           </div>
         </div>
       </nav>
@@ -279,11 +269,6 @@ function Index() {
                 <Play size={16} /> See how it works
               </button>
             </div>
-            <div className="trust up d4">
-              <span className="chip"><GraduationCap size={14} /> Built on HKDSE curriculum</span>
-              <span className="chip"><Lightbulb size={14} /> AI literacy first</span>
-              <span className="chip"><Tablet size={14} /> Beautiful on iPad</span>
-            </div>
           </div>
 
           {/* Mascot stage */}
@@ -312,8 +297,8 @@ function Index() {
         <div className="wrap">
           <div className="sec-head reveal">
             <div className="eyebrow">See it in action</div>
-            <h2>A two-minute tour of Good Student.</h2>
-            <p className="sec-sub">A peek at the website — drop your demo video into the frame below.</p>
+            <h2>A two-minute tour on learning with Good Student.</h2>
+            <p className="sec-sub">Watch a quick walkthrough of the website in action.</p>
           </div>
           <div className="demo-frame reveal">
             <div className="df-bar">
@@ -360,10 +345,10 @@ function Index() {
                 body: "One tutor that grows with you, all the way through school.",
               },
               {
-                icon: Tablet,
+                icon: Puzzle,
                 grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
-                title: "Made for iPad",
-                body: "A calm, focused website that feels right on iPad, laptop or phone.",
+                title: "Tutor & playmate",
+                body: "It helps you study — and explores your hobbies, from chess to coding to music.",
               },
             ].map((p) => (
               <div key={p.title} className="pillar">
@@ -436,21 +421,16 @@ function Index() {
             <div className="honesty-grid">
               <div>
                 <div className="eyebrow">What's different</div>
-                <h2>It tells you when it's not sure.</h2>
+                <h2>It teaches you to verify.</h2>
                 <p>
-                  It shows where answers come from — so students learn to <i>use</i> AI,
-                  not just trust it.
+                  It shows you where the answers come from and nudges you to learn
+                  using AI — instead of blindly copying its answers.
                 </p>
-                <div className="honesty-stats">
-                  <div><b>iPad</b><span>ready</span></div>
-                  <div><b>12+</b><span>subjects</span></div>
-                  <div><b>P1–S6</b><span>every level</span></div>
-                </div>
               </div>
               <div className="honesty-art">
                 <span className="ring" />
                 <span className="ring r2" />
-                <div className="mascot-wrap a-wave"><Mascot /></div>
+                <div className="mascot-wrap a-think a-blink"><Mascot /></div>
                 <svg className="mug" viewBox="0 0 60 60">
                   <rect x="10" y="18" width="34" height="30" rx="6" fill="#FFF6EC" stroke="#26323B" strokeWidth="2" />
                   <path d="M44 24 h6 a6 6 0 0 1 0 14 h-6" fill="none" stroke="#26323B" strokeWidth="3" />
@@ -465,24 +445,31 @@ function Index() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="faq" id="faq">
+      {/* MEET THE TEAM */}
+      <section className="team" id="faq">
         <div className="wrap">
           <div className="sec-head reveal">
-            <div className="eyebrow">Good to know</div>
-            <h2>Quick questions.</h2>
+            <div className="eyebrow">Meet the team</div>
+            <h2>The people behind Good Student.</h2>
+            <p className="sec-sub">A small team of educators, builders and curious minds.</p>
           </div>
-          <div className="faq-list">
-            {faqs.map((f, i) => (
-              <div key={i} className={`qa ${openQ === i ? "open" : ""}`}>
-                <button onClick={() => setOpenQ(openQ === i ? null : i)}>
-                  <span className="qi"><f.icon size={16} /></span>
-                  <span className="qt">{f.q}</span>
-                  <ChevronDown className="chev" size={18} />
-                </button>
-                <div className="ans" style={{ maxHeight: openQ === i ? 120 : 0 }}>
-                  <p>{f.a}</p>
+          <div className="team-grid">
+            {[
+              { name: "Alison Chan", role: "CEO, Solomon Learning", initials: "AC" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+            ].map((p, i) => (
+              <div key={i} className="team-card reveal">
+                <div className="team-photo">
+                  {p.initials ? <span className="ti">{p.initials}</span> : <span className="ti ph">+</span>}
                 </div>
+                <div className="team-name">{p.name}</div>
+                <div className="team-role">{p.role}</div>
               </div>
             ))}
           </div>
@@ -493,7 +480,7 @@ function Index() {
       <section className="cta-band">
         <div className="wrap">
           <div className="cta-card">
-            <div className="cta-mascot a-bob"><Mascot /></div>
+            <div className="cta-mascot a-jump"><Mascot /></div>
             <div>
               <div className="eyebrow">Ready when you are</div>
               <h2>Let's work through one together.</h2>
@@ -525,7 +512,7 @@ function Index() {
             </div>
             <div className="foot-col">
               <h4>Support</h4>
-              <a href="#faq">FAQ</a>
+              <a href="#faq">Team</a>
               <a href="#">Privacy &amp; safety</a>
               <a href="#">Contact</a>
             </div>
@@ -785,16 +772,44 @@ const STYLES = `
 .gs-root .a-blink .ms .ew,.gs-root .a-blink .ms .ep{animation:gs-mblink 3.4s ease-in-out infinite}
 .gs-root .a-talk .ms .mo{animation:gs-mtalk .42s ease-in-out infinite}
 .gs-root .a-talk .ms{animation:gs-mbob 3s ease-in-out infinite}
+/* Thinking: tilts head subtly, small mouth, no waving */
+.gs-root .a-think .ms{animation:gs-mthink 4.2s ease-in-out infinite;transform-origin:50% 60%}
+.gs-root .a-think .ms .mo{transform:scaleY(.45)}
+/* Jumping mascot for CTA */
+.gs-root .a-jump .ms{animation:gs-mjump 1.4s cubic-bezier(.5,0,.5,1) infinite;transform-origin:50% 95%}
+.gs-root .a-jump .ms .sh{animation:gs-mshadow 1.4s cubic-bezier(.5,0,.5,1) infinite;transform-origin:center}
 
 @keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes gs-mwave{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-100deg)}}
 @keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+@keyframes gs-mthink{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(4deg) translateY(-4px)}}
+@keyframes gs-mjump{0%,100%{transform:translateY(0) scaleY(1)}15%{transform:translateY(0) scaleY(.86) scaleX(1.08)}45%{transform:translateY(-44px) scaleY(1.06) scaleX(.96)}70%{transform:translateY(-44px) scaleY(1.06) scaleX(.96)}90%{transform:translateY(0) scaleY(.9) scaleX(1.06)}}
+@keyframes gs-mshadow{0%,100%{transform:scaleX(1);opacity:.18}45%,70%{transform:scaleX(.55);opacity:.08}}
 
-/* Sticky/snap scroll + scroll reveals */
-html{scroll-behavior:smooth}
-.gs-root{scroll-snap-type:y proximity}
-.gs-root .snap-sec,.gs-root section{scroll-snap-align:start;scroll-margin-top:80px}
+/* Sticky/snap scroll + scroll reveals — slide-style snapping */
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{scroll-snap-type:y mandatory}
+.gs-root section,.gs-root header.hero{scroll-snap-align:start;scroll-snap-stop:always;scroll-margin-top:0}
+.gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.gs-root .reveal.in{opacity:1;transform:none}
+.gs-root .hero-mascot{transform:translateY(var(--py,0))}
+.gs-root .blob{transform:translate3d(0,var(--py,0),0)}
+.gs-root .sec-head{position:relative}
+@media(min-width:961px){
+  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{min-height:100vh;display:flex;align-items:center;padding-top:80px;padding-bottom:40px}
+  .gs-root .features{align-items:flex-start;padding-top:100px}
+}
+
+/* TEAM */
+.gs-root .team{padding:80px 0}
+.gs-root .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.gs-root .team-card{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:24px;padding:22px 18px 20px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
+.gs-root .team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--orange-2)}
+.gs-root .team-photo{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(160deg,#FFE0C2,#FFC56B);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.6rem;box-shadow:var(--shadow-sm);overflow:hidden;border:3px solid #fff}
+.gs-root .team-photo .ti.ph{font-size:2rem;opacity:.6;color:var(--orange-deep);background:none}
+.gs-root .team-name{font-family:var(--font-display);font-weight:600;font-size:1.02rem;color:var(--ink)}
+.gs-root .team-role{margin-top:4px;font-size:.84rem;color:var(--ink-soft)}
 .gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .gs-root .reveal.in{opacity:1;transform:none}
 .gs-root .hero-mascot{transform:translateY(var(--py,0))}
@@ -808,7 +823,7 @@ html{scroll-behavior:smooth}
 
 /* DEMO section */
 .gs-root .demo{padding:70px 0 30px;position:relative}
-.gs-root .demo-frame{max-width:1040px;margin:0 auto;background:linear-gradient(180deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-lift);overflow:hidden;position:sticky;top:96px}
+.gs-root .demo-frame{max-width:1040px;margin:0 auto;width:100%;background:linear-gradient(180deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-lift);overflow:hidden}
 .gs-root .df-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:linear-gradient(180deg,#fff,#fff6ec);border-bottom:1px solid var(--line)}
 .gs-root .df-url{margin-left:14px;font-family:var(--font-body);font-size:.84rem;color:var(--ink-soft);background:var(--cream-2);padding:5px 14px;border-radius:999px}
 .gs-root .df-stage{aspect-ratio:16/9;background:
@@ -838,6 +853,8 @@ html{scroll-behavior:smooth}
   .gs-root .honesty-inner{padding:48px 30px}
   .gs-root .cta-card{flex-direction:column;text-align:center;padding:36px 28px}
   .gs-root .cta-mascot{width:100px}
+  .gs-root .team-grid{grid-template-columns:repeat(2,1fr)}
+  html,body{scroll-snap-type:none}
 }
 @media(max-width:560px){
   .gs-root .nav-right .lang{display:none}
