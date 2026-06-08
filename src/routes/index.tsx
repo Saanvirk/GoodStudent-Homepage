@@ -831,8 +831,9 @@ body{scroll-snap-type:none}
 .gs-root .blob{transform:translate3d(0,var(--py,0),0)}
 .gs-root .sec-head{position:relative}
 @media(min-width:961px){
-  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{min-height:100vh;display:flex;align-items:center;padding-top:72px;padding-bottom:40px}
-  .gs-root .features{align-items:flex-start;padding-top:100px}
+  .gs-root .slide-layer:last-child{height:118vh}
+  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{display:flex;align-items:center;padding-top:72px;padding-bottom:34px}
+  .gs-root .features{padding-top:86px}
 }
 
 /* TEAM */
@@ -890,8 +891,8 @@ body{scroll-snap-type:none}
   .gs-root .cta-card{flex-direction:column;text-align:center;padding:36px 28px}
   .gs-root .cta-mascot{width:100px}
   .gs-root .team-grid{grid-template-columns:repeat(2,1fr)}
-  .gs-root .slide-layer{position:relative;height:auto;min-height:auto;display:block;box-shadow:none}
-  .gs-root .slide-layer>section,.gs-root .slide-layer>header{min-height:auto;display:block}
+  .gs-root .slide-layer{height:auto;min-height:auto;display:block;box-shadow:none}
+  .gs-root .slide-layer>section,.gs-root .slide-layer>header{position:relative;height:auto;min-height:auto;display:block;overflow:visible}
   html,body{scroll-snap-type:none}
 }
 @media(max-width:560px){
