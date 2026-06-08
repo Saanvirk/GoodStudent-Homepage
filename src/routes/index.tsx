@@ -455,24 +455,31 @@ function Index() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="faq" id="faq">
+      {/* MEET THE TEAM */}
+      <section className="team" id="faq">
         <div className="wrap">
           <div className="sec-head reveal">
-            <div className="eyebrow">Good to know</div>
-            <h2>Quick questions.</h2>
+            <div className="eyebrow">Meet the team</div>
+            <h2>The people behind Good Student.</h2>
+            <p className="sec-sub">A small team of educators, builders and curious minds.</p>
           </div>
-          <div className="faq-list">
-            {faqs.map((f, i) => (
-              <div key={i} className={`qa ${openQ === i ? "open" : ""}`}>
-                <button onClick={() => setOpenQ(openQ === i ? null : i)}>
-                  <span className="qi"><f.icon size={16} /></span>
-                  <span className="qt">{f.q}</span>
-                  <ChevronDown className="chev" size={18} />
-                </button>
-                <div className="ans" style={{ maxHeight: openQ === i ? 120 : 0 }}>
-                  <p>{f.a}</p>
+          <div className="team-grid">
+            {[
+              { name: "Alison Chan", role: "CEO, Solomon Learning", initials: "AC" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+              { name: "Team member", role: "Role placeholder", initials: "" },
+            ].map((p, i) => (
+              <div key={i} className="team-card reveal">
+                <div className="team-photo">
+                  {p.initials ? <span className="ti">{p.initials}</span> : <span className="ti ph">+</span>}
                 </div>
+                <div className="team-name">{p.name}</div>
+                <div className="team-role">{p.role}</div>
               </div>
             ))}
           </div>
@@ -483,7 +490,7 @@ function Index() {
       <section className="cta-band">
         <div className="wrap">
           <div className="cta-card">
-            <div className="cta-mascot a-bob"><Mascot /></div>
+            <div className="cta-mascot a-jump"><Mascot /></div>
             <div>
               <div className="eyebrow">Ready when you are</div>
               <h2>Let's work through one together.</h2>
