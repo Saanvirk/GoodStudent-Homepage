@@ -831,7 +831,7 @@ body{scroll-snap-type:none}
 .gs-root .blob{transform:translate3d(0,var(--py,0),0)}
 .gs-root .sec-head{position:relative}
 @media(min-width:961px){
-  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{min-height:calc(100vh - 72px);display:flex;align-items:center;padding-top:48px;padding-bottom:40px}
+  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{min-height:100vh;display:flex;align-items:center;padding-top:72px;padding-bottom:40px}
   .gs-root .features{align-items:flex-start;padding-top:100px}
 }
 
@@ -890,7 +890,7 @@ body{scroll-snap-type:none}
   .gs-root .cta-card{flex-direction:column;text-align:center;padding:36px 28px}
   .gs-root .cta-mascot{width:100px}
   .gs-root .team-grid{grid-template-columns:repeat(2,1fr)}
-  .gs-root .slide-layer{position:relative;min-height:auto;box-shadow:none}
+  .gs-root .slide-layer{position:relative;height:auto;min-height:auto;display:block;box-shadow:none}
   .gs-root .slide-layer>section,.gs-root .slide-layer>header{min-height:auto;display:block}
   html,body{scroll-snap-type:none}
 }
