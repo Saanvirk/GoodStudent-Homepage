@@ -616,8 +616,27 @@ const STYLES = `
 .gs-root .tutor-build{border:1.5px dashed var(--orange-2);color:var(--orange-deep);justify-content:center;font-weight:600;font-family:var(--font-display);background:var(--cream)}
 .gs-root .dev-foot{padding:10px 18px;border-top:1px solid var(--line);background:#fff;display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--ink-faint)}
 .gs-root .dev-foot .streak{margin-left:auto;color:var(--orange-deep);font-weight:600}
-.gs-root .hero-mascot{position:absolute;width:124px;right:-12px;bottom:-66px;z-index:5;filter:drop-shadow(0 16px 22px rgba(120,40,0,.22));animation:gs-bob 4s ease-in-out infinite}
+.gs-root .hero-mascot{width:280px;z-index:5;filter:drop-shadow(0 20px 30px rgba(120,40,0,.28));position:relative}
 @keyframes gs-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+
+/* Hero spotlight stage */
+.gs-root .spotlight{position:relative;display:grid;place-items:center;min-height:480px;z-index:1}
+.gs-root .spotlight .ring{position:absolute;border-radius:50%;border:2px dashed rgba(224,78,7,.28);pointer-events:none}
+.gs-root .spotlight .ring.r1{width:380px;height:380px;animation:gs-spin 28s linear infinite}
+.gs-root .spotlight .ring.r2{width:460px;height:460px;border-style:dotted;border-color:rgba(70,214,174,.42);animation:gs-spin 40s linear infinite reverse}
+.gs-root .spotlight::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,84,.55),rgba(255,247,239,0) 65%);z-index:0;animation:gs-float 8s ease-in-out infinite}
+
+.gs-root .bubble-pop{position:absolute;top:30px;left:-20px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px 18px;box-shadow:var(--shadow);max-width:230px;z-index:6;animation:gs-up .8s .5s both cubic-bezier(.2,.7,.2,1)}
+.gs-root .bubble-pop b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:1rem;display:block;margin-bottom:3px}
+.gs-root .bubble-pop span{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
+.gs-root .bubble-pop::after{content:"";position:absolute;bottom:-10px;right:32px;width:20px;height:20px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+
+.gs-root .name-tag{position:absolute;bottom:6px;right:-10px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px 8px 8px;box-shadow:var(--shadow);z-index:6;animation:gs-up .8s .65s both cubic-bezier(.2,.7,.2,1)}
+.gs-root .name-tag .nt-ic{width:36px;height:36px}
+.gs-root .name-tag span{font-size:.78rem;line-height:1.25;color:var(--ink-soft)}
+.gs-root .name-tag b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.92rem}
+.gs-root .name-tag i{font-style:normal;color:var(--orange-deep);font-weight:500}
+
 
 /* Doodles */
 .gs-root .doodle{position:absolute;z-index:0;opacity:.85}
