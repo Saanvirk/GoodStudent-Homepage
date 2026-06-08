@@ -52,31 +52,35 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-/* -------- mascot -------- */
+/* -------- mascot (clean symmetric arms) -------- */
 function Mascot({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 220 246" className={`ms ${className}`} aria-hidden="true">
-      <ellipse className="sh" cx="110" cy="234" rx="52" ry="8" />
-      <rect className="bf st" x="86" y="186" width="15" height="40" rx="7.5" />
-      <rect className="bf st" x="119" y="186" width="15" height="40" rx="7.5" />
-      <ellipse className="bf st" cx="92" cy="228" rx="13" ry="7" />
-      <ellipse className="bf st" cx="128" cy="228" rx="13" ry="7" />
-      <g className="arml" transform="rotate(20 52 132)">
-        <rect className="bf st" x="44.5" y="126" width="15" height="48" rx="7.5" />
-        <circle className="bf st" cx="52" cy="176" r="9.5" />
+      <ellipse className="sh" cx="110" cy="234" rx="54" ry="7" />
+      {/* legs */}
+      <rect className="bf st" x="88" y="188" width="14" height="36" rx="7" />
+      <rect className="bf st" x="118" y="188" width="14" height="36" rx="7" />
+      <ellipse className="bf st" cx="95" cy="226" rx="13" ry="6" />
+      <ellipse className="bf st" cx="125" cy="226" rx="13" ry="6" />
+      {/* arms — symmetric, gently angled to body */}
+      <g className="arml">
+        <rect className="bf st" x="50" y="138" width="14" height="46" rx="7" transform="rotate(14 57 161)" />
+        <circle className="bf st" cx="52" cy="184" r="10" />
       </g>
-      <g className="armr" transform="rotate(-20 168 132)">
-        <rect className="bf st" x="160.5" y="126" width="15" height="48" rx="7.5" />
-        <circle className="bf st" cx="168" cy="176" r="9.5" />
+      <g className="armr">
+        <rect className="bf st" x="156" y="138" width="14" height="46" rx="7" transform="rotate(-14 163 161)" />
+        <circle className="bf st" cx="168" cy="184" r="10" />
       </g>
+      {/* body */}
       <rect className="bf st" x="66" y="118" width="88" height="82" rx="30" />
       <rect className="scr" x="85" y="138" width="50" height="36" rx="11" />
       <text className="scrt" x="110" y="162" textAnchor="middle">{"</>"}</text>
-      <path className="or" d="M110 116 L92 108 L92 124 Z" />
-      <path className="or" d="M110 116 L128 108 L128 124 Z" />
-      <circle className="ord" cx="110" cy="116" r="5" />
+      {/* neck */}
+      <rect className="bf st" x="104" y="110" width="12" height="12" rx="3" />
+      {/* antenna */}
       <path className="st" d="M110 36 C108 24 118 22 113 12" fill="none" strokeLinecap="round" />
       <circle className="ant" cx="112" cy="10" r="7" />
+      {/* head */}
       <rect className="bf st" x="56" y="34" width="108" height="92" rx="40" />
       <circle className="ac" cx="56" cy="82" r="9" />
       <circle className="ac" cx="164" cy="82" r="9" />
@@ -91,6 +95,30 @@ function Mascot({ className = "" }: { className?: string }) {
       <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
       <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
       <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
+    </svg>
+  );
+}
+
+/* -------- proper logo mark (chat bubble + grad cap) -------- */
+function LogoMark({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient id="lg-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FF8A3D" />
+          <stop offset="100%" stopColor="#E04E07" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M10 5 H38 A7 7 0 0 1 45 12 V30 A7 7 0 0 1 38 37 H23 L14 45 V37 H10 A7 7 0 0 1 3 30 V12 A7 7 0 0 1 10 5 Z"
+        fill="url(#lg-grad)"
+      />
+      {/* graduation cap */}
+      <path d="M24 13 L37 19 L24 25 L11 19 Z" fill="#FFF7EF" />
+      <path d="M16 21 V27 C16 29 20 30.5 24 30.5 C28 30.5 32 29 32 27 V21" fill="none" stroke="#FFF7EF" strokeWidth="2.2" strokeLinejoin="round" />
+      {/* tassel */}
+      <path d="M35 20 V25" stroke="#FFC56B" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="35" cy="26.5" r="1.6" fill="#FFC56B" />
     </svg>
   );
 }
