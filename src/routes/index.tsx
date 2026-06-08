@@ -52,31 +52,35 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-/* -------- mascot -------- */
+/* -------- mascot (clean symmetric arms) -------- */
 function Mascot({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 220 246" className={`ms ${className}`} aria-hidden="true">
-      <ellipse className="sh" cx="110" cy="234" rx="52" ry="8" />
-      <rect className="bf st" x="86" y="186" width="15" height="40" rx="7.5" />
-      <rect className="bf st" x="119" y="186" width="15" height="40" rx="7.5" />
-      <ellipse className="bf st" cx="92" cy="228" rx="13" ry="7" />
-      <ellipse className="bf st" cx="128" cy="228" rx="13" ry="7" />
-      <g className="arml" transform="rotate(20 52 132)">
-        <rect className="bf st" x="44.5" y="126" width="15" height="48" rx="7.5" />
-        <circle className="bf st" cx="52" cy="176" r="9.5" />
+      <ellipse className="sh" cx="110" cy="234" rx="54" ry="7" />
+      {/* legs */}
+      <rect className="bf st" x="88" y="188" width="14" height="36" rx="7" />
+      <rect className="bf st" x="118" y="188" width="14" height="36" rx="7" />
+      <ellipse className="bf st" cx="95" cy="226" rx="13" ry="6" />
+      <ellipse className="bf st" cx="125" cy="226" rx="13" ry="6" />
+      {/* arms — symmetric, gently angled to body */}
+      <g className="arml">
+        <rect className="bf st" x="50" y="138" width="14" height="46" rx="7" transform="rotate(14 57 161)" />
+        <circle className="bf st" cx="52" cy="184" r="10" />
       </g>
-      <g className="armr" transform="rotate(-20 168 132)">
-        <rect className="bf st" x="160.5" y="126" width="15" height="48" rx="7.5" />
-        <circle className="bf st" cx="168" cy="176" r="9.5" />
+      <g className="armr">
+        <rect className="bf st" x="156" y="138" width="14" height="46" rx="7" transform="rotate(-14 163 161)" />
+        <circle className="bf st" cx="168" cy="184" r="10" />
       </g>
+      {/* body */}
       <rect className="bf st" x="66" y="118" width="88" height="82" rx="30" />
       <rect className="scr" x="85" y="138" width="50" height="36" rx="11" />
       <text className="scrt" x="110" y="162" textAnchor="middle">{"</>"}</text>
-      <path className="or" d="M110 116 L92 108 L92 124 Z" />
-      <path className="or" d="M110 116 L128 108 L128 124 Z" />
-      <circle className="ord" cx="110" cy="116" r="5" />
+      {/* neck */}
+      <rect className="bf st" x="104" y="110" width="12" height="12" rx="3" />
+      {/* antenna */}
       <path className="st" d="M110 36 C108 24 118 22 113 12" fill="none" strokeLinecap="round" />
       <circle className="ant" cx="112" cy="10" r="7" />
+      {/* head */}
       <rect className="bf st" x="56" y="34" width="108" height="92" rx="40" />
       <circle className="ac" cx="56" cy="82" r="9" />
       <circle className="ac" cx="164" cy="82" r="9" />
@@ -91,6 +95,30 @@ function Mascot({ className = "" }: { className?: string }) {
       <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
       <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
       <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
+    </svg>
+  );
+}
+
+/* -------- proper logo mark (chat bubble + grad cap) -------- */
+function LogoMark({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient id="lg-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FF8A3D" />
+          <stop offset="100%" stopColor="#E04E07" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M10 5 H38 A7 7 0 0 1 45 12 V30 A7 7 0 0 1 38 37 H23 L14 45 V37 H10 A7 7 0 0 1 3 30 V12 A7 7 0 0 1 10 5 Z"
+        fill="url(#lg-grad)"
+      />
+      {/* graduation cap */}
+      <path d="M24 13 L37 19 L24 25 L11 19 Z" fill="#FFF7EF" />
+      <path d="M16 21 V27 C16 29 20 30.5 24 30.5 C28 30.5 32 29 32 27 V21" fill="none" stroke="#FFF7EF" strokeWidth="2.2" strokeLinejoin="round" />
+      {/* tassel */}
+      <path d="M35 20 V25" stroke="#FFC56B" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="35" cy="26.5" r="1.6" fill="#FFC56B" />
     </svg>
   );
 }
@@ -201,7 +229,7 @@ function Index() {
       <nav>
         <div className="wrap nav-in">
           <a className="logo" href="#top">
-            <span className="mk"><Mascot /></span>
+            <LogoMark className="mk" />
             <span>Good Student</span>
           </a>
           <div className="nav-links">
@@ -244,16 +272,9 @@ function Index() {
               </button>
             </div>
             <div className="trust up d4">
-              <div className="avatars">
-                <span style={{ background: "linear-gradient(135deg,#FF8A3D,#FB6A1E)" }}>L</span>
-                <span style={{ background: "linear-gradient(135deg,#3F95E6,#2E7BD0)" }}>M</span>
-                <span style={{ background: "linear-gradient(135deg,#37C2A0,#13A483)" }}>陳</span>
-                <span style={{ background: "linear-gradient(135deg,#8A7BE8,#6F5FE0)" }}>K</span>
-              </div>
-              <div>
-                <div className="stars">{[0, 1, 2, 3, 4].map((i) => <Star key={i} size={14} fill="#FFB454" stroke="#FFB454" />)}</div>
-                <div className="trust-sub"><b>4.9</b> · loved by 12,000+ HK families</div>
-              </div>
+              <span className="chip"><ShieldCheck size={14} /> No ads · student-safe</span>
+              <span className="chip"><Languages size={14} /> 粵 · EN · 普</span>
+              <span className="chip"><Sparkles size={14} /> Free to start</span>
             </div>
           </div>
 
@@ -485,7 +506,7 @@ function Index() {
           <div className="foot-grid">
             <div className="foot-brand">
               <a className="logo" href="#top">
-                <span className="mk"><Mascot /></span>
+                <LogoMark className="mk" />
                 <span>Good Student</span>
               </a>
               <p>An AI study tutor for Hong Kong students — built to guide, not to do the work for you.</p>
@@ -548,10 +569,9 @@ const STYLES = `
 /* NAV */
 .gs-root nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,247,239,.82);border-bottom:1px solid rgba(240,222,201,.7)}
 .gs-root .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.gs-root .logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:1.25rem}
-.gs-root .logo .mk{width:46px;height:46px;border-radius:14px;background:linear-gradient(150deg,var(--orange),var(--orange-2));display:grid;place-items:center;box-shadow:var(--shadow-sm);transform:rotate(-6deg);transition:transform .3s;overflow:hidden}
-.gs-root .logo:hover .mk{transform:rotate(6deg) scale(1.06)}
-.gs-root .logo .mk svg{width:36px;height:36px}
+.gs-root .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em}
+.gs-root .logo .mk{width:40px;height:40px;display:block;filter:drop-shadow(0 6px 12px rgba(224,78,7,.28));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.gs-root .logo:hover .mk{transform:rotate(-8deg) scale(1.08)}
 .gs-root .nav-links{display:flex;gap:30px;font-weight:500;color:var(--ink-soft);font-size:.95rem}
 .gs-root .nav-links a{position:relative;transition:color .2s}
 .gs-root .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--orange);border-radius:2px;transition:right .25s}
@@ -583,13 +603,9 @@ const STYLES = `
 .gs-root .up.d1{animation-delay:.05s}.gs-root .up.d2{animation-delay:.18s}.gs-root .up.d3{animation-delay:.32s}.gs-root .up.d4{animation-delay:.46s}
 @keyframes gs-up{to{opacity:1;transform:none}}
 
-.gs-root .trust{display:flex;align-items:center;gap:14px;margin-top:34px}
-.gs-root .avatars{display:flex}
-.gs-root .avatars span{width:36px;height:36px;border-radius:50%;border:3px solid var(--cream);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;margin-left:-10px;box-shadow:var(--shadow-sm)}
-.gs-root .avatars span:first-child{margin-left:0}
-.gs-root .stars{display:flex;gap:2px}
-.gs-root .trust-sub{font-size:.85rem;color:var(--ink-soft);margin-top:2px}
-.gs-root .trust-sub b{color:var(--ink);font-weight:600}
+.gs-root .trust{display:flex;align-items:center;gap:10px;margin-top:34px;flex-wrap:wrap}
+.gs-root .chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-body);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:8px 13px;border-radius:999px;box-shadow:var(--shadow-sm)}
+.gs-root .chip svg{color:var(--orange-deep)}
 
 /* Device */
 .gs-root .stage{position:relative}
