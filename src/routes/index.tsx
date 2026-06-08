@@ -509,7 +509,7 @@ function Index() {
             <div>
               <div className="eyebrow">Ready when you are</div>
               <h2>Let's work through one together.</h2>
-              <p>Free to start. No ads. Built for students — works great on iPad.</p>
+              <p>Free to start. No ads. Built for students. Start using on your preferred device!</p>
             </div>
             <button className="btn btn-primary btn-lg" onClick={() => scrollTo("features")}>
               Start exploring <ArrowRight size={18} />
