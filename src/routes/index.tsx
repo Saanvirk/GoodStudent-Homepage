@@ -585,8 +585,8 @@ const STYLES = `
 .gs-root .nav-links a:hover{color:var(--orange-deep)}
 .gs-root .nav-links a:hover::after{right:0}
 .gs-root .nav-right{display:flex;align-items:center;gap:14px}
-.gs-root .lang{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
-.gs-root .lang b{color:var(--orange-deep)}
+.gs-root .lang,.gs-root .foot-note{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
+.gs-root .lang b,.gs-root .foot-note svg{color:var(--orange-deep)}
 
 /* Buttons */
 .gs-root .btn{font-family:var(--font-display);font-weight:600;border:none;cursor:pointer;border-radius:999px;transition:transform .18s,box-shadow .18s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
