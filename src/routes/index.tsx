@@ -247,8 +247,8 @@ function Index() {
             <a href="#faq">FAQ</a>
           </div>
           <div className="nav-right">
-            <a href="#demo" className="nav-watch"><Play size={13} /> Watch demo</a>
-            <button className="btn btn-primary btn-sm" onClick={() => scrollTo("features")}>Explore tools <ArrowRight size={16} /></button>
+            <button className="btn btn-ghost btn-sm">Log in</button>
+            <button className="btn btn-primary btn-sm">Sign up <ArrowRight size={16} /></button>
           </div>
         </div>
       </nav>
