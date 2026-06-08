@@ -99,29 +99,41 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
-/* -------- proper logo mark (chat bubble + grad cap) -------- */
+/* -------- logo mark: tiny mascot face -------- */
 function LogoMark({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+    <svg viewBox="0 0 56 56" className={className} aria-hidden="true">
       <defs>
         <linearGradient id="lg-grad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#FF8A3D" />
           <stop offset="100%" stopColor="#E04E07" />
         </linearGradient>
       </defs>
-      <path
-        d="M10 5 H38 A7 7 0 0 1 45 12 V30 A7 7 0 0 1 38 37 H23 L14 45 V37 H10 A7 7 0 0 1 3 30 V12 A7 7 0 0 1 10 5 Z"
-        fill="url(#lg-grad)"
-      />
-      {/* graduation cap */}
-      <path d="M24 13 L37 19 L24 25 L11 19 Z" fill="#FFF7EF" />
-      <path d="M16 21 V27 C16 29 20 30.5 24 30.5 C28 30.5 32 29 32 27 V21" fill="none" stroke="#FFF7EF" strokeWidth="2.2" strokeLinejoin="round" />
-      {/* tassel */}
-      <path d="M35 20 V25" stroke="#FFC56B" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="35" cy="26.5" r="1.6" fill="#FFC56B" />
+      {/* rounded squircle backdrop */}
+      <rect x="2" y="2" width="52" height="52" rx="16" fill="url(#lg-grad)" />
+      {/* antenna */}
+      <path d="M28 11 C26.5 7 32 6 29 2" fill="none" stroke="#FFF7EF" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="29" cy="2.5" r="2.2" fill="#FFF7EF" />
+      {/* head */}
+      <rect x="10" y="11" width="36" height="32" rx="14" fill="#FFF7EF" />
+      {/* face screen */}
+      <rect x="14" y="17" width="28" height="22" rx="9" fill="#222F38" />
+      {/* eyes */}
+      <circle cx="22" cy="28" r="3.4" fill="#fff" />
+      <circle cx="22.7" cy="28.6" r="1.6" fill="#222F38" />
+      <circle cx="34" cy="28" r="3.4" fill="#fff" />
+      <circle cx="33.3" cy="28.6" r="1.6" fill="#222F38" />
+      {/* glasses */}
+      <circle cx="22" cy="28" r="5" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      <circle cx="34" cy="28" r="5" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      <path d="M27 28 q1 -1.5 2 0" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      {/* cheeks */}
+      <ellipse cx="17" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
+      <ellipse cx="39" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
     </svg>
   );
 }
+
 
 /* -------- main -------- */
 function Index() {
@@ -246,90 +258,59 @@ function Index() {
       </nav>
 
       {/* HERO */}
-      <header className="hero" id="top">
-        <Sparkles className="doodle drift" style={{ top: "12%", left: "5%", color: "var(--amber)" }} size={28} />
-        <Star className="doodle spin" style={{ top: "70%", left: "3%", color: "var(--teal)" }} size={20} />
-        <Heart className="doodle drift" style={{ top: "20%", right: "3%", color: "#E86A9A" }} size={22} />
+      <header className="hero snap-sec" id="top">
+        <Sparkles className="doodle drift" style={{ top: "14%", left: "6%", color: "var(--amber)" }} size={26} />
+        <Star className="doodle spin" style={{ top: "72%", left: "4%", color: "var(--teal)" }} size={18} />
+        <Heart className="doodle drift" style={{ top: "22%", right: "5%", color: "#E86A9A" }} size={20} />
 
         <div className="wrap hero-grid">
-          <div>
+          <div className="hero-copy">
             <div className="eyebrow up d1">
-              <span className="dot-live" /> An AI study tutor · P1 to DSE
+              <span className="dot-live" /> Meet Good Student
             </div>
             <h1 className="up d2">
-              A tutor that helps you <span className="hl">work it out</span>.
+              An AI study buddy that helps you <span className="hl">work it out</span>.
             </h1>
             <p className="lead up d3">
-              It works through problems with you — patiently, in Cantonese, English &amp; Mandarin.
-              Built to guide, never to do the work for you.
+              A patient tutor that thinks through problems with you, becomes a tutor from your own
+              notes, and grows real <b>AI literacy</b> while you learn.
             </p>
             <div className="hero-cta up d4">
               <button className="btn btn-primary" onClick={() => scrollTo("features")}>
                 <Sparkles size={18} /> Try a free lesson
               </button>
-              <button className="btn btn-ghost" onClick={() => scrollTo("tutors")}>
+              <button className="btn btn-ghost" onClick={() => scrollTo("features")}>
                 <Play size={16} /> See how it works
               </button>
             </div>
             <div className="trust up d4">
-              <span className="chip"><ShieldCheck size={14} /> No ads · student-safe</span>
-              <span className="chip"><Languages size={14} /> 粵 · EN · 普</span>
-              <span className="chip"><Sparkles size={14} /> Free to start</span>
+              <span className="chip"><GraduationCap size={14} /> Built on HKDSE curriculum</span>
+              <span className="chip"><Lightbulb size={14} /> AI literacy first</span>
+              <span className="chip"><Heart size={14} /> Powers your learning &amp; hobbies</span>
             </div>
           </div>
 
-          {/* Device preview */}
+          {/* Mascot stage */}
           <div className="stage">
             <span className="blob b1" />
             <span className="blob b2" />
-            <div className="device">
-              <div className="dev-bar">
-                <span className="dot" style={{ background: "#FB6A1E" }} />
-                <span className="dot" style={{ background: "#FFB454" }} />
-                <span className="dot" style={{ background: "#46D6AE" }} />
-                <span className="dev-title">goodstudent.app</span>
-                <span className="play"><Play size={11} fill="currentColor" /> Live</span>
+            <div className="spotlight">
+              <span className="ring r1" />
+              <span className="ring r2" />
+              <div className="hero-mascot a-wave a-blink a-bob"><Mascot /></div>
+              <div className="bubble-pop">
+                <b>Hi! I'm Good Student.</b>
+                <span>Let's work it out together — 粵 · EN · 普.</span>
               </div>
-              <div className="dev-body">
-                <div className="toggle">
-                  <button className={tab === "tools" ? "on" : ""} onClick={() => setTab("tools")}>Tools</button>
-                  <button className={tab === "tutors" ? "on" : ""} onClick={() => setTab("tutors")}>Tutors</button>
-                </div>
-                {tab === "tools" ? (
-                  <div className="tool-grid">
-                    {tools.map((t) => (
-                      <div key={t.label} className="tcell">
-                        <span className="tcell-ic" style={{ background: t.color + "1f", color: t.color }}>
-                          <t.icon size={18} />
-                        </span>
-                        <span>{t.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div>
-                    {tutors.map((t) => (
-                      <div key={t.label} className="tutor-row">
-                        <span className="ic" style={{ background: t.bg }}><t.icon size={16} /></span>
-                        <span className="nm">{t.label}</span>
-                        <span className="go">Open <ArrowRight size={12} /></span>
-                      </div>
-                    ))}
-                    <div className="tutor-row tutor-build">
-                      <Plus size={16} /> Build your own
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="dev-foot">
-                <Zap size={12} /> Updated 2 min ago
-                <span className="streak">🔥 7-day streak</span>
+              <div className="name-tag">
+                <LogoMark className="nt-ic" />
+                <span><b>Good Student</b><br /><i>your AI study buddy</i></span>
               </div>
             </div>
-            <div className="hero-mascot a-blink"><Mascot /></div>
           </div>
         </div>
       </header>
+
 
       {/* PILLARS */}
       <section className="intro">
@@ -569,9 +550,10 @@ const STYLES = `
 /* NAV */
 .gs-root nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,247,239,.82);border-bottom:1px solid rgba(240,222,201,.7)}
 .gs-root .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.gs-root .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em}
-.gs-root .logo .mk{width:40px;height:40px;display:block;filter:drop-shadow(0 6px 12px rgba(224,78,7,.28));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-.gs-root .logo:hover .mk{transform:rotate(-8deg) scale(1.08)}
+.gs-root .logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;color:var(--ink)}
+.gs-root .logo .mk{width:42px;height:42px;display:block;filter:drop-shadow(0 6px 14px rgba(224,78,7,.32));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.gs-root .logo:hover .mk{transform:rotate(-10deg) scale(1.1)}
+.gs-root .logo span{background:linear-gradient(180deg,var(--ink) 60%,var(--orange-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .gs-root .nav-links{display:flex;gap:30px;font-weight:500;color:var(--ink-soft);font-size:.95rem}
 .gs-root .nav-links a{position:relative;transition:color .2s}
 .gs-root .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--orange);border-radius:2px;transition:right .25s}
@@ -592,7 +574,8 @@ const STYLES = `
 
 /* HERO */
 .gs-root .hero{position:relative;padding:72px 0 80px}
-.gs-root .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.gs-root .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.gs-root .hero-copy{position:relative;z-index:2}
 .gs-root .hero h1{font-size:clamp(2.8rem,5.4vw,4.4rem);margin-top:18px}
 .gs-root .hero h1 .hl{color:var(--orange-deep);position:relative;white-space:nowrap;display:inline-block}
 .gs-root .hero h1 .hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.34em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1;transform:scaleX(0);transform-origin:left;animation:gs-underline 1s .7s forwards cubic-bezier(.2,.7,.2,1)}
@@ -635,8 +618,27 @@ const STYLES = `
 .gs-root .tutor-build{border:1.5px dashed var(--orange-2);color:var(--orange-deep);justify-content:center;font-weight:600;font-family:var(--font-display);background:var(--cream)}
 .gs-root .dev-foot{padding:10px 18px;border-top:1px solid var(--line);background:#fff;display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--ink-faint)}
 .gs-root .dev-foot .streak{margin-left:auto;color:var(--orange-deep);font-weight:600}
-.gs-root .hero-mascot{position:absolute;width:124px;right:-12px;bottom:-66px;z-index:5;filter:drop-shadow(0 16px 22px rgba(120,40,0,.22));animation:gs-bob 4s ease-in-out infinite}
+.gs-root .hero-mascot{width:280px;z-index:5;filter:drop-shadow(0 20px 30px rgba(120,40,0,.28));position:relative}
 @keyframes gs-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+
+/* Hero spotlight stage */
+.gs-root .spotlight{position:relative;display:grid;place-items:center;min-height:480px;z-index:1}
+.gs-root .spotlight .ring{position:absolute;border-radius:50%;border:2px dashed rgba(224,78,7,.28);pointer-events:none}
+.gs-root .spotlight .ring.r1{width:380px;height:380px;animation:gs-spin 28s linear infinite}
+.gs-root .spotlight .ring.r2{width:460px;height:460px;border-style:dotted;border-color:rgba(70,214,174,.42);animation:gs-spin 40s linear infinite reverse}
+.gs-root .spotlight::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,84,.55),rgba(255,247,239,0) 65%);z-index:0;animation:gs-float 8s ease-in-out infinite}
+
+.gs-root .bubble-pop{position:absolute;top:30px;left:-20px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px 18px;box-shadow:var(--shadow);max-width:230px;z-index:6;animation:gs-up .8s .5s both cubic-bezier(.2,.7,.2,1)}
+.gs-root .bubble-pop b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:1rem;display:block;margin-bottom:3px}
+.gs-root .bubble-pop span{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
+.gs-root .bubble-pop::after{content:"";position:absolute;bottom:-10px;right:32px;width:20px;height:20px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+
+.gs-root .name-tag{position:absolute;bottom:6px;right:-10px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px 8px 8px;box-shadow:var(--shadow);z-index:6;animation:gs-up .8s .65s both cubic-bezier(.2,.7,.2,1)}
+.gs-root .name-tag .nt-ic{width:36px;height:36px}
+.gs-root .name-tag span{font-size:.78rem;line-height:1.25;color:var(--ink-soft)}
+.gs-root .name-tag b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.92rem}
+.gs-root .name-tag i{font-style:normal;color:var(--orange-deep);font-weight:500}
+
 
 /* Doodles */
 .gs-root .doodle{position:absolute;z-index:0;opacity:.85}
@@ -760,15 +762,23 @@ const STYLES = `
 .gs-root .a-talk .ms{animation:gs-mbob 3s ease-in-out infinite}
 
 @keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes gs-mwave{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(14deg)}}
+@keyframes gs-mwave{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-100deg)}}
 @keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+
+/* Sticky/snap scroll */
+html{scroll-behavior:smooth}
+.gs-root{scroll-snap-type:y proximity}
+.gs-root .snap-sec,.gs-root section{scroll-snap-align:start;scroll-margin-top:80px}
 
 /* RESPONSIVE */
 @media(max-width:960px){
   .gs-root .hero-grid,.gs-root .stage-wrap,.gs-root .honesty-grid,.gs-root .pillars,.gs-root .foot-grid{grid-template-columns:1fr;gap:40px}
   .gs-root .nav-links{display:none}
-  .gs-root .hero-mascot{display:none}
+  .gs-root .hero-mascot{width:220px}
+  .gs-root .spotlight{min-height:380px}
+  .gs-root .bubble-pop{position:relative;top:0;left:0;max-width:none;margin-bottom:14px}
+  .gs-root .name-tag{position:relative;right:0;bottom:0;margin-top:14px}
   .gs-root .presenter{position:static;flex-direction:row;gap:20px;margin-bottom:20px;align-items:center}
   .gs-root .presenter .mascot-wrap{width:120px;margin-top:0;order:-1}
   .gs-root .bubble{flex:1;min-height:0;max-width:none}
