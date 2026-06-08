@@ -13,24 +13,20 @@ import {
   ScanLine,
   Layers,
   Mic,
-  Ear,
   Network,
   BookOpen,
-  ListChecks,
   Calculator,
   Music,
   Code2,
   Crown,
   ChevronDown,
   ShieldCheck,
-  Smartphone,
-  Globe,
+  Tablet,
   Play,
   ArrowRight,
-  Plus,
   Star,
   Heart,
-  Zap,
+  MonitorPlay,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -137,23 +133,38 @@ function LogoMark({ className = "" }: { className?: string }) {
 
 /* -------- main -------- */
 function Index() {
-  const [tab, setTab] = useState<"tools" | "tutors">("tools");
   const [stepIdx, setStepIdx] = useState(0);
   const [openQ, setOpenQ] = useState<number | null>(0);
 
-  // Scroll progress bar
+  // Scroll progress bar + reveal-on-scroll
   useEffect(() => {
     const sb = document.getElementById("gs-sb");
     const onScroll = () => {
       const h = document.documentElement;
       const sh = h.scrollHeight - h.clientHeight;
       if (sb && sh > 0) sb.style.width = (h.scrollTop / sh) * 100 + "%";
+      // parallax for hero stage
+      document.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+        const speed = parseFloat(el.dataset.parallax || "0.15");
+        const r = el.getBoundingClientRect();
+        const off = (r.top + r.height / 2 - window.innerHeight / 2) * speed;
+        el.style.setProperty("--py", `${off}px`);
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    onScroll();
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      io.disconnect();
+    };
   }, []);
 
-  // Auto-cycle feature speech (paused on hover via setStepIdx from card)
+  // Auto-cycle feature speech
   useEffect(() => {
     const t = setInterval(() => setStepIdx((i) => (i + 1) % 4), 4200);
     return () => clearInterval(t);
@@ -209,26 +220,11 @@ function Index() {
     },
   ];
 
-  const tools = [
-    { icon: ListChecks, label: "Quizzes", color: "#13A483" },
-    { icon: Layers, label: "Flashcards", color: "#E86A9A" },
-    { icon: Mic, label: "Say it Right", color: "#8A7BE8" },
-    { icon: Ear, label: "Hear it Right", color: "#3F95E6" },
-    { icon: Network, label: "Mind map", color: "#E04E07" },
-    { icon: BookOpen, label: "Reading", color: "#C77A0A" },
-  ];
-
-  const tutors = [
-    { icon: BookOpen, label: "DSE English", bg: "#3F95E6" },
-    { icon: Calculator, label: "DSE Maths", bg: "#C77A0A" },
-    { icon: Languages, label: "DSE 中文", bg: "#E86A9A" },
-  ];
-
   const faqs = [
-    { icon: ShieldCheck, q: "Is it safe for my child?", a: "Yes — made for students, no ads, private by design." },
-    { icon: Lightbulb, q: "Will it just give the answers?", a: "No. It guides them to work it out, like a good tutor." },
+    { icon: ShieldCheck, q: "Is it safe for students?", a: "Yes — built for students, no ads, private by design." },
+    { icon: Lightbulb, q: "Will it just give the answers?", a: "No. It guides you to work it out, like a good tutor would." },
     { icon: TrendingUp, q: "What ages and levels?", a: "Primary 1 through Secondary 6, including the DSE." },
-    { icon: Smartphone, q: "What device do we need?", a: "A phone — the one most families already have." },
+    { icon: Tablet, q: "What do I need to use it?", a: "Any modern browser — works beautifully on iPad, laptop and phone." },
     { icon: Languages, q: "Which languages?", a: "Cantonese, English and Mandarin." },
   ];
 
@@ -251,8 +247,8 @@ function Index() {
             <a href="#faq">FAQ</a>
           </div>
           <div className="nav-right">
-            <span className="lang"><Globe size={14} /> <b>粵</b> · EN · 普</span>
-            <button className="btn btn-primary btn-sm">Open app <ArrowRight size={16} /></button>
+            <a href="#demo" className="nav-watch"><Play size={13} /> Watch demo</a>
+            <button className="btn btn-primary btn-sm" onClick={() => scrollTo("features")}>Explore tools <ArrowRight size={16} /></button>
           </div>
         </div>
       </nav>
@@ -277,30 +273,30 @@ function Index() {
             </p>
             <div className="hero-cta up d4">
               <button className="btn btn-primary" onClick={() => scrollTo("features")}>
-                <Sparkles size={18} /> Try a free lesson
+                <Sparkles size={18} /> Explore tools
               </button>
-              <button className="btn btn-ghost" onClick={() => scrollTo("features")}>
+              <button className="btn btn-ghost" onClick={() => scrollTo("demo")}>
                 <Play size={16} /> See how it works
               </button>
             </div>
             <div className="trust up d4">
               <span className="chip"><GraduationCap size={14} /> Built on HKDSE curriculum</span>
               <span className="chip"><Lightbulb size={14} /> AI literacy first</span>
-              <span className="chip"><Heart size={14} /> Powers your learning &amp; hobbies</span>
+              <span className="chip"><Tablet size={14} /> Beautiful on iPad</span>
             </div>
           </div>
 
           {/* Mascot stage */}
           <div className="stage">
-            <span className="blob b1" />
-            <span className="blob b2" />
+            <span className="blob b1" data-parallax="0.08" />
+            <span className="blob b2" data-parallax="-0.06" />
             <div className="spotlight">
               <span className="ring r1" />
               <span className="ring r2" />
               <div className="hero-mascot a-wave a-blink a-bob"><Mascot /></div>
               <div className="bubble-pop">
                 <b>Hi! I'm Good Student.</b>
-                <span>Let's work it out together — 粵 · EN · 普.</span>
+                <span>Let's work it out together — one good question at a time.</span>
               </div>
               <div className="name-tag">
                 <LogoMark className="nt-ic" />
@@ -311,11 +307,40 @@ function Index() {
         </div>
       </header>
 
+      {/* DEMO — video placeholder */}
+      <section className="demo" id="demo">
+        <div className="wrap">
+          <div className="sec-head reveal">
+            <div className="eyebrow">See it in action</div>
+            <h2>A two-minute tour of Good Student.</h2>
+            <p className="sec-sub">A peek at the website — drop your demo video into the frame below.</p>
+          </div>
+          <div className="demo-frame reveal">
+            <div className="df-bar">
+              <span className="dot" style={{ background: "#FF6B6B" }} />
+              <span className="dot" style={{ background: "#FFD93D" }} />
+              <span className="dot" style={{ background: "#6BCB77" }} />
+              <span className="df-url">goodstudent.hk</span>
+            </div>
+            <div className="df-stage">
+              {/* Replace this block with your <video> or <iframe> */}
+              <div className="df-placeholder">
+                <div className="df-play"><Play size={34} /></div>
+                <b>Drop your demo video here</b>
+                <span>Replace this placeholder in <code>src/routes/index.tsx</code> · <code>.df-stage</code></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
 
       {/* PILLARS */}
       <section className="intro">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Why it exists</div>
             <h2>For when you don't have a tutor.</h2>
             <p className="sec-sub">Real tutoring shouldn't be a luxury. Good Student is built around three quiet ideas.</p>
@@ -332,13 +357,13 @@ function Index() {
                 icon: TrendingUp,
                 grad: "linear-gradient(150deg,#37C2A0,#13A483)",
                 title: "P1 to the DSE",
-                body: "One tutor that grows with you, right on your phone.",
+                body: "One tutor that grows with you, all the way through school.",
               },
               {
-                icon: Languages,
+                icon: Tablet,
                 grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
-                title: "Three languages",
-                body: "Cantonese, English or Mandarin — switch any time.",
+                title: "Made for iPad",
+                body: "A calm, focused website that feels right on iPad, laptop or phone.",
               },
             ].map((p) => (
               <div key={p.title} className="pillar">
@@ -356,7 +381,7 @@ function Index() {
       {/* FEATURES — talking mascot */}
       <section className="features" id="features">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Take the tour</div>
             <h2>Here's what I can do.</h2>
             <p className="sec-sub">Hover any card — I'll tell you about it.</p>
@@ -417,7 +442,7 @@ function Index() {
                   not just trust it.
                 </p>
                 <div className="honesty-stats">
-                  <div><b>3</b><span>languages</span></div>
+                  <div><b>iPad</b><span>ready</span></div>
                   <div><b>12+</b><span>subjects</span></div>
                   <div><b>P1–S6</b><span>every level</span></div>
                 </div>
@@ -443,7 +468,7 @@ function Index() {
       {/* FAQ */}
       <section className="faq" id="faq">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Good to know</div>
             <h2>Quick questions.</h2>
           </div>
@@ -472,10 +497,10 @@ function Index() {
             <div>
               <div className="eyebrow">Ready when you are</div>
               <h2>Let's work through one together.</h2>
-              <p>Free to start. No ads. Built for students.</p>
+              <p>Free to start. No ads. Built for students — works great on iPad.</p>
             </div>
-            <button className="btn btn-primary btn-lg">
-              Open the app <ArrowRight size={18} />
+            <button className="btn btn-primary btn-lg" onClick={() => scrollTo("features")}>
+              Start exploring <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -490,7 +515,7 @@ function Index() {
                 <LogoMark className="mk" />
                 <span>Good Student</span>
               </a>
-              <p>An AI study tutor for Hong Kong students — built to guide, not to do the work for you.</p>
+              <p>An AI study tutor for Hong Kong students — a website built to guide, not to do the work for you.</p>
             </div>
             <div className="foot-col">
               <h4>Product</h4>
@@ -507,7 +532,7 @@ function Index() {
           </div>
           <div className="foot-bottom">
             <span>© Good Student · A community education programme</span>
-            <span className="lang"><Globe size={14} /> <b>粵</b> · English · 普通話</span>
+            <span className="foot-note"><Tablet size={14} /> Works on iPad, laptop & phone</span>
           </div>
         </div>
       </footer>
@@ -560,8 +585,8 @@ const STYLES = `
 .gs-root .nav-links a:hover{color:var(--orange-deep)}
 .gs-root .nav-links a:hover::after{right:0}
 .gs-root .nav-right{display:flex;align-items:center;gap:14px}
-.gs-root .lang{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
-.gs-root .lang b{color:var(--orange-deep)}
+.gs-root .lang,.gs-root .foot-note{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
+.gs-root .lang b,.gs-root .foot-note svg{color:var(--orange-deep)}
 
 /* Buttons */
 .gs-root .btn{font-family:var(--font-display);font-weight:600;border:none;cursor:pointer;border-radius:999px;transition:transform .18s,box-shadow .18s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
@@ -766,10 +791,37 @@ const STYLES = `
 @keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
 
-/* Sticky/snap scroll */
+/* Sticky/snap scroll + scroll reveals */
 html{scroll-behavior:smooth}
 .gs-root{scroll-snap-type:y proximity}
 .gs-root .snap-sec,.gs-root section{scroll-snap-align:start;scroll-margin-top:80px}
+.gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.gs-root .reveal.in{opacity:1;transform:none}
+.gs-root .hero-mascot{transform:translateY(var(--py,0))}
+.gs-root .blob{transform:translate3d(0,var(--py,0),0)}
+.gs-root .sec-head{position:relative}
+
+/* Watch demo link (nav) */
+.gs-root .nav-watch{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:8px 13px;border-radius:999px;transition:.2s}
+.gs-root .nav-watch:hover{color:var(--orange-deep);border-color:var(--orange-2);transform:translateY(-1px)}
+.gs-root .nav-watch svg{color:var(--orange-deep)}
+
+/* DEMO section */
+.gs-root .demo{padding:70px 0 30px;position:relative}
+.gs-root .demo-frame{max-width:1040px;margin:0 auto;background:linear-gradient(180deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-lift);overflow:hidden;position:sticky;top:96px}
+.gs-root .df-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:linear-gradient(180deg,#fff,#fff6ec);border-bottom:1px solid var(--line)}
+.gs-root .df-url{margin-left:14px;font-family:var(--font-body);font-size:.84rem;color:var(--ink-soft);background:var(--cream-2);padding:5px 14px;border-radius:999px}
+.gs-root .df-stage{aspect-ratio:16/9;background:
+  radial-gradient(60% 70% at 50% 40%,rgba(255,180,84,.22),transparent 70%),
+  linear-gradient(160deg,#26323B,#1A2129);display:grid;place-items:center;color:#FFF7EF;position:relative;overflow:hidden}
+.gs-root .df-stage::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
+.gs-root .df-placeholder{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:1;padding:0 20px}
+.gs-root .df-placeholder b{font-family:var(--font-display);font-weight:600;font-size:1.3rem}
+.gs-root .df-placeholder span{font-size:.86rem;opacity:.7;max-width:30em}
+.gs-root .df-placeholder code{background:rgba(255,255,255,.1);padding:2px 7px;border-radius:6px;font-size:.78rem}
+.gs-root .df-play{width:84px;height:84px;border-radius:50%;background:linear-gradient(160deg,var(--orange-2),var(--orange-deep));display:grid;place-items:center;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 0 rgba(251,106,30,.6);animation:gs-pulseplay 2.4s ease-in-out infinite;cursor:pointer}
+@keyframes gs-pulseplay{0%,100%{box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 0 rgba(251,106,30,.55)}50%{box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 22px rgba(251,106,30,0)}}
+
 
 /* RESPONSIVE */
 @media(max-width:960px){
