@@ -775,7 +775,10 @@ html{scroll-behavior:smooth}
 @media(max-width:960px){
   .gs-root .hero-grid,.gs-root .stage-wrap,.gs-root .honesty-grid,.gs-root .pillars,.gs-root .foot-grid{grid-template-columns:1fr;gap:40px}
   .gs-root .nav-links{display:none}
-  .gs-root .hero-mascot{display:none}
+  .gs-root .hero-mascot{width:220px}
+  .gs-root .spotlight{min-height:380px}
+  .gs-root .bubble-pop{position:relative;top:0;left:0;max-width:none;margin-bottom:14px}
+  .gs-root .name-tag{position:relative;right:0;bottom:0;margin-top:14px}
   .gs-root .presenter{position:static;flex-direction:row;gap:20px;margin-bottom:20px;align-items:center}
   .gs-root .presenter .mascot-wrap{width:120px;margin-top:0;order:-1}
   .gs-root .bubble{flex:1;min-height:0;max-width:none}
