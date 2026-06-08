@@ -569,10 +569,9 @@ const STYLES = `
 /* NAV */
 .gs-root nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,247,239,.82);border-bottom:1px solid rgba(240,222,201,.7)}
 .gs-root .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.gs-root .logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:1.25rem}
-.gs-root .logo .mk{width:46px;height:46px;border-radius:14px;background:linear-gradient(150deg,var(--orange),var(--orange-2));display:grid;place-items:center;box-shadow:var(--shadow-sm);transform:rotate(-6deg);transition:transform .3s;overflow:hidden}
-.gs-root .logo:hover .mk{transform:rotate(6deg) scale(1.06)}
-.gs-root .logo .mk svg{width:36px;height:36px}
+.gs-root .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em}
+.gs-root .logo .mk{width:40px;height:40px;display:block;filter:drop-shadow(0 6px 12px rgba(224,78,7,.28));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.gs-root .logo:hover .mk{transform:rotate(-8deg) scale(1.08)}
 .gs-root .nav-links{display:flex;gap:30px;font-weight:500;color:var(--ink-soft);font-size:.95rem}
 .gs-root .nav-links a{position:relative;transition:color .2s}
 .gs-root .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--orange);border-radius:2px;transition:right .25s}
