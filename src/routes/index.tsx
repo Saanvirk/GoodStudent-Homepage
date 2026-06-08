@@ -709,7 +709,7 @@ const STYLES = `
 .gs-root .cta-card>div{flex:1;position:relative;z-index:1}
 .gs-root .cta-card h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:10px}
 .gs-root .cta-card p{margin-top:8px;color:var(--ink-soft)}
-.gs-root .cta-mascot{width:120px;flex-shrink:0;filter:drop-shadow(0 12px 18px rgba(120,40,0,.2))}
+.gs-root .cta-mascot{width:104px;flex-shrink:0;filter:drop-shadow(0 12px 18px rgba(120,40,0,.2))}
 .gs-root .cta-card .btn{position:relative;z-index:1;flex-shrink:0}
 
 /* FOOTER */
