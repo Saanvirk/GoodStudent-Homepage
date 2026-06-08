@@ -297,7 +297,7 @@ function Index() {
             <div className="spotlight">
               <span className="ring r1" />
               <span className="ring r2" />
-              <div className="hero-mascot a-wave a-blink"><Mascot /></div>
+              <div className="hero-mascot a-wave a-blink a-bob"><Mascot /></div>
               <div className="bubble-pop">
                 <b>Hi! I'm Good Student.</b>
                 <span>Let's work it out together — 粵 · EN · 普.</span>
