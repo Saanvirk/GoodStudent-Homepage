@@ -442,7 +442,7 @@ function Index() {
                   not just trust it.
                 </p>
                 <div className="honesty-stats">
-                  <div><b>3</b><span>languages</span></div>
+                  <div><b>iPad</b><span>ready</span></div>
                   <div><b>12+</b><span>subjects</span></div>
                   <div><b>P1–S6</b><span>every level</span></div>
                 </div>
