@@ -853,6 +853,8 @@ body{scroll-snap-type:y mandatory}
   .gs-root .honesty-inner{padding:48px 30px}
   .gs-root .cta-card{flex-direction:column;text-align:center;padding:36px 28px}
   .gs-root .cta-mascot{width:100px}
+  .gs-root .team-grid{grid-template-columns:repeat(2,1fr)}
+  html,body{scroll-snap-type:none}
 }
 @media(max-width:560px){
   .gs-root .nav-right .lang{display:none}
