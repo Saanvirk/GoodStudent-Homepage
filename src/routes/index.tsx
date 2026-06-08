@@ -258,90 +258,59 @@ function Index() {
       </nav>
 
       {/* HERO */}
-      <header className="hero" id="top">
-        <Sparkles className="doodle drift" style={{ top: "12%", left: "5%", color: "var(--amber)" }} size={28} />
-        <Star className="doodle spin" style={{ top: "70%", left: "3%", color: "var(--teal)" }} size={20} />
-        <Heart className="doodle drift" style={{ top: "20%", right: "3%", color: "#E86A9A" }} size={22} />
+      <header className="hero snap-sec" id="top">
+        <Sparkles className="doodle drift" style={{ top: "14%", left: "6%", color: "var(--amber)" }} size={26} />
+        <Star className="doodle spin" style={{ top: "72%", left: "4%", color: "var(--teal)" }} size={18} />
+        <Heart className="doodle drift" style={{ top: "22%", right: "5%", color: "#E86A9A" }} size={20} />
 
         <div className="wrap hero-grid">
-          <div>
+          <div className="hero-copy">
             <div className="eyebrow up d1">
-              <span className="dot-live" /> An AI study tutor · P1 to DSE
+              <span className="dot-live" /> Meet Good Student
             </div>
             <h1 className="up d2">
-              A tutor that helps you <span className="hl">work it out</span>.
+              An AI study buddy that helps you <span className="hl">work it out</span>.
             </h1>
             <p className="lead up d3">
-              It works through problems with you — patiently, in Cantonese, English &amp; Mandarin.
-              Built to guide, never to do the work for you.
+              A patient tutor that thinks through problems with you, becomes a tutor from your own
+              notes, and grows real <b>AI literacy</b> while you learn.
             </p>
             <div className="hero-cta up d4">
               <button className="btn btn-primary" onClick={() => scrollTo("features")}>
                 <Sparkles size={18} /> Try a free lesson
               </button>
-              <button className="btn btn-ghost" onClick={() => scrollTo("tutors")}>
+              <button className="btn btn-ghost" onClick={() => scrollTo("features")}>
                 <Play size={16} /> See how it works
               </button>
             </div>
             <div className="trust up d4">
-              <span className="chip"><ShieldCheck size={14} /> No ads · student-safe</span>
-              <span className="chip"><Languages size={14} /> 粵 · EN · 普</span>
-              <span className="chip"><Sparkles size={14} /> Free to start</span>
+              <span className="chip"><GraduationCap size={14} /> Built on HKDSE curriculum</span>
+              <span className="chip"><Lightbulb size={14} /> AI literacy first</span>
+              <span className="chip"><Heart size={14} /> Powers your learning &amp; hobbies</span>
             </div>
           </div>
 
-          {/* Device preview */}
+          {/* Mascot stage */}
           <div className="stage">
             <span className="blob b1" />
             <span className="blob b2" />
-            <div className="device">
-              <div className="dev-bar">
-                <span className="dot" style={{ background: "#FB6A1E" }} />
-                <span className="dot" style={{ background: "#FFB454" }} />
-                <span className="dot" style={{ background: "#46D6AE" }} />
-                <span className="dev-title">goodstudent.app</span>
-                <span className="play"><Play size={11} fill="currentColor" /> Live</span>
+            <div className="spotlight">
+              <span className="ring r1" />
+              <span className="ring r2" />
+              <div className="hero-mascot a-wave a-blink"><Mascot /></div>
+              <div className="bubble-pop">
+                <b>Hi! I'm Good Student.</b>
+                <span>Let's work it out together — 粵 · EN · 普.</span>
               </div>
-              <div className="dev-body">
-                <div className="toggle">
-                  <button className={tab === "tools" ? "on" : ""} onClick={() => setTab("tools")}>Tools</button>
-                  <button className={tab === "tutors" ? "on" : ""} onClick={() => setTab("tutors")}>Tutors</button>
-                </div>
-                {tab === "tools" ? (
-                  <div className="tool-grid">
-                    {tools.map((t) => (
-                      <div key={t.label} className="tcell">
-                        <span className="tcell-ic" style={{ background: t.color + "1f", color: t.color }}>
-                          <t.icon size={18} />
-                        </span>
-                        <span>{t.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div>
-                    {tutors.map((t) => (
-                      <div key={t.label} className="tutor-row">
-                        <span className="ic" style={{ background: t.bg }}><t.icon size={16} /></span>
-                        <span className="nm">{t.label}</span>
-                        <span className="go">Open <ArrowRight size={12} /></span>
-                      </div>
-                    ))}
-                    <div className="tutor-row tutor-build">
-                      <Plus size={16} /> Build your own
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="dev-foot">
-                <Zap size={12} /> Updated 2 min ago
-                <span className="streak">🔥 7-day streak</span>
+              <div className="name-tag">
+                <LogoMark className="nt-ic" />
+                <span><b>Good Student</b><br /><i>your AI study buddy</i></span>
               </div>
             </div>
-            <div className="hero-mascot a-blink"><Mascot /></div>
           </div>
         </div>
       </header>
+
 
       {/* PILLARS */}
       <section className="intro">
