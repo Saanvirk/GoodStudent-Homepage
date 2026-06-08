@@ -307,8 +307,8 @@ function Index() {
         <div className="wrap">
           <div className="sec-head reveal">
             <div className="eyebrow">See it in action</div>
-            <h2>A two-minute tour of Good Student.</h2>
-            <p className="sec-sub">A peek at the website — drop your demo video into the frame below.</p>
+            <h2>A two-minute tour on learning with Good Student.</h2>
+            <p className="sec-sub">Watch a quick walkthrough of the website in action.</p>
           </div>
           <div className="demo-frame reveal">
             <div className="df-bar">
