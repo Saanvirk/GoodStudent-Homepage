@@ -1,5 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  Sparkles,
+  Languages,
+  Lightbulb,
+  TrendingUp,
+  Wand2,
+  Wrench,
+  GraduationCap,
+  Puzzle,
+  Upload,
+  ScanLine,
+  Layers,
+  Mic,
+  Ear,
+  Network,
+  BookOpen,
+  ListChecks,
+  Calculator,
+  Music,
+  Code2,
+  Crown,
+  ChevronDown,
+  ShieldCheck,
+  Smartphone,
+  Globe,
+  Play,
+  ArrowRight,
+  Plus,
+  Star,
+  Heart,
+  Zap,
+} from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -8,236 +40,31 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "A tutor that helps you work it out — in Cantonese, English & Mandarin. Quizzes, flashcards, speaking practice and DSE-ready tutors.",
+          "A tutor that works through problems with you — in Cantonese, English & Mandarin. Quizzes, flashcards, speaking practice and DSE-ready tutors.",
       },
       { property: "og:title", content: "Good Student — An AI study tutor" },
       {
         property: "og:description",
-        content: "A tutor that helps you work it out — in Cantonese, English & Mandarin.",
+        content: "A tutor that works through problems with you — in Cantonese, English & Mandarin.",
       },
     ],
   }),
   component: Index,
 });
 
-const STYLES = `
-:root{
-  --orange:#FB6A1E;--orange-deep:#E04E07;--orange-2:#FF8A3D;--amber:#FFB454;
-  --cream:#FFF7EF;--cream-2:#FFEEDD;--paper:#FFFCF8;
-  --ink:#311C10;--ink-soft:#7A6453;--ink-faint:#A8978A;
-  --teal:#13A483;--teal-soft:#D6F0E8;--line:#F0DEC9;
-  --pink:#E86A9A;--violet:#8A7BE8;--blue:#3F95E6;
-  --shadow-sm:0 4px 16px -6px rgba(120,60,20,.22);
-  --shadow:0 22px 50px -24px rgba(176,72,12,.42);
-  --shadow-lift:0 34px 80px -30px rgba(176,72,12,.55);
-  --font-display:'Fredoka',system-ui,sans-serif;--font-body:'DM Sans',system-ui,sans-serif;
-}
-.gs-root *{margin:0;padding:0;box-sizing:border-box}
-.gs-root{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;scroll-behavior:smooth}
-.gs-root::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
-  background:radial-gradient(58% 48% at 86% -6%,rgba(255,138,61,.32),transparent 60%),radial-gradient(45% 40% at -6% 14%,rgba(255,180,84,.30),transparent 60%),radial-gradient(60% 45% at 50% 112%,rgba(19,164,131,.10),transparent 60%)}
-.gs-root .noise{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.gs-root .wrap{max-width:1140px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-.gs-root h1,.gs-root h2,.gs-root h3,.gs-root .display{font-family:var(--font-display);font-weight:600;line-height:1.04;letter-spacing:-.01em}
-.gs-root a{color:inherit;text-decoration:none}
-.gs-root .eyebrow{font-family:var(--font-display);font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep)}
-
-.gs-root .scrollbar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--amber),var(--orange),var(--orange-deep));z-index:99;transition:width .1s linear}
-
-.gs-root nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);background:rgba(255,247,239,.8);border-bottom:1px solid rgba(240,222,201,.7)}
-.gs-root .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
-.gs-root .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.3rem}
-.gs-root .logo .mk{width:44px;height:44px;border-radius:14px;background:linear-gradient(150deg,var(--orange),var(--orange-2));display:grid;place-items:center;box-shadow:var(--shadow-sm);transform:rotate(-6deg);transition:transform .3s;overflow:hidden}
-.gs-root .logo:hover .mk{transform:rotate(6deg) scale(1.06)}
-.gs-root .logo .mk svg{width:34px;height:34px}
-.gs-root .nav-links{display:flex;gap:28px;font-weight:500;color:var(--ink-soft);font-size:.96rem}
-.gs-root .nav-links a{position:relative;transition:color .2s}
-.gs-root .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--orange);border-radius:2px;transition:right .25s}
-.gs-root .nav-links a:hover{color:var(--orange-deep)}
-.gs-root .nav-links a:hover::after{right:0}
-.gs-root .nav-right{display:flex;align-items:center;gap:14px}
-.gs-root .lang{display:flex;align-items:center;gap:7px;font-size:.84rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
-.gs-root .lang b{color:var(--orange-deep)}
-.gs-root .btn{font-family:var(--font-display);font-weight:600;border:none;cursor:pointer;border-radius:999px;transition:transform .18s,box-shadow .18s,background .18s}
-.gs-root .btn-primary{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;padding:13px 24px;font-size:1rem;box-shadow:var(--shadow-sm)}
-.gs-root .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow)}
-.gs-root .btn-ghost{background:#fff;color:var(--ink);padding:13px 24px;font-size:1rem;border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
-.gs-root .btn-ghost:hover{transform:translateY(-2px);border-color:var(--orange-2);color:var(--orange-deep)}
-.gs-root .btn-sm{padding:9px 18px;font-size:.9rem}
-
-.gs-root .hero{position:relative;padding:60px 0 96px}
-.gs-root .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:50px;align-items:center}
-.gs-root .hero h1{font-size:clamp(2.7rem,5.6vw,4.4rem)}
-.gs-root .hero h1 .hl{color:var(--orange-deep);position:relative;white-space:nowrap}
-.gs-root .hero h1 .hl::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.06em;height:.32em;background:var(--amber);opacity:.45;border-radius:6px;z-index:-1;transform:scaleX(0);transform-origin:left;animation:gs-underline 1s .7s forwards cubic-bezier(.2,.7,.2,1)}
-@keyframes gs-underline{to{transform:scaleX(1)}}
-.gs-root .hero p.lead{margin:22px 0 30px;font-size:1.18rem;color:var(--ink-soft);max-width:26em}
-.gs-root .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-.gs-root .up{opacity:0;transform:translateY(22px);animation:gs-up .7s forwards cubic-bezier(.2,.7,.2,1)}
-.gs-root .up.d1{animation-delay:.05s}.gs-root .up.d2{animation-delay:.18s}.gs-root .up.d3{animation-delay:.32s}.gs-root .up.d4{animation-delay:.46s}
-@keyframes gs-up{to{opacity:1;transform:none}}
-
-.gs-root .stage{position:relative}
-.gs-root .blob{position:absolute;border-radius:50%;filter:blur(10px);z-index:-1}
-.gs-root .blob.b1{width:240px;height:240px;background:radial-gradient(circle,var(--amber),transparent 70%);top:-50px;right:-40px;opacity:.6;animation:gs-float 7s ease-in-out infinite}
-.gs-root .blob.b2{width:190px;height:190px;background:radial-gradient(circle,var(--teal-soft),transparent 70%);bottom:-40px;left:-40px;opacity:.85;animation:gs-float 9s ease-in-out infinite reverse}
-@keyframes gs-float{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
-.gs-root .device{background:var(--paper);border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow-lift);overflow:hidden;animation:gs-up .8s .25s both cubic-bezier(.2,.7,.2,1)}
-.gs-root .dev-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;background:linear-gradient(180deg,#fff,#fff8f1);border-bottom:1px solid var(--line)}
-.gs-root .dot{width:10px;height:10px;border-radius:50%}
-.gs-root .dev-bar .dev-title{margin-left:8px;font-family:var(--font-display);font-weight:600;font-size:.84rem;color:var(--ink-soft)}
-.gs-root .dev-bar .play{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:var(--orange-deep);background:var(--cream-2);padding:5px 11px;border-radius:999px;cursor:pointer}
-.gs-root .dev-bar .play i{animation:gs-pulse 2s infinite}
-@keyframes gs-pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.gs-root .dev-body{padding:18px;min-height:292px;background:linear-gradient(180deg,#fffdfa,#fff7ef)}
-.gs-root .toggle{display:flex;gap:6px;background:var(--cream-2);padding:5px;border-radius:14px;margin-bottom:16px}
-.gs-root .toggle button{flex:1;border:none;background:transparent;font-family:var(--font-display);font-weight:600;font-size:.86rem;color:var(--ink-soft);padding:8px;border-radius:10px;cursor:pointer;transition:.2s}
-.gs-root .toggle button.on{background:#fff;color:var(--orange-deep);box-shadow:var(--shadow-sm)}
-.gs-root .view{display:none}.gs-root .view.on{display:block;animation:gs-fade .45s ease}
-@keyframes gs-fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.gs-root .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.gs-root .tcell{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:.85rem;font-weight:500;transition:transform .2s}
-.gs-root .tcell:hover{transform:translateY(-3px)}
-.gs-root .tcell i{font-size:1.25rem}
-.gs-root .tutor-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:9px;transition:transform .2s}
-.gs-root .tutor-row:hover{transform:translateX(4px)}
-.gs-root .tutor-row .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;flex-shrink:0;font-size:1.05rem}
-.gs-root .tutor-row .nm{font-weight:500;font-size:.9rem}
-.gs-root .tutor-row .go{margin-left:auto;font-size:.8rem;color:var(--orange-deep);font-weight:600}
-.gs-root .tutor-build{border:1.5px dashed var(--orange-2);color:var(--orange-deep);justify-content:center;font-weight:600;font-family:var(--font-display);background:var(--cream)}
-.gs-root .hero-mascot{position:absolute;width:130px;right:-10px;bottom:-70px;z-index:3;filter:drop-shadow(0 16px 22px rgba(120,40,0,.22))}
-
-.gs-root .doodle{position:absolute;z-index:0;opacity:.85}
-.gs-root .spin{animation:gs-spin 14s linear infinite}@keyframes gs-spin{to{transform:rotate(360deg)}}
-.gs-root .drift{animation:gs-float 8s ease-in-out infinite}
-
-.gs-root .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-.gs-root .reveal.in{opacity:1;transform:none}
-.gs-root .pop{opacity:0;transform:scale(.85);transition:opacity .55s,transform .55s cubic-bezier(.3,1.4,.5,1)}
-.gs-root .pop.in{opacity:1;transform:none}
-.gs-root .pop.p2{transition-delay:.1s}.gs-root .pop.p3{transition-delay:.2s}
-.gs-root .sec-head{text-align:center;max-width:38rem;margin:0 auto 46px}
-.gs-root .sec-head h2{font-size:clamp(2rem,4vw,3rem);margin-top:12px}
-
-.gs-root .intro{padding:24px 0 90px}
-.gs-root .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.gs-root .pillar{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:26px;padding:30px 24px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
-.gs-root .pillar:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.gs-root .pillar .pic{width:64px;height:64px;border-radius:19px;margin:0 auto 16px;display:grid;place-items:center;font-size:1.8rem;color:#fff;box-shadow:var(--shadow-sm)}
-.gs-root .pillar:hover .pic{animation:gs-wiggle .5s}
-@keyframes gs-wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
-.gs-root .pillar h3{font-size:1.16rem}
-.gs-root .pillar p{margin-top:6px;color:var(--ink-soft);font-size:.94rem}
-
-.gs-root .features{padding:40px 0 70px;position:relative}
-.gs-root .stage-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
-.gs-root .presenter{position:sticky;top:96px;display:flex;flex-direction:column;align-items:center}
-.gs-root .bubble{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px 24px;box-shadow:var(--shadow);max-width:300px;text-align:center;position:relative;min-height:100px;display:flex;align-items:center;justify-content:center}
-.gs-root .bubble::after{content:"";position:absolute;bottom:-13px;left:50%;transform:translateX(-50%) rotate(45deg);width:24px;height:24px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.gs-root .bubble .line{font-family:var(--font-display);font-weight:500;font-size:1.16rem;color:var(--ink);opacity:0;transition:opacity .4s,transform .4s;position:absolute;padding:0 24px;transform:translateY(8px)}
-.gs-root .bubble .line.show{opacity:1;position:relative;transform:none}
-.gs-root .presenter .mascot-wrap{width:170px;margin-top:22px;filter:drop-shadow(0 16px 22px rgba(120,40,0,.2))}
-.gs-root .feat-steps{display:flex;flex-direction:column;gap:18px}
-.gs-root .fstep{background:linear-gradient(165deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:24px;padding:26px 28px;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s;cursor:pointer}
-.gs-root .fstep.active{border-color:var(--orange-2);box-shadow:var(--shadow);transform:scale(1.02)}
-.gs-root .fstep .fic{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;font-size:1.7rem;color:#fff;flex-shrink:0;box-shadow:var(--shadow-sm)}
-.gs-root .fstep.active .fic{animation:gs-wiggle .5s}
-.gs-root .fstep h3{font-size:1.3rem}
-.gs-root .fstep p{color:var(--ink-soft);font-size:.96rem;margin-top:3px}
-.gs-root .fstep .tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:7px}
-.gs-root .tag{font-size:.78rem;font-weight:500;background:var(--cream-2);color:var(--ink-soft);padding:4px 11px;border-radius:999px;display:flex;align-items:center;gap:5px}
-.gs-root .tag i{color:var(--orange);font-size:.92rem}
-
-.gs-root .honesty{padding:30px 0 100px}
-.gs-root .honesty-inner{background:linear-gradient(155deg,var(--orange),var(--orange-deep));border-radius:38px;padding:64px 52px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lift)}
-.gs-root .honesty-inner::before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 65%);top:-150px;left:-70px}
-.gs-root .honesty-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;position:relative;z-index:1}
-.gs-root .honesty .eyebrow{color:#ffe2c9}
-.gs-root .honesty h2{font-size:clamp(2rem,4.2vw,3.2rem);margin:12px 0 14px}
-.gs-root .honesty p{font-size:1.18rem;opacity:.95;max-width:24em}
-.gs-root .honesty-art{position:relative;display:grid;place-items:center;min-height:240px}
-.gs-root .honesty-art .ring{position:absolute;width:236px;height:236px;border-radius:50%;border:2px dashed rgba(255,255,255,.5);animation:gs-spin 22s linear infinite}
-.gs-root .honesty-art .mascot-wrap{width:200px;z-index:2;filter:drop-shadow(0 18px 26px rgba(120,40,0,.4))}
-.gs-root .banana{position:absolute;width:54px;bottom:6px;left:8%;transform:rotate(18deg);z-index:3}
-.gs-root .mug{position:absolute;width:48px;top:14px;right:8%;z-index:3;animation:gs-bob 3.5s ease-in-out infinite}
-
-.gs-root .faq{padding:0 0 100px}
-.gs-root .faq-list{max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.gs-root .qa{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:box-shadow .25s,border-color .25s}
-.gs-root .qa.open{box-shadow:var(--shadow);border-color:var(--orange-2)}
-.gs-root .qa button{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:1.04rem;color:var(--ink)}
-.gs-root .qa button .qi{width:32px;height:32px;border-radius:10px;background:var(--cream-2);display:grid;place-items:center;color:var(--orange-deep);flex-shrink:0}
-.gs-root .qa .chev{margin-left:auto;transition:transform .3s;color:var(--ink-faint)}
-.gs-root .qa.open .chev{transform:rotate(180deg)}
-.gs-root .qa .ans{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.gs-root .qa .ans p{padding:0 22px 20px 68px;color:var(--ink-soft)}
-
-.gs-root footer{background:linear-gradient(180deg,var(--cream),var(--cream-2));border-top:1px solid var(--line);padding:56px 0 36px;position:relative;z-index:1}
-.gs-root .foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:36px;margin-bottom:40px}
-.gs-root .foot-brand .logo{margin-bottom:14px}
-.gs-root .foot-brand p{color:var(--ink-soft);max-width:22em;font-size:.94rem}
-.gs-root .foot-col h4{font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
-.gs-root .foot-col a{display:block;color:var(--ink-soft);margin-bottom:10px;font-size:.94rem;transition:color .2s}
-.gs-root .foot-col a:hover{color:var(--orange-deep)}
-.gs-root .foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--ink-faint);font-size:.84rem}
-.gs-root .foot-mascot{width:58px}
-
-/* mascot kit */
-.gs-root .ms{width:100%;height:auto;transform-origin:center}
-.gs-root .ms .sh{fill:rgba(49,28,16,.12)}
-.gs-root .ms .bf{fill:#FFF6EC}
-.gs-root .ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
-.gs-root .ms .scr{fill:#26323B}
-.gs-root .ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
-.gs-root .ms .or{fill:#FB6A1E}.gs-root .ms .ord{fill:#E04E07}.gs-root .ms .ant{fill:#FB6A1E}
-.gs-root .ms .ac{fill:#46D6AE}.gs-root .ms .fc{fill:#222F38}
-.gs-root .ms .ew{fill:#fff}.gs-root .ms .ep{fill:#222F38}
-.gs-root .ms .gl{stroke:#46D6AE;stroke-width:3;fill:none}
-.gs-root .ms .bl{fill:#FF9A57;opacity:.55}.gs-root .ms .mo{fill:#FF8A4C}
-.gs-root .ms .ew,.gs-root .ms .ep,.gs-root .ms .mo{transform-box:fill-box;transform-origin:center}
-.gs-root .ms .armr{transform-box:fill-box;transform-origin:50% 4%}
-
-.gs-root .a-bob   .ms{animation:gs-mbob 3s ease-in-out infinite}
-.gs-root .a-float .ms{animation:gs-mflo 5s ease-in-out infinite}
-.gs-root .a-wave  .ms .armr{animation:gs-mwave 1.1s ease-in-out infinite}
-.gs-root .a-blink .ms .ew,.gs-root .a-blink .ms .ep{animation:gs-mblink 3s ease-in-out infinite}
-.gs-root .a-talk  .ms .mo{animation:gs-mtalk .4s ease-in-out infinite}
-.gs-root .a-talk  .ms{animation:gs-mbob 3s ease-in-out infinite}
-
-@keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
-@keyframes gs-mflo{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(6px,-12px) rotate(2deg)}}
-@keyframes gs-mwave{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(10deg)}}
-@keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
-@keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
-@keyframes gs-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
-
-.gs-root .hero-mascot{animation:gs-bob 4s ease-in-out infinite}
-
-@media(max-width:880px){
-  .gs-root .nav-links,.gs-root .hero-mascot,.gs-root .nav-right .lang{display:none}
-  .gs-root .hero-grid,.gs-root .honesty-grid,.gs-root .pillars,.gs-root .stage-wrap,.gs-root .foot-grid{grid-template-columns:1fr}
-  .gs-root .presenter{position:static;flex-direction:row;gap:16px;margin-bottom:24px;align-items:center}
-  .gs-root .presenter .mascot-wrap{width:110px;margin-top:0}
-  .gs-root .bubble{max-width:none;min-height:0;flex:1}
-  .gs-root .honesty-inner{padding:40px 26px}
-}
-@media(prefers-reduced-motion:reduce){.gs-root *{animation:none!important}}
-`;
-
-function Mascot() {
+/* -------- mascot -------- */
+function Mascot({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 220 246" className="ms" aria-hidden="true">
+    <svg viewBox="0 0 220 246" className={`ms ${className}`} aria-hidden="true">
       <ellipse className="sh" cx="110" cy="234" rx="52" ry="8" />
       <rect className="bf st" x="86" y="186" width="15" height="40" rx="7.5" />
       <rect className="bf st" x="119" y="186" width="15" height="40" rx="7.5" />
       <ellipse className="bf st" cx="92" cy="228" rx="13" ry="7" />
       <ellipse className="bf st" cx="128" cy="228" rx="13" ry="7" />
-      {/* left arm */}
       <g className="arml" transform="rotate(20 52 132)">
         <rect className="bf st" x="44.5" y="126" width="15" height="48" rx="7.5" />
         <circle className="bf st" cx="52" cy="176" r="9.5" />
       </g>
-      {/* right arm (waves) */}
       <g className="armr" transform="rotate(-20 168 132)">
         <rect className="bf st" x="160.5" y="126" width="15" height="48" rx="7.5" />
         <circle className="bf st" cx="168" cy="176" r="9.5" />
@@ -268,129 +95,169 @@ function Mascot() {
   );
 }
 
+/* -------- main -------- */
 function Index() {
+  const [tab, setTab] = useState<"tools" | "tutors">("tools");
+  const [stepIdx, setStepIdx] = useState(0);
+  const [openQ, setOpenQ] = useState<number | null>(0);
+
+  // Scroll progress bar
   useEffect(() => {
-    // Scroll progress bar
     const sb = document.getElementById("gs-sb");
     const onScroll = () => {
       const h = document.documentElement;
-      const st = h.scrollTop;
       const sh = h.scrollHeight - h.clientHeight;
-      if (sb) sb.style.width = (st / sh) * 100 + "%";
+      if (sb && sh > 0) sb.style.width = (h.scrollTop / sh) * 100 + "%";
     };
-    window.addEventListener("scroll", onScroll);
-
-    // Reveal animations
-    const io = new IntersectionObserver(
-      (es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
-      { threshold: 0.14 },
-    );
-    document.querySelectorAll(".gs-root .reveal,.gs-root .pop").forEach((el) => io.observe(el));
-
-    // Feature step / mascot bubble sync
-    const steps = document.querySelectorAll<HTMLElement>(".gs-root .fstep");
-    const lines = document.querySelectorAll<HTMLElement>(".gs-root .bubble .line");
-    const activate = (i: number) => {
-      steps.forEach((s, k) => s.classList.toggle("active", k === i));
-      lines.forEach((l) => l.classList.toggle("show", Number(l.dataset.i) === i));
-    };
-    const fio = new IntersectionObserver(
-      (es) =>
-        es.forEach((e) => {
-          if (e.isIntersecting) activate(Number((e.target as HTMLElement).dataset.i));
-        }),
-      { threshold: 0.6, rootMargin: "-18% 0px -18% 0px" },
-    );
-    const hoverHandlers: Array<[HTMLElement, () => void]> = [];
-    steps.forEach((s) => {
-      fio.observe(s);
-      const h = () => activate(Number(s.dataset.i));
-      s.addEventListener("mouseenter", h);
-      hoverHandlers.push([s, h]);
-    });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      io.disconnect();
-      fio.disconnect();
-      hoverHandlers.forEach(([el, h]) => el.removeEventListener("mouseenter", h));
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const setView = (v: "tools" | "tutors") => {
-    document.getElementById("view-tools")?.classList.toggle("on", v === "tools");
-    document.getElementById("view-tutors")?.classList.toggle("on", v === "tutors");
-    document.getElementById("tg-tools")?.classList.toggle("on", v === "tools");
-    document.getElementById("tg-tutors")?.classList.toggle("on", v === "tutors");
-  };
+  // Auto-cycle feature speech (paused on hover via setStepIdx from card)
+  useEffect(() => {
+    const t = setInterval(() => setStepIdx((i) => (i + 1) % 4), 4200);
+    return () => clearInterval(t);
+  }, []);
 
-  const toggleQa = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const btn = e.currentTarget;
-    const qa = btn.parentElement as HTMLElement;
-    const ans = qa.querySelector(".ans") as HTMLElement;
-    const open = qa.classList.contains("open");
-    document.querySelectorAll<HTMLElement>(".gs-root .qa").forEach((q) => {
-      q.classList.remove("open");
-      const a = q.querySelector(".ans") as HTMLElement;
-      a.style.maxHeight = "";
-    });
-    if (!open) {
-      qa.classList.add("open");
-      ans.style.maxHeight = ans.scrollHeight + "px";
-    }
-  };
+  const steps = [
+    {
+      icon: Wand2,
+      grad: "linear-gradient(150deg,#FF8A3D,#FB6A1E)",
+      title: "Make your own tutor",
+      blurb: "Built from your notes & past papers.",
+      tags: [
+        { icon: Upload, label: "Upload" },
+        { icon: ScanLine, label: "Scan" },
+      ],
+      line: "“Give me your notes — I'll become your tutor.”",
+    },
+    {
+      icon: Wrench,
+      grad: "linear-gradient(150deg,#8A7BE8,#6F5FE0)",
+      title: "A whole toolbox",
+      blurb: "Open whatever fits today.",
+      tags: [
+        { icon: Layers, label: "Flashcards" },
+        { icon: Mic, label: "Speaking" },
+        { icon: Network, label: "Mind maps" },
+      ],
+      line: "“Pick a tool. Quiz, flashcards, speaking… whatever helps.”",
+    },
+    {
+      icon: GraduationCap,
+      grad: "linear-gradient(150deg,#3F95E6,#2E7BD0)",
+      title: "Ready for the DSE",
+      blurb: "Tutors for every core subject.",
+      tags: [
+        { icon: BookOpen, label: "Eng" },
+        { icon: Calculator, label: "Maths" },
+        { icon: Languages, label: "中文" },
+      ],
+      line: "“Doing the DSE? These are ready to go.”",
+    },
+    {
+      icon: Puzzle,
+      grad: "linear-gradient(150deg,#37C2A0,#13A483)",
+      title: "Learn for fun",
+      blurb: "Chess, music, coding — your plan.",
+      tags: [
+        { icon: Crown, label: "Chess" },
+        { icon: Music, label: "Music" },
+        { icon: Code2, label: "Code" },
+      ],
+      line: "“Or learn something just for fun.”",
+    },
+  ];
+
+  const tools = [
+    { icon: ListChecks, label: "Quizzes", color: "#13A483" },
+    { icon: Layers, label: "Flashcards", color: "#E86A9A" },
+    { icon: Mic, label: "Say it Right", color: "#8A7BE8" },
+    { icon: Ear, label: "Hear it Right", color: "#3F95E6" },
+    { icon: Network, label: "Mind map", color: "#E04E07" },
+    { icon: BookOpen, label: "Reading", color: "#C77A0A" },
+  ];
+
+  const tutors = [
+    { icon: BookOpen, label: "DSE English", bg: "#3F95E6" },
+    { icon: Calculator, label: "DSE Maths", bg: "#C77A0A" },
+    { icon: Languages, label: "DSE 中文", bg: "#E86A9A" },
+  ];
+
+  const faqs = [
+    { icon: ShieldCheck, q: "Is it safe for my child?", a: "Yes — made for students, no ads, private by design." },
+    { icon: Lightbulb, q: "Will it just give the answers?", a: "No. It guides them to work it out, like a good tutor." },
+    { icon: TrendingUp, q: "What ages and levels?", a: "Primary 1 through Secondary 6, including the DSE." },
+    { icon: Smartphone, q: "What device do we need?", a: "A phone — the one most families already have." },
+    { icon: Languages, q: "Which languages?", a: "Cantonese, English and Mandarin." },
+  ];
 
   return (
     <div className="gs-root">
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
       <div className="scrollbar" id="gs-sb" />
-      <div className="noise" />
 
+      {/* NAV */}
       <nav>
         <div className="wrap nav-in">
           <a className="logo" href="#top">
-            <span className="mk"><Mascot /></span> Good Student
+            <span className="mk"><Mascot /></span>
+            <span>Good Student</span>
           </a>
           <div className="nav-links">
             <a href="#features">Tools</a>
-            <a href="#features">Tutors</a>
-            <a href="#features">Explore</a>
+            <a href="#tutors">Tutors</a>
+            <a href="#honesty">Why us</a>
             <a href="#faq">FAQ</a>
           </div>
           <div className="nav-right">
-            <span className="lang"><i className="ti ti-world" /> <b>粵</b> · EN · 普</span>
-            <button className="btn btn-primary btn-sm">Open app</button>
+            <span className="lang"><Globe size={14} /> <b>粵</b> · EN · 普</span>
+            <button className="btn btn-primary btn-sm">Open app <ArrowRight size={16} /></button>
           </div>
         </div>
       </nav>
 
+      {/* HERO */}
       <header className="hero" id="top">
-        <i className="ti ti-sparkles doodle drift" style={{ top: "14%", left: "6%", fontSize: "1.8rem", color: "var(--amber)" }} />
-        <i className="ti ti-star-filled doodle spin" style={{ top: "62%", left: "2%", fontSize: "1.4rem", color: "var(--teal)" }} />
+        <Sparkles className="doodle drift" style={{ top: "12%", left: "5%", color: "var(--amber)" }} size={28} />
+        <Star className="doodle spin" style={{ top: "70%", left: "3%", color: "var(--teal)" }} size={20} />
+        <Heart className="doodle drift" style={{ top: "20%", right: "3%", color: "#E86A9A" }} size={22} />
+
         <div className="wrap hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow up d1">An AI study tutor · P1 to DSE</div>
+          <div>
+            <div className="eyebrow up d1">
+              <span className="dot-live" /> An AI study tutor · P1 to DSE
+            </div>
             <h1 className="up d2">
               A tutor that helps you <span className="hl">work it out</span>.
             </h1>
             <p className="lead up d3">
-              It works through problems with you — in Cantonese, English &amp; Mandarin.
+              It works through problems with you — patiently, in Cantonese, English &amp; Mandarin.
+              Built to guide, never to do the work for you.
             </p>
             <div className="hero-cta up d4">
-              <button
-                className="btn btn-primary"
-                onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                <i className="ti ti-tools" style={{ verticalAlign: "-2px" }} /> Explore the tools
+              <button className="btn btn-primary" onClick={() => scrollTo("features")}>
+                <Sparkles size={18} /> Try a free lesson
               </button>
-              <button
-                className="btn btn-ghost"
-                onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Meet your tutors
+              <button className="btn btn-ghost" onClick={() => scrollTo("tutors")}>
+                <Play size={16} /> See how it works
               </button>
             </div>
+            <div className="trust up d4">
+              <div className="avatars">
+                <span style={{ background: "linear-gradient(135deg,#FF8A3D,#FB6A1E)" }}>L</span>
+                <span style={{ background: "linear-gradient(135deg,#3F95E6,#2E7BD0)" }}>M</span>
+                <span style={{ background: "linear-gradient(135deg,#37C2A0,#13A483)" }}>陳</span>
+                <span style={{ background: "linear-gradient(135deg,#8A7BE8,#6F5FE0)" }}>K</span>
+              </div>
+              <div>
+                <div className="stars">{[0, 1, 2, 3, 4].map((i) => <Star key={i} size={14} fill="#FFB454" stroke="#FFB454" />)}</div>
+                <div className="trust-sub"><b>4.9</b> · loved by 12,000+ HK families</div>
+              </div>
+            </div>
           </div>
+
+          {/* Device preview */}
           <div className="stage">
             <span className="blob b1" />
             <span className="blob b2" />
@@ -399,30 +266,43 @@ function Index() {
                 <span className="dot" style={{ background: "#FB6A1E" }} />
                 <span className="dot" style={{ background: "#FFB454" }} />
                 <span className="dot" style={{ background: "#46D6AE" }} />
-                <span className="dev-title">Good Student</span>
-                <span className="play"><i className="ti ti-player-play-filled" /> See it move</span>
+                <span className="dev-title">goodstudent.app</span>
+                <span className="play"><Play size={11} fill="currentColor" /> Live</span>
               </div>
               <div className="dev-body">
                 <div className="toggle">
-                  <button id="tg-tools" className="on" onClick={() => setView("tools")}>Tools</button>
-                  <button id="tg-tutors" onClick={() => setView("tutors")}>Tutors</button>
+                  <button className={tab === "tools" ? "on" : ""} onClick={() => setTab("tools")}>Tools</button>
+                  <button className={tab === "tutors" ? "on" : ""} onClick={() => setTab("tutors")}>Tutors</button>
                 </div>
-                <div id="view-tools" className="view on">
+                {tab === "tools" ? (
                   <div className="tool-grid">
-                    <div className="tcell"><i className="ti ti-list-check" style={{ color: "#13A483" }} /> Quizzes</div>
-                    <div className="tcell"><i className="ti ti-cards" style={{ color: "#E86A9A" }} /> Flashcards</div>
-                    <div className="tcell"><i className="ti ti-microphone" style={{ color: "#8A7BE8" }} /> Say it Right</div>
-                    <div className="tcell"><i className="ti ti-ear" style={{ color: "#3F95E6" }} /> Hear it Right</div>
-                    <div className="tcell"><i className="ti ti-sitemap" style={{ color: "#E04E07" }} /> Mind map</div>
-                    <div className="tcell"><i className="ti ti-book-2" style={{ color: "#C77A0A" }} /> Reading</div>
+                    {tools.map((t) => (
+                      <div key={t.label} className="tcell">
+                        <span className="tcell-ic" style={{ background: t.color + "1f", color: t.color }}>
+                          <t.icon size={18} />
+                        </span>
+                        <span>{t.label}</span>
+                      </div>
+                    ))}
                   </div>
-                </div>
-                <div id="view-tutors" className="view">
-                  <div className="tutor-row"><span className="ic" style={{ background: "#3F95E6" }}><i className="ti ti-abc" /></span><span className="nm">DSE English</span><span className="go">Open →</span></div>
-                  <div className="tutor-row"><span className="ic" style={{ background: "#C77A0A" }}><i className="ti ti-calculator" /></span><span className="nm">DSE Maths</span><span className="go">Open →</span></div>
-                  <div className="tutor-row"><span className="ic" style={{ background: "#E86A9A" }}><i className="ti ti-language" /></span><span className="nm">DSE 中文</span><span className="go">Open →</span></div>
-                  <div className="tutor-row tutor-build"><i className="ti ti-plus" /> Build your own</div>
-                </div>
+                ) : (
+                  <div>
+                    {tutors.map((t) => (
+                      <div key={t.label} className="tutor-row">
+                        <span className="ic" style={{ background: t.bg }}><t.icon size={16} /></span>
+                        <span className="nm">{t.label}</span>
+                        <span className="go">Open <ArrowRight size={12} /></span>
+                      </div>
+                    ))}
+                    <div className="tutor-row tutor-build">
+                      <Plus size={16} /> Build your own
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="dev-foot">
+                <Zap size={12} /> Updated 2 min ago
+                <span className="streak">🔥 7-day streak</span>
               </div>
             </div>
             <div className="hero-mascot a-blink"><Mascot /></div>
@@ -430,118 +310,125 @@ function Index() {
         </div>
       </header>
 
+      {/* PILLARS */}
       <section className="intro">
         <div className="wrap">
-          <div className="sec-head reveal">
+          <div className="sec-head">
             <div className="eyebrow">Why it exists</div>
             <h2>For when you don't have a tutor.</h2>
+            <p className="sec-sub">Real tutoring shouldn't be a luxury. Good Student is built around three quiet ideas.</p>
           </div>
           <div className="pillars">
-            <div className="pillar pop">
-              <div className="pic" style={{ background: "linear-gradient(150deg,#FF8A3D,#FB6A1E)" }}><i className="ti ti-bulb" /></div>
-              <h3>Guides, doesn't tell</h3>
-              <p>It asks the next question, so the learning is yours.</p>
-            </div>
-            <div className="pillar pop p2">
-              <div className="pic" style={{ background: "linear-gradient(150deg,#37C2A0,#13A483)" }}><i className="ti ti-stairs-up" /></div>
-              <h3>P1 to the DSE</h3>
-              <p>One tutor that grows with you, on your phone.</p>
-            </div>
-            <div className="pillar pop p3">
-              <div className="pic" style={{ background: "linear-gradient(150deg,#FFC56B,#FFB454)" }}><i className="ti ti-language" /></div>
-              <h3>Three languages</h3>
-              <p>Cantonese, English or Mandarin.</p>
-            </div>
+            {[
+              {
+                icon: Lightbulb,
+                grad: "linear-gradient(150deg,#FF8A3D,#FB6A1E)",
+                title: "Guides, doesn't tell",
+                body: "It asks the next question, so the learning stays yours.",
+              },
+              {
+                icon: TrendingUp,
+                grad: "linear-gradient(150deg,#37C2A0,#13A483)",
+                title: "P1 to the DSE",
+                body: "One tutor that grows with you, right on your phone.",
+              },
+              {
+                icon: Languages,
+                grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
+                title: "Three languages",
+                body: "Cantonese, English or Mandarin — switch any time.",
+              },
+            ].map((p) => (
+              <div key={p.title} className="pillar">
+                <div className="pic" style={{ background: p.grad }}>
+                  <p.icon size={28} strokeWidth={2.2} />
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* FEATURES — talking mascot */}
       <section className="features" id="features">
         <div className="wrap">
-          <div className="sec-head reveal">
+          <div className="sec-head">
             <div className="eyebrow">Take the tour</div>
             <h2>Here's what I can do.</h2>
+            <p className="sec-sub">Hover any card — I'll tell you about it.</p>
           </div>
           <div className="stage-wrap">
             <div className="presenter">
               <div className="bubble">
-                <span className="line show" data-i="0">"Give me your notes — I'll become your tutor."</span>
-                <span className="line" data-i="1">"Pick a tool. Quiz, flashcards, speaking… whatever helps."</span>
-                <span className="line" data-i="2">"Doing the DSE? These are ready to go."</span>
-                <span className="line" data-i="3">"Or learn something just for fun."</span>
+                {steps.map((s, i) => (
+                  <span key={i} className={`line ${i === stepIdx ? "show" : ""}`}>{s.line}</span>
+                ))}
               </div>
               <div className="mascot-wrap a-talk"><Mascot /></div>
+              <div className="presenter-dots">
+                {steps.map((_, i) => (
+                  <button key={i} className={i === stepIdx ? "on" : ""} onClick={() => setStepIdx(i)} aria-label={`Step ${i + 1}`} />
+                ))}
+              </div>
             </div>
-            <div className="feat-steps">
-              <div className="fstep active" data-i="0">
-                <div className="fic" style={{ background: "linear-gradient(150deg,#FF8A3D,#FB6A1E)" }}><i className="ti ti-wand" /></div>
-                <div>
-                  <h3>Make your own tutor</h3>
-                  <p>Built from your notes &amp; past papers.</p>
-                  <div className="tags">
-                    <span className="tag"><i className="ti ti-upload" />Upload</span>
-                    <span className="tag"><i className="ti ti-scan" />Scan</span>
+
+            <div className="feat-steps" id="tutors">
+              {steps.map((s, i) => (
+                <div
+                  key={s.title}
+                  className={`fstep ${i === stepIdx ? "active" : ""}`}
+                  onMouseEnter={() => setStepIdx(i)}
+                  onClick={() => setStepIdx(i)}
+                >
+                  <div className="fic" style={{ background: s.grad }}>
+                    <s.icon size={26} strokeWidth={2.2} />
                   </div>
-                </div>
-              </div>
-              <div className="fstep" data-i="1">
-                <div className="fic" style={{ background: "linear-gradient(150deg,#8A7BE8,#6F5FE0)" }}><i className="ti ti-tools" /></div>
-                <div>
-                  <h3>A whole toolbox</h3>
-                  <p>Open whatever fits today.</p>
-                  <div className="tags">
-                    <span className="tag"><i className="ti ti-cards" />Flashcards</span>
-                    <span className="tag"><i className="ti ti-microphone" />Speaking</span>
-                    <span className="tag"><i className="ti ti-sitemap" />Mind maps</span>
+                  <div className="fbody">
+                    <h3>{s.title}</h3>
+                    <p>{s.blurb}</p>
+                    <div className="tags">
+                      {s.tags.map((t) => (
+                        <span className="tag" key={t.label}><t.icon size={12} /> {t.label}</span>
+                      ))}
+                    </div>
                   </div>
+                  <ArrowRight className="fstep-arrow" size={20} />
                 </div>
-              </div>
-              <div className="fstep" data-i="2">
-                <div className="fic" style={{ background: "linear-gradient(150deg,#3F95E6,#2E7BD0)" }}><i className="ti ti-school" /></div>
-                <div>
-                  <h3>Ready for the DSE</h3>
-                  <p>Tutors for every core subject.</p>
-                  <div className="tags">
-                    <span className="tag"><i className="ti ti-abc" />Eng</span>
-                    <span className="tag"><i className="ti ti-calculator" />Maths</span>
-                    <span className="tag"><i className="ti ti-language" />中文</span>
-                  </div>
-                </div>
-              </div>
-              <div className="fstep" data-i="3">
-                <div className="fic" style={{ background: "linear-gradient(150deg,#37C2A0,#13A483)" }}><i className="ti ti-puzzle" /></div>
-                <div>
-                  <h3>Learn for fun</h3>
-                  <p>Chess, music, coding — your plan.</p>
-                  <div className="tags">
-                    <span className="tag"><i className="ti ti-chess" />Chess</span>
-                    <span className="tag"><i className="ti ti-music" />Music</span>
-                    <span className="tag"><i className="ti ti-code" />Code</span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="honesty">
+      {/* HONESTY band */}
+      <section className="honesty" id="honesty">
         <div className="wrap">
-          <div className="honesty-inner reveal">
+          <div className="honesty-inner">
             <div className="honesty-grid">
               <div>
                 <div className="eyebrow">What's different</div>
                 <h2>It tells you when it's not sure.</h2>
-                <p>It shows where answers come from — so you learn to use AI, not just trust it.</p>
+                <p>
+                  It shows where answers come from — so students learn to <i>use</i> AI,
+                  not just trust it.
+                </p>
+                <div className="honesty-stats">
+                  <div><b>3</b><span>languages</span></div>
+                  <div><b>12+</b><span>subjects</span></div>
+                  <div><b>P1–S6</b><span>every level</span></div>
+                </div>
               </div>
               <div className="honesty-art">
                 <span className="ring" />
+                <span className="ring r2" />
+                <div className="mascot-wrap a-wave"><Mascot /></div>
                 <svg className="mug" viewBox="0 0 60 60">
                   <rect x="10" y="18" width="34" height="30" rx="6" fill="#FFF6EC" stroke="#26323B" strokeWidth="2" />
                   <path d="M44 24 h6 a6 6 0 0 1 0 14 h-6" fill="none" stroke="#26323B" strokeWidth="3" />
                   <text x="27" y="38" textAnchor="middle" fontFamily="monospace" fontSize="9" fill="#E04E07" fontWeight="700">404</text>
                 </svg>
-                <div className="mascot-wrap a-wave"><Mascot /></div>
                 <svg className="banana" viewBox="0 0 60 40">
                   <path d="M6 10 q4 22 28 24 q18 0 20 -8 q-10 6 -22 0 q-16 -8 -16 -18 q-6 -2 -10 2z" fill="#FFC93C" stroke="#E0A800" strokeWidth="1.5" />
                 </svg>
@@ -551,45 +438,63 @@ function Index() {
         </div>
       </section>
 
+      {/* FAQ */}
       <section className="faq" id="faq">
         <div className="wrap">
-          <div className="sec-head reveal">
+          <div className="sec-head">
             <div className="eyebrow">Good to know</div>
             <h2>Quick questions.</h2>
           </div>
-          <div className="faq-list reveal">
-            {[
-              { i: "ti-shield-check", q: "Is it safe for my child?", a: "Yes — made for students, no ads, private by design." },
-              { i: "ti-bulb", q: "Will it just give the answers?", a: "No. It guides them to work it out, like a good tutor." },
-              { i: "ti-stairs-up", q: "What ages and levels?", a: "Primary 1 through Secondary 6, including the DSE." },
-              { i: "ti-device-mobile", q: "What device do we need?", a: "A phone — the one most families already have." },
-              { i: "ti-language", q: "Which languages?", a: "Cantonese, English and Mandarin." },
-            ].map((qa, k) => (
-              <div className="qa" key={k}>
-                <button onClick={toggleQa}>
-                  <span className="qi"><i className={`ti ${qa.i}`} /></span>
-                  {qa.q}
-                  <i className="ti ti-chevron-down chev" />
+          <div className="faq-list">
+            {faqs.map((f, i) => (
+              <div key={i} className={`qa ${openQ === i ? "open" : ""}`}>
+                <button onClick={() => setOpenQ(openQ === i ? null : i)}>
+                  <span className="qi"><f.icon size={16} /></span>
+                  <span className="qt">{f.q}</span>
+                  <ChevronDown className="chev" size={18} />
                 </button>
-                <div className="ans"><p>{qa.a}</p></div>
+                <div className="ans" style={{ maxHeight: openQ === i ? 120 : 0 }}>
+                  <p>{f.a}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* CTA */}
+      <section className="cta-band">
+        <div className="wrap">
+          <div className="cta-card">
+            <div className="cta-mascot a-bob"><Mascot /></div>
+            <div>
+              <div className="eyebrow">Ready when you are</div>
+              <h2>Let's work through one together.</h2>
+              <p>Free to start. No ads. Built for students.</p>
+            </div>
+            <button className="btn btn-primary btn-lg">
+              Open the app <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
       <footer>
         <div className="wrap">
           <div className="foot-grid">
             <div className="foot-brand">
-              <a className="logo" href="#top"><span className="mk"><Mascot /></span> Good Student</a>
+              <a className="logo" href="#top">
+                <span className="mk"><Mascot /></span>
+                <span>Good Student</span>
+              </a>
               <p>An AI study tutor for Hong Kong students — built to guide, not to do the work for you.</p>
             </div>
             <div className="foot-col">
               <h4>Product</h4>
               <a href="#features">Tools</a>
-              <a href="#features">Tutors</a>
-              <a href="#features">Explore</a>
+              <a href="#tutors">Tutors</a>
+              <a href="#honesty">Why us</a>
             </div>
             <div className="foot-col">
               <h4>Support</h4>
@@ -600,11 +505,267 @@ function Index() {
           </div>
           <div className="foot-bottom">
             <span>© Good Student · A community education programme</span>
-            <span className="lang"><i className="ti ti-world" /> <b>粵</b> · English · 普通話</span>
-            <div className="foot-mascot a-bob"><Mascot /></div>
+            <span className="lang"><Globe size={14} /> <b>粵</b> · English · 普通話</span>
           </div>
         </div>
       </footer>
     </div>
   );
 }
+
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ===== styles ===== */
+const STYLES = `
+:root{
+  --orange:#FB6A1E;--orange-deep:#E04E07;--orange-2:#FF8A3D;--amber:#FFB454;
+  --cream:#FFF7EF;--cream-2:#FFEEDD;--paper:#FFFCF8;
+  --ink:#311C10;--ink-soft:#7A6453;--ink-faint:#A8978A;
+  --teal:#13A483;--teal-soft:#D6F0E8;--line:#F0DEC9;
+  --pink:#E86A9A;--violet:#8A7BE8;--blue:#3F95E6;
+  --shadow-sm:0 4px 16px -6px rgba(120,60,20,.22);
+  --shadow:0 22px 50px -24px rgba(176,72,12,.42);
+  --shadow-lift:0 34px 80px -30px rgba(176,72,12,.55);
+  --font-display:'Fredoka',system-ui,sans-serif;--font-body:'DM Sans',system-ui,sans-serif;
+}
+.gs-root *{margin:0;padding:0;box-sizing:border-box}
+.gs-root{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+.gs-root::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6;
+  background:radial-gradient(58% 48% at 86% -6%,rgba(255,138,61,.32),transparent 60%),
+             radial-gradient(45% 40% at -6% 14%,rgba(255,180,84,.30),transparent 60%),
+             radial-gradient(60% 45% at 50% 112%,rgba(19,164,131,.10),transparent 60%)}
+.gs-root .wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+.gs-root h1,.gs-root h2,.gs-root h3{font-family:var(--font-display);font-weight:600;line-height:1.04;letter-spacing:-.015em}
+.gs-root a{color:inherit;text-decoration:none}
+.gs-root .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep)}
+.gs-root .dot-live{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:gs-ping 2s infinite}
+@keyframes gs-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
+
+.gs-root .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--amber),var(--orange),var(--orange-deep));z-index:99;transition:width .1s linear}
+
+/* NAV */
+.gs-root nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,247,239,.82);border-bottom:1px solid rgba(240,222,201,.7)}
+.gs-root .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+.gs-root .logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:1.25rem}
+.gs-root .logo .mk{width:46px;height:46px;border-radius:14px;background:linear-gradient(150deg,var(--orange),var(--orange-2));display:grid;place-items:center;box-shadow:var(--shadow-sm);transform:rotate(-6deg);transition:transform .3s;overflow:hidden}
+.gs-root .logo:hover .mk{transform:rotate(6deg) scale(1.06)}
+.gs-root .logo .mk svg{width:36px;height:36px}
+.gs-root .nav-links{display:flex;gap:30px;font-weight:500;color:var(--ink-soft);font-size:.95rem}
+.gs-root .nav-links a{position:relative;transition:color .2s}
+.gs-root .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--orange);border-radius:2px;transition:right .25s}
+.gs-root .nav-links a:hover{color:var(--orange-deep)}
+.gs-root .nav-links a:hover::after{right:0}
+.gs-root .nav-right{display:flex;align-items:center;gap:14px}
+.gs-root .lang{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
+.gs-root .lang b{color:var(--orange-deep)}
+
+/* Buttons */
+.gs-root .btn{font-family:var(--font-display);font-weight:600;border:none;cursor:pointer;border-radius:999px;transition:transform .18s,box-shadow .18s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.gs-root .btn-primary{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;padding:14px 24px;font-size:1rem;box-shadow:var(--shadow-sm)}
+.gs-root .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow)}
+.gs-root .btn-ghost{background:#fff;color:var(--ink);padding:14px 22px;font-size:1rem;border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
+.gs-root .btn-ghost:hover{transform:translateY(-2px);border-color:var(--orange-2);color:var(--orange-deep)}
+.gs-root .btn-sm{padding:9px 16px;font-size:.88rem}
+.gs-root .btn-lg{padding:18px 30px;font-size:1.08rem}
+
+/* HERO */
+.gs-root .hero{position:relative;padding:72px 0 80px}
+.gs-root .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.gs-root .hero h1{font-size:clamp(2.8rem,5.4vw,4.4rem);margin-top:18px}
+.gs-root .hero h1 .hl{color:var(--orange-deep);position:relative;white-space:nowrap;display:inline-block}
+.gs-root .hero h1 .hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.34em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1;transform:scaleX(0);transform-origin:left;animation:gs-underline 1s .7s forwards cubic-bezier(.2,.7,.2,1)}
+@keyframes gs-underline{to{transform:scaleX(1)}}
+.gs-root .hero p.lead{margin:20px 0 32px;font-size:1.18rem;color:var(--ink-soft);max-width:30em}
+.gs-root .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.gs-root .up{opacity:0;transform:translateY(22px);animation:gs-up .7s forwards cubic-bezier(.2,.7,.2,1)}
+.gs-root .up.d1{animation-delay:.05s}.gs-root .up.d2{animation-delay:.18s}.gs-root .up.d3{animation-delay:.32s}.gs-root .up.d4{animation-delay:.46s}
+@keyframes gs-up{to{opacity:1;transform:none}}
+
+.gs-root .trust{display:flex;align-items:center;gap:14px;margin-top:34px}
+.gs-root .avatars{display:flex}
+.gs-root .avatars span{width:36px;height:36px;border-radius:50%;border:3px solid var(--cream);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;margin-left:-10px;box-shadow:var(--shadow-sm)}
+.gs-root .avatars span:first-child{margin-left:0}
+.gs-root .stars{display:flex;gap:2px}
+.gs-root .trust-sub{font-size:.85rem;color:var(--ink-soft);margin-top:2px}
+.gs-root .trust-sub b{color:var(--ink);font-weight:600}
+
+/* Device */
+.gs-root .stage{position:relative}
+.gs-root .blob{position:absolute;border-radius:50%;filter:blur(14px);z-index:0;pointer-events:none}
+.gs-root .blob.b1{width:280px;height:280px;background:radial-gradient(circle,var(--amber),transparent 70%);top:-60px;right:-50px;opacity:.55;animation:gs-float 7s ease-in-out infinite}
+.gs-root .blob.b2{width:220px;height:220px;background:radial-gradient(circle,var(--teal-soft),transparent 70%);bottom:-50px;left:-50px;opacity:.85;animation:gs-float 9s ease-in-out infinite reverse}
+@keyframes gs-float{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
+.gs-root .device{position:relative;z-index:1;background:var(--paper);border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow-lift);overflow:hidden;animation:gs-up .8s .25s both cubic-bezier(.2,.7,.2,1)}
+.gs-root .dev-bar{display:flex;align-items:center;gap:7px;padding:14px 18px;background:linear-gradient(180deg,#fff,#fff8f1);border-bottom:1px solid var(--line)}
+.gs-root .dot{width:11px;height:11px;border-radius:50%}
+.gs-root .dev-bar .dev-title{margin-left:10px;font-family:var(--font-body);font-weight:500;font-size:.82rem;color:var(--ink-soft)}
+.gs-root .dev-bar .play{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:600;color:var(--orange-deep);background:var(--cream-2);padding:5px 11px;border-radius:999px}
+.gs-root .dev-body{padding:18px;min-height:300px;background:linear-gradient(180deg,#fffdfa,#fff7ef)}
+.gs-root .toggle{display:flex;gap:6px;background:var(--cream-2);padding:5px;border-radius:14px;margin-bottom:16px}
+.gs-root .toggle button{flex:1;border:none;background:transparent;font-family:var(--font-display);font-weight:600;font-size:.88rem;color:var(--ink-soft);padding:9px;border-radius:10px;cursor:pointer;transition:.2s}
+.gs-root .toggle button.on{background:#fff;color:var(--orange-deep);box-shadow:var(--shadow-sm)}
+.gs-root .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;animation:gs-fade .4s ease}
+.gs-root .tcell{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:.88rem;font-weight:500;transition:transform .2s,border-color .2s}
+.gs-root .tcell:hover{transform:translateY(-3px);border-color:var(--orange-2)}
+.gs-root .tcell-ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+@keyframes gs-fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.gs-root .tutor-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:9px;transition:transform .2s}
+.gs-root .tutor-row:hover{transform:translateX(4px)}
+.gs-root .tutor-row .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;flex-shrink:0}
+.gs-root .tutor-row .nm{font-weight:500;font-size:.92rem}
+.gs-root .tutor-row .go{margin-left:auto;font-size:.82rem;color:var(--orange-deep);font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.gs-root .tutor-build{border:1.5px dashed var(--orange-2);color:var(--orange-deep);justify-content:center;font-weight:600;font-family:var(--font-display);background:var(--cream)}
+.gs-root .dev-foot{padding:10px 18px;border-top:1px solid var(--line);background:#fff;display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--ink-faint)}
+.gs-root .dev-foot .streak{margin-left:auto;color:var(--orange-deep);font-weight:600}
+.gs-root .hero-mascot{position:absolute;width:124px;right:-12px;bottom:-66px;z-index:5;filter:drop-shadow(0 16px 22px rgba(120,40,0,.22));animation:gs-bob 4s ease-in-out infinite}
+@keyframes gs-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+
+/* Doodles */
+.gs-root .doodle{position:absolute;z-index:0;opacity:.85}
+.gs-root .spin{animation:gs-spin 14s linear infinite}@keyframes gs-spin{to{transform:rotate(360deg)}}
+.gs-root .drift{animation:gs-float 8s ease-in-out infinite}
+
+/* Section heads */
+.gs-root .sec-head{text-align:center;max-width:42rem;margin:0 auto 48px}
+.gs-root .sec-head h2{font-size:clamp(2.1rem,4vw,3rem);margin-top:14px}
+.gs-root .sec-sub{margin-top:14px;color:var(--ink-soft);font-size:1.04rem}
+
+/* PILLARS */
+.gs-root .intro{padding:90px 0 70px;position:relative}
+.gs-root .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.gs-root .pillar{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:28px;padding:36px 28px 32px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
+.gs-root .pillar:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.gs-root .pillar .pic{width:72px;height:72px;border-radius:22px;margin:0 auto 18px;display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);transform:rotate(-6deg);transition:transform .3s}
+.gs-root .pillar:hover .pic{transform:rotate(8deg) scale(1.08)}
+.gs-root .pillar h3{font-size:1.24rem}
+.gs-root .pillar p{margin-top:8px;color:var(--ink-soft);font-size:.96rem}
+
+/* FEATURES */
+.gs-root .features{padding:60px 0 80px;position:relative}
+.gs-root .stage-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.gs-root .presenter{position:sticky;top:104px;display:flex;flex-direction:column;align-items:center}
+.gs-root .bubble{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px 26px;box-shadow:var(--shadow);max-width:320px;text-align:center;position:relative;min-height:110px;display:flex;align-items:center;justify-content:center}
+.gs-root .bubble::after{content:"";position:absolute;bottom:-13px;left:50%;transform:translateX(-50%) rotate(45deg);width:24px;height:24px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gs-root .bubble .line{font-family:var(--font-display);font-weight:500;font-size:1.14rem;color:var(--ink);opacity:0;transition:opacity .35s;position:absolute;padding:0 26px}
+.gs-root .bubble .line.show{opacity:1;position:relative}
+.gs-root .presenter .mascot-wrap{width:180px;margin-top:24px;filter:drop-shadow(0 16px 22px rgba(120,40,0,.2))}
+.gs-root .presenter-dots{display:flex;gap:8px;margin-top:14px}
+.gs-root .presenter-dots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--line);cursor:pointer;transition:.2s;padding:0}
+.gs-root .presenter-dots button.on{background:var(--orange);width:24px;border-radius:4px}
+.gs-root .feat-steps{display:flex;flex-direction:column;gap:18px}
+.gs-root .fstep{background:linear-gradient(165deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:24px;padding:24px 26px;display:flex;gap:20px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s;cursor:pointer;position:relative}
+.gs-root .fstep:hover{transform:translateX(4px)}
+.gs-root .fstep.active{border-color:var(--orange-2);box-shadow:var(--shadow);transform:scale(1.02)}
+.gs-root .fstep .fic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:var(--shadow-sm);transform:rotate(-4deg);transition:transform .3s}
+.gs-root .fstep.active .fic{transform:rotate(8deg) scale(1.06)}
+.gs-root .fbody{flex:1;min-width:0}
+.gs-root .fstep h3{font-size:1.28rem}
+.gs-root .fstep p{color:var(--ink-soft);font-size:.96rem;margin-top:4px}
+.gs-root .fstep .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
+.gs-root .tag{font-size:.78rem;font-weight:500;background:var(--cream-2);color:var(--ink-soft);padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:5px}
+.gs-root .tag svg{color:var(--orange)}
+.gs-root .fstep-arrow{color:var(--ink-faint);opacity:0;transform:translateX(-6px);transition:.25s}
+.gs-root .fstep.active .fstep-arrow,.gs-root .fstep:hover .fstep-arrow{opacity:1;transform:none;color:var(--orange-deep)}
+
+/* HONESTY */
+.gs-root .honesty{padding:40px 0 90px}
+.gs-root .honesty-inner{background:linear-gradient(155deg,var(--orange),var(--orange-deep));border-radius:42px;padding:72px 60px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lift)}
+.gs-root .honesty-inner::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);top:-160px;left:-80px}
+.gs-root .honesty-inner::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%);bottom:-100px;right:-60px}
+.gs-root .honesty-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
+.gs-root .honesty .eyebrow{color:#ffe2c9}
+.gs-root .honesty h2{font-size:clamp(2rem,4.2vw,3.2rem);margin:14px 0 16px}
+.gs-root .honesty p{font-size:1.16rem;opacity:.95;max-width:26em}
+.gs-root .honesty-stats{display:flex;gap:32px;margin-top:30px}
+.gs-root .honesty-stats div{display:flex;flex-direction:column}
+.gs-root .honesty-stats b{font-family:var(--font-display);font-weight:600;font-size:2rem;line-height:1}
+.gs-root .honesty-stats span{font-size:.84rem;opacity:.85;margin-top:4px}
+.gs-root .honesty-art{position:relative;display:grid;place-items:center;min-height:280px}
+.gs-root .honesty-art .ring{position:absolute;width:260px;height:260px;border-radius:50%;border:2px dashed rgba(255,255,255,.5);animation:gs-spin 22s linear infinite}
+.gs-root .honesty-art .ring.r2{width:340px;height:340px;border-color:rgba(255,255,255,.22);animation-duration:32s;animation-direction:reverse}
+.gs-root .honesty-art .mascot-wrap{width:210px;z-index:2;filter:drop-shadow(0 18px 26px rgba(120,40,0,.4))}
+.gs-root .banana{position:absolute;width:56px;bottom:10px;left:12%;transform:rotate(18deg);z-index:3}
+.gs-root .mug{position:absolute;width:52px;top:18px;right:10%;z-index:3;animation:gs-bob 3.5s ease-in-out infinite}
+
+/* FAQ */
+.gs-root .faq{padding:30px 0 90px}
+.gs-root .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.gs-root .qa{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:box-shadow .25s,border-color .25s}
+.gs-root .qa.open{box-shadow:var(--shadow);border-color:var(--orange-2)}
+.gs-root .qa button{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 22px;display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:1.05rem;color:var(--ink)}
+.gs-root .qa button .qi{width:34px;height:34px;border-radius:11px;background:var(--cream-2);display:grid;place-items:center;color:var(--orange-deep);flex-shrink:0}
+.gs-root .qa .qt{flex:1}
+.gs-root .qa .chev{color:var(--ink-faint);transition:transform .3s}
+.gs-root .qa.open .chev{transform:rotate(180deg);color:var(--orange-deep)}
+.gs-root .qa .ans{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.gs-root .qa .ans p{padding:0 22px 20px 70px;color:var(--ink-soft)}
+
+/* CTA band */
+.gs-root .cta-band{padding:30px 0 100px}
+.gs-root .cta-card{background:linear-gradient(160deg,#fff,#fff5e8);border:1px solid var(--line);border-radius:32px;padding:40px 44px;display:flex;align-items:center;gap:28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.gs-root .cta-card::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,84,.35),transparent 65%);top:-140px;right:-80px;pointer-events:none}
+.gs-root .cta-card>div{flex:1;position:relative;z-index:1}
+.gs-root .cta-card h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:10px}
+.gs-root .cta-card p{margin-top:8px;color:var(--ink-soft)}
+.gs-root .cta-mascot{width:120px;flex-shrink:0;filter:drop-shadow(0 12px 18px rgba(120,40,0,.2))}
+.gs-root .cta-card .btn{position:relative;z-index:1;flex-shrink:0}
+
+/* FOOTER */
+.gs-root footer{background:linear-gradient(180deg,var(--cream),var(--cream-2));border-top:1px solid var(--line);padding:60px 0 36px;position:relative;z-index:1}
+.gs-root .foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:40px;margin-bottom:42px}
+.gs-root .foot-brand .logo{margin-bottom:16px}
+.gs-root .foot-brand p{color:var(--ink-soft);max-width:24em;font-size:.94rem}
+.gs-root .foot-col h4{font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.gs-root .foot-col a{display:block;color:var(--ink-soft);margin-bottom:10px;font-size:.94rem;transition:color .2s}
+.gs-root .foot-col a:hover{color:var(--orange-deep)}
+.gs-root .foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--ink-faint);font-size:.84rem}
+
+/* MASCOT */
+.gs-root .ms{width:100%;height:auto;transform-origin:center;display:block}
+.gs-root .ms .sh{fill:rgba(49,28,16,.12)}
+.gs-root .ms .bf{fill:#FFF6EC}
+.gs-root .ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
+.gs-root .ms .scr{fill:#26323B}
+.gs-root .ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
+.gs-root .ms .or{fill:#FB6A1E}.gs-root .ms .ord{fill:#E04E07}.gs-root .ms .ant{fill:#FB6A1E}
+.gs-root .ms .ac{fill:#46D6AE}.gs-root .ms .fc{fill:#222F38}
+.gs-root .ms .ew{fill:#fff}.gs-root .ms .ep{fill:#222F38}
+.gs-root .ms .gl{stroke:#46D6AE;stroke-width:3;fill:none}
+.gs-root .ms .bl{fill:#FF9A57;opacity:.55}.gs-root .ms .mo{fill:#FF8A4C}
+.gs-root .ms .ew,.gs-root .ms .ep,.gs-root .ms .mo{transform-box:fill-box;transform-origin:center}
+.gs-root .ms .armr{transform-box:fill-box;transform-origin:50% 4%}
+
+.gs-root .a-bob .ms{animation:gs-mbob 3s ease-in-out infinite}
+.gs-root .a-wave .ms .armr{animation:gs-mwave 1.2s ease-in-out infinite}
+.gs-root .a-blink .ms .ew,.gs-root .a-blink .ms .ep{animation:gs-mblink 3.4s ease-in-out infinite}
+.gs-root .a-talk .ms .mo{animation:gs-mtalk .42s ease-in-out infinite}
+.gs-root .a-talk .ms{animation:gs-mbob 3s ease-in-out infinite}
+
+@keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes gs-mwave{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(14deg)}}
+@keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .gs-root .hero-grid,.gs-root .stage-wrap,.gs-root .honesty-grid,.gs-root .pillars,.gs-root .foot-grid{grid-template-columns:1fr;gap:40px}
+  .gs-root .nav-links{display:none}
+  .gs-root .hero-mascot{display:none}
+  .gs-root .presenter{position:static;flex-direction:row;gap:20px;margin-bottom:20px;align-items:center}
+  .gs-root .presenter .mascot-wrap{width:120px;margin-top:0;order:-1}
+  .gs-root .bubble{flex:1;min-height:0;max-width:none}
+  .gs-root .presenter-dots{display:none}
+  .gs-root .honesty-inner{padding:48px 30px}
+  .gs-root .cta-card{flex-direction:column;text-align:center;padding:36px 28px}
+  .gs-root .cta-mascot{width:100px}
+}
+@media(max-width:560px){
+  .gs-root .nav-right .lang{display:none}
+  .gs-root .hero{padding:50px 0 70px}
+  .gs-root .fstep{padding:20px;gap:14px}
+  .gs-root .trust{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.gs-root *,.gs-root *::before,.gs-root *::after{animation:none!important;transition:none!important}}
+`;
