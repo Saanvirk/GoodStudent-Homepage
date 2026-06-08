@@ -247,8 +247,8 @@ function Index() {
             <a href="#faq">FAQ</a>
           </div>
           <div className="nav-right">
-            <span className="lang"><Globe size={14} /> <b>粵</b> · EN · 普</span>
-            <button className="btn btn-primary btn-sm">Open app <ArrowRight size={16} /></button>
+            <a href="#demo" className="nav-watch"><Play size={13} /> Watch demo</a>
+            <button className="btn btn-primary btn-sm" onClick={() => scrollTo("features")}>Explore tools <ArrowRight size={16} /></button>
           </div>
         </div>
       </nav>
