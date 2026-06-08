@@ -574,7 +574,8 @@ const STYLES = `
 
 /* HERO */
 .gs-root .hero{position:relative;padding:72px 0 80px}
-.gs-root .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.gs-root .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.gs-root .hero-copy{position:relative;z-index:2}
 .gs-root .hero h1{font-size:clamp(2.8rem,5.4vw,4.4rem);margin-top:18px}
 .gs-root .hero h1 .hl{color:var(--orange-deep);position:relative;white-space:nowrap;display:inline-block}
 .gs-root .hero h1 .hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.34em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1;transform:scaleX(0);transform-origin:left;animation:gs-underline 1s .7s forwards cubic-bezier(.2,.7,.2,1)}
