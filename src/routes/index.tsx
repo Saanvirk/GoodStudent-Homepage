@@ -19,14 +19,11 @@ import {
   Music,
   Code2,
   Crown,
-  ChevronDown,
-  ShieldCheck,
   Tablet,
   Play,
   ArrowRight,
   Star,
   Heart,
-  MonitorPlay,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
