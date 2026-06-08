@@ -361,7 +361,7 @@ function Index() {
                 icon: Puzzle,
                 grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
                 title: "Tutor & playmate",
-                body: "It helps you study — and explores your hobbies, from chess to coding to music.",
+                body: "It helps you study AND explores your hobbies, from chess to coding to music.",
               },
             ].map((p) => (
               <div key={p.title} className="pillar">
