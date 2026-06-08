@@ -431,21 +431,16 @@ function Index() {
             <div className="honesty-grid">
               <div>
                 <div className="eyebrow">What's different</div>
-                <h2>It tells you when it's not sure.</h2>
+                <h2>It teaches you to verify.</h2>
                 <p>
-                  It shows where answers come from — so students learn to <i>use</i> AI,
-                  not just trust it.
+                  It shows you where the answers come from and nudges you to learn
+                  using AI — instead of blindly copying its answers.
                 </p>
-                <div className="honesty-stats">
-                  <div><b>iPad</b><span>ready</span></div>
-                  <div><b>12+</b><span>subjects</span></div>
-                  <div><b>P1–S6</b><span>every level</span></div>
-                </div>
               </div>
               <div className="honesty-art">
                 <span className="ring" />
                 <span className="ring r2" />
-                <div className="mascot-wrap a-wave"><Mascot /></div>
+                <div className="mascot-wrap a-think a-blink"><Mascot /></div>
                 <svg className="mug" viewBox="0 0 60 60">
                   <rect x="10" y="18" width="34" height="30" rx="6" fill="#FFF6EC" stroke="#26323B" strokeWidth="2" />
                   <path d="M44 24 h6 a6 6 0 0 1 0 14 h-6" fill="none" stroke="#26323B" strokeWidth="3" />
