@@ -99,29 +99,41 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
-/* -------- proper logo mark (chat bubble + grad cap) -------- */
+/* -------- logo mark: tiny mascot face -------- */
 function LogoMark({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+    <svg viewBox="0 0 56 56" className={className} aria-hidden="true">
       <defs>
         <linearGradient id="lg-grad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#FF8A3D" />
           <stop offset="100%" stopColor="#E04E07" />
         </linearGradient>
       </defs>
-      <path
-        d="M10 5 H38 A7 7 0 0 1 45 12 V30 A7 7 0 0 1 38 37 H23 L14 45 V37 H10 A7 7 0 0 1 3 30 V12 A7 7 0 0 1 10 5 Z"
-        fill="url(#lg-grad)"
-      />
-      {/* graduation cap */}
-      <path d="M24 13 L37 19 L24 25 L11 19 Z" fill="#FFF7EF" />
-      <path d="M16 21 V27 C16 29 20 30.5 24 30.5 C28 30.5 32 29 32 27 V21" fill="none" stroke="#FFF7EF" strokeWidth="2.2" strokeLinejoin="round" />
-      {/* tassel */}
-      <path d="M35 20 V25" stroke="#FFC56B" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="35" cy="26.5" r="1.6" fill="#FFC56B" />
+      {/* rounded squircle backdrop */}
+      <rect x="2" y="2" width="52" height="52" rx="16" fill="url(#lg-grad)" />
+      {/* antenna */}
+      <path d="M28 11 C26.5 7 32 6 29 2" fill="none" stroke="#FFF7EF" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="29" cy="2.5" r="2.2" fill="#FFF7EF" />
+      {/* head */}
+      <rect x="10" y="11" width="36" height="32" rx="14" fill="#FFF7EF" />
+      {/* face screen */}
+      <rect x="14" y="17" width="28" height="22" rx="9" fill="#222F38" />
+      {/* eyes */}
+      <circle cx="22" cy="28" r="3.4" fill="#fff" />
+      <circle cx="22.7" cy="28.6" r="1.6" fill="#222F38" />
+      <circle cx="34" cy="28" r="3.4" fill="#fff" />
+      <circle cx="33.3" cy="28.6" r="1.6" fill="#222F38" />
+      {/* glasses */}
+      <circle cx="22" cy="28" r="5" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      <circle cx="34" cy="28" r="5" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      <path d="M27 28 q1 -1.5 2 0" fill="none" stroke="#46D6AE" strokeWidth="1.3" />
+      {/* cheeks */}
+      <ellipse cx="17" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
+      <ellipse cx="39" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
     </svg>
   );
 }
+
 
 /* -------- main -------- */
 function Index() {
