@@ -760,9 +760,14 @@ const STYLES = `
 .gs-root .a-talk .ms{animation:gs-mbob 3s ease-in-out infinite}
 
 @keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes gs-mwave{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(14deg)}}
+@keyframes gs-mwave{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-100deg)}}
 @keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+
+/* Sticky/snap scroll */
+html{scroll-behavior:smooth}
+.gs-root{scroll-snap-type:y proximity}
+.gs-root .snap-sec,.gs-root section{scroll-snap-align:start;scroll-margin-top:80px}
 
 /* RESPONSIVE */
 @media(max-width:960px){
