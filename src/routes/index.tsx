@@ -721,20 +721,20 @@ const STYLES = `
 .gs-root .fstep{background:linear-gradient(165deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:22px;padding:13px 18px;display:flex;gap:16px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s;cursor:pointer;position:relative}
 .gs-root .fstep:hover{transform:translateX(4px)}
 .gs-root .fstep.active{border-color:var(--orange-2);box-shadow:var(--shadow);transform:scale(1.02)}
-.gs-root .fstep .fic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:var(--shadow-sm);transform:rotate(-4deg);transition:transform .3s}
+.gs-root .fstep .fic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:var(--shadow-sm);transform:rotate(-4deg);transition:transform .3s}
 .gs-root .fstep.active .fic{transform:rotate(8deg) scale(1.06)}
 .gs-root .fbody{flex:1;min-width:0}
-.gs-root .fstep h3{font-size:1.28rem}
-.gs-root .fstep p{color:var(--ink-soft);font-size:.96rem;margin-top:4px}
-.gs-root .fstep .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:7px}
+.gs-root .fstep h3{font-size:1.18rem}
+.gs-root .fstep p{color:var(--ink-soft);font-size:.92rem;margin-top:2px}
+.gs-root .fstep .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
 .gs-root .tag{font-size:.78rem;font-weight:500;background:var(--cream-2);color:var(--ink-soft);padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:5px}
 .gs-root .tag svg{color:var(--orange)}
 .gs-root .fstep-arrow{color:var(--ink-faint);opacity:0;transform:translateX(-6px);transition:.25s}
 .gs-root .fstep.active .fstep-arrow,.gs-root .fstep:hover .fstep-arrow{opacity:1;transform:none;color:var(--orange-deep)}
 
 /* HONESTY */
-.gs-root .honesty{padding:40px 0 90px}
-.gs-root .honesty-inner{background:linear-gradient(155deg,var(--orange),var(--orange-deep));border-radius:42px;padding:72px 60px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lift)}
+.gs-root .honesty{padding:34px 0 52px}
+.gs-root .honesty-inner{background:linear-gradient(155deg,var(--orange),var(--orange-deep));border-radius:42px;padding:54px 60px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lift)}
 .gs-root .honesty-inner::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);top:-160px;left:-80px}
 .gs-root .honesty-inner::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%);bottom:-100px;right:-60px}
 .gs-root .honesty-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
