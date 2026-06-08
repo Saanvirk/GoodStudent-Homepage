@@ -288,8 +288,8 @@ function Index() {
 
           {/* Mascot stage */}
           <div className="stage">
-            <span className="blob b1" />
-            <span className="blob b2" />
+            <span className="blob b1" data-parallax="0.08" />
+            <span className="blob b2" data-parallax="-0.06" />
             <div className="spotlight">
               <span className="ring r1" />
               <span className="ring r2" />
