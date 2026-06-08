@@ -357,13 +357,13 @@ function Index() {
                 icon: TrendingUp,
                 grad: "linear-gradient(150deg,#37C2A0,#13A483)",
                 title: "P1 to the DSE",
-                body: "One tutor that grows with you, right on your phone.",
+                body: "One tutor that grows with you, all the way through school.",
               },
               {
-                icon: Languages,
+                icon: Tablet,
                 grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
-                title: "Three languages",
-                body: "Cantonese, English or Mandarin — switch any time.",
+                title: "Made for iPad",
+                body: "A calm, focused website that feels right on iPad, laptop or phone.",
               },
             ].map((p) => (
               <div key={p.title} className="pillar">
