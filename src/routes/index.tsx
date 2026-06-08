@@ -272,16 +272,9 @@ function Index() {
               </button>
             </div>
             <div className="trust up d4">
-              <div className="avatars">
-                <span style={{ background: "linear-gradient(135deg,#FF8A3D,#FB6A1E)" }}>L</span>
-                <span style={{ background: "linear-gradient(135deg,#3F95E6,#2E7BD0)" }}>M</span>
-                <span style={{ background: "linear-gradient(135deg,#37C2A0,#13A483)" }}>陳</span>
-                <span style={{ background: "linear-gradient(135deg,#8A7BE8,#6F5FE0)" }}>K</span>
-              </div>
-              <div>
-                <div className="stars">{[0, 1, 2, 3, 4].map((i) => <Star key={i} size={14} fill="#FFB454" stroke="#FFB454" />)}</div>
-                <div className="trust-sub"><b>4.9</b> · loved by 12,000+ HK families</div>
-              </div>
+              <span className="chip"><ShieldCheck size={14} /> No ads · student-safe</span>
+              <span className="chip"><Languages size={14} /> 粵 · EN · 普</span>
+              <span className="chip"><Sparkles size={14} /> Free to start</span>
             </div>
           </div>
 
