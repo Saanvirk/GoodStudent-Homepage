@@ -307,6 +307,35 @@ function Index() {
         </div>
       </header>
 
+      {/* DEMO — video placeholder */}
+      <section className="demo" id="demo">
+        <div className="wrap">
+          <div className="sec-head reveal">
+            <div className="eyebrow">See it in action</div>
+            <h2>A two-minute tour of Good Student.</h2>
+            <p className="sec-sub">A peek at the website — drop your demo video into the frame below.</p>
+          </div>
+          <div className="demo-frame reveal">
+            <div className="df-bar">
+              <span className="dot" style={{ background: "#FF6B6B" }} />
+              <span className="dot" style={{ background: "#FFD93D" }} />
+              <span className="dot" style={{ background: "#6BCB77" }} />
+              <span className="df-url">goodstudent.hk</span>
+            </div>
+            <div className="df-stage">
+              {/* Replace this block with your <video> or <iframe> */}
+              <div className="df-placeholder">
+                <div className="df-play"><Play size={34} /></div>
+                <b>Drop your demo video here</b>
+                <span>Replace this placeholder in <code>src/routes/index.tsx</code> · <code>.df-stage</code></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
 
       {/* PILLARS */}
       <section className="intro">
