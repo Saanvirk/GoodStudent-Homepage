@@ -515,7 +515,7 @@ function Index() {
                 <LogoMark className="mk" />
                 <span>Good Student</span>
               </a>
-              <p>An AI study tutor for Hong Kong students — built to guide, not to do the work for you.</p>
+              <p>An AI study tutor for Hong Kong students — a website built to guide, not to do the work for you.</p>
             </div>
             <div className="foot-col">
               <h4>Product</h4>
@@ -532,7 +532,7 @@ function Index() {
           </div>
           <div className="foot-bottom">
             <span>© Good Student · A community education programme</span>
-            <span className="lang"><Globe size={14} /> <b>粵</b> · English · 普通話</span>
+            <span className="foot-note"><Tablet size={14} /> Works on iPad, laptop & phone</span>
           </div>
         </div>
       </footer>
