@@ -340,7 +340,7 @@ function Index() {
       {/* PILLARS */}
       <section className="intro">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Why it exists</div>
             <h2>For when you don't have a tutor.</h2>
             <p className="sec-sub">Real tutoring shouldn't be a luxury. Good Student is built around three quiet ideas.</p>
@@ -381,7 +381,7 @@ function Index() {
       {/* FEATURES — talking mascot */}
       <section className="features" id="features">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Take the tour</div>
             <h2>Here's what I can do.</h2>
             <p className="sec-sub">Hover any card — I'll tell you about it.</p>
@@ -468,7 +468,7 @@ function Index() {
       {/* FAQ */}
       <section className="faq" id="faq">
         <div className="wrap">
-          <div className="sec-head">
+          <div className="sec-head reveal">
             <div className="eyebrow">Good to know</div>
             <h2>Quick questions.</h2>
           </div>
