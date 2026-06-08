@@ -220,26 +220,11 @@ function Index() {
     },
   ];
 
-  const tools = [
-    { icon: ListChecks, label: "Quizzes", color: "#13A483" },
-    { icon: Layers, label: "Flashcards", color: "#E86A9A" },
-    { icon: Mic, label: "Say it Right", color: "#8A7BE8" },
-    { icon: Ear, label: "Hear it Right", color: "#3F95E6" },
-    { icon: Network, label: "Mind map", color: "#E04E07" },
-    { icon: BookOpen, label: "Reading", color: "#C77A0A" },
-  ];
-
-  const tutors = [
-    { icon: BookOpen, label: "DSE English", bg: "#3F95E6" },
-    { icon: Calculator, label: "DSE Maths", bg: "#C77A0A" },
-    { icon: Languages, label: "DSE 中文", bg: "#E86A9A" },
-  ];
-
   const faqs = [
-    { icon: ShieldCheck, q: "Is it safe for my child?", a: "Yes — made for students, no ads, private by design." },
-    { icon: Lightbulb, q: "Will it just give the answers?", a: "No. It guides them to work it out, like a good tutor." },
+    { icon: ShieldCheck, q: "Is it safe for students?", a: "Yes — built for students, no ads, private by design." },
+    { icon: Lightbulb, q: "Will it just give the answers?", a: "No. It guides you to work it out, like a good tutor would." },
     { icon: TrendingUp, q: "What ages and levels?", a: "Primary 1 through Secondary 6, including the DSE." },
-    { icon: Smartphone, q: "What device do we need?", a: "A phone — the one most families already have." },
+    { icon: Tablet, q: "What do I need to use it?", a: "Any modern browser — works beautifully on iPad, laptop and phone." },
     { icon: Languages, q: "Which languages?", a: "Cantonese, English and Mandarin." },
   ];
 
