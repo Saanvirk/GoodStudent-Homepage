@@ -772,7 +772,7 @@ const STYLES = `
 .gs-root .cta-card>div{flex:1;position:relative;z-index:1}
 .gs-root .cta-card h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:10px}
 .gs-root .cta-card p{margin-top:8px;color:var(--ink-soft)}
-.gs-root .cta-mascot{width:104px;flex-shrink:0;filter:drop-shadow(0 12px 18px rgba(120,40,0,.2))}
+.gs-root .cta-mascot{width:116px;flex-shrink:0;filter:drop-shadow(0 12px 18px rgba(120,40,0,.2))}
 .gs-root .cta-card .btn{position:relative;z-index:1;flex-shrink:0}
 
 /* FOOTER */
@@ -795,7 +795,8 @@ const STYLES = `
 .gs-root .ms .or{fill:#FB6A1E}.gs-root .ms .ord{fill:#E04E07}.gs-root .ms .ant{fill:#FB6A1E}
 .gs-root .ms .ac{fill:#46D6AE}.gs-root .ms .fc{fill:#222F38}
 .gs-root .ms .ew{fill:#fff}.gs-root .ms .ep{fill:#222F38}
-.gs-root .ms .gl{stroke:#46D6AE;stroke-width:3;fill:none}
+.gs-root .ms .gl{stroke:#46D6AE;stroke-width:3;fill:none;stroke-linecap:round}
+.gs-root .ms .gh{fill:#fff;opacity:.68}
 .gs-root .ms .bl{fill:#FF9A57;opacity:.55}.gs-root .ms .mo{fill:#FF8A4C}
 .gs-root .ms .ew,.gs-root .ms .ep,.gs-root .ms .mo{transform-box:fill-box;transform-origin:center}
 .gs-root .ms .armr{transform-box:fill-box;transform-origin:50% 4%}
@@ -808,17 +809,17 @@ const STYLES = `
 /* Thinking: tilts head subtly, small mouth, no waving */
 .gs-root .a-think .ms{animation:gs-mthink 4.2s ease-in-out infinite;transform-origin:50% 60%}
 .gs-root .a-think .ms .mo{transform:scaleY(.45)}
-/* Jumping mascot for CTA */
-.gs-root .a-jump .ms{animation:gs-mjump 1.4s cubic-bezier(.5,0,.5,1) infinite;transform-origin:50% 95%}
-.gs-root .a-jump .ms .sh{animation:gs-mshadow 1.4s cubic-bezier(.5,0,.5,1) infinite;transform-origin:center}
+/* Cute CTA hop: slower, softer, more playful than a jump */
+.gs-root .a-jump .ms{animation:gs-mjump 3.4s cubic-bezier(.34,1.56,.64,1) infinite;transform-origin:50% 95%}
+.gs-root .a-jump .ms .sh{animation:gs-mshadow 3.4s ease-in-out infinite;transform-origin:center}
 
 @keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes gs-mwave{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-100deg)}}
 @keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
 @keyframes gs-mthink{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(4deg) translateY(-4px)}}
-@keyframes gs-mjump{0%,100%{transform:translateY(0) scaleY(1)}15%{transform:translateY(0) scaleY(.86) scaleX(1.08)}45%{transform:translateY(-44px) scaleY(1.06) scaleX(.96)}70%{transform:translateY(-44px) scaleY(1.06) scaleX(.96)}90%{transform:translateY(0) scaleY(.9) scaleX(1.06)}}
-@keyframes gs-mshadow{0%,100%{transform:scaleX(1);opacity:.18}45%,70%{transform:scaleX(.55);opacity:.08}}
+@keyframes gs-mjump{0%,100%{transform:translateY(0) rotate(0) scale(1)}18%{transform:translateY(0) rotate(-2deg) scaleX(1.04) scaleY(.97)}34%{transform:translateY(-18px) rotate(3deg) scaleX(.99) scaleY(1.03)}50%{transform:translateY(0) rotate(-1deg) scaleX(1.02) scaleY(.98)}66%{transform:translateY(-8px) rotate(2deg) scale(1.01)}82%{transform:translateY(0) rotate(0) scale(1)}}
+@keyframes gs-mshadow{0%,100%{transform:scaleX(1);opacity:.16}34%{transform:scaleX(.76);opacity:.09}66%{transform:scaleX(.88);opacity:.12}}
 
 /* Sticky/snap scroll + scroll reveals — slide-style snapping */
 html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
