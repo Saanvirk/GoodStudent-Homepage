@@ -229,7 +229,7 @@ function Index() {
       <nav>
         <div className="wrap nav-in">
           <a className="logo" href="#top">
-            <span className="mk"><Mascot /></span>
+            <LogoMark className="mk" />
             <span>Good Student</span>
           </a>
           <div className="nav-links">
