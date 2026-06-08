@@ -834,6 +834,7 @@ body{scroll-snap-type:none}
   .gs-root .slide-layer:last-child{height:118vh}
   .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{display:flex;align-items:center;padding-top:72px;padding-bottom:34px}
   .gs-root .features{padding-top:86px}
+  .gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{align-items:flex-start;padding-top:112px}
 }
 
 /* TEAM */
