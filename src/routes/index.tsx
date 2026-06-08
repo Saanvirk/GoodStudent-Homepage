@@ -279,11 +279,6 @@ function Index() {
                 <Play size={16} /> See how it works
               </button>
             </div>
-            <div className="trust up d4">
-              <span className="chip"><GraduationCap size={14} /> Built on HKDSE curriculum</span>
-              <span className="chip"><Lightbulb size={14} /> AI literacy first</span>
-              <span className="chip"><Tablet size={14} /> Beautiful on iPad</span>
-            </div>
           </div>
 
           {/* Mascot stage */}
