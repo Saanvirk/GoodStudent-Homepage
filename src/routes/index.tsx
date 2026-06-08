@@ -823,7 +823,7 @@ body{scroll-snap-type:y mandatory}
 
 /* DEMO section */
 .gs-root .demo{padding:70px 0 30px;position:relative}
-.gs-root .demo-frame{max-width:1040px;margin:0 auto;background:linear-gradient(180deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-lift);overflow:hidden;position:sticky;top:96px}
+.gs-root .demo-frame{max-width:1040px;margin:0 auto;width:100%;background:linear-gradient(180deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow-lift);overflow:hidden}
 .gs-root .df-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:linear-gradient(180deg,#fff,#fff6ec);border-bottom:1px solid var(--line)}
 .gs-root .df-url{margin-left:14px;font-family:var(--font-body);font-size:.84rem;color:var(--ink-soft);background:var(--cream-2);padding:5px 14px;border-radius:999px}
 .gs-root .df-stage{aspect-ratio:16/9;background:
