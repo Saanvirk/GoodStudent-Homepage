@@ -831,13 +831,13 @@ body{scroll-snap-type:y mandatory}
 
 /* TEAM */
 .gs-root .team{padding:80px 0}
-.gs-root .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.gs-root .team-card{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:24px;padding:22px 18px 20px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
+.gs-root .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.gs-root .team-card{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:26px;padding:28px 18px 24px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
 .gs-root .team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--orange-2)}
-.gs-root .team-photo{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(160deg,#FFE0C2,#FFC56B);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:700;font-size:1.6rem;box-shadow:var(--shadow-sm);overflow:hidden;border:3px solid #fff}
-.gs-root .team-photo .ti.ph{font-size:2rem;opacity:.6;color:var(--orange-deep);background:none}
-.gs-root .team-name{font-family:var(--font-display);font-weight:600;font-size:1.02rem;color:var(--ink)}
-.gs-root .team-role{margin-top:4px;font-size:.84rem;color:var(--ink-soft)}
+.gs-root .team-photo{width:124px;height:124px;border-radius:50%;margin:0 auto 18px;background:linear-gradient(160deg,#FFE0C2,#FFC56B);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:700;font-size:2rem;box-shadow:var(--shadow);overflow:hidden;border:4px solid #fff}
+.gs-root .team-photo .ti.ph{font-size:2.5rem;opacity:.6;color:var(--orange-deep);background:none}
+.gs-root .team-name{font-family:var(--font-display);font-weight:600;font-size:1.12rem;color:var(--ink)}
+.gs-root .team-role{margin-top:5px;font-size:.92rem;color:var(--ink-soft)}
 .gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .gs-root .reveal.in{opacity:1;transform:none}
 .gs-root .hero-mascot{transform:translateY(var(--py,0))}
