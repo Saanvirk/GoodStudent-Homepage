@@ -135,7 +135,9 @@ function LogoMark({ className = "" }: { className?: string }) {
 
 /* -------- main -------- */
 function Index() {
+  const navigate = useNavigate();
   const [stepIdx, setStepIdx] = useState(0);
+  
   
 
   // Scroll progress bar + reveal-on-scroll
