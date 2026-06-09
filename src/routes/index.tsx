@@ -274,7 +274,7 @@ function Index() {
               <button className="btn btn-primary" onClick={() => scrollTo("features")}>
                 <Sparkles size={18} /> Explore tools
               </button>
-              <button className="btn btn-ghost" onClick={() => scrollTo("demo")}>
+              <button className="btn btn-ghost" onClick={() => navigate({ to: "/tutors" })}>
                 <Play size={16} /> See how it works
               </button>
             </div>
