@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   Sparkles,
@@ -135,7 +135,9 @@ function LogoMark({ className = "" }: { className?: string }) {
 
 /* -------- main -------- */
 function Index() {
+  const navigate = useNavigate();
   const [stepIdx, setStepIdx] = useState(0);
+  
   
 
   // Scroll progress bar + reveal-on-scroll
@@ -272,7 +274,7 @@ function Index() {
               <button className="btn btn-primary" onClick={() => scrollTo("features")}>
                 <Sparkles size={18} /> Explore tools
               </button>
-              <button className="btn btn-ghost" onClick={() => scrollTo("demo")}>
+              <button className="btn btn-ghost" onClick={() => navigate({ to: "/tutors" })}>
                 <Play size={16} /> See how it works
               </button>
             </div>
