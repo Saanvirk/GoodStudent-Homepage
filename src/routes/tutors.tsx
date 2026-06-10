@@ -472,12 +472,6 @@ const css = `
 .tp-card-fav:hover{color:var(--orange-deep);background:var(--cream)}
 .tp-card-fav.is-on{color:var(--orange-deep)}
 .tp-card-fav--inline{}
-.tp-mycard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.tp-mycard-title{font-family:var(--font-display);font-weight:600;font-size:1.04rem;color:var(--ink);line-height:1.2}
-.tp-mycard-sub{font-size:.78rem;color:var(--ink-faint);font-weight:500}
-.tp-mycard-support{font-size:.84rem;color:var(--ink-soft);margin-top:4px;line-height:1.45}
-.tp-mycard-foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.tp-mycard-meta{font-size:.72rem;color:var(--ink-faint);font-style:italic}
 
 .tp-build{display:flex;align-items:center;gap:14px;background:var(--cream);border:1.5px dashed var(--orange-2);border-radius:18px;padding:18px;cursor:pointer;font-family:inherit;color:inherit;text-align:left;transition:background .2s,border-color .2s,transform .2s}
 .tp-build:hover{background:var(--cream-2);border-color:var(--orange-deep);transform:translateY(-2px)}
