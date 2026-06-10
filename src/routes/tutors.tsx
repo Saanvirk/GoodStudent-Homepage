@@ -16,6 +16,15 @@ import {
   Heart,
   ImagePlus,
   X,
+  ArrowLeft,
+  Check,
+  UploadCloud,
+  FileText,
+  Trash2,
+  Target,
+  MessageSquare,
+  Image as ImageIcon,
+  Type as TypeIcon,
 } from "lucide-react";
 
 /* ===== Shared mascot symbol (with glasses) used inside scene cards ===== */
