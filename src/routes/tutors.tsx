@@ -15,12 +15,117 @@ import {
   Sparkles,
   Heart,
   ImagePlus,
+  X,
 } from "lucide-react";
-import imgEnglish from "@/assets/tutor-english.jpg";
-import imgMaths from "@/assets/tutor-maths.jpg";
-import imgCivics from "@/assets/tutor-civics.jpg";
-import imgChinese from "@/assets/tutor-chinese.jpg";
-import imgNotes from "@/assets/tutor-notes.jpg";
+
+/* ===== Shared mascot symbol (with glasses) used inside scene cards ===== */
+function BotSymbols() {
+  return (
+    <svg style={{ position: "absolute", width: 0, height: 0 }} aria-hidden="true">
+      <symbol id="tp-bot" viewBox="0 0 220 250">
+        <ellipse cx="110" cy="238" rx="54" ry="8" fill="rgba(60,40,20,.12)" />
+        <rect x="86" y="190" width="15" height="40" rx="7.5" fill="#F4EFE3" stroke="#E2D6BD" strokeWidth="2" />
+        <rect x="119" y="190" width="15" height="40" rx="7.5" fill="#F4EFE3" stroke="#E2D6BD" strokeWidth="2" />
+        <ellipse cx="92" cy="232" rx="13" ry="7" fill="#FBF7EE" stroke="#E2D6BD" strokeWidth="2" />
+        <ellipse cx="128" cy="232" rx="13" ry="7" fill="#FBF7EE" stroke="#E2D6BD" strokeWidth="2" />
+        <rect x="48" y="130" width="15" height="46" rx="7.5" fill="#F4EFE3" stroke="#E2D6BD" strokeWidth="2" transform="rotate(16 55 153)" />
+        <circle cx="52" cy="178" r="9" fill="#FBF7EE" stroke="#E2D6BD" strokeWidth="2" />
+        <rect x="157" y="130" width="15" height="46" rx="7.5" fill="#F4EFE3" stroke="#E2D6BD" strokeWidth="2" transform="rotate(-16 165 153)" />
+        <circle cx="168" cy="178" r="9" fill="#FBF7EE" stroke="#E2D6BD" strokeWidth="2" />
+        <rect x="64" y="120" width="92" height="82" rx="30" fill="#F4EFE3" stroke="#E2D6BD" strokeWidth="2.4" />
+        <rect x="86" y="140" width="48" height="34" rx="10" fill="#26323B" />
+        <text x="110" y="164" textAnchor="middle" fontFamily="monospace" fontSize="16" fill="#46D6AE" fontWeight="700">{"</>"}</text>
+        <path d="M110 38 C108 26 118 24 113 14" stroke="#E2D6BD" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <circle cx="112" cy="12" r="7" fill="#FB6A1E" />
+        <rect x="56" y="36" width="108" height="92" rx="40" fill="#F7F2E8" stroke="#E2D6BD" strokeWidth="2.4" />
+        <circle cx="56" cy="84" r="9" fill="#5BD0B4" />
+        <circle cx="164" cy="84" r="9" fill="#5BD0B4" />
+        <rect x="68" y="52" width="84" height="62" rx="26" fill="#26323B" />
+        <circle cx="93" cy="82" r="12" fill="#fff" />
+        <circle cx="96" cy="84" r="6" fill="#1F2A30" />
+        <circle cx="127" cy="82" r="12" fill="#fff" />
+        <circle cx="124" cy="84" r="6" fill="#1F2A30" />
+        <circle cx="89" cy="78" r="2.4" fill="#fff" />
+        <circle cx="120" cy="78" r="2.4" fill="#fff" />
+        <circle cx="93" cy="82" r="17" fill="none" stroke="#2FB39A" strokeWidth="4" />
+        <circle cx="127" cy="82" r="17" fill="none" stroke="#2FB39A" strokeWidth="4" />
+        <path d="M109 80 q1 -3 2 0" stroke="#2FB39A" strokeWidth="4" fill="none" />
+        <ellipse cx="80" cy="98" rx="7" ry="4" fill="#C77E5A" opacity=".5" />
+        <ellipse cx="140" cy="98" rx="7" ry="4" fill="#C77E5A" opacity=".5" />
+        <ellipse cx="110" cy="100" rx="5" ry="4" fill="#FB6A1E" />
+      </symbol>
+    </svg>
+  );
+}
+
+type SceneKey = "english" | "maths" | "civics" | "chinese" | "notes";
+
+function Scene({ k }: { k: SceneKey }) {
+  const bot = <use href="#tp-bot" x="45" y="40" width="150" height="170" />;
+  if (k === "english") return (
+    <svg viewBox="0 0 240 220" className="tp-scene">
+      <rect width="240" height="220" rx="16" fill="#F7E4DE" />
+      <circle cx="120" cy="116" r="94" fill="none" stroke="#B5462F" strokeDasharray="2 7" opacity=".35" />
+      {bot}
+      <rect x="74" y="150" width="92" height="36" rx="4" fill="#9E3B27" />
+      <path d="M80 152 h38 v32 h-38 z" fill="#FBF6EC" /><path d="M122 152 h38 v32 h-38 z" fill="#FFFDF7" />
+      <line x1="120" y1="150" x2="120" y2="186" stroke="#7E2C1C" strokeWidth="2" />
+      <g stroke="#C9B3AC" strokeWidth="2" strokeLinecap="round"><line x1="86" y1="160" x2="112" y2="160" /><line x1="86" y1="168" x2="112" y2="168" /><line x1="86" y1="176" x2="106" y2="176" /><line x1="128" y1="160" x2="154" y2="160" /><line x1="128" y1="168" x2="154" y2="168" /></g>
+      <g><rect x="172" y="24" width="46" height="32" rx="9" fill="#fff" stroke="#E6CFC8" strokeWidth="1.5" /><path d="M186 54 l-2 9 l10 -7 z" fill="#fff" stroke="#E6CFC8" strokeWidth="1.5" /><text x="195" y="46" textAnchor="middle" fontFamily="Fredoka,sans-serif" fontSize="17" fontWeight="700" fill="#B5462F">Aa</text></g>
+    </svg>
+  );
+  if (k === "maths") return (
+    <svg viewBox="0 0 240 220" className="tp-scene">
+      <rect width="240" height="220" rx="16" fill="#FBEED1" />
+      <circle cx="120" cy="116" r="94" fill="none" stroke="#C98C2E" strokeDasharray="2 7" opacity=".4" />
+      {bot}
+      <rect x="74" y="150" width="92" height="38" rx="6" fill="#2E3B33" />
+      <rect x="74" y="150" width="92" height="38" rx="6" fill="none" stroke="#A07A3A" strokeWidth="3" />
+      <path d="M88 178 l11 -18 l11 18 z" fill="none" stroke="#F3E7CC" strokeWidth="2.2" strokeLinejoin="round" />
+      <text x="138" y="176" textAnchor="middle" fontFamily="serif" fontSize="20" fill="#F3E7CC">π</text>
+      <text x="34" y="44" fontFamily="Fredoka,sans-serif" fontSize="18" fontWeight="700" fill="#C98C2E">7+</text>
+      <path d="M196 30 l16 0 l0 16 z" fill="none" stroke="#C98C2E" strokeWidth="2.4" strokeLinejoin="round" />
+    </svg>
+  );
+  if (k === "civics") return (
+    <svg viewBox="0 0 240 220" className="tp-scene">
+      <rect width="240" height="220" rx="16" fill="#DBF0EA" />
+      <circle cx="120" cy="116" r="94" fill="none" stroke="#15897A" strokeDasharray="2 7" opacity=".4" />
+      {bot}
+      <path d="M110 192 h20 l-3 -16 h-14 z" fill="#9A6A3A" />
+      <circle cx="120" cy="160" r="28" fill="#7FB8D6" stroke="#3E7E9E" strokeWidth="2" />
+      <path d="M104 150 q10 6 6 18 q-8 6 -14 -2 q2 -10 8 -16z" fill="#5FA86E" />
+      <path d="M128 148 q12 2 16 12 q-6 8 -16 4 q-4 -8 0 -16z" fill="#5FA86E" />
+      <path d="M118 174 q8 4 14 12" fill="none" stroke="#5FA86E" strokeWidth="4" strokeLinecap="round" />
+      <path d="M94 160 h52 M120 132 v56" stroke="#EAF6FA" strokeWidth="1.5" opacity=".7" />
+      <g transform="translate(192 30)"><circle r="4" fill="#E8709A" /><g fill="#F4A8C2"><ellipse cx="0" cy="-9" rx="4" ry="7" /><ellipse cx="9" cy="-3" rx="4" ry="7" transform="rotate(72 9 -3)" /><ellipse cx="5" cy="8" rx="4" ry="7" transform="rotate(144 5 8)" /><ellipse cx="-5" cy="8" rx="4" ry="7" transform="rotate(216 -5 8)" /><ellipse cx="-9" cy="-3" rx="4" ry="7" transform="rotate(288 -9 -3)" /></g></g>
+    </svg>
+  );
+  if (k === "chinese") return (
+    <svg viewBox="0 0 240 220" className="tp-scene">
+      <rect width="240" height="220" rx="16" fill="#F7E2DD" />
+      <circle cx="120" cy="116" r="94" fill="none" stroke="#9E2B2B" strokeDasharray="2 7" opacity=".35" />
+      {bot}
+      <rect x="66" y="138" width="58" height="62" rx="3" fill="#FBF6EC" stroke="#E6D9C0" strokeWidth="2" />
+      <text x="95" y="180" textAnchor="middle" fontFamily="serif" fontSize="36" fill="#9E2B2B">學</text>
+      <g transform="rotate(34 150 150)"><rect x="146" y="120" width="8" height="48" rx="3" fill="#B6884E" /><path d="M146 168 q4 18 8 0 z" fill="#2A2A2A" /><rect x="146" y="116" width="8" height="6" fill="#9E2B2B" /></g>
+      <rect x="190" y="28" width="26" height="26" rx="3" fill="#9E2B2B" /><text x="203" y="47" textAnchor="middle" fontFamily="serif" fontSize="14" fill="#FBE3DC">福</text>
+    </svg>
+  );
+  return (
+    <svg viewBox="0 0 240 220" className="tp-scene">
+      <rect width="240" height="220" rx="16" fill="#FAE6E8" />
+      <circle cx="120" cy="116" r="94" fill="none" stroke="#D2789A" strokeDasharray="2 7" opacity=".4" />
+      {bot}
+      <rect x="74" y="150" width="92" height="36" rx="4" fill="#fff" stroke="#EAD3DA" strokeWidth="2" />
+      <line x1="120" y1="150" x2="120" y2="186" stroke="#EAD3DA" strokeWidth="1.5" />
+      <rect x="84" y="166" width="26" height="6" rx="3" fill="#FCE08A" />
+      <g stroke="#B9A6AE" strokeWidth="2" strokeLinecap="round"><path d="M84 159 q8 -3 16 0 q8 3 12 0" /><path d="M84 178 q8 -3 14 0" /><path d="M128 159 q8 -3 16 0 q6 3 10 0" /><path d="M128 168 q8 -3 16 0" /><path d="M128 177 q6 -3 12 0" /></g>
+      <rect x="150" y="146" width="7" height="34" rx="3" fill="#F4A8C2" transform="rotate(30 153 163)" />
+      <g transform="translate(190 26) rotate(8)"><rect width="34" height="32" rx="3" fill="#FCE08A" stroke="#E9C95E" strokeWidth="1.5" /><path d="M17 7 l3 7 l7 1 l-5 5 l1 7 l-6 -4 l-6 4 l1 -7 l-5 -5 l7 -1 z" fill="#E8A33A" /></g>
+    </svg>
+  );
+}
 
 export const Route = createFileRoute("/tutors")({
   head: () => ({
