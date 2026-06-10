@@ -505,6 +505,7 @@ const css = `
   .tp-side{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--line);padding:14px 16px}
   .tp-nav{flex-direction:row;flex-wrap:wrap;gap:4px}
   .tp-side-foot{margin-top:12px}
-  .tp-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .tp-rowgrid{grid-template-columns:1fr;gap:14px}
+  .tp-row-media{width:42%;max-width:160px}
 }
 `;
