@@ -987,15 +987,14 @@ const css = `
 .tp-mo-sub{margin-top:4px;color:var(--ink-soft);font-size:.9rem}
 
 .tp-stepper{list-style:none;padding:0;margin:0 0 22px;display:flex;align-items:center;gap:0;flex-wrap:nowrap}
-.tp-step{display:flex;align-items:center;flex:1;min-width:0;position:relative}
-.tp-step:last-child{flex:0}
+.tp-step{display:flex;align-items:center;min-width:0;position:relative}
+.tp-step:not(:last-child){flex:1}
 .tp-step-dot{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-faint);cursor:default;flex-shrink:0;transition:all .2s;padding:0}
 .tp-step.is-now .tp-step-dot{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;border-color:transparent;box-shadow:0 0 0 4px rgba(255,138,61,.22)}
 .tp-step.is-done .tp-step-dot{background:var(--teal);color:#fff;border-color:transparent;cursor:pointer}
-.tp-step-label{font-family:var(--font-display);font-weight:600;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-left:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tp-step.is-now .tp-step-label{color:var(--orange-deep)}
-.tp-step.is-done .tp-step-label{color:var(--ink-soft)}
-.tp-step-bar{flex:1;height:2px;background:var(--line);margin:0 8px;border-radius:2px;min-width:10px}
+.tp-step-label{font-family:var(--font-display);font-weight:600;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-left:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;opacity:0;transition:max-width .25s ease,opacity .2s ease,margin .2s ease}
+.tp-step.is-now .tp-step-label{color:var(--orange-deep);max-width:140px;opacity:1}
+.tp-step-bar{flex:1;height:2px;background:var(--line);margin:0 10px;border-radius:2px;min-width:12px}
 .tp-step.is-done .tp-step-bar{background:var(--teal)}
 
 .tp-mo-grid{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
