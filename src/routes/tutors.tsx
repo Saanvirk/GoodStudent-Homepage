@@ -16,6 +16,15 @@ import {
   Heart,
   ImagePlus,
   X,
+  ArrowLeft,
+  Check,
+  UploadCloud,
+  FileText,
+  Trash2,
+  Target,
+  MessageSquare,
+  Image as ImageIcon,
+  Type as TypeIcon,
 } from "lucide-react";
 
 /* ===== Shared mascot symbol (with glasses) used inside scene cards ===== */
@@ -294,6 +303,7 @@ function TutorsPage() {
   const [images, setImages] = useState<Record<string, string>>({});
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [builderOpen, setBuilderOpen] = useState(false);
 
 
   const nav = [
@@ -413,7 +423,7 @@ function TutorsPage() {
               ><X size={13} /></button>
             )}
           </div>
-          <button className="tp-btn tp-btn-primary"><Plus size={15} /> New tutor</button>
+          <button className="tp-btn tp-btn-primary" onClick={() => setBuilderOpen(true)}><Plus size={15} /> New tutor</button>
         </div>
 
         {favList.length > 0 && (
@@ -464,7 +474,7 @@ function TutorsPage() {
               />
             ))}
             {!q && (
-              <button className="tp-build">
+              <button className="tp-build" onClick={() => setBuilderOpen(true)}>
                 <div className="tp-build-ic"><Plus size={22} strokeWidth={2.4} /></div>
                 <div>
                   <p className="tp-build-title">Build a new tutor</p>
@@ -484,7 +494,236 @@ function TutorsPage() {
 
       </main>
 
+      {builderOpen && (
+        <BuilderModal
+          onClose={() => setBuilderOpen(false)}
+          onCreate={() => setBuilderOpen(false)}
+        />
+      )}
+
       <style>{css}</style>
+    </div>
+  );
+}
+
+type BuilderData = {
+  name: string;
+  objectives: string;
+  files: { name: string; size: number }[];
+  instructions: string;
+  image: { kind: "preset"; preset: "notes" } | { kind: "custom"; url: string };
+};
+
+function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d: BuilderData) => void }) {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState<BuilderData>({
+    name: "",
+    objectives: "",
+    files: [],
+    instructions: "",
+    image: { kind: "preset", preset: "notes" },
+  });
+  const fileRef = useRef<HTMLInputElement | null>(null);
+  const imgRef = useRef<HTMLInputElement | null>(null);
+
+  const steps = [
+    { id: "name", label: "Name", icon: TypeIcon },
+    { id: "obj", label: "Goals", icon: Target },
+    { id: "files", label: "Resources", icon: UploadCloud },
+    { id: "inst", label: "Instructions", icon: MessageSquare },
+    { id: "img", label: "Image", icon: ImageIcon },
+  ];
+
+  const canNext = () => {
+    if (step === 0) return data.name.trim().length > 0;
+    if (step === 1) return data.objectives.trim().length > 0;
+    return true;
+  };
+
+  const onAddFiles = (list: FileList | null) => {
+    if (!list) return;
+    const next = Array.from(list).map((f) => ({ name: f.name, size: f.size }));
+    setData((d) => ({ ...d, files: [...d.files, ...next] }));
+  };
+
+  const removeFile = (i: number) =>
+    setData((d) => ({ ...d, files: d.files.filter((_, idx) => idx !== i) }));
+
+  const onPickImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setData((d) => ({ ...d, image: { kind: "custom", url: URL.createObjectURL(f) } }));
+  };
+
+  const next = () => (step < steps.length - 1 ? setStep(step + 1) : onCreate(data));
+  const back = () => step > 0 && setStep(step - 1);
+
+  return (
+    <div className="tp-mo" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="tp-mo-card" onClick={(e) => e.stopPropagation()}>
+        <button className="tp-mo-close" onClick={onClose} aria-label="Close"><X size={16} /></button>
+
+        <div className="tp-mo-head">
+          <div className="tp-eyebrow"><span className="tp-dot" /> Build a tutor</div>
+          <h2 className="tp-mo-title">Let's spin up your new tutor</h2>
+          <p className="tp-mo-sub">Five quick steps. You can edit anything later.</p>
+        </div>
+
+        <ol className="tp-stepper">
+          {steps.map((s, i) => {
+            const Ic = s.icon;
+            const state = i < step ? "done" : i === step ? "now" : "todo";
+            return (
+              <li key={s.id} className={`tp-step is-${state}`}>
+                <button type="button" className="tp-step-dot" onClick={() => i < step && setStep(i)}>
+                  {state === "done" ? <Check size={14} /> : <Ic size={14} />}
+                </button>
+                <span className="tp-step-label">{s.label}</span>
+                {i < steps.length - 1 && <span className="tp-step-bar" />}
+              </li>
+            );
+          })}
+        </ol>
+
+        <div className="tp-mo-body">
+          {step === 0 && (
+            <div className="tp-field">
+              <label className="tp-label">Tutor name</label>
+              <p className="tp-help">Give your tutor a memorable name — like a study buddy.</p>
+              <input
+                autoFocus
+                className="tp-input"
+                placeholder="e.g. Bio Buddy, Econ Coach…"
+                value={data.name}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
+                maxLength={60}
+              />
+            </div>
+          )}
+
+          {step === 1 && (
+            <div className="tp-field">
+              <label className="tp-label">Learning objectives</label>
+              <p className="tp-help">What do you want to get out of this tutor? Be specific.</p>
+              <textarea
+                autoFocus
+                className="tp-textarea"
+                rows={5}
+                placeholder="e.g. Master IB Bio Unit 2, prep for end-of-term test, drill data-response questions…"
+                value={data.objectives}
+                onChange={(e) => setData({ ...data, objectives: e.target.value })}
+                maxLength={600}
+              />
+              <div className="tp-counter">{data.objectives.length}/600</div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="tp-field">
+              <label className="tp-label">Upload resources</label>
+              <p className="tp-help">Notes, past papers, slides, textbooks. PDFs, docs and images all work.</p>
+              <button
+                type="button"
+                className="tp-drop"
+                onClick={() => fileRef.current?.click()}
+              >
+                <UploadCloud size={26} />
+                <b>Drop files or click to upload</b>
+                <span>Up to 20MB each</span>
+              </button>
+              <input
+                ref={fileRef}
+                type="file"
+                multiple
+                hidden
+                onChange={(e) => onAddFiles(e.target.files)}
+              />
+              {data.files.length > 0 && (
+                <ul className="tp-filelist">
+                  {data.files.map((f, i) => (
+                    <li key={i}>
+                      <FileText size={15} />
+                      <span className="tp-file-name">{f.name}</span>
+                      <span className="tp-file-size">{(f.size / 1024).toFixed(0)} KB</span>
+                      <button type="button" onClick={() => removeFile(i)} aria-label="Remove">
+                        <Trash2 size={14} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="tp-field">
+              <label className="tp-label">Any specific instructions?</label>
+              <p className="tp-help">Tone, language, what to avoid, how to explain. Optional but helpful.</p>
+              <textarea
+                autoFocus
+                className="tp-textarea"
+                rows={5}
+                placeholder="e.g. Be encouraging, use simple analogies, quiz me after each topic, reply in Cantonese when I ask…"
+                value={data.instructions}
+                onChange={(e) => setData({ ...data, instructions: e.target.value })}
+                maxLength={600}
+              />
+              <div className="tp-counter">{data.instructions.length}/600</div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="tp-field">
+              <label className="tp-label">Customise tutor image</label>
+              <p className="tp-help">Pick the default mascot scene or upload your own.</p>
+              <div className="tp-imgpick">
+                <button
+                  type="button"
+                  className={`tp-imgopt${data.image.kind === "preset" ? " is-on" : ""}`}
+                  onClick={() => setData({ ...data, image: { kind: "preset", preset: "notes" } })}
+                >
+                  <div className="tp-imgopt-art"><Scene k="notes" /></div>
+                  <span>Default mascot</span>
+                </button>
+                <button
+                  type="button"
+                  className={`tp-imgopt${data.image.kind === "custom" ? " is-on" : ""}`}
+                  onClick={() => imgRef.current?.click()}
+                >
+                  <div className="tp-imgopt-art tp-imgopt-art--upload">
+                    {data.image.kind === "custom"
+                      ? <img src={data.image.url} alt="" />
+                      : <><ImagePlus size={26} /><b>Upload your own</b></>}
+                  </div>
+                  <span>{data.image.kind === "custom" ? "Change image" : "Upload image"}</span>
+                </button>
+                <input ref={imgRef} type="file" accept="image/*" hidden onChange={onPickImage} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="tp-mo-foot">
+          <button
+            type="button"
+            className="tp-btn tp-btn-ghost"
+            onClick={back}
+            disabled={step === 0}
+            style={step === 0 ? { visibility: "hidden" } : undefined}
+          >
+            <ArrowLeft size={15} /> Back
+          </button>
+          <div className="tp-mo-progress">Step {step + 1} of {steps.length}</div>
+          <button
+            type="button"
+            className="tp-btn tp-btn-primary"
+            onClick={next}
+            disabled={!canNext()}
+          >
+            {step === steps.length - 1 ? (<>Create tutor <Sparkles size={14} /></>) : (<>Next <ArrowRight size={14} /></>)}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -689,4 +928,70 @@ const css = `
   .tp-rowgrid{grid-template-columns:1fr;gap:14px}
   .tp-row-media{width:42%;max-width:160px}
 }
+
+/* ===== Builder modal ===== */
+.tp-mo{position:fixed;inset:0;z-index:100;background:rgba(49,28,16,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;animation:tp-fade .2s ease}
+@keyframes tp-fade{from{opacity:0}to{opacity:1}}
+@keyframes tp-pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.tp-mo-card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:28px;width:100%;max-width:600px;max-height:92vh;overflow:auto;box-shadow:0 30px 80px -20px rgba(120,40,0,.45);padding:30px 32px 24px;animation:tp-pop .25s cubic-bezier(.2,.8,.2,1)}
+.tp-mo-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;color:var(--ink-soft);transition:all .15s}
+.tp-mo-close:hover{color:var(--orange-deep);border-color:var(--orange-2);transform:rotate(90deg)}
+.tp-mo-head{margin-bottom:22px}
+.tp-mo-title{font-family:var(--font-display);font-weight:600;font-size:1.6rem;color:var(--ink);margin-top:8px;line-height:1.15}
+.tp-mo-sub{margin-top:6px;color:var(--ink-soft);font-size:.92rem}
+
+.tp-stepper{list-style:none;padding:0;margin:0 0 26px;display:flex;align-items:center;gap:0}
+.tp-step{display:flex;align-items:center;flex:1;min-width:0;position:relative}
+.tp-step:last-child{flex:0}
+.tp-step-dot{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-faint);cursor:default;flex-shrink:0;transition:all .2s}
+.tp-step.is-now .tp-step-dot{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;border-color:transparent;box-shadow:0 0 0 4px rgba(255,138,61,.22)}
+.tp-step.is-done .tp-step-dot{background:var(--teal);color:#fff;border-color:transparent;cursor:pointer}
+.tp-step-label{font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-left:8px;white-space:nowrap}
+.tp-step.is-now .tp-step-label{color:var(--orange-deep)}
+.tp-step.is-done .tp-step-label{color:var(--ink-soft)}
+.tp-step-bar{flex:1;height:2px;background:var(--line);margin:0 10px;border-radius:2px;min-width:14px}
+.tp-step.is-done .tp-step-bar{background:var(--teal)}
+
+.tp-mo-body{min-height:220px}
+.tp-field{display:flex;flex-direction:column;gap:6px}
+.tp-label{font-family:var(--font-display);font-weight:600;font-size:.95rem;color:var(--ink)}
+.tp-help{font-size:.84rem;color:var(--ink-soft);margin-bottom:8px}
+.tp-input,.tp-textarea{width:100%;font-family:var(--font-body);font-size:.95rem;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;resize:vertical}
+.tp-input:focus,.tp-textarea:focus{border-color:var(--orange-2);box-shadow:0 0 0 4px rgba(255,138,61,.18)}
+.tp-counter{align-self:flex-end;font-size:.72rem;color:var(--ink-faint);margin-top:4px}
+
+.tp-drop{width:100%;border:2px dashed var(--orange-2);background:var(--cream);border-radius:18px;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--ink);transition:background .15s,border-color .15s}
+.tp-drop:hover{background:var(--cream-2);border-color:var(--orange-deep)}
+.tp-drop svg{color:var(--orange-deep);margin-bottom:6px}
+.tp-drop b{font-family:var(--font-display);font-weight:600;font-size:.98rem}
+.tp-drop span{font-size:.8rem;color:var(--ink-soft)}
+.tp-filelist{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:6px}
+.tp-filelist li{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:.86rem}
+.tp-filelist svg:first-child{color:var(--orange-deep);flex-shrink:0}
+.tp-file-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.tp-file-size{font-size:.74rem;color:var(--ink-faint);flex-shrink:0}
+.tp-filelist button{background:transparent;border:none;cursor:pointer;color:var(--ink-faint);padding:4px;border-radius:6px;display:grid;place-items:center}
+.tp-filelist button:hover{color:var(--orange-deep);background:var(--cream)}
+
+.tp-imgpick{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tp-imgopt{background:#fff;border:2px solid var(--line);border-radius:18px;padding:10px;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;gap:8px;transition:all .18s}
+.tp-imgopt:hover{border-color:var(--orange-2);transform:translateY(-2px)}
+.tp-imgopt.is-on{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,138,61,.18)}
+.tp-imgopt-art{aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--cream-2);display:grid;place-items:center}
+.tp-imgopt-art img{width:100%;height:100%;object-fit:cover}
+.tp-imgopt-art--upload{flex-direction:column;color:var(--ink-soft);gap:4px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px}
+.tp-imgopt-art--upload svg{color:var(--orange-deep)}
+.tp-imgopt-art--upload b{font-family:var(--font-display);font-weight:600;font-size:.84rem;color:var(--ink)}
+.tp-imgopt>span{font-family:var(--font-display);font-weight:600;font-size:.82rem;color:var(--ink);text-align:center}
+
+.tp-mo-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+.tp-mo-progress{font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.tp-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+@media (max-width:560px){
+  .tp-mo-card{padding:24px 20px}
+  .tp-step-label{display:none}
+  .tp-imgpick{grid-template-columns:1fr}
+}
 `;
+
