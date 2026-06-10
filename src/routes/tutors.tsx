@@ -423,7 +423,7 @@ function TutorsPage() {
               ><X size={13} /></button>
             )}
           </div>
-          <button className="tp-btn tp-btn-primary"><Plus size={15} /> New tutor</button>
+          <button className="tp-btn tp-btn-primary" onClick={() => setBuilderOpen(true)}><Plus size={15} /> New tutor</button>
         </div>
 
         {favList.length > 0 && (
