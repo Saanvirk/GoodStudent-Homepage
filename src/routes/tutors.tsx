@@ -80,42 +80,55 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
-/* ===== Hand-drawn line icons — no emoji ===== */
-type GlyphKey = "english" | "maths" | "civics" | "chinese";
+/* ===== Abstract geometric "rich media" — no icons, no emoji =====
+   Inspired by Material card spec: overlapping primitive shapes, flat colors. */
+type ShapeKey = "english" | "maths" | "civics" | "chinese" | "notes";
 
-function Glyph({ k }: { k: GlyphKey }) {
-  const s = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+function Shapes({ k, tint, accent }: { k: ShapeKey; tint: string; accent: string }) {
   switch (k) {
     case "english":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <path d="M7 8h11a3 3 0 0 1 3 3v14H10a3 3 0 0 1-3-3V8z" fill="rgba(255,255,255,.35)" />
-          <path d="M7 22a3 3 0 0 1 3-3h11" />
-          <path d="M12 13h6M12 17h4" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <circle cx="72" cy="64" r="44" fill={accent} opacity="0.85" />
+          <rect x="104" y="30" width="62" height="62" fill={accent} opacity="0.35" />
+          <rect x="96" y="22" width="78" height="78" fill="none" stroke={accent} strokeWidth="2" opacity="0.6" />
         </svg>
       );
     case "maths":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <rect x="6" y="6" width="20" height="20" rx="3" fill="rgba(255,255,255,.3)" />
-          <path d="M6 13h20M13 6v20" />
-          <path d="M18 19l5 5M23 19l-5 5" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <polygon points="40,98 96,18 152,98" fill={accent} opacity="0.85" />
+          <circle cx="138" cy="70" r="34" fill={accent} opacity="0.45" />
+          <rect x="20" y="74" width="40" height="40" fill={accent} opacity="0.55" />
         </svg>
       );
     case "civics":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <path d="M5 26h22" />
-          <path d="M7 26V14M11 26V14M16 26V14M21 26V14M25 26V14" />
-          <path d="M5 14h22L16 6 5 14z" fill="rgba(255,255,255,.3)" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <rect x="14" y="56" width="172" height="14" fill={accent} opacity="0.7" />
+          <circle cx="62" cy="46" r="30" fill={accent} opacity="0.85" />
+          <polygon points="130,16 168,86 92,86" fill={accent} opacity="0.55" />
         </svg>
       );
     case "chinese":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <rect x="6" y="6" width="20" height="20" rx="2" fill="rgba(255,255,255,.3)" />
-          <path d="M16 9v14M9 16h14M11 12l10 8M21 12l-10 8" opacity=".55" />
-          <path d="M11 10h10M11 22h10" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <circle cx="100" cy="60" r="50" fill={accent} opacity="0.85" />
+          <rect x="78" y="6" width="44" height="108" fill={accent} opacity="0.25" />
+          <rect x="6" y="50" width="188" height="20" fill={accent} opacity="0.35" />
+        </svg>
+      );
+    case "notes":
+      return (
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <rect x="22" y="22" width="86" height="86" fill={accent} opacity="0.55" />
+          <circle cx="138" cy="64" r="40" fill={accent} opacity="0.8" />
+          <polygon points="50,108 120,10 168,108" fill={accent} opacity="0.25" />
         </svg>
       );
   }
@@ -123,67 +136,93 @@ function Glyph({ k }: { k: GlyphKey }) {
 
 type Tutor = {
   id: string;
-  glyph: GlyphKey;
+  shape: ShapeKey;
   title: string;
   subtitle?: string;
+  support?: string;
   tint: string;
-  ink: string;
+  accent: string;
   meta?: string;
 };
 
 const preCreated: Tutor[] = [
-  { id: "eng",  glyph: "english", title: "DSE English",     subtitle: "Writing • Reading • Speaking", tint: "#C8553D", ink: "#FBEFE8" },
-  { id: "mat",  glyph: "maths",   title: "DSE Maths",       subtitle: "Core • M1 • M2",               tint: "#3D5A6C", ink: "#E8EEF2" },
-  { id: "civ",  glyph: "civics",  title: "DSE Citizenship", subtitle: "Hong Kong & the world",        tint: "#6B8E4E", ink: "#EEF3E6" },
-  { id: "chi",  glyph: "chinese", title: "DSE 中文",         subtitle: "閱讀 • 寫作 • 聆聽說話",          tint: "#8C5E7A", ink: "#F2E8EE" },
+  { id: "eng", shape: "english", title: "DSE English",     subtitle: "Paper 1–4",
+    support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
+    tint: "#F2D9CF", accent: "#9C3A24" },
+  { id: "mat", shape: "maths",   title: "DSE Maths",       subtitle: "Core · M1 · M2",
+    support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
+    tint: "#D5DFE5", accent: "#264253" },
+  { id: "civ", shape: "civics",  title: "DSE Citizenship", subtitle: "HK & the world",
+    support: "Frameworks for source questions, case studies and short-answer structure.",
+    tint: "#DCE6CD", accent: "#4D6E36" },
+  { id: "chi", shape: "chinese", title: "DSE 中文",         subtitle: "閱讀 · 寫作 · 聆聽說話",
+    support: "範文精讀、作文骨架同說話卷練習，一齊由零開始拆解。",
+    tint: "#E6D5DE", accent: "#6E3F58" },
 ];
 
 const myTutors: Tutor[] = [
-  { id: "eng-notes", glyph: "english", title: "English · my notes", subtitle: "Built from 24 pages", tint: "#6B5B95", ink: "#ECE8F2", meta: "Last edited 2d ago" },
+  { id: "eng-notes", shape: "notes", title: "English · my notes",
+    subtitle: "Built from 24 pages",
+    support: "Trained on your Form 5 essays and vocab lists.",
+    tint: "#DCD6E5", accent: "#4A3F6B", meta: "Last edited 2d ago" },
 ];
 
 function TutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
   return (
-    <button className="tp-card">
-      <div className="tp-card-ic" style={{ background: t.tint, color: t.ink }}>
-        <Glyph k={t.glyph} />
+    <article className="tp-card">
+      <div className="tp-card-media">
+        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
+        <button
+          type="button"
+          className={`tp-card-fav${fav ? " is-on" : ""}`}
+          onClick={(e) => { e.stopPropagation(); onFav(); }}
+          aria-label="Favourite tutor"
+        >
+          <Heart size={14} fill={fav ? "currentColor" : "none"} />
+        </button>
       </div>
-      <h3 className="tp-card-title">{t.title}</h3>
-      {t.subtitle && <p className="tp-card-sub">{t.subtitle}</p>}
-      <span
-        className={`tp-card-fav${fav ? " is-on" : ""}`}
-        onClick={(e) => { e.stopPropagation(); e.preventDefault(); onFav(); }}
-        role="button"
-        aria-label="Favourite tutor"
-      >
-        <Heart size={14} fill={fav ? "currentColor" : "none"} />
-      </span>
-      <span className="tp-card-arrow"><ArrowRight size={16} /></span>
-    </button>
+      <div className="tp-card-body">
+        <h3 className="tp-card-title">{t.title}</h3>
+        {t.subtitle && <p className="tp-card-sub">{t.subtitle}</p>}
+        {t.support && <p className="tp-card-support">{t.support}</p>}
+        <div className="tp-card-actions">
+          <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
+          <button className="tp-card-act">Preview</button>
+        </div>
+      </div>
+    </article>
   );
 }
 
 function MyTutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
   return (
-    <button className="tp-mycard">
-      <div className="tp-card-ic tp-card-ic--sm" style={{ background: t.tint, color: t.ink }}>
-        <Glyph k={t.glyph} />
+    <article className="tp-mycard">
+      <div className="tp-mycard-media">
+        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
       </div>
       <div className="tp-mycard-body">
-        <h3 className="tp-mycard-title">{t.title}</h3>
+        <div className="tp-mycard-head">
+          <h3 className="tp-mycard-title">{t.title}</h3>
+          <button
+            type="button"
+            className={`tp-card-fav tp-card-fav--inline${fav ? " is-on" : ""}`}
+            onClick={(e) => { e.stopPropagation(); onFav(); }}
+            aria-label="Favourite tutor"
+          >
+            <Heart size={14} fill={fav ? "currentColor" : "none"} />
+          </button>
+        </div>
         <p className="tp-mycard-sub">{t.subtitle}</p>
-        <span className="tp-mycard-meta">{t.meta}</span>
+        {t.support && <p className="tp-mycard-support">{t.support}</p>}
+        <div className="tp-mycard-foot">
+          <span className="tp-mycard-meta">{t.meta}</span>
+          <div className="tp-card-actions">
+            <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
+            <button className="tp-card-act">Edit</button>
+          </div>
+        </div>
       </div>
-      <span
-        className={`tp-card-fav tp-card-fav--inline${fav ? " is-on" : ""}`}
-        onClick={(e) => { e.stopPropagation(); e.preventDefault(); onFav(); }}
-        role="button"
-        aria-label="Favourite tutor"
-      >
-        <Heart size={14} fill={fav ? "currentColor" : "none"} />
-      </span>
-      <ArrowRight size={16} className="tp-mycard-arrow" />
-    </button>
+    </article>
   );
 }
 
