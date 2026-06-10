@@ -516,6 +516,7 @@ type BuilderData = {
 
 function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d: BuilderData) => void }) {
   const [step, setStep] = useState(0);
+  const [generating, setGenerating] = useState(false);
   const [data, setData] = useState<BuilderData>({
     name: "",
     objectives: "",
@@ -528,15 +529,23 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
 
   const steps = [
     { id: "name", label: "Name", icon: TypeIcon },
-    { id: "obj", label: "Goals", icon: Target },
     { id: "files", label: "Resources", icon: UploadCloud },
+    { id: "obj", label: "Goals", icon: Target },
     { id: "inst", label: "Instructions", icon: MessageSquare },
     { id: "img", label: "Image", icon: ImageIcon },
   ];
 
+  const bubbles = [
+    { b: "First things first…", s: "What should we call your tutor?" },
+    { b: "Feed me anything!", s: "Notes, past papers, slides — the more the merrier." },
+    { b: "What's the goal?", s: data.files.length > 0 ? "Type it out, or let me draft it from your resources." : "Tell me what success looks like for you." },
+    { b: "Any house rules?", s: "Tone, language, things to avoid — totally optional." },
+    { b: "Almost there!", s: "Pick a look for your tutor." },
+  ];
+
   const canNext = () => {
     if (step === 0) return data.name.trim().length > 0;
-    if (step === 1) return data.objectives.trim().length > 0;
+    if (step === 2) return data.objectives.trim().length > 0;
     return true;
   };
 
@@ -553,6 +562,22 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
     const f = e.target.files?.[0];
     if (!f) return;
     setData((d) => ({ ...d, image: { kind: "custom", url: URL.createObjectURL(f) } }));
+  };
+
+  const generateObjectives = () => {
+    if (data.files.length === 0) return;
+    setGenerating(true);
+    setTimeout(() => {
+      const fileBits = data.files.slice(0, 3).map((f) => f.name.replace(/\.[^.]+$/, "")).join(", ");
+      const draft =
+        `Based on your resources (${fileBits}), the focus is to:\n` +
+        `• Master the core concepts covered across your uploaded notes\n` +
+        `• Drill exam-style questions and explain reasoning step by step\n` +
+        `• Identify weak spots and revisit them with targeted practice\n` +
+        `• Build confidence ahead of your next assessment`;
+      setData((d) => ({ ...d, objectives: draft }));
+      setGenerating(false);
+    }, 900);
   };
 
   const next = () => (step < steps.length - 1 ? setStep(step + 1) : onCreate(data));
@@ -575,8 +600,8 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
             const state = i < step ? "done" : i === step ? "now" : "todo";
             return (
               <li key={s.id} className={`tp-step is-${state}`}>
-                <button type="button" className="tp-step-dot" onClick={() => i < step && setStep(i)}>
-                  {state === "done" ? <Check size={14} /> : <Ic size={14} />}
+                <button type="button" className="tp-step-dot" onClick={() => i < step && setStep(i)} aria-label={s.label}>
+                  {state === "done" ? <Check size={13} /> : <Ic size={13} />}
                 </button>
                 <span className="tp-step-label">{s.label}</span>
                 {i < steps.length - 1 && <span className="tp-step-bar" />}
@@ -585,122 +610,143 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
           })}
         </ol>
 
-        <div className="tp-mo-body">
-          {step === 0 && (
-            <div className="tp-field">
-              <label className="tp-label">Tutor name</label>
-              <p className="tp-help">Give your tutor a memorable name — like a study buddy.</p>
-              <input
-                autoFocus
-                className="tp-input"
-                placeholder="e.g. Bio Buddy, Econ Coach…"
-                value={data.name}
-                onChange={(e) => setData({ ...data, name: e.target.value })}
-                maxLength={60}
-              />
+        <div className="tp-mo-grid">
+          <aside className="tp-mo-guide">
+            <div className="tp-mo-mascot"><Mascot /></div>
+            <div className="tp-mo-bubble">
+              <b>{bubbles[step].b}</b>
+              <span>{bubbles[step].s}</span>
             </div>
-          )}
+          </aside>
 
-          {step === 1 && (
-            <div className="tp-field">
-              <label className="tp-label">Learning objectives</label>
-              <p className="tp-help">What do you want to get out of this tutor? Be specific.</p>
-              <textarea
-                autoFocus
-                className="tp-textarea"
-                rows={5}
-                placeholder="e.g. Master IB Bio Unit 2, prep for end-of-term test, drill data-response questions…"
-                value={data.objectives}
-                onChange={(e) => setData({ ...data, objectives: e.target.value })}
-                maxLength={600}
-              />
-              <div className="tp-counter">{data.objectives.length}/600</div>
-            </div>
-          )}
-
-          {step === 2 && (
-            <div className="tp-field">
-              <label className="tp-label">Upload resources</label>
-              <p className="tp-help">Notes, past papers, slides, textbooks. PDFs, docs and images all work.</p>
-              <button
-                type="button"
-                className="tp-drop"
-                onClick={() => fileRef.current?.click()}
-              >
-                <UploadCloud size={26} />
-                <b>Drop files or click to upload</b>
-                <span>Up to 20MB each</span>
-              </button>
-              <input
-                ref={fileRef}
-                type="file"
-                multiple
-                hidden
-                onChange={(e) => onAddFiles(e.target.files)}
-              />
-              {data.files.length > 0 && (
-                <ul className="tp-filelist">
-                  {data.files.map((f, i) => (
-                    <li key={i}>
-                      <FileText size={15} />
-                      <span className="tp-file-name">{f.name}</span>
-                      <span className="tp-file-size">{(f.size / 1024).toFixed(0)} KB</span>
-                      <button type="button" onClick={() => removeFile(i)} aria-label="Remove">
-                        <Trash2 size={14} />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
-
-          {step === 3 && (
-            <div className="tp-field">
-              <label className="tp-label">Any specific instructions?</label>
-              <p className="tp-help">Tone, language, what to avoid, how to explain. Optional but helpful.</p>
-              <textarea
-                autoFocus
-                className="tp-textarea"
-                rows={5}
-                placeholder="e.g. Be encouraging, use simple analogies, quiz me after each topic, reply in Cantonese when I ask…"
-                value={data.instructions}
-                onChange={(e) => setData({ ...data, instructions: e.target.value })}
-                maxLength={600}
-              />
-              <div className="tp-counter">{data.instructions.length}/600</div>
-            </div>
-          )}
-
-          {step === 4 && (
-            <div className="tp-field">
-              <label className="tp-label">Customise tutor image</label>
-              <p className="tp-help">Pick the default mascot scene or upload your own.</p>
-              <div className="tp-imgpick">
-                <button
-                  type="button"
-                  className={`tp-imgopt${data.image.kind === "preset" ? " is-on" : ""}`}
-                  onClick={() => setData({ ...data, image: { kind: "preset", preset: "notes" } })}
-                >
-                  <div className="tp-imgopt-art"><Scene k="notes" /></div>
-                  <span>Default mascot</span>
-                </button>
-                <button
-                  type="button"
-                  className={`tp-imgopt${data.image.kind === "custom" ? " is-on" : ""}`}
-                  onClick={() => imgRef.current?.click()}
-                >
-                  <div className="tp-imgopt-art tp-imgopt-art--upload">
-                    {data.image.kind === "custom"
-                      ? <img src={data.image.url} alt="" />
-                      : <><ImagePlus size={26} /><b>Upload your own</b></>}
-                  </div>
-                  <span>{data.image.kind === "custom" ? "Change image" : "Upload image"}</span>
-                </button>
-                <input ref={imgRef} type="file" accept="image/*" hidden onChange={onPickImage} />
+          <div className="tp-mo-body">
+            {step === 0 && (
+              <div className="tp-field">
+                <label className="tp-label">Tutor name</label>
+                <p className="tp-help">Give your tutor a memorable name — like a study buddy.</p>
+                <input
+                  autoFocus
+                  className="tp-input"
+                  placeholder="e.g. Bio Buddy, Econ Coach…"
+                  value={data.name}
+                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                  maxLength={60}
+                />
               </div>
-            </div>
-          )}
+            )}
+
+            {step === 1 && (
+              <div className="tp-field">
+                <label className="tp-label">Upload resources</label>
+                <p className="tp-help">Notes, past papers, slides, textbooks. PDFs, docs and images all work.</p>
+                <button
+                  type="button"
+                  className="tp-drop"
+                  onClick={() => fileRef.current?.click()}
+                >
+                  <UploadCloud size={24} />
+                  <b>Drop files or click to upload</b>
+                  <span>Up to 20MB each</span>
+                </button>
+                <input
+                  ref={fileRef}
+                  type="file"
+                  multiple
+                  hidden
+                  onChange={(e) => onAddFiles(e.target.files)}
+                />
+                {data.files.length > 0 && (
+                  <ul className="tp-filelist">
+                    {data.files.map((f, i) => (
+                      <li key={i}>
+                        <FileText size={15} />
+                        <span className="tp-file-name">{f.name}</span>
+                        <span className="tp-file-size">{(f.size / 1024).toFixed(0)} KB</span>
+                        <button type="button" onClick={() => removeFile(i)} aria-label="Remove">
+                          <Trash2 size={14} />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p className="tp-help tp-help--note">You can skip this and add resources later.</p>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="tp-field">
+                <div className="tp-label-row">
+                  <label className="tp-label">Learning objectives</label>
+                  <button
+                    type="button"
+                    className="tp-aigen"
+                    onClick={generateObjectives}
+                    disabled={data.files.length === 0 || generating}
+                    title={data.files.length === 0 ? "Upload resources first to generate" : "Draft from your resources"}
+                  >
+                    <Sparkles size={13} /> {generating ? "Generating…" : "Generate with AI"}
+                  </button>
+                </div>
+                <p className="tp-help">What do you want to get out of this tutor? Be specific.</p>
+                <textarea
+                  className="tp-textarea"
+                  rows={6}
+                  placeholder="e.g. Master IB Bio Unit 2, prep for end-of-term test, drill data-response questions…"
+                  value={data.objectives}
+                  onChange={(e) => setData({ ...data, objectives: e.target.value })}
+                  maxLength={600}
+                />
+                <div className="tp-counter">{data.objectives.length}/600</div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="tp-field">
+                <label className="tp-label">Any specific instructions?</label>
+                <p className="tp-help">Tone, language, what to avoid, how to explain. Optional but helpful.</p>
+                <textarea
+                  autoFocus
+                  className="tp-textarea"
+                  rows={6}
+                  placeholder="e.g. Be encouraging, use simple analogies, quiz me after each topic, reply in Cantonese when I ask…"
+                  value={data.instructions}
+                  onChange={(e) => setData({ ...data, instructions: e.target.value })}
+                  maxLength={600}
+                />
+                <div className="tp-counter">{data.instructions.length}/600</div>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div className="tp-field">
+                <label className="tp-label">Customise tutor image</label>
+                <p className="tp-help">Pick the default mascot scene or upload your own.</p>
+                <div className="tp-imgpick">
+                  <button
+                    type="button"
+                    className={`tp-imgopt${data.image.kind === "preset" ? " is-on" : ""}`}
+                    onClick={() => setData({ ...data, image: { kind: "preset", preset: "notes" } })}
+                  >
+                    <div className="tp-imgopt-art"><Scene k="notes" /></div>
+                    <span>Default mascot</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`tp-imgopt${data.image.kind === "custom" ? " is-on" : ""}`}
+                    onClick={() => imgRef.current?.click()}
+                  >
+                    <div className="tp-imgopt-art tp-imgopt-art--upload">
+                      {data.image.kind === "custom"
+                        ? <img src={data.image.url} alt="" />
+                        : <><ImagePlus size={22} /><b>Upload your own</b></>}
+                    </div>
+                    <span>{data.image.kind === "custom" ? "Change image" : "Upload image"}</span>
+                  </button>
+                  <input ref={imgRef} type="file" accept="image/*" hidden onChange={onPickImage} />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="tp-mo-foot">
