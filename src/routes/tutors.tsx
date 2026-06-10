@@ -993,3 +993,5 @@ const css = `
   .tp-step-label{display:none}
   .tp-imgpick{grid-template-columns:1fr}
 }
+`;
+
