@@ -118,29 +118,6 @@ function Glyph({ k }: { k: GlyphKey }) {
           <path d="M11 10h10M11 22h10" />
         </svg>
       );
-    case "biology":
-      return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <path d="M9 6c8 6 8 14 0 20M23 6c-8 6-8 14 0 20" fill="rgba(255,255,255,.25)" />
-          <path d="M11 10h10M13 16h6M11 22h10" />
-        </svg>
-      );
-    case "physics":
-      return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <ellipse cx="16" cy="16" rx="11" ry="5" />
-          <ellipse cx="16" cy="16" rx="11" ry="5" transform="rotate(60 16 16)" />
-          <ellipse cx="16" cy="16" rx="11" ry="5" transform="rotate(120 16 16)" />
-          <circle cx="16" cy="16" r="2.2" fill="currentColor" />
-        </svg>
-      );
-    case "history":
-      return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <circle cx="16" cy="16" r="10" fill="rgba(255,255,255,.3)" />
-          <path d="M16 9v7l5 3" />
-        </svg>
-      );
   }
 }
 
