@@ -1,4 +1,4 @@
 # Project Memory
 
 ## Core
-Mascot is ALWAYS: green glasses (#2FB39A), orange antenna + orange side accent dots (#FB6A1E). Never amber/teal accents. Keep consistent across all mascot SVGs.
+Mascot is ALWAYS: thick green glasses frame (#2FB39A), teal side ear-dots (#5BD0B4), ONLY the top antenna ball is orange (#FB6A1E). Apply consistently to every mascot SVG (sidebar Mascot + BotSymbols scene mascot).
