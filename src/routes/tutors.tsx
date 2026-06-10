@@ -641,12 +641,7 @@ const css = `
 .tp-ms .ew{fill:#fff}
 .tp-ms .mo{fill:#FB6A1E}
 .tp-ms .gl{fill:none;stroke:#2FB39A;stroke-width:5;stroke-linecap:round}
-.tp-ms .fc{fill:#26323B}
-.tp-ms .ew{fill:#fff}
-.tp-ms .ep{fill:#26323B}
-.tp-ms .gl{fill:none;stroke:#2FB39A;stroke-width:3.4;stroke-linecap:round}
 .tp-ms .bl{fill:#FF9A57;opacity:.7}
-.tp-ms .mo{fill:#E04E07}
 
 .tp-scene{width:100%;height:100%;display:block;object-fit:cover}
 .tp-row-media:has(.tp-scene){background:transparent}
