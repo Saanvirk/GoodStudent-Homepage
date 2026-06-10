@@ -184,9 +184,13 @@ function Mascot({ className = "" }: { className?: string }) {
       <circle className="ep" cx="96" cy="82" r="5" />
       <circle className="ew" cx="127" cy="80" r="11" />
       <circle className="ep" cx="124" cy="82" r="5" />
+      <circle className="gl" cx="93" cy="80" r="15" />
+      <circle className="gl" cx="127" cy="80" r="15" />
+      <path className="gl" d="M108 78 q1 -3 4 0" />
       <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
       <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
       <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
+
     </svg>
   );
 }
