@@ -1047,10 +1047,19 @@ const css = `
 .tp-mo-progress{font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
 .tp-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 
-@media (max-width:560px){
-  .tp-mo-card{padding:24px 20px}
+@media (max-width:820px){
+  .tp-mo-grid{grid-template-columns:1fr;gap:16px}
+  .tp-mo-guide{position:static;flex-direction:row;align-items:center;text-align:left;gap:14px}
+  .tp-mo-mascot{width:80px;flex-shrink:0}
+  .tp-mo-bubble{text-align:left}
+  .tp-mo-bubble::before{top:50%;left:-7px;transform:translateY(-50%) rotate(45deg);border-left:1px solid var(--line);border-top:none;border-bottom:1px solid var(--line);border-right:none}
   .tp-step-label{display:none}
+}
+@media (max-width:560px){
+  .tp-mo-card{padding:22px 18px}
   .tp-imgpick{grid-template-columns:1fr}
+  .tp-mo-foot{flex-wrap:wrap;justify-content:center}
+  .tp-mo-progress{order:-1;width:100%;text-align:center}
 }
 `;
 
