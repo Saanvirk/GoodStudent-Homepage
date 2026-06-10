@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   Home,
   Pencil,
@@ -14,7 +14,13 @@ import {
   ArrowRight,
   Sparkles,
   Heart,
+  ImagePlus,
 } from "lucide-react";
+import imgEnglish from "@/assets/tutor-english.jpg";
+import imgMaths from "@/assets/tutor-maths.jpg";
+import imgCivics from "@/assets/tutor-civics.jpg";
+import imgChinese from "@/assets/tutor-chinese.jpg";
+import imgNotes from "@/assets/tutor-notes.jpg";
 
 export const Route = createFileRoute("/tutors")({
   head: () => ({
@@ -80,129 +86,78 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
-/* ===== Abstract geometric "rich media" — no icons, no emoji =====
-   Inspired by Material card spec: overlapping primitive shapes, flat colors. */
-type ShapeKey = "english" | "maths" | "civics" | "chinese" | "notes";
-
-function Shapes({ k, tint, accent }: { k: ShapeKey; tint: string; accent: string }) {
-  switch (k) {
-    case "english":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <circle cx="72" cy="64" r="44" fill={accent} opacity="0.85" />
-          <rect x="104" y="30" width="62" height="62" fill={accent} opacity="0.35" />
-          <rect x="96" y="22" width="78" height="78" fill="none" stroke={accent} strokeWidth="2" opacity="0.6" />
-        </svg>
-      );
-    case "maths":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <polygon points="40,98 96,18 152,98" fill={accent} opacity="0.85" />
-          <circle cx="138" cy="70" r="34" fill={accent} opacity="0.45" />
-          <rect x="20" y="74" width="40" height="40" fill={accent} opacity="0.55" />
-        </svg>
-      );
-    case "civics":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <rect x="14" y="56" width="172" height="14" fill={accent} opacity="0.7" />
-          <circle cx="62" cy="46" r="30" fill={accent} opacity="0.85" />
-          <polygon points="130,16 168,86 92,86" fill={accent} opacity="0.55" />
-        </svg>
-      );
-    case "chinese":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <circle cx="100" cy="60" r="50" fill={accent} opacity="0.85" />
-          <rect x="78" y="6" width="44" height="108" fill={accent} opacity="0.25" />
-          <rect x="6" y="50" width="188" height="20" fill={accent} opacity="0.35" />
-        </svg>
-      );
-    case "notes":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <rect x="22" y="22" width="86" height="86" fill={accent} opacity="0.55" />
-          <circle cx="138" cy="64" r="40" fill={accent} opacity="0.8" />
-          <polygon points="50,108 120,10 168,108" fill={accent} opacity="0.25" />
-        </svg>
-      );
-  }
-}
-
 type Tutor = {
   id: string;
-  shape: ShapeKey;
   title: string;
   subtitle?: string;
   support?: string;
-  tint: string;
-  accent: string;
+  image: string;     // default editorial photo
   meta?: string;
 };
 
 const preCreated: Tutor[] = [
-  { id: "eng", shape: "english", title: "DSE English",     subtitle: "Paper 1–4",
+  { id: "eng", title: "DSE English", subtitle: "Paper 1–4",
     support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
-    tint: "#F2D9CF", accent: "#9C3A24" },
-  { id: "mat", shape: "maths",   title: "DSE Maths",       subtitle: "Core · M1 · M2",
+    image: imgEnglish },
+  { id: "mat", title: "DSE Maths", subtitle: "Core · M1 · M2",
     support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
-    tint: "#D5DFE5", accent: "#264253" },
-  { id: "civ", shape: "civics",  title: "DSE Citizenship", subtitle: "HK & the world",
+    image: imgMaths },
+  { id: "civ", title: "DSE Citizenship", subtitle: "HK & the world",
     support: "Frameworks for source questions, case studies and short-answer structure.",
-    tint: "#DCE6CD", accent: "#4D6E36" },
-  { id: "chi", shape: "chinese", title: "DSE 中文",         subtitle: "閱讀 · 寫作 · 聆聽說話",
+    image: imgCivics },
+  { id: "chi", title: "DSE 中文", subtitle: "閱讀 · 寫作 · 聆聽說話",
     support: "範文精讀、作文骨架同說話卷練習，一齊由零開始拆解。",
-    tint: "#E6D5DE", accent: "#6E3F58" },
+    image: imgChinese },
 ];
 
 const myTutors: Tutor[] = [
-  { id: "eng-notes", shape: "notes", title: "English · my notes",
-    subtitle: "Built from 24 pages",
+  { id: "eng-notes", title: "English · my notes", subtitle: "Built from 24 pages",
     support: "Trained on your Form 5 essays and vocab lists.",
-    tint: "#DCD6E5", accent: "#4A3F6B", meta: "Last edited 2d ago" },
+    image: imgNotes, meta: "Last edited 2d ago" },
 ];
 
-function TutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
+function TutorRow({
+  t, fav, onFav, image, onImage, isMine,
+}: {
+  t: Tutor; fav: boolean; onFav: () => void;
+  image: string; onImage: (url: string) => void; isMine?: boolean;
+}) {
+  const fileRef = useRef<HTMLInputElement | null>(null);
+  const pick = () => fileRef.current?.click();
+  const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    onImage(URL.createObjectURL(f));
+  };
+
   return (
-    <article className="tp-card">
-      <div className="tp-card-media">
-        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
+    <article className="tp-row">
+      <div className="tp-row-media">
+        <img src={image} alt="" loading="lazy" />
         <button
           type="button"
-          className={`tp-card-fav${fav ? " is-on" : ""}`}
-          onClick={(e) => { e.stopPropagation(); onFav(); }}
-          aria-label="Favourite tutor"
+          className="tp-row-editimg"
+          onClick={(e) => { e.stopPropagation(); pick(); }}
+          aria-label="Change image"
+          title="Change image"
         >
-          <Heart size={14} fill={fav ? "currentColor" : "none"} />
+          <ImagePlus size={14} />
+          <span>Edit</span>
         </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={onFile}
+        />
       </div>
-      <div className="tp-card-body">
-        <h3 className="tp-card-title">{t.title}</h3>
-        {t.subtitle && <p className="tp-card-sub">{t.subtitle}</p>}
-        {t.support && <p className="tp-card-support">{t.support}</p>}
-        <div className="tp-card-actions">
-          <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
-          <button className="tp-card-act">Preview</button>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function MyTutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
-  return (
-    <article className="tp-mycard">
-      <div className="tp-mycard-media">
-        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
-      </div>
-      <div className="tp-mycard-body">
-        <div className="tp-mycard-head">
-          <h3 className="tp-mycard-title">{t.title}</h3>
+      <div className="tp-row-body">
+        <div className="tp-row-head">
+          <div>
+            <h3 className="tp-row-title">{t.title}</h3>
+            {t.subtitle && <p className="tp-row-sub">{t.subtitle}</p>}
+          </div>
           <button
             type="button"
             className={`tp-card-fav tp-card-fav--inline${fav ? " is-on" : ""}`}
@@ -212,13 +167,12 @@ function MyTutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => v
             <Heart size={14} fill={fav ? "currentColor" : "none"} />
           </button>
         </div>
-        <p className="tp-mycard-sub">{t.subtitle}</p>
-        {t.support && <p className="tp-mycard-support">{t.support}</p>}
-        <div className="tp-mycard-foot">
-          <span className="tp-mycard-meta">{t.meta}</span>
+        {t.support && <p className="tp-row-support">{t.support}</p>}
+        <div className="tp-row-foot">
+          <span className="tp-row-meta">{t.meta ?? (isMine ? "" : "Ready to go")}</span>
           <div className="tp-card-actions">
             <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
-            <button className="tp-card-act">Edit</button>
+            <button className="tp-card-act">{isMine ? "Edit" : "Preview"}</button>
           </div>
         </div>
       </div>
@@ -230,6 +184,7 @@ function TutorsPage() {
   const [active, setActive] = useState("tutor");
   const [userOpen, setUserOpen] = useState(false);
   const [favs, setFavs] = useState<Record<string, boolean>>({ eng: true });
+  const [images, setImages] = useState<Record<string, string>>({});
 
   const nav = [
     { id: "home", label: "Home", icon: Home, to: "/" as const },
@@ -239,6 +194,9 @@ function TutorsPage() {
   ];
 
   const toggleFav = (id: string) => setFavs((f) => ({ ...f, [id]: !f[id] }));
+  const setImage = (id: string, url: string) => setImages((m) => ({ ...m, [id]: url }));
+  const imgFor = (t: Tutor) => images[t.id] ?? t.image;
+  const myIds = useMemo(() => new Set(myTutors.map((t) => t.id)), []);
   const allTutors = useMemo(() => [...preCreated, ...myTutors], []);
   const favList = allTutors.filter((t) => favs[t.id]);
 
@@ -328,9 +286,13 @@ function TutorsPage() {
               <span className="tp-section-label"><Heart size={11} fill="currentColor" /> Favourites</span>
               <span className="tp-section-count">{favList.length}</span>
             </div>
-            <div className="tp-grid">
+            <div className="tp-rowgrid">
               {favList.map((t) => (
-                <TutorCard key={"fav-" + t.id} t={t} fav onFav={() => toggleFav(t.id)} />
+                <TutorRow
+                  key={"fav-" + t.id} t={t} fav onFav={() => toggleFav(t.id)}
+                  image={imgFor(t)} onImage={(u) => setImage(t.id, u)}
+                  isMine={myIds.has(t.id)}
+                />
               ))}
             </div>
           </section>
@@ -341,9 +303,12 @@ function TutorsPage() {
             <span className="tp-section-label">Pre-made tutors</span>
             <span className="tp-section-count">{preCreated.length}</span>
           </div>
-          <div className="tp-grid">
+          <div className="tp-rowgrid">
             {preCreated.map((t) => (
-              <TutorCard key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)} />
+              <TutorRow
+                key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
+                image={imgFor(t)} onImage={(u) => setImage(t.id, u)}
+              />
             ))}
           </div>
         </section>
@@ -353,9 +318,12 @@ function TutorsPage() {
             <span className="tp-section-label">My tutors</span>
             <span className="tp-section-count">{myTutors.length}</span>
           </div>
-          <div className="tp-mygrid">
+          <div className="tp-rowgrid">
             {myTutors.map((t) => (
-              <MyTutorCard key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)} />
+              <TutorRow
+                key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
+                image={imgFor(t)} onImage={(u) => setImage(t.id, u)} isMine
+              />
             ))}
             <button className="tp-build">
               <div className="tp-build-ic"><Plus size={22} strokeWidth={2.4} /></div>
@@ -454,24 +422,40 @@ const css = `
 .tp-section-label svg{color:var(--orange-deep)}
 .tp-section-count{font-size:.7rem;font-weight:600;color:var(--orange-deep);background:var(--cream-2);padding:3px 9px;border-radius:999px;font-family:var(--font-display)}
 
-.tp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
-
-/* Material-spec card: rich media → title → support → actions */
-.tp-card{
-  position:relative;background:#fffdf9;border:1px solid var(--line);border-radius:18px;
-  overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,border-color .25s;
+/* ===== Unified horizontal tutor card ===== */
+.tp-rowgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:20px}
+.tp-row{
+  display:flex;background:#fffdf9;border:1px solid var(--line);border-radius:20px;
+  overflow:hidden;box-shadow:var(--shadow-sm);
+  transition:transform .22s,box-shadow .22s,border-color .22s;
 }
-.tp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--orange-2)}
-.tp-card-media{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line)}
-.tp-card-media svg{width:100%;height:100%;display:block}
-.tp-card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
-.tp-card-title{font-family:var(--font-display);font-weight:600;font-size:1.18rem;color:var(--ink);line-height:1.2}
-.tp-card-sub{font-size:.82rem;color:var(--ink-faint);font-weight:500;letter-spacing:.01em}
-.tp-card-support{font-size:.88rem;color:var(--ink-soft);margin-top:6px;line-height:1.5;flex:1}
-.tp-card-actions{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.tp-row:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
+.tp-row-media{
+  position:relative;flex-shrink:0;width:38%;max-width:220px;min-width:150px;
+  background:var(--cream-2);overflow:hidden;
+}
+.tp-row-media img{width:100%;height:100%;object-fit:cover;display:block}
+.tp-row-editimg{
+  position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:5px;
+  padding:5px 9px;border-radius:999px;border:none;cursor:pointer;
+  background:rgba(255,253,249,.94);color:var(--ink);
+  font-family:var(--font-display);font-weight:600;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;
+  box-shadow:0 2px 8px -2px rgba(0,0,0,.25);
+  opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s,color .15s;
+}
+.tp-row:hover .tp-row-editimg{opacity:1;transform:translateY(0)}
+.tp-row-editimg:hover{color:var(--orange-deep)}
+.tp-row-body{flex:1;min-width:0;padding:18px 20px 16px;display:flex;flex-direction:column;gap:6px}
+.tp-row-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.tp-row-title{font-family:var(--font-display);font-weight:600;font-size:1.12rem;color:var(--ink);line-height:1.2}
+.tp-row-sub{font-size:.78rem;color:var(--ink-faint);font-weight:500;margin-top:2px;letter-spacing:.01em}
+.tp-row-support{font-size:.88rem;color:var(--ink-soft);line-height:1.5;margin-top:2px}
+.tp-row-foot{margin-top:auto;padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line)}
+.tp-row-meta{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+
+.tp-card-actions{display:flex;gap:4px}
 .tp-card-act{
-  font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;
+  font-family:var(--font-display);font-weight:600;font-size:.76rem;letter-spacing:.05em;text-transform:uppercase;
   background:transparent;border:none;color:var(--ink-soft);cursor:pointer;
   padding:6px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px;
   transition:background .15s,color .15s;
@@ -481,31 +465,13 @@ const css = `
 .tp-card-act--primary:hover{background:var(--cream-2);color:var(--orange-deep)}
 
 .tp-card-fav{
-  position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;color:var(--ink);
-  background:rgba(255,253,249,.92);border:none;cursor:pointer;
-  box-shadow:0 2px 8px -2px rgba(0,0,0,.18);transition:all .15s;
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:var(--ink-faint);
+  background:transparent;border:none;cursor:pointer;transition:all .15s;
 }
-.tp-card-fav:hover{color:var(--orange-deep);transform:scale(1.08)}
-.tp-card-fav.is-on{color:var(--orange-deep);background:#fff}
-.tp-card-fav--inline{position:static;width:28px;height:28px;box-shadow:none;background:transparent}
-.tp-card-fav--inline:hover{background:var(--cream)}
-
-.tp-mygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:22px}
-.tp-mycard{
-  display:flex;background:#fffdf9;border:1px solid var(--line);border-radius:18px;
-  overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s,border-color .2s;
-}
-.tp-mycard:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.tp-mycard-media{width:130px;flex-shrink:0;border-right:1px solid var(--line)}
-.tp-mycard-media svg{width:100%;height:100%;display:block}
-.tp-mycard-body{flex:1;min-width:0;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
-.tp-mycard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.tp-mycard-title{font-family:var(--font-display);font-weight:600;font-size:1.04rem;color:var(--ink);line-height:1.2}
-.tp-mycard-sub{font-size:.78rem;color:var(--ink-faint);font-weight:500}
-.tp-mycard-support{font-size:.84rem;color:var(--ink-soft);margin-top:4px;line-height:1.45}
-.tp-mycard-foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.tp-mycard-meta{font-size:.72rem;color:var(--ink-faint);font-style:italic}
+.tp-card-fav:hover{color:var(--orange-deep);background:var(--cream)}
+.tp-card-fav.is-on{color:var(--orange-deep)}
+.tp-card-fav--inline{}
 
 .tp-build{display:flex;align-items:center;gap:14px;background:var(--cream);border:1.5px dashed var(--orange-2);border-radius:18px;padding:18px;cursor:pointer;font-family:inherit;color:inherit;text-align:left;transition:background .2s,border-color .2s,transform .2s}
 .tp-build:hover{background:var(--cream-2);border-color:var(--orange-deep);transform:translateY(-2px)}
@@ -539,6 +505,7 @@ const css = `
   .tp-side{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--line);padding:14px 16px}
   .tp-nav{flex-direction:row;flex-wrap:wrap;gap:4px}
   .tp-side-foot{margin-top:12px}
-  .tp-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .tp-rowgrid{grid-template-columns:1fr;gap:14px}
+  .tp-row-media{width:42%;max-width:160px}
 }
 `;
