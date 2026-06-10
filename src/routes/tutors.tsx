@@ -86,129 +86,78 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
-/* ===== Abstract geometric "rich media" — no icons, no emoji =====
-   Inspired by Material card spec: overlapping primitive shapes, flat colors. */
-type ShapeKey = "english" | "maths" | "civics" | "chinese" | "notes";
-
-function Shapes({ k, tint, accent }: { k: ShapeKey; tint: string; accent: string }) {
-  switch (k) {
-    case "english":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <circle cx="72" cy="64" r="44" fill={accent} opacity="0.85" />
-          <rect x="104" y="30" width="62" height="62" fill={accent} opacity="0.35" />
-          <rect x="96" y="22" width="78" height="78" fill="none" stroke={accent} strokeWidth="2" opacity="0.6" />
-        </svg>
-      );
-    case "maths":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <polygon points="40,98 96,18 152,98" fill={accent} opacity="0.85" />
-          <circle cx="138" cy="70" r="34" fill={accent} opacity="0.45" />
-          <rect x="20" y="74" width="40" height="40" fill={accent} opacity="0.55" />
-        </svg>
-      );
-    case "civics":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <rect x="14" y="56" width="172" height="14" fill={accent} opacity="0.7" />
-          <circle cx="62" cy="46" r="30" fill={accent} opacity="0.85" />
-          <polygon points="130,16 168,86 92,86" fill={accent} opacity="0.55" />
-        </svg>
-      );
-    case "chinese":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <circle cx="100" cy="60" r="50" fill={accent} opacity="0.85" />
-          <rect x="78" y="6" width="44" height="108" fill={accent} opacity="0.25" />
-          <rect x="6" y="50" width="188" height="20" fill={accent} opacity="0.35" />
-        </svg>
-      );
-    case "notes":
-      return (
-        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="200" height="120" fill={tint} />
-          <rect x="22" y="22" width="86" height="86" fill={accent} opacity="0.55" />
-          <circle cx="138" cy="64" r="40" fill={accent} opacity="0.8" />
-          <polygon points="50,108 120,10 168,108" fill={accent} opacity="0.25" />
-        </svg>
-      );
-  }
-}
-
 type Tutor = {
   id: string;
-  shape: ShapeKey;
   title: string;
   subtitle?: string;
   support?: string;
-  tint: string;
-  accent: string;
+  image: string;     // default editorial photo
   meta?: string;
 };
 
 const preCreated: Tutor[] = [
-  { id: "eng", shape: "english", title: "DSE English",     subtitle: "Paper 1–4",
+  { id: "eng", title: "DSE English", subtitle: "Paper 1–4",
     support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
-    tint: "#F2D9CF", accent: "#9C3A24" },
-  { id: "mat", shape: "maths",   title: "DSE Maths",       subtitle: "Core · M1 · M2",
+    image: imgEnglish },
+  { id: "mat", title: "DSE Maths", subtitle: "Core · M1 · M2",
     support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
-    tint: "#D5DFE5", accent: "#264253" },
-  { id: "civ", shape: "civics",  title: "DSE Citizenship", subtitle: "HK & the world",
+    image: imgMaths },
+  { id: "civ", title: "DSE Citizenship", subtitle: "HK & the world",
     support: "Frameworks for source questions, case studies and short-answer structure.",
-    tint: "#DCE6CD", accent: "#4D6E36" },
-  { id: "chi", shape: "chinese", title: "DSE 中文",         subtitle: "閱讀 · 寫作 · 聆聽說話",
+    image: imgCivics },
+  { id: "chi", title: "DSE 中文", subtitle: "閱讀 · 寫作 · 聆聽說話",
     support: "範文精讀、作文骨架同說話卷練習，一齊由零開始拆解。",
-    tint: "#E6D5DE", accent: "#6E3F58" },
+    image: imgChinese },
 ];
 
 const myTutors: Tutor[] = [
-  { id: "eng-notes", shape: "notes", title: "English · my notes",
-    subtitle: "Built from 24 pages",
+  { id: "eng-notes", title: "English · my notes", subtitle: "Built from 24 pages",
     support: "Trained on your Form 5 essays and vocab lists.",
-    tint: "#DCD6E5", accent: "#4A3F6B", meta: "Last edited 2d ago" },
+    image: imgNotes, meta: "Last edited 2d ago" },
 ];
 
-function TutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
+function TutorRow({
+  t, fav, onFav, image, onImage, isMine,
+}: {
+  t: Tutor; fav: boolean; onFav: () => void;
+  image: string; onImage: (url: string) => void; isMine?: boolean;
+}) {
+  const fileRef = useRef<HTMLInputElement | null>(null);
+  const pick = () => fileRef.current?.click();
+  const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    onImage(URL.createObjectURL(f));
+  };
+
   return (
-    <article className="tp-card">
-      <div className="tp-card-media">
-        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
+    <article className="tp-row">
+      <div className="tp-row-media">
+        <img src={image} alt="" loading="lazy" />
         <button
           type="button"
-          className={`tp-card-fav${fav ? " is-on" : ""}`}
-          onClick={(e) => { e.stopPropagation(); onFav(); }}
-          aria-label="Favourite tutor"
+          className="tp-row-editimg"
+          onClick={(e) => { e.stopPropagation(); pick(); }}
+          aria-label="Change image"
+          title="Change image"
         >
-          <Heart size={14} fill={fav ? "currentColor" : "none"} />
+          <ImagePlus size={14} />
+          <span>Edit</span>
         </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={onFile}
+        />
       </div>
-      <div className="tp-card-body">
-        <h3 className="tp-card-title">{t.title}</h3>
-        {t.subtitle && <p className="tp-card-sub">{t.subtitle}</p>}
-        {t.support && <p className="tp-card-support">{t.support}</p>}
-        <div className="tp-card-actions">
-          <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
-          <button className="tp-card-act">Preview</button>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function MyTutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
-  return (
-    <article className="tp-mycard">
-      <div className="tp-mycard-media">
-        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
-      </div>
-      <div className="tp-mycard-body">
-        <div className="tp-mycard-head">
-          <h3 className="tp-mycard-title">{t.title}</h3>
+      <div className="tp-row-body">
+        <div className="tp-row-head">
+          <div>
+            <h3 className="tp-row-title">{t.title}</h3>
+            {t.subtitle && <p className="tp-row-sub">{t.subtitle}</p>}
+          </div>
           <button
             type="button"
             className={`tp-card-fav tp-card-fav--inline${fav ? " is-on" : ""}`}
@@ -218,13 +167,12 @@ function MyTutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => v
             <Heart size={14} fill={fav ? "currentColor" : "none"} />
           </button>
         </div>
-        <p className="tp-mycard-sub">{t.subtitle}</p>
-        {t.support && <p className="tp-mycard-support">{t.support}</p>}
-        <div className="tp-mycard-foot">
-          <span className="tp-mycard-meta">{t.meta}</span>
+        {t.support && <p className="tp-row-support">{t.support}</p>}
+        <div className="tp-row-foot">
+          <span className="tp-row-meta">{t.meta ?? (isMine ? "" : "Ready to go")}</span>
           <div className="tp-card-actions">
             <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
-            <button className="tp-card-act">Edit</button>
+            <button className="tp-card-act">{isMine ? "Edit" : "Preview"}</button>
           </div>
         </div>
       </div>
