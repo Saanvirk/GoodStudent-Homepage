@@ -206,7 +206,7 @@ type Tutor = {
 
 const preCreated: Tutor[] = [
   { id: "eng", title: "DSE English", subtitle: "Paper 1–4",
-    support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
+    support: "Plan essays, and train for all 4 papers to ace your HKDSE English exams.",
     scene: "english" },
   { id: "mat", title: "DSE Maths", subtitle: "Core · M1 · M2",
     support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
