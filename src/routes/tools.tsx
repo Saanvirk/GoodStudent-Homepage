@@ -433,11 +433,15 @@ const css = `
 }
 .tl-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--orange-2)}
 .tl-card-ic{
-  width:52px;height:52px;border-radius:15px;display:grid;place-items:center;
-  font-size:1.5rem;color:#fff;flex-shrink:0;
-  box-shadow:var(--shadow-sm);transform:rotate(-4deg);transition:transform .3s;
+  width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+  flex-shrink:0;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18), 0 6px 14px -8px rgba(60,30,10,.35);
+  transform:rotate(-3deg);transition:transform .3s;
 }
-.tl-card:hover .tl-card-ic{transform:rotate(7deg) scale(1.07)}
+.tl-card-ic svg{width:28px;height:28px;display:block}
+.tl-card-ic::after{content:"";position:absolute;inset:4px;border-radius:11px;border:1px dashed rgba(255,255,255,.22);pointer-events:none}
+.tl-card:hover .tl-card-ic{transform:rotate(5deg) scale(1.06)}
+
 .tl-card-body{flex:1;min-width:0}
 .tl-card-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tl-card-title{font-family:var(--font-display);font-weight:600;font-size:1.04rem;color:var(--ink)}
