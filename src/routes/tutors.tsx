@@ -635,7 +635,12 @@ const css = `
 .tp-ms .scr{fill:#26323B}
 .tp-ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
 .tp-ms .ant{fill:var(--orange)}
-.tp-ms .ac{fill:var(--orange)}
+.tp-ms .ac{fill:#5BD0B4}
+.tp-ms .fc{fill:#26323B}
+.tp-ms .ep{fill:#1F2A30}
+.tp-ms .ew{fill:#fff}
+.tp-ms .mo{fill:#FB6A1E}
+.tp-ms .gl{fill:none;stroke:#2FB39A;stroke-width:5;stroke-linecap:round}
 .tp-ms .fc{fill:#26323B}
 .tp-ms .ew{fill:#fff}
 .tp-ms .ep{fill:#26323B}
