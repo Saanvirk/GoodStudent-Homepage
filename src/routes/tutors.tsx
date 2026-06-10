@@ -280,7 +280,6 @@ function TutorRow({
         </div>
         {t.support && <p className="tp-row-support">{t.support}</p>}
         <div className="tp-row-foot">
-          <span className="tp-row-meta">{t.meta ?? (isMine ? "" : "Ready to go")}</span>
           <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
         </div>
       </div>
