@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   Home,
   Pencil,
@@ -14,7 +14,13 @@ import {
   ArrowRight,
   Sparkles,
   Heart,
+  ImagePlus,
 } from "lucide-react";
+import imgEnglish from "@/assets/tutor-english.jpg";
+import imgMaths from "@/assets/tutor-maths.jpg";
+import imgCivics from "@/assets/tutor-civics.jpg";
+import imgChinese from "@/assets/tutor-chinese.jpg";
+import imgNotes from "@/assets/tutor-notes.jpg";
 
 export const Route = createFileRoute("/tutors")({
   head: () => ({
