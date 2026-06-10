@@ -184,6 +184,7 @@ function TutorsPage() {
   const [active, setActive] = useState("tutor");
   const [userOpen, setUserOpen] = useState(false);
   const [favs, setFavs] = useState<Record<string, boolean>>({ eng: true });
+  const [images, setImages] = useState<Record<string, string>>({});
 
   const nav = [
     { id: "home", label: "Home", icon: Home, to: "/" as const },
@@ -193,6 +194,9 @@ function TutorsPage() {
   ];
 
   const toggleFav = (id: string) => setFavs((f) => ({ ...f, [id]: !f[id] }));
+  const setImage = (id: string, url: string) => setImages((m) => ({ ...m, [id]: url }));
+  const imgFor = (t: Tutor) => images[t.id] ?? t.image;
+  const myIds = useMemo(() => new Set(myTutors.map((t) => t.id)), []);
   const allTutors = useMemo(() => [...preCreated, ...myTutors], []);
   const favList = allTutors.filter((t) => favs[t.id]);
 
