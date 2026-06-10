@@ -80,42 +80,55 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
-/* ===== Hand-drawn line icons — no emoji ===== */
-type GlyphKey = "english" | "maths" | "civics" | "chinese";
+/* ===== Abstract geometric "rich media" — no icons, no emoji =====
+   Inspired by Material card spec: overlapping primitive shapes, flat colors. */
+type ShapeKey = "english" | "maths" | "civics" | "chinese" | "notes";
 
-function Glyph({ k }: { k: GlyphKey }) {
-  const s = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+function Shapes({ k, tint, accent }: { k: ShapeKey; tint: string; accent: string }) {
   switch (k) {
     case "english":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <path d="M7 8h11a3 3 0 0 1 3 3v14H10a3 3 0 0 1-3-3V8z" fill="rgba(255,255,255,.35)" />
-          <path d="M7 22a3 3 0 0 1 3-3h11" />
-          <path d="M12 13h6M12 17h4" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <circle cx="72" cy="64" r="44" fill={accent} opacity="0.85" />
+          <rect x="104" y="30" width="62" height="62" fill={accent} opacity="0.35" />
+          <rect x="96" y="22" width="78" height="78" fill="none" stroke={accent} strokeWidth="2" opacity="0.6" />
         </svg>
       );
     case "maths":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <rect x="6" y="6" width="20" height="20" rx="3" fill="rgba(255,255,255,.3)" />
-          <path d="M6 13h20M13 6v20" />
-          <path d="M18 19l5 5M23 19l-5 5" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <polygon points="40,98 96,18 152,98" fill={accent} opacity="0.85" />
+          <circle cx="138" cy="70" r="34" fill={accent} opacity="0.45" />
+          <rect x="20" y="74" width="40" height="40" fill={accent} opacity="0.55" />
         </svg>
       );
     case "civics":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <path d="M5 26h22" />
-          <path d="M7 26V14M11 26V14M16 26V14M21 26V14M25 26V14" />
-          <path d="M5 14h22L16 6 5 14z" fill="rgba(255,255,255,.3)" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <rect x="14" y="56" width="172" height="14" fill={accent} opacity="0.7" />
+          <circle cx="62" cy="46" r="30" fill={accent} opacity="0.85" />
+          <polygon points="130,16 168,86 92,86" fill={accent} opacity="0.55" />
         </svg>
       );
     case "chinese":
       return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <rect x="6" y="6" width="20" height="20" rx="2" fill="rgba(255,255,255,.3)" />
-          <path d="M16 9v14M9 16h14M11 12l10 8M21 12l-10 8" opacity=".55" />
-          <path d="M11 10h10M11 22h10" />
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <circle cx="100" cy="60" r="50" fill={accent} opacity="0.85" />
+          <rect x="78" y="6" width="44" height="108" fill={accent} opacity="0.25" />
+          <rect x="6" y="50" width="188" height="20" fill={accent} opacity="0.35" />
+        </svg>
+      );
+    case "notes":
+      return (
+        <svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="200" height="120" fill={tint} />
+          <rect x="22" y="22" width="86" height="86" fill={accent} opacity="0.55" />
+          <circle cx="138" cy="64" r="40" fill={accent} opacity="0.8" />
+          <polygon points="50,108 120,10 168,108" fill={accent} opacity="0.25" />
         </svg>
       );
   }
@@ -123,67 +136,93 @@ function Glyph({ k }: { k: GlyphKey }) {
 
 type Tutor = {
   id: string;
-  glyph: GlyphKey;
+  shape: ShapeKey;
   title: string;
   subtitle?: string;
+  support?: string;
   tint: string;
-  ink: string;
+  accent: string;
   meta?: string;
 };
 
 const preCreated: Tutor[] = [
-  { id: "eng",  glyph: "english", title: "DSE English",     subtitle: "Writing • Reading • Speaking", tint: "#C8553D", ink: "#FBEFE8" },
-  { id: "mat",  glyph: "maths",   title: "DSE Maths",       subtitle: "Core • M1 • M2",               tint: "#3D5A6C", ink: "#E8EEF2" },
-  { id: "civ",  glyph: "civics",  title: "DSE Citizenship", subtitle: "Hong Kong & the world",        tint: "#6B8E4E", ink: "#EEF3E6" },
-  { id: "chi",  glyph: "chinese", title: "DSE 中文",         subtitle: "閱讀 • 寫作 • 聆聽說話",          tint: "#8C5E7A", ink: "#F2E8EE" },
+  { id: "eng", shape: "english", title: "DSE English",     subtitle: "Paper 1–4",
+    support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
+    tint: "#F2D9CF", accent: "#9C3A24" },
+  { id: "mat", shape: "maths",   title: "DSE Maths",       subtitle: "Core · M1 · M2",
+    support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
+    tint: "#D5DFE5", accent: "#264253" },
+  { id: "civ", shape: "civics",  title: "DSE Citizenship", subtitle: "HK & the world",
+    support: "Frameworks for source questions, case studies and short-answer structure.",
+    tint: "#DCE6CD", accent: "#4D6E36" },
+  { id: "chi", shape: "chinese", title: "DSE 中文",         subtitle: "閱讀 · 寫作 · 聆聽說話",
+    support: "範文精讀、作文骨架同說話卷練習，一齊由零開始拆解。",
+    tint: "#E6D5DE", accent: "#6E3F58" },
 ];
 
 const myTutors: Tutor[] = [
-  { id: "eng-notes", glyph: "english", title: "English · my notes", subtitle: "Built from 24 pages", tint: "#6B5B95", ink: "#ECE8F2", meta: "Last edited 2d ago" },
+  { id: "eng-notes", shape: "notes", title: "English · my notes",
+    subtitle: "Built from 24 pages",
+    support: "Trained on your Form 5 essays and vocab lists.",
+    tint: "#DCD6E5", accent: "#4A3F6B", meta: "Last edited 2d ago" },
 ];
 
 function TutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
   return (
-    <button className="tp-card">
-      <div className="tp-card-ic" style={{ background: t.tint, color: t.ink }}>
-        <Glyph k={t.glyph} />
+    <article className="tp-card">
+      <div className="tp-card-media">
+        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
+        <button
+          type="button"
+          className={`tp-card-fav${fav ? " is-on" : ""}`}
+          onClick={(e) => { e.stopPropagation(); onFav(); }}
+          aria-label="Favourite tutor"
+        >
+          <Heart size={14} fill={fav ? "currentColor" : "none"} />
+        </button>
       </div>
-      <h3 className="tp-card-title">{t.title}</h3>
-      {t.subtitle && <p className="tp-card-sub">{t.subtitle}</p>}
-      <span
-        className={`tp-card-fav${fav ? " is-on" : ""}`}
-        onClick={(e) => { e.stopPropagation(); e.preventDefault(); onFav(); }}
-        role="button"
-        aria-label="Favourite tutor"
-      >
-        <Heart size={14} fill={fav ? "currentColor" : "none"} />
-      </span>
-      <span className="tp-card-arrow"><ArrowRight size={16} /></span>
-    </button>
+      <div className="tp-card-body">
+        <h3 className="tp-card-title">{t.title}</h3>
+        {t.subtitle && <p className="tp-card-sub">{t.subtitle}</p>}
+        {t.support && <p className="tp-card-support">{t.support}</p>}
+        <div className="tp-card-actions">
+          <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
+          <button className="tp-card-act">Preview</button>
+        </div>
+      </div>
+    </article>
   );
 }
 
 function MyTutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
   return (
-    <button className="tp-mycard">
-      <div className="tp-card-ic tp-card-ic--sm" style={{ background: t.tint, color: t.ink }}>
-        <Glyph k={t.glyph} />
+    <article className="tp-mycard">
+      <div className="tp-mycard-media">
+        <Shapes k={t.shape} tint={t.tint} accent={t.accent} />
       </div>
       <div className="tp-mycard-body">
-        <h3 className="tp-mycard-title">{t.title}</h3>
+        <div className="tp-mycard-head">
+          <h3 className="tp-mycard-title">{t.title}</h3>
+          <button
+            type="button"
+            className={`tp-card-fav tp-card-fav--inline${fav ? " is-on" : ""}`}
+            onClick={(e) => { e.stopPropagation(); onFav(); }}
+            aria-label="Favourite tutor"
+          >
+            <Heart size={14} fill={fav ? "currentColor" : "none"} />
+          </button>
+        </div>
         <p className="tp-mycard-sub">{t.subtitle}</p>
-        <span className="tp-mycard-meta">{t.meta}</span>
+        {t.support && <p className="tp-mycard-support">{t.support}</p>}
+        <div className="tp-mycard-foot">
+          <span className="tp-mycard-meta">{t.meta}</span>
+          <div className="tp-card-actions">
+            <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
+            <button className="tp-card-act">Edit</button>
+          </div>
+        </div>
       </div>
-      <span
-        className={`tp-card-fav tp-card-fav--inline${fav ? " is-on" : ""}`}
-        onClick={(e) => { e.stopPropagation(); e.preventDefault(); onFav(); }}
-        role="button"
-        aria-label="Favourite tutor"
-      >
-        <Heart size={14} fill={fav ? "currentColor" : "none"} />
-      </span>
-      <ArrowRight size={16} className="tp-mycard-arrow" />
-    </button>
+    </article>
   );
 }
 
@@ -415,47 +454,60 @@ const css = `
 .tp-section-label svg{color:var(--orange-deep)}
 .tp-section-count{font-size:.7rem;font-weight:600;color:var(--orange-deep);background:var(--cream-2);padding:3px 9px;border-radius:999px;font-family:var(--font-display)}
 
-.tp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
-.tp-card{position:relative;background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:22px;cursor:pointer;font-family:inherit;color:inherit;text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:0;min-height:188px;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,border-color .25s}
-.tp-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--orange-2)}
+.tp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
 
-/* Hand-drawn flat icon tile — no gradients, rounded square with subtle inner outline */
-.tp-card-ic{
-  width:56px;height:56px;border-radius:14px;
-  display:grid;place-items:center;margin-bottom:18px;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18), 0 6px 14px -8px rgba(60,30,10,.35);
-  position:relative;
+/* Material-spec card: rich media → title → support → actions */
+.tp-card{
+  position:relative;background:#fffdf9;border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,border-color .25s;
 }
-.tp-card-ic svg{width:30px;height:30px;display:block}
-.tp-card-ic::after{
-  content:"";position:absolute;inset:4px;border-radius:11px;
-  border:1px dashed rgba(255,255,255,.22);pointer-events:none;
+.tp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--orange-2)}
+.tp-card-media{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line)}
+.tp-card-media svg{width:100%;height:100%;display:block}
+.tp-card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tp-card-title{font-family:var(--font-display);font-weight:600;font-size:1.18rem;color:var(--ink);line-height:1.2}
+.tp-card-sub{font-size:.82rem;color:var(--ink-faint);font-weight:500;letter-spacing:.01em}
+.tp-card-support{font-size:.88rem;color:var(--ink-soft);margin-top:6px;line-height:1.5;flex:1}
+.tp-card-actions{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.tp-card-act{
+  font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;
+  background:transparent;border:none;color:var(--ink-soft);cursor:pointer;
+  padding:6px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px;
+  transition:background .15s,color .15s;
 }
-.tp-card-ic--sm{width:46px;height:46px;border-radius:12px;margin-bottom:0}
-.tp-card-ic--sm svg{width:24px;height:24px}
+.tp-card-act:hover{background:var(--cream);color:var(--ink)}
+.tp-card-act--primary{color:var(--orange-deep)}
+.tp-card-act--primary:hover{background:var(--cream-2);color:var(--orange-deep)}
 
-.tp-card-title{font-family:var(--font-display);font-weight:600;font-size:1.12rem;color:var(--ink)}
-.tp-card-sub{font-size:.86rem;color:var(--ink-soft);margin-top:4px}
+.tp-card-fav{
+  position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--ink);
+  background:rgba(255,253,249,.92);border:none;cursor:pointer;
+  box-shadow:0 2px 8px -2px rgba(0,0,0,.18);transition:all .15s;
+}
+.tp-card-fav:hover{color:var(--orange-deep);transform:scale(1.08)}
+.tp-card-fav.is-on{color:var(--orange-deep);background:#fff}
+.tp-card-fav--inline{position:static;width:28px;height:28px;box-shadow:none;background:transparent}
+.tp-card-fav--inline:hover{background:var(--cream)}
 
-.tp-card-fav{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--ink-faint);background:rgba(255,255,255,.85);border:1px solid var(--line);cursor:pointer;transition:all .18s;z-index:2}
-.tp-card-fav:hover{color:var(--orange-deep);border-color:var(--orange-2)}
-.tp-card-fav.is-on{color:var(--orange-deep);background:var(--cream-2);border-color:var(--orange-2)}
-.tp-card-fav--inline{position:static;flex-shrink:0}
+.tp-mygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:22px}
+.tp-mycard{
+  display:flex;background:#fffdf9;border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.tp-mycard:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
+.tp-mycard-media{width:130px;flex-shrink:0;border-right:1px solid var(--line)}
+.tp-mycard-media svg{width:100%;height:100%;display:block}
+.tp-mycard-body{flex:1;min-width:0;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.tp-mycard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.tp-mycard-title{font-family:var(--font-display);font-weight:600;font-size:1.04rem;color:var(--ink);line-height:1.2}
+.tp-mycard-sub{font-size:.78rem;color:var(--ink-faint);font-weight:500}
+.tp-mycard-support{font-size:.84rem;color:var(--ink-soft);margin-top:4px;line-height:1.45}
+.tp-mycard-foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.tp-mycard-meta{font-size:.72rem;color:var(--ink-faint);font-style:italic}
 
-.tp-card-arrow{position:absolute;bottom:18px;right:18px;width:30px;height:30px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;color:var(--ink-faint);transition:all .2s}
-.tp-card:hover .tp-card-arrow{background:var(--orange);color:#fff;transform:translateX(3px)}
-
-.tp-mygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
-.tp-mycard{display:flex;align-items:center;gap:14px;background:#fffdf9;border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;font-family:inherit;color:inherit;text-align:left;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s,border-color .2s}
-.tp-mycard:hover{transform:translateX(4px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.tp-mycard-body{flex:1;min-width:0}
-.tp-mycard-title{font-family:var(--font-display);font-weight:600;font-size:1rem;color:var(--ink)}
-.tp-mycard-sub{font-size:.82rem;color:var(--ink-soft);margin-top:2px}
-.tp-mycard-meta{display:block;font-size:.72rem;color:var(--ink-faint);margin-top:6px;font-style:italic}
-.tp-mycard-arrow{color:var(--ink-faint);transition:transform .2s,color .2s;flex-shrink:0}
-.tp-mycard:hover .tp-mycard-arrow{color:var(--orange-deep);transform:translateX(3px)}
-
-.tp-build{display:flex;align-items:center;gap:14px;background:var(--cream);border:1.5px dashed var(--orange-2);border-radius:18px;padding:16px;cursor:pointer;font-family:inherit;color:inherit;text-align:left;transition:background .2s,border-color .2s,transform .2s}
+.tp-build{display:flex;align-items:center;gap:14px;background:var(--cream);border:1.5px dashed var(--orange-2);border-radius:18px;padding:18px;cursor:pointer;font-family:inherit;color:inherit;text-align:left;transition:background .2s,border-color .2s,transform .2s}
 .tp-build:hover{background:var(--cream-2);border-color:var(--orange-deep);transform:translateY(-2px)}
 .tp-build-ic{width:46px;height:46px;border-radius:14px;background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;display:grid;place-items:center;flex-shrink:0;box-shadow:var(--shadow-sm)}
 .tp-build-title{font-family:var(--font-display);font-weight:600;font-size:1rem;color:var(--orange-deep)}
