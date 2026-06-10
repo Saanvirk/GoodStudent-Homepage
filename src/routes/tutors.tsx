@@ -474,7 +474,7 @@ function TutorsPage() {
               />
             ))}
             {!q && (
-              <button className="tp-build">
+              <button className="tp-build" onClick={() => setBuilderOpen(true)}>
                 <div className="tp-build-ic"><Plus size={22} strokeWidth={2.4} /></div>
                 <div>
                   <p className="tp-build-title">Build a new tutor</p>
