@@ -281,10 +281,7 @@ function TutorRow({
         {t.support && <p className="tp-row-support">{t.support}</p>}
         <div className="tp-row-foot">
           <span className="tp-row-meta">{t.meta ?? (isMine ? "" : "Ready to go")}</span>
-          <div className="tp-card-actions">
-            <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
-            <button className="tp-card-act">{isMine ? "Edit" : "Preview"}</button>
-          </div>
+          <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
         </div>
       </div>
     </article>
