@@ -136,9 +136,6 @@ const preCreated: Tutor[] = [
   { id: "mat",  glyph: "maths",   title: "DSE Maths",       subtitle: "Core • M1 • M2",               tint: "#3D5A6C", ink: "#E8EEF2" },
   { id: "civ",  glyph: "civics",  title: "DSE Citizenship", subtitle: "Hong Kong & the world",        tint: "#6B8E4E", ink: "#EEF3E6" },
   { id: "chi",  glyph: "chinese", title: "DSE 中文",         subtitle: "閱讀 • 寫作 • 聆聽說話",          tint: "#8C5E7A", ink: "#F2E8EE" },
-  { id: "bio",  glyph: "biology", title: "DSE Biology",     subtitle: "Cells, ecology, genetics",      tint: "#B8893A", ink: "#F5EBD9" },
-  { id: "phy",  glyph: "physics", title: "DSE Physics",     subtitle: "Mechanics & waves",             tint: "#506B7A", ink: "#E6EEF2" },
-  { id: "his",  glyph: "history", title: "DSE History",     subtitle: "Sources, essays, themes",       tint: "#9C6B3F", ink: "#F2E6D8" },
 ];
 
 const myTutors: Tutor[] = [
