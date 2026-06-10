@@ -286,9 +286,13 @@ function TutorsPage() {
               <span className="tp-section-label"><Heart size={11} fill="currentColor" /> Favourites</span>
               <span className="tp-section-count">{favList.length}</span>
             </div>
-            <div className="tp-grid">
+            <div className="tp-rowgrid">
               {favList.map((t) => (
-                <TutorCard key={"fav-" + t.id} t={t} fav onFav={() => toggleFav(t.id)} />
+                <TutorRow
+                  key={"fav-" + t.id} t={t} fav onFav={() => toggleFav(t.id)}
+                  image={imgFor(t)} onImage={(u) => setImage(t.id, u)}
+                  isMine={myIds.has(t.id)}
+                />
               ))}
             </div>
           </section>
@@ -299,9 +303,12 @@ function TutorsPage() {
             <span className="tp-section-label">Pre-made tutors</span>
             <span className="tp-section-count">{preCreated.length}</span>
           </div>
-          <div className="tp-grid">
+          <div className="tp-rowgrid">
             {preCreated.map((t) => (
-              <TutorCard key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)} />
+              <TutorRow
+                key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
+                image={imgFor(t)} onImage={(u) => setImage(t.id, u)}
+              />
             ))}
           </div>
         </section>
@@ -311,9 +318,12 @@ function TutorsPage() {
             <span className="tp-section-label">My tutors</span>
             <span className="tp-section-count">{myTutors.length}</span>
           </div>
-          <div className="tp-mygrid">
+          <div className="tp-rowgrid">
             {myTutors.map((t) => (
-              <MyTutorCard key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)} />
+              <TutorRow
+                key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
+                image={imgFor(t)} onImage={(u) => setImage(t.id, u)} isMine
+              />
             ))}
             <button className="tp-build">
               <div className="tp-build-ic"><Plus size={22} strokeWidth={2.4} /></div>
