@@ -494,7 +494,236 @@ function TutorsPage() {
 
       </main>
 
+      {builderOpen && (
+        <BuilderModal
+          onClose={() => setBuilderOpen(false)}
+          onCreate={() => setBuilderOpen(false)}
+        />
+      )}
+
       <style>{css}</style>
+    </div>
+  );
+}
+
+type BuilderData = {
+  name: string;
+  objectives: string;
+  files: { name: string; size: number }[];
+  instructions: string;
+  image: { kind: "preset"; preset: "notes" } | { kind: "custom"; url: string };
+};
+
+function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d: BuilderData) => void }) {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState<BuilderData>({
+    name: "",
+    objectives: "",
+    files: [],
+    instructions: "",
+    image: { kind: "preset", preset: "notes" },
+  });
+  const fileRef = useRef<HTMLInputElement | null>(null);
+  const imgRef = useRef<HTMLInputElement | null>(null);
+
+  const steps = [
+    { id: "name", label: "Name", icon: TypeIcon },
+    { id: "obj", label: "Goals", icon: Target },
+    { id: "files", label: "Resources", icon: UploadCloud },
+    { id: "inst", label: "Instructions", icon: MessageSquare },
+    { id: "img", label: "Image", icon: ImageIcon },
+  ];
+
+  const canNext = () => {
+    if (step === 0) return data.name.trim().length > 0;
+    if (step === 1) return data.objectives.trim().length > 0;
+    return true;
+  };
+
+  const onAddFiles = (list: FileList | null) => {
+    if (!list) return;
+    const next = Array.from(list).map((f) => ({ name: f.name, size: f.size }));
+    setData((d) => ({ ...d, files: [...d.files, ...next] }));
+  };
+
+  const removeFile = (i: number) =>
+    setData((d) => ({ ...d, files: d.files.filter((_, idx) => idx !== i) }));
+
+  const onPickImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setData((d) => ({ ...d, image: { kind: "custom", url: URL.createObjectURL(f) } }));
+  };
+
+  const next = () => (step < steps.length - 1 ? setStep(step + 1) : onCreate(data));
+  const back = () => step > 0 && setStep(step - 1);
+
+  return (
+    <div className="tp-mo" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="tp-mo-card" onClick={(e) => e.stopPropagation()}>
+        <button className="tp-mo-close" onClick={onClose} aria-label="Close"><X size={16} /></button>
+
+        <div className="tp-mo-head">
+          <div className="tp-eyebrow"><span className="tp-dot" /> Build a tutor</div>
+          <h2 className="tp-mo-title">Let's spin up your new tutor</h2>
+          <p className="tp-mo-sub">Five quick steps. You can edit anything later.</p>
+        </div>
+
+        <ol className="tp-stepper">
+          {steps.map((s, i) => {
+            const Ic = s.icon;
+            const state = i < step ? "done" : i === step ? "now" : "todo";
+            return (
+              <li key={s.id} className={`tp-step is-${state}`}>
+                <button type="button" className="tp-step-dot" onClick={() => i < step && setStep(i)}>
+                  {state === "done" ? <Check size={14} /> : <Ic size={14} />}
+                </button>
+                <span className="tp-step-label">{s.label}</span>
+                {i < steps.length - 1 && <span className="tp-step-bar" />}
+              </li>
+            );
+          })}
+        </ol>
+
+        <div className="tp-mo-body">
+          {step === 0 && (
+            <div className="tp-field">
+              <label className="tp-label">Tutor name</label>
+              <p className="tp-help">Give your tutor a memorable name — like a study buddy.</p>
+              <input
+                autoFocus
+                className="tp-input"
+                placeholder="e.g. Bio Buddy, Econ Coach…"
+                value={data.name}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
+                maxLength={60}
+              />
+            </div>
+          )}
+
+          {step === 1 && (
+            <div className="tp-field">
+              <label className="tp-label">Learning objectives</label>
+              <p className="tp-help">What do you want to get out of this tutor? Be specific.</p>
+              <textarea
+                autoFocus
+                className="tp-textarea"
+                rows={5}
+                placeholder="e.g. Master IB Bio Unit 2, prep for end-of-term test, drill data-response questions…"
+                value={data.objectives}
+                onChange={(e) => setData({ ...data, objectives: e.target.value })}
+                maxLength={600}
+              />
+              <div className="tp-counter">{data.objectives.length}/600</div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="tp-field">
+              <label className="tp-label">Upload resources</label>
+              <p className="tp-help">Notes, past papers, slides, textbooks. PDFs, docs and images all work.</p>
+              <button
+                type="button"
+                className="tp-drop"
+                onClick={() => fileRef.current?.click()}
+              >
+                <UploadCloud size={26} />
+                <b>Drop files or click to upload</b>
+                <span>Up to 20MB each</span>
+              </button>
+              <input
+                ref={fileRef}
+                type="file"
+                multiple
+                hidden
+                onChange={(e) => onAddFiles(e.target.files)}
+              />
+              {data.files.length > 0 && (
+                <ul className="tp-filelist">
+                  {data.files.map((f, i) => (
+                    <li key={i}>
+                      <FileText size={15} />
+                      <span className="tp-file-name">{f.name}</span>
+                      <span className="tp-file-size">{(f.size / 1024).toFixed(0)} KB</span>
+                      <button type="button" onClick={() => removeFile(i)} aria-label="Remove">
+                        <Trash2 size={14} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="tp-field">
+              <label className="tp-label">Any specific instructions?</label>
+              <p className="tp-help">Tone, language, what to avoid, how to explain. Optional but helpful.</p>
+              <textarea
+                autoFocus
+                className="tp-textarea"
+                rows={5}
+                placeholder="e.g. Be encouraging, use simple analogies, quiz me after each topic, reply in Cantonese when I ask…"
+                value={data.instructions}
+                onChange={(e) => setData({ ...data, instructions: e.target.value })}
+                maxLength={600}
+              />
+              <div className="tp-counter">{data.instructions.length}/600</div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="tp-field">
+              <label className="tp-label">Customise tutor image</label>
+              <p className="tp-help">Pick the default mascot scene or upload your own.</p>
+              <div className="tp-imgpick">
+                <button
+                  type="button"
+                  className={`tp-imgopt${data.image.kind === "preset" ? " is-on" : ""}`}
+                  onClick={() => setData({ ...data, image: { kind: "preset", preset: "notes" } })}
+                >
+                  <div className="tp-imgopt-art"><Scene k="notes" /></div>
+                  <span>Default mascot</span>
+                </button>
+                <button
+                  type="button"
+                  className={`tp-imgopt${data.image.kind === "custom" ? " is-on" : ""}`}
+                  onClick={() => imgRef.current?.click()}
+                >
+                  <div className="tp-imgopt-art tp-imgopt-art--upload">
+                    {data.image.kind === "custom"
+                      ? <img src={data.image.url} alt="" />
+                      : <><ImagePlus size={26} /><b>Upload your own</b></>}
+                  </div>
+                  <span>{data.image.kind === "custom" ? "Change image" : "Upload image"}</span>
+                </button>
+                <input ref={imgRef} type="file" accept="image/*" hidden onChange={onPickImage} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="tp-mo-foot">
+          <button
+            type="button"
+            className="tp-btn tp-btn-ghost"
+            onClick={back}
+            disabled={step === 0}
+            style={step === 0 ? { visibility: "hidden" } : undefined}
+          >
+            <ArrowLeft size={15} /> Back
+          </button>
+          <div className="tp-mo-progress">Step {step + 1} of {steps.length}</div>
+          <button
+            type="button"
+            className="tp-btn tp-btn-primary"
+            onClick={next}
+            disabled={!canNext()}
+          >
+            {step === steps.length - 1 ? (<>Create tutor <Sparkles size={14} /></>) : (<>Next <ArrowRight size={14} /></>)}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
