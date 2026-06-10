@@ -38,8 +38,8 @@ function BotSymbols() {
         <path d="M110 38 C108 26 118 24 113 14" stroke="#E2D6BD" strokeWidth="3" fill="none" strokeLinecap="round" />
         <circle cx="112" cy="12" r="7" fill="#FB6A1E" />
         <rect x="56" y="36" width="108" height="92" rx="40" fill="#F7F2E8" stroke="#E2D6BD" strokeWidth="2.4" />
-        <circle cx="56" cy="84" r="9" fill="#5BD0B4" />
-        <circle cx="164" cy="84" r="9" fill="#5BD0B4" />
+        <circle cx="56" cy="84" r="9" fill="#FB6A1E" />
+        <circle cx="164" cy="84" r="9" fill="#FB6A1E" />
         <rect x="68" y="52" width="84" height="62" rx="26" fill="#26323B" />
         <circle cx="93" cy="82" r="12" fill="#fff" />
         <circle cx="96" cy="84" r="6" fill="#1F2A30" />
