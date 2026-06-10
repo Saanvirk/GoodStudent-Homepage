@@ -26,7 +26,7 @@ import {
   Heart,
 } from "lucide-react";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/welcome")({
   head: () => ({
     meta: [
       { title: "Good Student — An AI study tutor for P1 to DSE" },
