@@ -1,908 +1,615 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
-  Sparkles,
-  Languages,
-  Lightbulb,
-  TrendingUp,
-  Wand2,
+  Home,
+  Pencil,
   Wrench,
-  GraduationCap,
-  Puzzle,
-  Upload,
-  ScanLine,
-  Layers,
-  Mic,
-  Network,
+  Globe,
+  ChevronsUpDown,
+  User,
+  Settings,
+  LogOut,
+  ArrowRight,
+  Flame,
+  Trophy,
+  Target,
+  Sparkles,
+  Zap,
+  Star,
+  Calendar,
+  CheckCircle2,
+  PlayCircle,
   BookOpen,
   Calculator,
-  Music,
-  Code2,
-  Crown,
-  Tablet,
-  Play,
-  ArrowRight,
-  Star,
-  Heart,
+  Languages,
+  Layers,
+  Mic,
+  FileText,
+  Brain,
+  Headphones,
+  PenTool,
+  Award,
+  Lock,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Good Student — An AI study tutor for P1 to DSE" },
-      {
-        name: "description",
-        content:
-          "A tutor that works through problems with you — in Cantonese, English & Mandarin. Quizzes, flashcards, speaking practice and DSE-ready tutors.",
-      },
-      { property: "og:title", content: "Good Student — An AI study tutor" },
-      {
-        property: "og:description",
-        content: "A tutor that works through problems with you — in Cantonese, English & Mandarin.",
-      },
+      { title: "Home — Good Student" },
+      { name: "description", content: "Your study home — pick up where you left off, jump into a tutor, open a favourite tool, and keep your streak alive." },
+      { property: "og:title", content: "Home — Good Student" },
+      { property: "og:description", content: "Your study home — tutors, tools and daily quests." },
     ],
   }),
-  component: Index,
+  component: HomePage,
 });
 
-/* -------- mascot (clean symmetric arms) -------- */
-function Mascot({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 220 246" className={`ms ${className}`} aria-hidden="true">
-      <ellipse className="sh" cx="110" cy="234" rx="54" ry="7" />
-      {/* legs */}
-      <rect className="bf st" x="88" y="188" width="14" height="36" rx="7" />
-      <rect className="bf st" x="118" y="188" width="14" height="36" rx="7" />
-      <ellipse className="bf st" cx="95" cy="226" rx="13" ry="6" />
-      <ellipse className="bf st" cx="125" cy="226" rx="13" ry="6" />
-      {/* arms — symmetric, gently angled to body */}
-      <g className="arml">
-        <rect className="bf st" x="50" y="138" width="14" height="46" rx="7" transform="rotate(14 57 161)" />
-        <circle className="bf st" cx="52" cy="184" r="10" />
-      </g>
-      <g className="armr">
-        <rect className="bf st" x="156" y="138" width="14" height="46" rx="7" transform="rotate(-14 163 161)" />
-        <circle className="bf st" cx="168" cy="184" r="10" />
-      </g>
-      {/* body */}
-      <rect className="bf st" x="66" y="118" width="88" height="82" rx="30" />
-      <rect className="scr" x="85" y="138" width="50" height="36" rx="11" />
-      <text className="scrt" x="110" y="162" textAnchor="middle">{"</>"}</text>
-      {/* neck */}
-      <rect className="bf st" x="104" y="110" width="12" height="12" rx="3" />
-      {/* antenna */}
-      <path className="st" d="M110 36 C108 24 118 22 113 12" fill="none" strokeLinecap="round" />
-      <circle className="ant" cx="112" cy="10" r="7" />
-      {/* head */}
-      <rect className="bf st" x="56" y="34" width="108" height="92" rx="40" />
-      <circle className="ac" cx="56" cy="82" r="9" />
-      <circle className="ac" cx="164" cy="82" r="9" />
-      <rect className="fc" x="68" y="50" width="84" height="62" rx="26" />
-      <circle className="ew" cx="93" cy="80" r="11" />
-      <circle className="ep" cx="96" cy="82" r="5" />
-      <circle className="ew" cx="127" cy="80" r="11" />
-      <circle className="ep" cx="124" cy="82" r="5" />
-      <circle className="gl" cx="93" cy="80" r="17" />
-      <circle className="gl" cx="127" cy="80" r="17" />
-      <path className="gl" d="M109 79 q1 -4 2 0" />
-      <path className="gl" d="M76 78 h-8 M144 78 h8" />
-      <circle className="gh" cx="88" cy="74" r="4" />
-      <circle className="gh" cx="122" cy="74" r="4" />
-      <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
-      <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
-      <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
-    </svg>
-  );
-}
-
-/* -------- logo mark: tiny mascot face -------- */
+/* ===== Brand mark + mascot (matched to tutors page) ===== */
 function LogoMark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 56 56" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="lg-grad" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="gh-lg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#FF8A3D" />
           <stop offset="100%" stopColor="#E04E07" />
         </linearGradient>
       </defs>
-      {/* rounded squircle backdrop */}
-      <rect x="2" y="2" width="52" height="52" rx="16" fill="url(#lg-grad)" />
-      {/* antenna */}
-      <path d="M28 11 C26.5 7 32 6 29 2" fill="none" stroke="#FFF7EF" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="29" cy="2.5" r="2.2" fill="#FFF7EF" />
-      {/* head */}
+      <rect x="2" y="2" width="52" height="52" rx="16" fill="url(#gh-lg)" />
       <rect x="10" y="11" width="36" height="32" rx="14" fill="#FFF7EF" />
-      {/* face screen */}
       <rect x="14" y="17" width="28" height="22" rx="9" fill="#222F38" />
-      {/* eyes */}
-      <circle cx="22" cy="28" r="3.4" fill="#fff" />
+      <circle cx="22" cy="28" r="5.6" fill="none" stroke="#2FB39A" strokeWidth="1.7" />
+      <circle cx="34" cy="28" r="5.6" fill="none" stroke="#2FB39A" strokeWidth="1.7" />
       <circle cx="22.7" cy="28.6" r="1.6" fill="#222F38" />
-      <circle cx="34" cy="28" r="3.4" fill="#fff" />
       <circle cx="33.3" cy="28.6" r="1.6" fill="#222F38" />
-      {/* glasses */}
-      <circle cx="22" cy="28" r="5.6" fill="none" stroke="#46D6AE" strokeWidth="1.7" />
-      <circle cx="34" cy="28" r="5.6" fill="none" stroke="#46D6AE" strokeWidth="1.7" />
-      <path d="M27.5 28 q.5 -1.7 1 0" fill="none" stroke="#46D6AE" strokeWidth="1.7" />
-      <circle cx="20.7" cy="26.3" r="1.2" fill="#fff" opacity=".72" />
-      <circle cx="32.7" cy="26.3" r="1.2" fill="#fff" opacity=".72" />
-      {/* cheeks */}
-      <ellipse cx="17" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
-      <ellipse cx="39" cy="35" rx="2.4" ry="1.3" fill="#FF9A57" opacity=".7" />
     </svg>
   );
 }
 
+function Mascot() {
+  return (
+    <svg viewBox="0 0 220 246" className="gh-ms" aria-hidden="true">
+      <ellipse cx="110" cy="234" rx="54" ry="7" fill="rgba(60,40,20,.12)" />
+      <rect x="88" y="188" width="14" height="36" rx="7" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" />
+      <rect x="118" y="188" width="14" height="36" rx="7" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" />
+      <ellipse cx="95" cy="226" rx="13" ry="6" fill="#FFFCF5" stroke="#E2D6BD" strokeWidth="2" />
+      <ellipse cx="125" cy="226" rx="13" ry="6" fill="#FFFCF5" stroke="#E2D6BD" strokeWidth="2" />
+      <g><rect x="50" y="138" width="14" height="46" rx="7" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" transform="rotate(14 57 161)" /><circle cx="52" cy="184" r="10" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" /></g>
+      <g><rect x="156" y="138" width="14" height="46" rx="7" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" transform="rotate(-14 163 161)" /><circle cx="168" cy="184" r="10" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" /></g>
+      <rect x="66" y="118" width="88" height="82" rx="30" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" />
+      <rect x="85" y="138" width="50" height="36" rx="11" fill="#26323B" />
+      <text x="110" y="162" textAnchor="middle" fontFamily="monospace" fontSize="16" fill="#46D6AE" fontWeight="700">{"</>"}</text>
+      <rect x="104" y="110" width="12" height="12" rx="3" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" />
+      <path d="M110 36 C108 24 118 22 113 12" stroke="#E2D6BD" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+      <circle cx="112" cy="10" r="7" fill="#FB6A1E" />
+      <rect x="56" y="34" width="108" height="92" rx="40" fill="#FFFCF5" stroke="#E2D6BD" strokeWidth="2" />
+      <circle cx="56" cy="82" r="9" fill="#5BD0B4" />
+      <circle cx="164" cy="82" r="9" fill="#5BD0B4" />
+      <rect x="68" y="50" width="84" height="62" rx="26" fill="#26323B" />
+      <circle cx="93" cy="80" r="11" fill="#fff" />
+      <circle cx="96" cy="82" r="5" fill="#1F2A30" />
+      <circle cx="127" cy="80" r="11" fill="#fff" />
+      <circle cx="124" cy="82" r="5" fill="#1F2A30" />
+      <circle cx="93" cy="80" r="15" fill="none" stroke="#2FB39A" strokeWidth="5" />
+      <circle cx="127" cy="80" r="15" fill="none" stroke="#2FB39A" strokeWidth="5" />
+      <path d="M108 78 q1 -3 4 0" stroke="#2FB39A" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <ellipse cx="80" cy="98" rx="7" ry="4" fill="#C77E5A" opacity=".5" />
+      <ellipse cx="140" cy="98" rx="7" ry="4" fill="#C77E5A" opacity=".5" />
+      <ellipse cx="110" cy="100" rx="6" ry="5" fill="#FB6A1E" />
+    </svg>
+  );
+}
 
-/* -------- main -------- */
-function Index() {
-  const navigate = useNavigate();
-  const [stepIdx, setStepIdx] = useState(0);
-  
-  
+/* ===== data ===== */
+const quickTutors = [
+  { id: "eng", title: "DSE English", sub: "Paper 1–4", tint: "#F7E4DE", ink: "#9E3B27", icon: BookOpen, last: "Resumed yesterday" },
+  { id: "mat", title: "DSE Maths", sub: "Core · M1 · M2", tint: "#FBEED1", ink: "#A4742A", icon: Calculator, last: "2 quizzes today" },
+  { id: "chi", title: "DSE 中文", sub: "閱讀 · 寫作", tint: "#FAE6E8", ink: "#9E2B2B", icon: Languages, last: "New past paper" },
+  { id: "notes", title: "English · my notes", sub: "Built from 24 pages", tint: "#E6EEF7", ink: "#3D5A6C", icon: PenTool, last: "Custom tutor" },
+];
 
-  // Scroll progress bar + reveal-on-scroll
-  useEffect(() => {
-    const sb = document.getElementById("gs-sb");
-    const onScroll = () => {
-      const h = document.documentElement;
-      const sh = h.scrollHeight - h.clientHeight;
-      if (sb && sh > 0) sb.style.width = (h.scrollTop / sh) * 100 + "%";
-      // parallax for hero stage
-      document.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
-        const speed = parseFloat(el.dataset.parallax || "0.15");
-        const r = el.getBoundingClientRect();
-        const off = (r.top + r.height / 2 - window.innerHeight / 2) * speed;
-        el.style.setProperty("--py", `${off}px`);
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
-      { threshold: 0.12 }
-    );
-    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      io.disconnect();
-    };
-  }, []);
+const favTools = [
+  { id: "flash", title: "Flashcards", sub: "From any topic", tint: "#F2E8EE", ink: "#8C5E7A", icon: Layers },
+  { id: "say",   title: "Say It Right!", sub: "Speaking practice", tint: "#E8EEF2", ink: "#3D5A6C", icon: Mic },
+  { id: "hear",  title: "Hear It Right!", sub: "Listening drills", tint: "#FBEFE8", ink: "#C8553D", icon: Headphones },
+  { id: "doc",   title: "Doc Summariser", sub: "PDFs → key points", tint: "#EFEAD9", ink: "#7A6B4F", icon: FileText },
+  { id: "mind",  title: "Mind Maps", sub: "Revise visually", tint: "#F2E6D8", ink: "#9C6B3F", icon: Brain },
+];
 
-  // Auto-cycle feature speech
-  useEffect(() => {
-    const t = setInterval(() => setStepIdx((i) => (i + 1) % 4), 4200);
-    return () => clearInterval(t);
-  }, []);
+const quests = [
+  { id: "q1", label: "Finish 1 English reading set", xp: 40, done: true },
+  { id: "q2", label: "5 Maths quiz questions", xp: 30, done: true },
+  { id: "q3", label: "Try a speaking prompt", xp: 50, done: false },
+];
 
-  const steps = [
-    {
-      icon: Wand2,
-      grad: "linear-gradient(150deg,#FF8A3D,#FB6A1E)",
-      title: "Make your own tutor",
-      blurb: "Built from your notes & past papers.",
-      tags: [
-        { icon: Upload, label: "Upload" },
-        { icon: ScanLine, label: "Scan" },
-      ],
-      line: "“Give me your notes — I'll become your tutor.”",
-    },
-    {
-      icon: Wrench,
-      grad: "linear-gradient(150deg,#8A7BE8,#6F5FE0)",
-      title: "A whole toolbox",
-      blurb: "Open whatever fits today.",
-      tags: [
-        { icon: Layers, label: "Flashcards" },
-        { icon: Mic, label: "Speaking" },
-        { icon: Network, label: "Mind maps" },
-      ],
-      line: "“Pick a tool. Quiz, flashcards, speaking… whatever helps.”",
-    },
-    {
-      icon: GraduationCap,
-      grad: "linear-gradient(150deg,#3F95E6,#2E7BD0)",
-      title: "Ready for the DSE",
-      blurb: "Tutors for every core subject.",
-      tags: [
-        { icon: BookOpen, label: "Eng" },
-        { icon: Calculator, label: "Maths" },
-        { icon: Languages, label: "中文" },
-      ],
-      line: "“Doing the DSE? These are ready to go.”",
-    },
-    {
-      icon: Puzzle,
-      grad: "linear-gradient(150deg,#37C2A0,#13A483)",
-      title: "Learn for fun",
-      blurb: "Chess, music, coding — your plan.",
-      tags: [
-        { icon: Crown, label: "Chess" },
-        { icon: Music, label: "Music" },
-        { icon: Code2, label: "Code" },
-      ],
-      line: "“Or learn something just for fun.”",
-    },
+const badges = [
+  { id: "b1", label: "7-day streak", icon: Flame, on: true,  tint: "linear-gradient(150deg,#FF8A3D,#E04E07)" },
+  { id: "b2", label: "First quiz",   icon: Star,  on: true,  tint: "linear-gradient(150deg,#FFD56B,#F2A93D)" },
+  { id: "b3", label: "Note ninja",   icon: PenTool, on: true, tint: "linear-gradient(150deg,#8A7BE8,#6F5FE0)" },
+  { id: "b4", label: "Listener",     icon: Headphones, on: false, tint: "linear-gradient(150deg,#A8B8C2,#7C8A95)" },
+  { id: "b5", label: "Polyglot",     icon: Languages, on: false, tint: "linear-gradient(150deg,#A8B8C2,#7C8A95)" },
+];
+
+/* ===== page ===== */
+function HomePage() {
+  const [active, setActive] = useState("home");
+  const [userOpen, setUserOpen] = useState(false);
+  const [questState, setQuestState] = useState(quests);
+
+  const nav = [
+    { id: "home",  label: "Home",  icon: Home,   to: "/" as const },
+    { id: "tutor", label: "Tutor", icon: Pencil, to: "/tutors" as const },
+    { id: "tools", label: "Tools", icon: Wrench, to: "/tools" as const },
+    { id: "explore", label: "Explore", icon: Globe },
   ];
 
+  const totalXp = questState.reduce((s, q) => s + q.xp, 0);
+  const earnedXp = questState.filter((q) => q.done).reduce((s, q) => s + q.xp, 0);
+  const pct = Math.round((earnedXp / totalXp) * 100);
+  const level = 6;
+  const streak = 7;
+
+  const toggleQuest = (id: string) =>
+    setQuestState((qs) => qs.map((q) => (q.id === id ? { ...q, done: !q.done } : q)));
 
   return (
-    <div className="gs-root">
-      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
-      <div className="scrollbar" id="gs-sb" />
+    <div className="gh-root">
+      {/* Sidebar (matches tutors/tools) */}
+      <aside className="gh-side">
+        <Link to="/" className="gh-brand">
+          <LogoMark className="gh-brand-mark" />
+          <span className="gh-brand-name">Good Student</span>
+        </Link>
 
-      {/* NAV */}
-      <nav>
-        <div className="wrap nav-in">
-          <a className="logo" href="#top">
-            <LogoMark className="mk" />
-            <span>Good Student</span>
-          </a>
-          <div className="nav-links">
-            <a href="#features">Tools</a>
-            <a href="#tutors">Tutors</a>
-            <a href="#honesty">Why us</a>
-            <a href="#faq">Team</a>
-          </div>
-          <div className="nav-right">
-            <button className="btn btn-ghost btn-sm">Log in</button>
-            <button className="btn btn-primary btn-sm">Sign up <ArrowRight size={16} /></button>
-          </div>
-        </div>
-      </nav>
+        <nav className="gh-nav">
+          {nav.map((n) => {
+            const Icon = n.icon;
+            const isActive = active === n.id;
+            const cls = `gh-nav-item${isActive ? " is-active" : ""}`;
+            if (n.to) {
+              return (
+                <Link key={n.id} to={n.to} className={cls} onClick={() => setActive(n.id)}>
+                  <Icon size={17} /> <span>{n.label}</span>
+                </Link>
+              );
+            }
+            return (
+              <button key={n.id} className={cls} onClick={() => setActive(n.id)}>
+                <Icon size={17} /> <span>{n.label}</span>
+              </button>
+            );
+          })}
+        </nav>
 
-      <div className="slide-stack">
-        <div className="slide-layer hero-layer">
-      {/* HERO */}
-      <header className="hero" id="top">
-        <Sparkles className="doodle drift" style={{ top: "14%", left: "6%", color: "var(--amber)" }} size={26} />
-        <Star className="doodle spin" style={{ top: "72%", left: "4%", color: "var(--teal)" }} size={18} />
-        <Heart className="doodle drift" style={{ top: "22%", right: "5%", color: "#E86A9A" }} size={20} />
-
-        <div className="wrap hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow up d1">
-              <span className="dot-live" /> Meet Good Student
+        <div className="gh-side-foot">
+          {userOpen && (
+            <div className="gh-user-card">
+              <div className="gh-user-head">
+                <div className="gh-ava">TC</div>
+                <div>
+                  <div className="gh-user-name">Tiffany Chiu</div>
+                  <div className="gh-user-mail">tks@goodstudent.app</div>
+                </div>
+              </div>
+              <div className="gh-user-actions">
+                <button><User size={15} /> My profile</button>
+                <button><Settings size={15} /> Settings</button>
+              </div>
+              <button className="gh-signout"><LogOut size={15} /> Sign out</button>
             </div>
-            <h1 className="up d2">
-              An AI study buddy that helps you <span className="hl">work it out</span>.
+          )}
+          <button className="gh-user-switch" onClick={() => setUserOpen((v) => !v)}>
+            <div className="gh-ava gh-ava-sm">TC</div>
+            <div className="gh-user-switch-meta">
+              <div className="gh-user-name">Tiffany Chiu</div>
+              <div className="gh-user-mail">Student · Yr 12</div>
+            </div>
+            <ChevronsUpDown size={15} />
+          </button>
+        </div>
+      </aside>
+
+      <main className="gh-main">
+        {/* ===== Hero greeting + gamification ===== */}
+        <header className="gh-hero">
+          <div className="gh-hero-copy">
+            <div className="gh-eyebrow"><span className="gh-dot" /> Welcome back</div>
+            <h1 className="gh-title">
+              Hi Tiffany — let's keep that <span className="gh-hl">streak</span> alive.
             </h1>
-            <p className="lead up d3">
-              A patient tutor that thinks through problems with you, becomes a tutor from your own
-              notes, and grows real <b>AI literacy</b> while you learn.
+            <p className="gh-subtitle">
+              You're {100 - pct}% away from finishing today's quests. Pick up where you left
+              off, or jump into something new.
             </p>
-            <div className="hero-cta up d4">
-              <button className="btn btn-primary" onClick={() => scrollTo("features")}>
-                <Sparkles size={18} /> Explore tools
+            <div className="gh-hero-cta">
+              <button className="gh-btn gh-btn-primary">
+                <PlayCircle size={17} /> Resume English · Paper 2
               </button>
-              <button className="btn btn-ghost" onClick={() => navigate({ to: "/tutors" })}>
-                <Play size={16} /> See how it works
-              </button>
+              <Link to="/tutors" className="gh-btn gh-btn-ghost">
+                Browse tutors <ArrowRight size={15} />
+              </Link>
             </div>
           </div>
 
-          {/* Mascot stage */}
-          <div className="stage">
-            <span className="blob b1" data-parallax="0.08" />
-            <span className="blob b2" data-parallax="-0.06" />
-            <div className="spotlight">
-              <span className="ring r1" />
-              <span className="ring r2" />
-              <div className="hero-mascot a-wave a-blink a-bob"><Mascot /></div>
-              <div className="bubble-pop">
-                <b>Hi! I'm Good Student.</b>
-                <span>Let's work it out together! One good question at a time.</span>
-              </div>
-              <div className="name-tag">
-                <LogoMark className="nt-ic" />
-                <span><b>Good Student</b><br /><i>your AI study buddy</i></span>
-              </div>
+          <div className="gh-mascot-card">
+            <div className="gh-mascot-art"><Mascot /></div>
+            <div className="gh-mascot-bubble">
+              <b>Day {streak} — nice!</b>
+              <span>Two quick wins and you'll level up to <b>Lv {level + 1}</b>.</span>
             </div>
           </div>
-        </div>
-      </header>
-        </div>
+        </header>
 
-        <div className="slide-layer demo-layer">
-
-      {/* DEMO — video placeholder */}
-      <section className="demo" id="demo">
-        <div className="wrap">
-          <div className="sec-head reveal">
-            <div className="eyebrow">See it in action</div>
-            <h2>A two-minute tour on learning with Good Student.</h2>
-            <p className="sec-sub">Watch a quick walkthrough of the website in action.</p>
-          </div>
-          <div className="demo-frame reveal">
-            <div className="df-bar">
-              <span className="dot" style={{ background: "#FF6B6B" }} />
-              <span className="dot" style={{ background: "#FFD93D" }} />
-              <span className="dot" style={{ background: "#6BCB77" }} />
-              <span className="df-url">goodstudent.hk</span>
+        {/* ===== Gamification strip ===== */}
+        <section className="gh-stats">
+          <div className="gh-stat gh-stat--streak">
+            <div className="gh-stat-ic"><Flame size={20} /></div>
+            <div className="gh-stat-body">
+              <div className="gh-stat-num">{streak}<span>days</span></div>
+              <div className="gh-stat-lbl">Study streak</div>
             </div>
-            <div className="df-stage">
-              {/* Replace this block with your <video> or <iframe> */}
-              <div className="df-placeholder">
-                <div className="df-play"><Play size={34} /></div>
-                <b>Drop your demo video here</b>
-                <span>Replace this placeholder in <code>src/routes/index.tsx</code> · <code>.df-stage</code></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-        </div>
-
-        <div className="slide-layer intro-layer">
-
-
-
-
-      {/* PILLARS */}
-      <section className="intro">
-        <div className="wrap">
-          <div className="sec-head reveal">
-            <div className="eyebrow">Why it exists</div>
-            <h2>For when you don't have a tutor.</h2>
-            <p className="sec-sub">Real tutoring shouldn't be a luxury. Good Student is built around three quiet ideas.</p>
-          </div>
-          <div className="pillars">
-            {[
-              {
-                icon: Lightbulb,
-                grad: "linear-gradient(150deg,#FF8A3D,#FB6A1E)",
-                title: "Guides, doesn't tell",
-                body: "It asks the next question, so the learning stays yours.",
-              },
-              {
-                icon: TrendingUp,
-                grad: "linear-gradient(150deg,#37C2A0,#13A483)",
-                title: "P1 to the DSE",
-                body: "One tutor that grows with you, all the way through school.",
-              },
-              {
-                icon: Puzzle,
-                grad: "linear-gradient(150deg,#FFC56B,#FFB454)",
-                title: "Tutor & playmate",
-                body: "It helps you study AND explores your hobbies, from chess to coding to music.",
-              },
-            ].map((p) => (
-              <div key={p.title} className="pillar">
-                <div className="pic" style={{ background: p.grad }}>
-                  <p.icon size={28} strokeWidth={2.2} />
-                </div>
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-        </div>
-
-        <div className="slide-layer features-layer">
-
-      {/* FEATURES — talking mascot */}
-      <section className="features" id="features">
-        <div className="wrap">
-          <div className="sec-head reveal">
-            <div className="eyebrow">Take the tour</div>
-            <h2>Here's what I can do.</h2>
-            <p className="sec-sub">Hover any card — I'll tell you about it.</p>
-          </div>
-          <div className="stage-wrap">
-            <div className="presenter">
-              <div className="bubble">
-                {steps.map((s, i) => (
-                  <span key={i} className={`line ${i === stepIdx ? "show" : ""}`}>{s.line}</span>
-                ))}
-              </div>
-              <div className="mascot-wrap a-talk"><Mascot /></div>
-              <div className="presenter-dots">
-                {steps.map((_, i) => (
-                  <button key={i} className={i === stepIdx ? "on" : ""} onClick={() => setStepIdx(i)} aria-label={`Step ${i + 1}`} />
-                ))}
-              </div>
-            </div>
-
-            <div className="feat-steps" id="tutors">
-              {steps.map((s, i) => (
-                <div
-                  key={s.title}
-                  className={`fstep ${i === stepIdx ? "active" : ""}`}
-                  onMouseEnter={() => setStepIdx(i)}
-                  onClick={() => setStepIdx(i)}
-                >
-                  <div className="fic" style={{ background: s.grad }}>
-                    <s.icon size={26} strokeWidth={2.2} />
-                  </div>
-                  <div className="fbody">
-                    <h3>{s.title}</h3>
-                    <p>{s.blurb}</p>
-                    <div className="tags">
-                      {s.tags.map((t) => (
-                        <span className="tag" key={t.label}><t.icon size={12} /> {t.label}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <ArrowRight className="fstep-arrow" size={20} />
-                </div>
+            <div className="gh-streak-row">
+              {Array.from({ length: 7 }).map((_, i) => (
+                <span key={i} className={`gh-streak-dot${i < streak ? " on" : ""}`} />
               ))}
             </div>
           </div>
-        </div>
-      </section>
-        </div>
 
-        <div className="slide-layer honesty-layer">
+          <div className="gh-stat gh-stat--xp">
+            <div className="gh-stat-ic"><Zap size={20} /></div>
+            <div className="gh-stat-body">
+              <div className="gh-stat-num">{earnedXp}<span>/ {totalXp} XP</span></div>
+              <div className="gh-stat-lbl">Today's progress</div>
+            </div>
+            <div className="gh-bar"><span style={{ width: `${pct}%` }} /></div>
+          </div>
 
-      {/* HONESTY band */}
-      <section className="honesty" id="honesty">
-        <div className="wrap">
-          <div className="honesty-inner">
-            <div className="honesty-grid">
-              <div>
-                <div className="eyebrow">What's different</div>
-                <h2>It teaches you to verify.</h2>
-                <p>
-                  It shows you where the answers come from and nudges you to learn
-                  using AI — instead of blindly copying its answers.
-                </p>
-              </div>
-              <div className="honesty-art">
-                <span className="ring" />
-                <span className="ring r2" />
-                <div className="mascot-wrap a-think a-blink"><Mascot /></div>
-                <svg className="mug" viewBox="0 0 60 60">
-                  <rect x="10" y="18" width="34" height="30" rx="6" fill="#FFF6EC" stroke="#26323B" strokeWidth="2" />
-                  <path d="M44 24 h6 a6 6 0 0 1 0 14 h-6" fill="none" stroke="#26323B" strokeWidth="3" />
-                  <text x="27" y="38" textAnchor="middle" fontFamily="monospace" fontSize="9" fill="#E04E07" fontWeight="700">404</text>
-                </svg>
-                <svg className="banana" viewBox="0 0 60 40">
-                  <path d="M6 10 q4 22 28 24 q18 0 20 -8 q-10 6 -22 0 q-16 -8 -16 -18 q-6 -2 -10 2z" fill="#FFC93C" stroke="#E0A800" strokeWidth="1.5" />
-                </svg>
-              </div>
+          <div className="gh-stat gh-stat--lv">
+            <div className="gh-stat-ic"><Trophy size={20} /></div>
+            <div className="gh-stat-body">
+              <div className="gh-stat-num">Lv {level}<span>Scholar</span></div>
+              <div className="gh-stat-lbl">240 XP to Lv {level + 1}</div>
+            </div>
+            <div className="gh-bar gh-bar--alt"><span style={{ width: "62%" }} /></div>
+          </div>
+
+          <div className="gh-stat gh-stat--quest">
+            <div className="gh-stat-ic"><Target size={20} /></div>
+            <div className="gh-stat-body">
+              <div className="gh-stat-num">{questState.filter(q=>q.done).length}<span>/ {questState.length} quests</span></div>
+              <div className="gh-stat-lbl">Daily quests</div>
+            </div>
+            <div className="gh-quest-mini">
+              {questState.map((q) => (
+                <span key={q.id} className={`gh-quest-pill${q.done ? " done" : ""}`} title={q.label}>
+                  {q.done ? <CheckCircle2 size={12} /> : <span className="gh-quest-empty" />}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
-        </div>
+        </section>
 
-        <div className="slide-layer team-layer">
-
-      {/* MEET THE TEAM */}
-      <section className="team" id="faq">
-        <div className="wrap">
-          <div className="sec-head reveal">
-            <div className="eyebrow">Meet the team</div>
-            <h2>The people behind Good Student.</h2>
-            <p className="sec-sub">A small team of educators, builders and curious minds.</p>
-          </div>
-          <div className="team-grid">
-            {[
-              { name: "Alison Chan", role: "CEO, Solomon Learning", initials: "AC" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-              { name: "Team member", role: "Role placeholder", initials: "" },
-            ].map((p, i) => (
-              <div key={i} className="team-card reveal">
-                <div className="team-photo">
-                  {p.initials ? <span className="ti">{p.initials}</span> : <span className="ti ph">+</span>}
-                </div>
-                <div className="team-name">{p.name}</div>
-                <div className="team-role">{p.role}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-        </div>
-
-        <div className="slide-layer cta-layer">
-
-      {/* CTA */}
-      <section className="cta-band">
-        <div className="wrap">
-          <div className="cta-card">
-            <div className="cta-mascot a-jump"><Mascot /></div>
+        {/* ===== Quick access tutors ===== */}
+        <section className="gh-section">
+          <div className="gh-section-head">
             <div>
-              <div className="eyebrow">Ready when you are</div>
-              <h2>Let's work through one together.</h2>
-              <p>Free to start. No ads. Built for students. Start using on your preferred device!</p>
+              <div className="gh-section-eyebrow"><Sparkles size={13} /> Quick access</div>
+              <h2 className="gh-section-title">Your tutors</h2>
             </div>
-            <button className="btn btn-primary btn-lg" onClick={() => scrollTo("features")}>
-              Start exploring <ArrowRight size={18} />
-            </button>
+            <Link to="/tutors" className="gh-section-link">See all <ArrowRight size={14} /></Link>
           </div>
-        </div>
-      </section>
-        </div>
-      </div>
+          <div className="gh-tutor-grid">
+            {quickTutors.map((t) => {
+              const Icon = t.icon;
+              return (
+                <Link key={t.id} to="/tutors" className="gh-tutor-card">
+                  <div className="gh-tutor-media" style={{ background: t.tint, color: t.ink }}>
+                    <Icon size={34} strokeWidth={1.8} />
+                  </div>
+                  <div className="gh-tutor-body">
+                    <h3>{t.title}</h3>
+                    <p className="gh-tutor-sub">{t.sub}</p>
+                    <p className="gh-tutor-last"><Calendar size={11} /> {t.last}</p>
+                  </div>
+                  <ArrowRight size={16} className="gh-tutor-arrow" />
+                </Link>
+              );
+            })}
+          </div>
+        </section>
 
-      {/* FOOTER */}
-      <footer>
-        <div className="wrap">
-          <div className="foot-grid">
-            <div className="foot-brand">
-              <a className="logo" href="#top">
-                <LogoMark className="mk" />
-                <span>Good Student</span>
-              </a>
-              <p>An AI study tutor for Hong Kong students — a website built to guide, not to do the work for you.</p>
+        {/* ===== Favourite tools ===== */}
+        <section className="gh-section">
+          <div className="gh-section-head">
+            <div>
+              <div className="gh-section-eyebrow"><Star size={13} /> Favourites</div>
+              <h2 className="gh-section-title">Tools you keep coming back to</h2>
             </div>
-            <div className="foot-col">
-              <h4>Product</h4>
-              <a href="#features">Tools</a>
-              <a href="#tutors">Tutors</a>
-              <a href="#honesty">Why us</a>
+            <Link to="/tools" className="gh-section-link">All tools <ArrowRight size={14} /></Link>
+          </div>
+          <div className="gh-tool-grid">
+            {favTools.map((t) => {
+              const Icon = t.icon;
+              return (
+                <Link key={t.id} to="/tools" className="gh-tool-card">
+                  <div className="gh-tool-ic" style={{ background: t.tint, color: t.ink }}>
+                    <Icon size={22} strokeWidth={1.8} />
+                  </div>
+                  <div>
+                    <div className="gh-tool-title">{t.title}</div>
+                    <div className="gh-tool-sub">{t.sub}</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ===== Quests + Badges (two-up) ===== */}
+        <section className="gh-twoup">
+          <div className="gh-panel">
+            <div className="gh-panel-head">
+              <div>
+                <div className="gh-section-eyebrow"><Target size={13} /> Daily quests</div>
+                <h2 className="gh-section-title">Knock these out for XP</h2>
+              </div>
+              <span className="gh-panel-meta">Resets at midnight</span>
             </div>
-            <div className="foot-col">
-              <h4>Support</h4>
-              <a href="#faq">Team</a>
-              <a href="#">Privacy &amp; safety</a>
-              <a href="#">Contact</a>
+            <ul className="gh-quest-list">
+              {questState.map((q) => (
+                <li key={q.id} className={`gh-quest${q.done ? " is-done" : ""}`}>
+                  <button
+                    type="button"
+                    className="gh-quest-check"
+                    aria-label={q.done ? "Mark incomplete" : "Mark complete"}
+                    onClick={() => toggleQuest(q.id)}
+                  >
+                    {q.done ? <CheckCircle2 size={20} /> : <span className="gh-quest-empty gh-quest-empty--lg" />}
+                  </button>
+                  <div className="gh-quest-text">{q.label}</div>
+                  <span className="gh-quest-xp">+{q.xp} XP</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="gh-panel">
+            <div className="gh-panel-head">
+              <div>
+                <div className="gh-section-eyebrow"><Award size={13} /> Achievements</div>
+                <h2 className="gh-section-title">Badges you've earned</h2>
+              </div>
+              <span className="gh-panel-meta">{badges.filter(b=>b.on).length} / {badges.length}</span>
+            </div>
+            <div className="gh-badges">
+              {badges.map((b) => {
+                const Icon = b.icon;
+                return (
+                  <div key={b.id} className={`gh-badge${b.on ? "" : " is-locked"}`}>
+                    <div className="gh-badge-ic" style={{ background: b.tint }}>
+                      {b.on ? <Icon size={22} /> : <Lock size={18} />}
+                    </div>
+                    <div className="gh-badge-lbl">{b.label}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <div className="foot-bottom">
-            <span>© Good Student · A community education programme</span>
-            <span className="foot-note"><Tablet size={14} /> Works on iPad, laptop & phone</span>
+        </section>
+
+        {/* ===== About the app (no Explore) ===== */}
+        <section className="gh-section">
+          <div className="gh-section-head">
+            <div>
+              <div className="gh-section-eyebrow"><BookOpen size={13} /> Around the app</div>
+              <h2 className="gh-section-title">Where to go next</h2>
+            </div>
           </div>
-        </div>
-      </footer>
+          <div className="gh-about-grid">
+            <Link to="/tutors" className="gh-about-card">
+              <div className="gh-about-ic" style={{ background: "linear-gradient(150deg,#FF8A3D,#E04E07)" }}>
+                <Pencil size={20} />
+              </div>
+              <h3>Tutors</h3>
+              <p>Pick a ready-made DSE tutor or build your own from notes, past papers and slides.</p>
+              <span className="gh-about-cta">Open tutors <ArrowRight size={14} /></span>
+            </Link>
+            <Link to="/tools" className="gh-about-card">
+              <div className="gh-about-ic" style={{ background: "linear-gradient(150deg,#8A7BE8,#6F5FE0)" }}>
+                <Wrench size={20} />
+              </div>
+              <h3>Tools</h3>
+              <p>Flashcards, mind maps, speaking practice, summarisers — open the right tool for now.</p>
+              <span className="gh-about-cta">Open tools <ArrowRight size={14} /></span>
+            </Link>
+            <Link to="/welcome" className="gh-about-card">
+              <div className="gh-about-ic" style={{ background: "linear-gradient(150deg,#37C2A0,#13A483)" }}>
+                <Sparkles size={20} />
+              </div>
+              <h3>About Good Student</h3>
+              <p>What we believe about AI literacy, how the tutor thinks, and the team behind it.</p>
+              <span className="gh-about-cta">Read more <ArrowRight size={14} /></span>
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <style>{css}</style>
     </div>
   );
 }
 
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-/* ===== styles ===== */
-const STYLES = `
-:root{
+const css = `
+.gh-root{
   --orange:#FB6A1E;--orange-deep:#E04E07;--orange-2:#FF8A3D;--amber:#FFB454;
   --cream:#FFF7EF;--cream-2:#FFEEDD;--paper:#FFFCF8;
   --ink:#311C10;--ink-soft:#7A6453;--ink-faint:#A8978A;
-  --teal:#13A483;--teal-soft:#D6F0E8;--line:#F0DEC9;
-  --pink:#E86A9A;--violet:#8A7BE8;--blue:#3F95E6;
+  --teal:#13A483;--line:#F0DEC9;
   --shadow-sm:0 4px 16px -6px rgba(120,60,20,.22);
   --shadow:0 22px 50px -24px rgba(176,72,12,.42);
-  --shadow-lift:0 34px 80px -30px rgba(176,72,12,.55);
-  --font-display:'Fredoka',system-ui,sans-serif;--font-body:'DM Sans',system-ui,sans-serif;
+  --font-display:'Fredoka',system-ui,sans-serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  font-family:var(--font-body);color:var(--ink);background:var(--cream);
+  min-height:100vh;display:flex;-webkit-font-smoothing:antialiased;line-height:1.55;
 }
-.gs-root *{margin:0;padding:0;box-sizing:border-box}
-.gs-root{font-family:var(--font-body);color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
-.gs-root::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6;
-  background:radial-gradient(58% 48% at 86% -6%,rgba(255,138,61,.32),transparent 60%),
-             radial-gradient(45% 40% at -6% 14%,rgba(255,180,84,.30),transparent 60%),
-             radial-gradient(60% 45% at 50% 112%,rgba(19,164,131,.10),transparent 60%)}
-.gs-root .wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
-.gs-root h1,.gs-root h2,.gs-root h3{font-family:var(--font-display);font-weight:600;line-height:1.04;letter-spacing:-.015em}
-.gs-root a{color:inherit;text-decoration:none}
-.gs-root .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep)}
-.gs-root .dot-live{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:gs-ping 2s infinite}
-@keyframes gs-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
-
-.gs-root .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--amber),var(--orange),var(--orange-deep));z-index:99;transition:width .1s linear}
-.gs-root .slide-stack{position:relative;z-index:1;background:var(--cream)}
-.gs-root .slide-layer{position:sticky;top:0;height:100vh;background:var(--cream);overflow:hidden;display:flex;align-items:center;box-shadow:0 -24px 70px -48px rgba(49,28,16,.45)}
-.gs-root .slide-layer>section,.gs-root .slide-layer>header{width:100%;height:100vh;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--cream)}
-.gs-root .slide-layer:nth-child(1){z-index:1}.gs-root .slide-layer:nth-child(2){z-index:2}.gs-root .slide-layer:nth-child(3){z-index:3}.gs-root .slide-layer:nth-child(4){z-index:4}.gs-root .slide-layer:nth-child(5){z-index:5}.gs-root .slide-layer:nth-child(6){z-index:6}.gs-root .slide-layer:nth-child(7){z-index:7}
-.gs-root .demo-layer,.gs-root .demo-layer>section,.gs-root .intro-layer,.gs-root .intro-layer>section,.gs-root .team-layer,.gs-root .team-layer>section{background:linear-gradient(180deg,var(--cream),#fff9f3)}
-.gs-root .honesty-layer,.gs-root .cta-layer{background:var(--cream)}
-
-/* NAV */
-.gs-root nav{position:fixed;inset:0 0 auto 0;z-index:60;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,247,239,.82);border-bottom:1px solid rgba(240,222,201,.7)}
-.gs-root .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.gs-root .logo{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;color:var(--ink)}
-.gs-root .logo .mk{width:42px;height:42px;display:block;filter:drop-shadow(0 6px 14px rgba(224,78,7,.32));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.gs-root .logo:hover .mk{transform:rotate(-10deg) scale(1.1)}
-.gs-root .logo span{background:linear-gradient(180deg,var(--ink) 60%,var(--orange-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.gs-root .nav-links{display:flex;gap:30px;font-weight:500;color:var(--ink-soft);font-size:.95rem}
-.gs-root .nav-links a{position:relative;transition:color .2s}
-.gs-root .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;background:var(--orange);border-radius:2px;transition:right .25s}
-.gs-root .nav-links a:hover{color:var(--orange-deep)}
-.gs-root .nav-links a:hover::after{right:0}
-.gs-root .nav-right{display:flex;align-items:center;gap:14px}
-.gs-root .lang,.gs-root .foot-note{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
-.gs-root .lang b,.gs-root .foot-note svg{color:var(--orange-deep)}
-
-/* Buttons */
-.gs-root .btn{font-family:var(--font-display);font-weight:600;border:none;cursor:pointer;border-radius:999px;transition:transform .18s,box-shadow .18s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-.gs-root .btn-primary{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;padding:14px 24px;font-size:1rem;box-shadow:var(--shadow-sm)}
-.gs-root .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow)}
-.gs-root .btn-ghost{background:#fff;color:var(--ink);padding:14px 22px;font-size:1rem;border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
-.gs-root .btn-ghost:hover{transform:translateY(-2px);border-color:var(--orange-2);color:var(--orange-deep)}
-.gs-root .btn-sm{padding:9px 16px;font-size:.88rem}
-.gs-root .btn-lg{padding:18px 30px;font-size:1.08rem}
-
-/* HERO */
-.gs-root .hero{position:relative;padding:72px 0 80px}
-.gs-root .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-.gs-root .hero-copy{position:relative;z-index:2}
-.gs-root .hero h1{font-size:clamp(2.8rem,5.4vw,4.4rem);margin-top:18px}
-.gs-root .hero h1 .hl{color:var(--orange-deep);position:relative;white-space:nowrap;display:inline-block}
-.gs-root .hero h1 .hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.34em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1;transform:scaleX(0);transform-origin:left;animation:gs-underline 1s .7s forwards cubic-bezier(.2,.7,.2,1)}
-@keyframes gs-underline{to{transform:scaleX(1)}}
-.gs-root .hero p.lead{margin:20px 0 32px;font-size:1.18rem;color:var(--ink-soft);max-width:30em}
-.gs-root .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-.gs-root .up{opacity:0;transform:translateY(22px);animation:gs-up .7s forwards cubic-bezier(.2,.7,.2,1)}
-.gs-root .up.d1{animation-delay:.05s}.gs-root .up.d2{animation-delay:.18s}.gs-root .up.d3{animation-delay:.32s}.gs-root .up.d4{animation-delay:.46s}
-@keyframes gs-up{to{opacity:1;transform:none}}
-
-.gs-root .trust{display:flex;align-items:center;gap:10px;margin-top:34px;flex-wrap:wrap}
-.gs-root .chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-body);font-weight:500;font-size:.82rem;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:8px 13px;border-radius:999px;box-shadow:var(--shadow-sm)}
-.gs-root .chip svg{color:var(--orange-deep)}
-
-/* Device */
-.gs-root .stage{position:relative}
-.gs-root .blob{position:absolute;border-radius:50%;filter:blur(14px);z-index:0;pointer-events:none}
-.gs-root .blob.b1{width:280px;height:280px;background:radial-gradient(circle,var(--amber),transparent 70%);top:-60px;right:-50px;opacity:.55;animation:gs-float 7s ease-in-out infinite}
-.gs-root .blob.b2{width:220px;height:220px;background:radial-gradient(circle,var(--teal-soft),transparent 70%);bottom:-50px;left:-50px;opacity:.85;animation:gs-float 9s ease-in-out infinite reverse}
-@keyframes gs-float{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
-.gs-root .device{position:relative;z-index:1;background:var(--paper);border-radius:30px;border:1px solid var(--line);box-shadow:var(--shadow-lift);overflow:hidden;animation:gs-up .8s .25s both cubic-bezier(.2,.7,.2,1)}
-.gs-root .dev-bar{display:flex;align-items:center;gap:7px;padding:14px 18px;background:linear-gradient(180deg,#fff,#fff8f1);border-bottom:1px solid var(--line)}
-.gs-root .dot{width:11px;height:11px;border-radius:50%}
-.gs-root .dev-bar .dev-title{margin-left:10px;font-family:var(--font-body);font-weight:500;font-size:.82rem;color:var(--ink-soft)}
-.gs-root .dev-bar .play{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:600;color:var(--orange-deep);background:var(--cream-2);padding:5px 11px;border-radius:999px}
-.gs-root .dev-body{padding:18px;min-height:300px;background:linear-gradient(180deg,#fffdfa,#fff7ef)}
-.gs-root .toggle{display:flex;gap:6px;background:var(--cream-2);padding:5px;border-radius:14px;margin-bottom:16px}
-.gs-root .toggle button{flex:1;border:none;background:transparent;font-family:var(--font-display);font-weight:600;font-size:.88rem;color:var(--ink-soft);padding:9px;border-radius:10px;cursor:pointer;transition:.2s}
-.gs-root .toggle button.on{background:#fff;color:var(--orange-deep);box-shadow:var(--shadow-sm)}
-.gs-root .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;animation:gs-fade .4s ease}
-.gs-root .tcell{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:.88rem;font-weight:500;transition:transform .2s,border-color .2s}
-.gs-root .tcell:hover{transform:translateY(-3px);border-color:var(--orange-2)}
-.gs-root .tcell-ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
-@keyframes gs-fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.gs-root .tutor-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:9px;transition:transform .2s}
-.gs-root .tutor-row:hover{transform:translateX(4px)}
-.gs-root .tutor-row .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;flex-shrink:0}
-.gs-root .tutor-row .nm{font-weight:500;font-size:.92rem}
-.gs-root .tutor-row .go{margin-left:auto;font-size:.82rem;color:var(--orange-deep);font-weight:600;display:inline-flex;align-items:center;gap:4px}
-.gs-root .tutor-build{border:1.5px dashed var(--orange-2);color:var(--orange-deep);justify-content:center;font-weight:600;font-family:var(--font-display);background:var(--cream)}
-.gs-root .dev-foot{padding:10px 18px;border-top:1px solid var(--line);background:#fff;display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--ink-faint)}
-.gs-root .dev-foot .streak{margin-left:auto;color:var(--orange-deep);font-weight:600}
-.gs-root .hero-mascot{width:280px;z-index:5;filter:drop-shadow(0 20px 30px rgba(120,40,0,.28));position:relative}
-@keyframes gs-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
-
-/* Hero spotlight stage */
-.gs-root .spotlight{position:relative;display:grid;place-items:center;min-height:480px;z-index:1}
-.gs-root .spotlight .ring{position:absolute;border-radius:50%;border:2px dashed rgba(224,78,7,.28);pointer-events:none}
-.gs-root .spotlight .ring.r1{width:380px;height:380px;animation:gs-spin 28s linear infinite}
-.gs-root .spotlight .ring.r2{width:460px;height:460px;border-style:dotted;border-color:rgba(70,214,174,.42);animation:gs-spin 40s linear infinite reverse}
-.gs-root .spotlight::before{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,84,.55),rgba(255,247,239,0) 65%);z-index:0;animation:gs-float 8s ease-in-out infinite}
-
-.gs-root .bubble-pop{position:absolute;top:30px;left:-20px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px 18px;box-shadow:var(--shadow);max-width:230px;z-index:6;animation:gs-up .8s .5s both cubic-bezier(.2,.7,.2,1)}
-.gs-root .bubble-pop b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:1rem;display:block;margin-bottom:3px}
-.gs-root .bubble-pop span{font-size:.86rem;color:var(--ink-soft);line-height:1.45}
-.gs-root .bubble-pop::after{content:"";position:absolute;bottom:-10px;right:32px;width:20px;height:20px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
-
-.gs-root .name-tag{position:absolute;bottom:6px;right:-10px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px 8px 8px;box-shadow:var(--shadow);z-index:6;animation:gs-up .8s .65s both cubic-bezier(.2,.7,.2,1)}
-.gs-root .name-tag .nt-ic{width:36px;height:36px}
-.gs-root .name-tag span{font-size:.78rem;line-height:1.25;color:var(--ink-soft)}
-.gs-root .name-tag b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.92rem}
-.gs-root .name-tag i{font-style:normal;color:var(--orange-deep);font-weight:500}
-
-
-/* Doodles */
-.gs-root .doodle{position:absolute;z-index:0;opacity:.85}
-.gs-root .spin{animation:gs-spin 14s linear infinite}@keyframes gs-spin{to{transform:rotate(360deg)}}
-.gs-root .drift{animation:gs-float 8s ease-in-out infinite}
-
-/* Section heads */
-.gs-root .sec-head{text-align:center;max-width:42rem;margin:0 auto 28px}
-.gs-root .sec-head h2{font-size:clamp(2.1rem,4vw,3rem);margin-top:14px}
-.gs-root .sec-sub{margin-top:14px;color:var(--ink-soft);font-size:1.04rem}
-
-/* PILLARS */
-.gs-root .intro{padding:90px 0 70px;position:relative}
-.gs-root .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.gs-root .pillar{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:28px;padding:36px 28px 32px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
-.gs-root .pillar:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.gs-root .pillar .pic{width:72px;height:72px;border-radius:22px;margin:0 auto 18px;display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);transform:rotate(-6deg);transition:transform .3s}
-.gs-root .pillar:hover .pic{transform:rotate(8deg) scale(1.08)}
-.gs-root .pillar h3{font-size:1.24rem}
-.gs-root .pillar p{margin-top:8px;color:var(--ink-soft);font-size:.96rem}
-
-/* FEATURES */
-.gs-root .features{padding:44px 0 32px;position:relative}
-.gs-root .stage-wrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:44px;align-items:center}
-.gs-root .presenter{display:flex;flex-direction:column;align-items:center}
-.gs-root .bubble{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px 26px;box-shadow:var(--shadow);max-width:320px;text-align:center;position:relative;min-height:110px;display:flex;align-items:center;justify-content:center}
-.gs-root .bubble::after{content:"";position:absolute;bottom:-13px;left:50%;transform:translateX(-50%) rotate(45deg);width:24px;height:24px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.gs-root .bubble .line{font-family:var(--font-display);font-weight:500;font-size:1.14rem;color:var(--ink);opacity:0;transition:opacity .35s;position:absolute;padding:0 26px}
-.gs-root .bubble .line.show{opacity:1;position:relative}
-.gs-root .presenter .mascot-wrap{width:160px;margin-top:18px;filter:drop-shadow(0 16px 22px rgba(120,40,0,.2))}
-.gs-root .presenter-dots{display:flex;gap:8px;margin-top:14px}
-.gs-root .presenter-dots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--line);cursor:pointer;transition:.2s;padding:0}
-.gs-root .presenter-dots button.on{background:var(--orange);width:24px;border-radius:4px}
-.gs-root .feat-steps{display:flex;flex-direction:column;gap:10px}
-.gs-root .fstep{background:linear-gradient(165deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:22px;padding:13px 18px;display:flex;gap:16px;align-items:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s;cursor:pointer;position:relative}
-.gs-root .fstep:hover{transform:translateX(4px)}
-.gs-root .fstep.active{border-color:var(--orange-2);box-shadow:var(--shadow);transform:scale(1.02)}
-.gs-root .fstep .fic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:var(--shadow-sm);transform:rotate(-4deg);transition:transform .3s}
-.gs-root .fstep.active .fic{transform:rotate(8deg) scale(1.06)}
-.gs-root .fbody{flex:1;min-width:0}
-.gs-root .fstep h3{font-size:1.18rem}
-.gs-root .fstep p{color:var(--ink-soft);font-size:.92rem;margin-top:2px}
-.gs-root .fstep .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
-.gs-root .tag{font-size:.78rem;font-weight:500;background:var(--cream-2);color:var(--ink-soft);padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:5px}
-.gs-root .tag svg{color:var(--orange)}
-.gs-root .fstep-arrow{color:var(--ink-faint);opacity:0;transform:translateX(-6px);transition:.25s}
-.gs-root .fstep.active .fstep-arrow,.gs-root .fstep:hover .fstep-arrow{opacity:1;transform:none;color:var(--orange-deep)}
-
-/* HONESTY */
-.gs-root .honesty{padding:34px 0 52px}
-.gs-root .honesty-inner{background:linear-gradient(155deg,var(--orange),var(--orange-deep));border-radius:42px;padding:54px 60px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lift)}
-.gs-root .honesty-inner::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);top:-160px;left:-80px}
-.gs-root .honesty-inner::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%);bottom:-100px;right:-60px}
-.gs-root .honesty-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
-.gs-root .honesty .eyebrow{color:#ffe2c9}
-.gs-root .honesty h2{font-size:clamp(2rem,4.2vw,3.2rem);margin:14px 0 16px}
-.gs-root .honesty p{font-size:1.16rem;opacity:.95;max-width:26em}
-.gs-root .honesty-stats{display:flex;gap:32px;margin-top:30px}
-.gs-root .honesty-stats div{display:flex;flex-direction:column}
-.gs-root .honesty-stats b{font-family:var(--font-display);font-weight:600;font-size:2rem;line-height:1}
-.gs-root .honesty-stats span{font-size:.84rem;opacity:.85;margin-top:4px}
-.gs-root .honesty-art{position:relative;display:grid;place-items:center;min-height:280px}
-.gs-root .honesty-art .ring{position:absolute;width:260px;height:260px;border-radius:50%;border:2px dashed rgba(255,255,255,.5);animation:gs-spin 22s linear infinite}
-.gs-root .honesty-art .ring.r2{width:340px;height:340px;border-color:rgba(255,255,255,.22);animation-duration:32s;animation-direction:reverse}
-.gs-root .honesty-art .mascot-wrap{width:210px;z-index:2;filter:drop-shadow(0 18px 26px rgba(120,40,0,.4))}
-.gs-root .banana{position:absolute;width:56px;bottom:10px;left:12%;transform:rotate(18deg);z-index:3}
-.gs-root .mug{position:absolute;width:52px;top:18px;right:10%;z-index:3;animation:gs-bob 3.5s ease-in-out infinite}
-
-/* FAQ */
-.gs-root .faq{padding:30px 0 90px}
-.gs-root .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.gs-root .qa{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:box-shadow .25s,border-color .25s}
-.gs-root .qa.open{box-shadow:var(--shadow);border-color:var(--orange-2)}
-.gs-root .qa button{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 22px;display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:1.05rem;color:var(--ink)}
-.gs-root .qa button .qi{width:34px;height:34px;border-radius:11px;background:var(--cream-2);display:grid;place-items:center;color:var(--orange-deep);flex-shrink:0}
-.gs-root .qa .qt{flex:1}
-.gs-root .qa .chev{color:var(--ink-faint);transition:transform .3s}
-.gs-root .qa.open .chev{transform:rotate(180deg);color:var(--orange-deep)}
-.gs-root .qa .ans{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.gs-root .qa .ans p{padding:0 22px 20px 70px;color:var(--ink-soft)}
-
-/* CTA band */
-.gs-root .cta-band{padding:30px 0 100px}
-.gs-root .cta-card{background:linear-gradient(160deg,#fff,#fff5e8);border:1px solid var(--line);border-radius:32px;padding:40px 44px;display:flex;align-items:center;gap:28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.gs-root .cta-card::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,84,.35),transparent 65%);top:-140px;right:-80px;pointer-events:none}
-.gs-root .cta-card>div{flex:1;position:relative;z-index:1}
-.gs-root .cta-card h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:10px}
-.gs-root .cta-card p{margin-top:8px;color:var(--ink-soft)}
-.gs-root .cta-mascot{width:116px;flex-shrink:0;filter:drop-shadow(0 12px 18px rgba(120,40,0,.2))}
-.gs-root .cta-card .btn{position:relative;z-index:1;flex-shrink:0}
-
-/* FOOTER */
-.gs-root footer{background:linear-gradient(180deg,var(--cream),var(--cream-2));border-top:1px solid var(--line);padding:60px 0 36px;position:relative;z-index:10}
-.gs-root .foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:40px;margin-bottom:42px}
-.gs-root .foot-brand .logo{margin-bottom:16px}
-.gs-root .foot-brand p{color:var(--ink-soft);max-width:24em;font-size:.94rem}
-.gs-root .foot-col h4{font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
-.gs-root .foot-col a{display:block;color:var(--ink-soft);margin-bottom:10px;font-size:.94rem;transition:color .2s}
-.gs-root .foot-col a:hover{color:var(--orange-deep)}
-.gs-root .foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--ink-faint);font-size:.84rem}
-
-/* MASCOT */
-.gs-root .ms{width:100%;height:auto;transform-origin:center;display:block}
-.gs-root .ms .sh{fill:rgba(49,28,16,.12)}
-.gs-root .ms .bf{fill:#FFF6EC}
-.gs-root .ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
-.gs-root .ms .scr{fill:#26323B}
-.gs-root .ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
-.gs-root .ms .or{fill:#FB6A1E}.gs-root .ms .ord{fill:#E04E07}.gs-root .ms .ant{fill:#FB6A1E}
-.gs-root .ms .ac{fill:#46D6AE}.gs-root .ms .fc{fill:#222F38}
-.gs-root .ms .ew{fill:#fff}.gs-root .ms .ep{fill:#222F38}
-.gs-root .ms .gl{stroke:#46D6AE;stroke-width:3;fill:none;stroke-linecap:round}
-.gs-root .ms .gh{fill:#fff;opacity:.68}
-.gs-root .ms .bl{fill:#FF9A57;opacity:.55}.gs-root .ms .mo{fill:#FF8A4C}
-.gs-root .ms .ew,.gs-root .ms .ep,.gs-root .ms .mo{transform-box:fill-box;transform-origin:center}
-.gs-root .ms .armr{transform-box:fill-box;transform-origin:50% 4%}
-
-.gs-root .a-bob .ms{animation:gs-mbob 3s ease-in-out infinite}
-.gs-root .a-wave .ms .armr{animation:gs-mwave 1.2s ease-in-out infinite}
-.gs-root .a-blink .ms .ew,.gs-root .a-blink .ms .ep{animation:gs-mblink 3.4s ease-in-out infinite}
-.gs-root .a-talk .ms .mo{animation:gs-mtalk .42s ease-in-out infinite}
-.gs-root .a-talk .ms{animation:gs-mbob 3s ease-in-out infinite}
-/* Thinking: tilts head subtly, small mouth, no waving */
-.gs-root .a-think .ms{animation:gs-mthink 4.2s ease-in-out infinite;transform-origin:50% 60%}
-.gs-root .a-think .ms .mo{transform:scaleY(.45)}
-/* Cute CTA hop: slower, softer, more playful than a jump */
-.gs-root .a-jump .ms{animation:gs-mjump 3.4s cubic-bezier(.34,1.56,.64,1) infinite;transform-origin:50% 95%}
-.gs-root .a-jump .ms .sh{animation:gs-mshadow 3.4s ease-in-out infinite;transform-origin:center}
-
-@keyframes gs-mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes gs-mwave{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-100deg)}}
-@keyframes gs-mblink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
-@keyframes gs-mtalk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
-@keyframes gs-mthink{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(4deg) translateY(-4px)}}
-@keyframes gs-mjump{0%,100%{transform:translateY(0) rotate(0) scale(1)}18%{transform:translateY(0) rotate(-2deg) scaleX(1.04) scaleY(.97)}34%{transform:translateY(-18px) rotate(3deg) scaleX(.99) scaleY(1.03)}50%{transform:translateY(0) rotate(-1deg) scaleX(1.02) scaleY(.98)}66%{transform:translateY(-8px) rotate(2deg) scale(1.01)}82%{transform:translateY(0) rotate(0) scale(1)}}
-@keyframes gs-mshadow{0%,100%{transform:scaleX(1);opacity:.16}34%{transform:scaleX(.76);opacity:.09}66%{transform:scaleX(.88);opacity:.12}}
-
-/* Sticky slide scroll — each panel pins while the next slides over it */
-html{scroll-behavior:smooth}
-body{scroll-snap-type:none}
-.gs-root section,.gs-root header.hero{scroll-margin-top:0}
-.gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-.gs-root .reveal.in{opacity:1;transform:none}
-.gs-root .hero-mascot{transform:translateY(var(--py,0))}
-.gs-root .blob{transform:translate3d(0,var(--py,0),0)}
-.gs-root .sec-head{position:relative}
-@media(min-width:961px){
-  .gs-root .slide-layer:last-child{height:118vh}
-  .gs-root header.hero,.gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{display:flex;align-items:center;padding-top:72px;padding-bottom:34px}
-  .gs-root .features{padding-top:86px}
-  .gs-root .demo,.gs-root .intro,.gs-root .features,.gs-root .honesty,.gs-root .team,.gs-root .cta-band{align-items:flex-start;padding-top:112px}
+.gh-root *{box-sizing:border-box}
+.gh-root::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
+  background:radial-gradient(50% 42% at 88% -4%,rgba(255,138,61,.28),transparent 60%),
+             radial-gradient(40% 38% at -4% 12%,rgba(255,180,84,.26),transparent 60%);
 }
+.gh-root h1,.gh-root h2,.gh-root h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0}
 
-/* TEAM */
-.gs-root .team{padding:80px 0}
-.gs-root .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-.gs-root .team-card{background:linear-gradient(165deg,#fff,#fff7ef);border:1px solid var(--line);border-radius:26px;padding:28px 18px 24px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s}
-.gs-root .team-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--orange-2)}
-.gs-root .team-photo{width:124px;height:124px;border-radius:50%;margin:0 auto 18px;background:linear-gradient(160deg,#FFE0C2,#FFC56B);display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:700;font-size:2rem;box-shadow:var(--shadow);overflow:hidden;border:4px solid #fff}
-.gs-root .team-photo .ti.ph{font-size:2.5rem;opacity:.6;color:var(--orange-deep);background:none}
-.gs-root .team-name{font-family:var(--font-display);font-weight:600;font-size:1.12rem;color:var(--ink)}
-.gs-root .team-role{margin-top:5px;font-size:.92rem;color:var(--ink-soft)}
-.gs-root .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-.gs-root .reveal.in{opacity:1;transform:none}
-.gs-root .hero-mascot{transform:translateY(var(--py,0))}
-.gs-root .blob{transform:translate3d(0,var(--py,0),0)}
-.gs-root .sec-head{position:relative}
+/* sidebar */
+.gh-side{width:248px;flex-shrink:0;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 18px;background:rgba(255,247,239,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-right:1px solid var(--line);z-index:5}
+.gh-brand{display:flex;align-items:center;gap:11px;padding:0 8px;margin-bottom:32px;text-decoration:none;color:inherit}
+.gh-brand-mark{width:38px;height:38px;display:block;filter:drop-shadow(0 6px 14px rgba(224,78,7,.32));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.gh-brand:hover .gh-brand-mark{transform:rotate(-10deg) scale(1.08)}
+.gh-brand-name{font-family:var(--font-display);font-weight:700;font-size:1.18rem;letter-spacing:-.02em;background:linear-gradient(180deg,var(--ink) 60%,var(--orange-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.gh-nav{display:flex;flex-direction:column;gap:3px;flex:1}
+.gh-nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font-family:var(--font-body);font-weight:500;font-size:.94rem;color:var(--ink-soft);background:transparent;border:none;cursor:pointer;text-align:left;text-decoration:none;transition:background .18s,color .18s}
+.gh-nav-item:hover{background:rgba(255,255,255,.7);color:var(--ink)}
+.gh-nav-item.is-active{background:#fff;color:var(--orange-deep);box-shadow:var(--shadow-sm);font-weight:600}
+.gh-nav-item.is-active svg{color:var(--orange)}
+.gh-side-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.gh-user-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
+.gh-user-head{display:flex;align-items:center;gap:10px}
+.gh-ava{width:36px;height:36px;border-radius:11px;background:linear-gradient(150deg,var(--orange-2),var(--orange));color:#fff;font-weight:600;font-family:var(--font-display);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;box-shadow:var(--shadow-sm)}
+.gh-ava-sm{width:34px;height:34px;font-size:.76rem;border-radius:10px}
+.gh-user-name{font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--ink)}
+.gh-user-mail{font-size:.76rem;color:var(--ink-soft)}
+.gh-user-actions{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);padding-top:8px}
+.gh-user-actions button,.gh-signout{display:flex;align-items:center;gap:10px;background:transparent;border:none;cursor:pointer;padding:8px 6px;border-radius:8px;font-size:.86rem;color:var(--ink-soft);text-align:left;font-family:var(--font-body)}
+.gh-user-actions button:hover,.gh-signout:hover{background:var(--cream);color:var(--ink)}
+.gh-signout{border-top:1px solid var(--line);padding-top:10px;margin-top:2px;color:var(--orange-deep)}
+.gh-user-switch{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s,border-color .15s;font-family:inherit}
+.gh-user-switch:hover{transform:translateY(-1px);border-color:var(--orange-2)}
+.gh-user-switch-meta{flex:1;text-align:left;min-width:0;overflow:hidden}
+.gh-user-switch-meta .gh-user-name,.gh-user-switch-meta .gh-user-mail{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gh-user-switch>svg{color:var(--ink-faint);flex-shrink:0}
 
-/* Watch demo link (nav) */
-.gs-root .nav-watch{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:8px 13px;border-radius:999px;transition:.2s}
-.gs-root .nav-watch:hover{color:var(--orange-deep);border-color:var(--orange-2);transform:translateY(-1px)}
-.gs-root .nav-watch svg{color:var(--orange-deep)}
+/* main */
+.gh-main{flex:1;min-width:0;padding:38px 56px 80px;position:relative;z-index:1}
 
-/* DEMO section */
-.gs-root .demo{padding:48px 0 26px;position:relative}
-.gs-root .demo .wrap{max-width:1360px}
-.gs-root .demo .sec-head{margin-bottom:34px}
-.gs-root .demo-frame{max-width:1220px;margin:0 auto;width:100%;background:linear-gradient(180deg,#fff,#fff8f1);border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow-lift);overflow:hidden}
-.gs-root .df-bar{display:flex;align-items:center;gap:9px;padding:18px 22px;background:linear-gradient(180deg,#fff,#fff6ec);border-bottom:1px solid var(--line)}
-.gs-root .df-url{margin-left:18px;font-family:var(--font-body);font-size:1rem;color:var(--ink-soft);background:var(--cream-2);padding:7px 18px;border-radius:999px}
-.gs-root .df-stage{aspect-ratio:16/9;background:
-  radial-gradient(60% 70% at 50% 40%,rgba(255,180,84,.22),transparent 70%),
-  linear-gradient(160deg,#26323B,#1A2129);display:grid;place-items:center;color:#FFF7EF;position:relative;overflow:hidden}
-.gs-root .df-stage::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:36px 36px;pointer-events:none}
-.gs-root .df-placeholder{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:1;padding:0 20px}
-.gs-root .df-placeholder b{font-family:var(--font-display);font-weight:600;font-size:1.6rem}
-.gs-root .df-placeholder span{font-size:1rem;opacity:.7;max-width:34em}
-.gs-root .df-placeholder code{background:rgba(255,255,255,.1);padding:2px 7px;border-radius:6px;font-size:.78rem}
-.gs-root .df-play{width:102px;height:102px;border-radius:50%;background:linear-gradient(160deg,var(--orange-2),var(--orange-deep));display:grid;place-items:center;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 0 rgba(251,106,30,.6);animation:gs-pulseplay 2.4s ease-in-out infinite;cursor:pointer}
-@keyframes gs-pulseplay{0%,100%{box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 0 rgba(251,106,30,.55)}50%{box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 22px rgba(251,106,30,0)}}
+/* hero */
+.gh-hero{display:grid;grid-template-columns:1.5fr .9fr;gap:36px;align-items:center;margin-bottom:28px}
+.gh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:14px}
+.gh-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:gh-ping 2s infinite}
+@keyframes gh-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
+.gh-title{font-size:clamp(2rem,3.4vw,2.85rem)}
+.gh-hl{color:var(--orange-deep);position:relative;display:inline-block;white-space:nowrap}
+.gh-hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.32em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1}
+.gh-subtitle{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:34em}
+.gh-hero-cta{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.gh-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font-weight:600;font-size:.92rem;cursor:pointer;border:none;font-family:var(--font-display);transition:transform .18s,box-shadow .18s,border-color .18s;text-decoration:none}
+.gh-btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
+.gh-btn-ghost:hover{transform:translateY(-2px);border-color:var(--orange-2);color:var(--orange-deep)}
+.gh-btn-primary{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;box-shadow:var(--shadow-sm)}
+.gh-btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow)}
 
+.gh-mascot-card{position:relative;display:flex;justify-content:flex-end;align-items:flex-end;min-height:170px}
+.gh-mascot-art{width:150px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:gh-bob 4s ease-in-out infinite}
+@keyframes gh-bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+.gh-mascot-bubble{position:absolute;top:6px;left:0;max-width:230px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 16px;box-shadow:var(--shadow)}
+.gh-mascot-bubble b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.95rem;display:block;margin-bottom:2px}
+.gh-mascot-bubble span{font-size:.82rem;color:var(--ink-soft);line-height:1.45}
+.gh-mascot-bubble::after{content:"";position:absolute;bottom:-9px;right:32px;width:18px;height:18px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
 
-/* RESPONSIVE */
-@media(max-width:960px){
-  .gs-root .hero-grid,.gs-root .stage-wrap,.gs-root .honesty-grid,.gs-root .pillars,.gs-root .foot-grid{grid-template-columns:1fr;gap:40px}
-  .gs-root .nav-links{display:none}
-  .gs-root .hero-mascot{width:220px}
-  .gs-root .spotlight{min-height:380px}
-  .gs-root .bubble-pop{position:relative;top:0;left:0;max-width:none;margin-bottom:14px}
-  .gs-root .name-tag{position:relative;right:0;bottom:0;margin-top:14px}
-  .gs-root .presenter{position:static;flex-direction:row;gap:20px;margin-bottom:20px;align-items:center}
-  .gs-root .presenter .mascot-wrap{width:120px;margin-top:0;order:-1}
-  .gs-root .bubble{flex:1;min-height:0;max-width:none}
-  .gs-root .presenter-dots{display:none}
-  .gs-root .honesty-inner{padding:48px 30px}
-  .gs-root .cta-card{flex-direction:column;text-align:center;padding:36px 28px}
-  .gs-root .cta-mascot{width:100px}
-  .gs-root .team-grid{grid-template-columns:repeat(2,1fr)}
-  .gs-root .slide-layer{position:relative;height:auto;min-height:auto;display:block;box-shadow:none;animation:none!important}
-  .gs-root .slide-layer>section,.gs-root .slide-layer>header{height:auto;min-height:auto;display:block;overflow:visible}
-  html,body{scroll-snap-type:none}
+/* stats strip */
+.gh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px}
+.gh-stat{background:#fffdf9;border:1px solid var(--line);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px;min-height:128px}
+.gh-stat::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,138,61,.05),transparent 60%);pointer-events:none}
+.gh-stat-ic{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(150deg,var(--orange-2),var(--orange));box-shadow:var(--shadow-sm)}
+.gh-stat--xp .gh-stat-ic{background:linear-gradient(150deg,#FFD56B,#F2A93D)}
+.gh-stat--lv .gh-stat-ic{background:linear-gradient(150deg,#8A7BE8,#6F5FE0)}
+.gh-stat--quest .gh-stat-ic{background:linear-gradient(150deg,#37C2A0,#13A483)}
+.gh-stat-body{display:flex;flex-direction:column;gap:1px}
+.gh-stat-num{font-family:var(--font-display);font-weight:700;font-size:1.45rem;line-height:1;color:var(--ink);display:flex;align-items:baseline;gap:6px}
+.gh-stat-num span{font-size:.72rem;font-weight:500;color:var(--ink-faint);letter-spacing:.02em;text-transform:uppercase}
+.gh-stat-lbl{font-size:.78rem;color:var(--ink-soft)}
+.gh-streak-row{display:flex;gap:5px;margin-top:auto}
+.gh-streak-dot{flex:1;height:6px;border-radius:999px;background:var(--cream-2)}
+.gh-streak-dot.on{background:linear-gradient(90deg,var(--orange-2),var(--orange))}
+.gh-bar{height:8px;border-radius:999px;background:var(--cream-2);overflow:hidden;margin-top:auto}
+.gh-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#FFD56B,#F2A93D);transition:width .3s}
+.gh-bar--alt span{background:linear-gradient(90deg,#8A7BE8,#6F5FE0)}
+.gh-quest-mini{display:flex;gap:6px;margin-top:auto}
+.gh-quest-pill{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--cream-2);color:var(--ink-faint)}
+.gh-quest-pill.done{background:linear-gradient(150deg,#37C2A0,#13A483);color:#fff}
+.gh-quest-empty{width:10px;height:10px;border-radius:50%;border:1.6px solid currentColor;display:block}
+.gh-quest-empty--lg{width:16px;height:16px;border-width:2px}
+
+/* generic section */
+.gh-section{margin-bottom:44px}
+.gh-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+.gh-section-eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:6px}
+.gh-section-title{font-size:1.35rem;color:var(--ink)}
+.gh-section-link{font-family:var(--font-display);font-weight:600;font-size:.82rem;color:var(--orange-deep);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;transition:background .15s}
+.gh-section-link:hover{background:var(--cream-2)}
+
+/* tutor quick cards */
+.gh-tutor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.gh-tutor-card{display:flex;align-items:center;gap:14px;padding:14px;background:#fffdf9;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
+.gh-tutor-card:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
+.gh-tutor-media{flex-shrink:0;width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.gh-tutor-body{flex:1;min-width:0}
+.gh-tutor-body h3{font-size:1rem;color:var(--ink)}
+.gh-tutor-sub{font-size:.76rem;color:var(--ink-faint);margin-top:2px}
+.gh-tutor-last{font-size:.72rem;color:var(--ink-soft);margin-top:6px;display:inline-flex;align-items:center;gap:5px}
+.gh-tutor-arrow{color:var(--ink-faint);transition:color .15s,transform .15s}
+.gh-tutor-card:hover .gh-tutor-arrow{color:var(--orange-deep);transform:translateX(3px)}
+
+/* tool grid */
+.gh-tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.gh-tool-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fffdf9;border:1px solid var(--line);border-radius:16px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s,box-shadow .18s;box-shadow:var(--shadow-sm)}
+.gh-tool-card:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
+.gh-tool-ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.gh-tool-title{font-family:var(--font-display);font-weight:600;font-size:.94rem;color:var(--ink)}
+.gh-tool-sub{font-size:.76rem;color:var(--ink-faint);margin-top:1px}
+
+/* two-up: quests + badges */
+.gh-twoup{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-bottom:44px}
+.gh-panel{background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow-sm)}
+.gh-panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:14px}
+.gh-panel-meta{font-size:.72rem;font-family:var(--font-display);font-weight:600;color:var(--ink-faint);background:var(--cream-2);padding:4px 10px;border-radius:999px}
+
+.gh-quest-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.gh-quest{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--cream);border:1px solid var(--line);transition:background .18s}
+.gh-quest:hover{background:#fff}
+.gh-quest-check{background:transparent;border:none;cursor:pointer;color:var(--ink-faint);display:flex;align-items:center;justify-content:center;padding:0}
+.gh-quest.is-done .gh-quest-check{color:var(--teal)}
+.gh-quest-text{flex:1;font-size:.92rem;color:var(--ink)}
+.gh-quest.is-done .gh-quest-text{color:var(--ink-soft);text-decoration:line-through}
+.gh-quest-xp{font-family:var(--font-display);font-weight:600;font-size:.76rem;color:var(--orange-deep);background:var(--cream-2);padding:4px 10px;border-radius:999px}
+
+.gh-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:12px}
+.gh-badge{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.gh-badge-ic{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow-sm);transition:transform .2s}
+.gh-badge:hover .gh-badge-ic{transform:scale(1.06) rotate(-4deg)}
+.gh-badge.is-locked .gh-badge-ic{filter:saturate(.3) opacity(.7)}
+.gh-badge-lbl{font-size:.72rem;color:var(--ink-soft);font-weight:500}
+.gh-badge.is-locked .gh-badge-lbl{color:var(--ink-faint)}
+
+/* about cards */
+.gh-about-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.gh-about-card{display:flex;flex-direction:column;gap:8px;padding:20px;background:#fffdf9;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);transition:transform .2s,border-color .2s,box-shadow .2s}
+.gh-about-card:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
+.gh-about-ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow-sm);margin-bottom:6px}
+.gh-about-card h3{font-size:1.08rem;color:var(--ink)}
+.gh-about-card p{font-size:.86rem;color:var(--ink-soft);line-height:1.5;margin:0}
+.gh-about-cta{margin-top:6px;font-family:var(--font-display);font-weight:600;font-size:.82rem;color:var(--orange-deep);display:inline-flex;align-items:center;gap:5px}
+
+/* responsive */
+@media (max-width:1080px){
+  .gh-stats{grid-template-columns:repeat(2,1fr)}
+  .gh-twoup{grid-template-columns:1fr}
 }
-@media(max-width:560px){
-  .gs-root .nav-right .lang{display:none}
-  .gs-root .hero{padding:50px 0 70px}
-  .gs-root .fstep{padding:20px;gap:14px}
-  .gs-root .trust{flex-wrap:wrap}
+@media (max-width:820px){
+  .gh-main{padding:28px 24px 64px}
+  .gh-hero{grid-template-columns:1fr}
+  .gh-mascot-card{justify-content:flex-start}
 }
-@media(prefers-reduced-motion:reduce){.gs-root *,.gs-root *::before,.gs-root *::after{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  .gh-side{display:none}
+  .gh-stats{grid-template-columns:1fr 1fr}
+}
 `;
