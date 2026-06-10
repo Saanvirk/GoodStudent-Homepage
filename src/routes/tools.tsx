@@ -55,13 +55,20 @@ function LogoMark({ className = "" }: { className?: string }) {
 }
 
 type Cat = "languages" | "stem" | "content" | "summary";
+type GKey =
+  | "ear" | "mic" | "book" | "pen"
+  | "abacus" | "flask"
+  | "cards" | "branch" | "camera" | "frame"
+  | "doc" | "globe" | "play";
+
 type Tool = {
   id: string;
   title: string;
   sub: string;
-  emoji: string;
+  glyph: GKey;
   cat: Cat;
   tint: string;
+  ink: string;
   badge?: string;
 };
 
@@ -73,24 +80,21 @@ const CATEGORIES: { id: Cat | "all"; label: string }[] = [
   { id: "summary", label: "Content summary" },
 ];
 
+/* Editorial palette — flat muted colors, no saturated AI-gradient bubbles */
 const TOOLS: Tool[] = [
-  // Languages
-  { id: "hear",  title: "Hear It Right!",            sub: "Listening comprehension practice",                emoji: "👂", cat: "languages", tint: "linear-gradient(150deg,#FFD2B5,#FFB089)" },
-  { id: "say",   title: "Say It Right!",             sub: "Speaking & pronunciation feedback",               emoji: "🗣️", cat: "languages", tint: "linear-gradient(150deg,#7FD0B5,#3FB89A)" },
-  { id: "read",  title: "DSE Reading Comprehension", sub: "Exam-style reading practice",                     emoji: "📚", cat: "languages", tint: "linear-gradient(150deg,#FFD262,#F2A93C)" },
-  { id: "write", title: "Writing Genie",             sub: "Grammar & writing — English / 中文",              emoji: "✍️", cat: "languages", tint: "linear-gradient(150deg,#B9A6F2,#8A7BE8)" },
-  // STEM
-  { id: "math",  title: "Math Quiz Generator",       sub: "Maths practice at any level",                     emoji: "🧮", cat: "stem",      tint: "linear-gradient(150deg,#7FB8F2,#3F95E6)" },
-  { id: "lab",   title: "Lab Report Generator",      sub: "Write up science experiments cleanly",            emoji: "🧪", cat: "stem",      tint: "linear-gradient(150deg,#A6E8C9,#4FC58E)", badge: "New" },
-  // Content generation
-  { id: "flash", title: "Flashcards Generator",      sub: "Flashcards from any topic or text",               emoji: "🎴", cat: "content",   tint: "linear-gradient(150deg,#FF9CB9,#E86A9A)" },
-  { id: "mind",  title: "Mind Map Generator",        sub: "Map a topic for revision or brainstorming",       emoji: "🧠", cat: "content",   tint: "linear-gradient(150deg,#FFC084,#FB6A1E)" },
-  { id: "ocr",   title: "OCR Tool",                  sub: "Snap homework or notes — bring them into tools",  emoji: "📸", cat: "content",   tint: "linear-gradient(150deg,#E0D4C2,#A89479)", badge: "On-ramp" },
-  { id: "img",   title: "Image Studio",              sub: "Generate images for your assignments",            emoji: "🎨", cat: "content",   tint: "linear-gradient(150deg,#C5A6F2,#8A5DE8)", badge: "New" },
-  // Summary
-  { id: "doc",   title: "Document Summariser",       sub: "Long notes & PDFs → key points",                  emoji: "📄", cat: "summary",   tint: "linear-gradient(150deg,#F2C879,#E0A23C)" },
-  { id: "web",   title: "Website Summariser",        sub: "Summarise key points from any website",           emoji: "🌐", cat: "summary",   tint: "linear-gradient(150deg,#8FD4E8,#3FA8C9)" },
-  { id: "yt",    title: "YouTube Summariser",        sub: "Summarise a lesson video",                        emoji: "▶️", cat: "summary",   tint: "linear-gradient(150deg,#FF9A8A,#E84C3A)" },
+  { id: "hear",  title: "Hear It Right!",            sub: "Listening comprehension practice",                glyph: "ear",    cat: "languages", tint: "#C8553D", ink: "#FBEFE8" },
+  { id: "say",   title: "Say It Right!",             sub: "Speaking & pronunciation feedback",               glyph: "mic",    cat: "languages", tint: "#3D5A6C", ink: "#E8EEF2" },
+  { id: "read",  title: "DSE Reading Comprehension", sub: "Exam-style reading practice",                     glyph: "book",   cat: "languages", tint: "#B8893A", ink: "#F5EBD9" },
+  { id: "write", title: "Writing Genie",             sub: "Grammar & writing — English / 中文",              glyph: "pen",    cat: "languages", tint: "#6B5B95", ink: "#ECE8F2" },
+  { id: "math",  title: "Math Quiz Generator",       sub: "Maths practice at any level",                     glyph: "abacus", cat: "stem",      tint: "#506B7A", ink: "#E6EEF2" },
+  { id: "lab",   title: "Lab Report Generator",      sub: "Write up science experiments cleanly",            glyph: "flask",  cat: "stem",      tint: "#6B8E4E", ink: "#EEF3E6", badge: "New" },
+  { id: "flash", title: "Flashcards Generator",      sub: "Flashcards from any topic or text",               glyph: "cards",  cat: "content",   tint: "#8C5E7A", ink: "#F2E8EE" },
+  { id: "mind",  title: "Mind Map Generator",        sub: "Map a topic for revision or brainstorming",       glyph: "branch", cat: "content",   tint: "#9C6B3F", ink: "#F2E6D8" },
+  { id: "ocr",   title: "OCR Tool",                  sub: "Snap homework or notes — bring them into tools",  glyph: "camera", cat: "content",   tint: "#4A5D52", ink: "#E5ECE7", badge: "On-ramp" },
+  { id: "img",   title: "Image Studio",              sub: "Generate images for your assignments",            glyph: "frame",  cat: "content",   tint: "#A65A4B", ink: "#F3E4DF", badge: "New" },
+  { id: "doc",   title: "Document Summariser",       sub: "Long notes & PDFs → key points",                  glyph: "doc",    cat: "summary",   tint: "#7A6B4F", ink: "#EFEAD9" },
+  { id: "web",   title: "Website Summariser",        sub: "Summarise key points from any website",           glyph: "globe",  cat: "summary",   tint: "#3D7068", ink: "#E2EDE9" },
+  { id: "yt",    title: "YouTube Summariser",        sub: "Summarise a lesson video",                        glyph: "play",   cat: "summary",   tint: "#A04545", ink: "#F2E0E0" },
 ];
 
 const CAT_LABEL: Record<Cat, string> = {
@@ -100,11 +104,30 @@ const CAT_LABEL: Record<Cat, string> = {
   summary: "Content summary",
 };
 
+function Glyph({ k }: { k: GKey }) {
+  const s = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+  switch (k) {
+    case "ear":    return (<svg viewBox="0 0 32 32" {...s}><path d="M11 22c-2 2-2 5 1 6 4 1 6-3 6-6 0-3 4-3 4-7a6 6 0 0 0-12 0c0 2 1 3 1 5" fill="rgba(255,255,255,.3)"/><path d="M14 14a3 3 0 0 1 5 1"/></svg>);
+    case "mic":    return (<svg viewBox="0 0 32 32" {...s}><rect x="13" y="5" width="6" height="14" rx="3" fill="rgba(255,255,255,.3)"/><path d="M9 15a7 7 0 0 0 14 0M16 22v5M11 27h10"/></svg>);
+    case "book":   return (<svg viewBox="0 0 32 32" {...s}><path d="M7 7h8a3 3 0 0 1 3 3v17M25 7h-8a3 3 0 0 0-3 3v17" fill="rgba(255,255,255,.3)"/><path d="M9 12h5M9 16h5M21 12h-4M21 16h-4"/></svg>);
+    case "pen":    return (<svg viewBox="0 0 32 32" {...s}><path d="M6 26l4-1 14-14-3-3L7 22l-1 4z" fill="rgba(255,255,255,.3)"/><path d="M18 9l5 5"/></svg>);
+    case "abacus": return (<svg viewBox="0 0 32 32" {...s}><rect x="5" y="6" width="22" height="20" rx="2" fill="rgba(255,255,255,.25)"/><path d="M5 13h22M5 19h22"/><circle cx="11" cy="13" r="1.6" fill="currentColor"/><circle cx="17" cy="13" r="1.6" fill="currentColor"/><circle cx="13" cy="19" r="1.6" fill="currentColor"/><circle cx="20" cy="19" r="1.6" fill="currentColor"/></svg>);
+    case "flask":  return (<svg viewBox="0 0 32 32" {...s}><path d="M13 5h6M14 5v8L8 24a3 3 0 0 0 3 4h10a3 3 0 0 0 3-4l-6-11V5" fill="rgba(255,255,255,.3)"/><circle cx="14" cy="20" r="1.3" fill="currentColor"/><circle cx="18" cy="23" r="1.3" fill="currentColor"/></svg>);
+    case "cards":  return (<svg viewBox="0 0 32 32" {...s}><rect x="5" y="10" width="15" height="18" rx="2" transform="rotate(-8 12 19)" fill="rgba(255,255,255,.25)"/><rect x="12" y="6" width="15" height="18" rx="2" transform="rotate(6 19 15)" fill="rgba(255,255,255,.35)"/><path d="M17 12h6M17 16h4"/></svg>);
+    case "branch": return (<svg viewBox="0 0 32 32" {...s}><circle cx="16" cy="16" r="3.2" fill="rgba(255,255,255,.3)"/><circle cx="6" cy="7" r="2.4"/><circle cx="26" cy="7" r="2.4"/><circle cx="6" cy="25" r="2.4"/><circle cx="26" cy="25" r="2.4"/><path d="M14 14l-6-6M18 14l6-6M14 18l-6 6M18 18l6 6"/></svg>);
+    case "camera": return (<svg viewBox="0 0 32 32" {...s}><path d="M5 11h4l2-3h10l2 3h4v14H5z" fill="rgba(255,255,255,.3)"/><circle cx="16" cy="18" r="4.5"/><circle cx="23" cy="13" r=".9" fill="currentColor"/></svg>);
+    case "frame":  return (<svg viewBox="0 0 32 32" {...s}><rect x="5" y="6" width="22" height="20" rx="2" fill="rgba(255,255,255,.25)"/><circle cx="11" cy="12" r="1.6" fill="currentColor"/><path d="M5 22l6-6 5 5 4-3 7 7"/></svg>);
+    case "doc":    return (<svg viewBox="0 0 32 32" {...s}><path d="M9 4h11l5 5v19H9z" fill="rgba(255,255,255,.3)"/><path d="M20 4v5h5"/><path d="M13 14h10M13 18h10M13 22h7"/></svg>);
+    case "globe":  return (<svg viewBox="0 0 32 32" {...s}><circle cx="16" cy="16" r="11" fill="rgba(255,255,255,.25)"/><ellipse cx="16" cy="16" rx="5" ry="11"/><path d="M5 16h22"/></svg>);
+    case "play":   return (<svg viewBox="0 0 32 32" {...s}><rect x="4" y="7" width="24" height="18" rx="4" fill="rgba(255,255,255,.3)"/><path d="M14 12l6 4-6 4z" fill="currentColor" stroke="none"/></svg>);
+  }
+}
+
 function ToolCard({ t, favorited, onFav }: { t: Tool; favorited: boolean; onFav: () => void }) {
   return (
     <button className="tl-card">
-      <div className="tl-card-ic" style={{ background: t.tint }}>
-        <span>{t.emoji}</span>
+      <div className="tl-card-ic" style={{ background: t.tint, color: t.ink }}>
+        <Glyph k={t.glyph} />
       </div>
       <div className="tl-card-body">
         <div className="tl-card-head">
