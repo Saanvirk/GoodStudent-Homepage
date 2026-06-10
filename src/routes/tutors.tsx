@@ -634,8 +634,8 @@ const css = `
 .tp-ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
 .tp-ms .scr{fill:#26323B}
 .tp-ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
-.tp-ms .ant{fill:#FFB454}
-.tp-ms .ac{fill:#FFB454}
+.tp-ms .ant{fill:var(--orange)}
+.tp-ms .ac{fill:var(--orange)}
 .tp-ms .fc{fill:#26323B}
 .tp-ms .ew{fill:#fff}
 .tp-ms .ep{fill:#26323B}
