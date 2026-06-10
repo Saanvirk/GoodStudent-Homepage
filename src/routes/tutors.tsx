@@ -38,18 +38,18 @@ function BotSymbols() {
         <path d="M110 38 C108 26 118 24 113 14" stroke="#E2D6BD" strokeWidth="3" fill="none" strokeLinecap="round" />
         <circle cx="112" cy="12" r="7" fill="#FB6A1E" />
         <rect x="56" y="36" width="108" height="92" rx="40" fill="#F7F2E8" stroke="#E2D6BD" strokeWidth="2.4" />
-        <circle cx="56" cy="84" r="9" fill="#FB6A1E" />
-        <circle cx="164" cy="84" r="9" fill="#FB6A1E" />
+        <circle cx="56" cy="84" r="9" fill="#5BD0B4" />
+        <circle cx="164" cy="84" r="9" fill="#5BD0B4" />
         <rect x="68" y="52" width="84" height="62" rx="26" fill="#26323B" />
-        <circle cx="93" cy="82" r="12" fill="#fff" />
+        <circle cx="93" cy="82" r="13" fill="#fff" />
         <circle cx="96" cy="84" r="6" fill="#1F2A30" />
-        <circle cx="127" cy="82" r="12" fill="#fff" />
+        <circle cx="127" cy="82" r="13" fill="#fff" />
         <circle cx="124" cy="84" r="6" fill="#1F2A30" />
         <circle cx="89" cy="78" r="2.4" fill="#fff" />
         <circle cx="120" cy="78" r="2.4" fill="#fff" />
-        <circle cx="93" cy="82" r="17" fill="none" stroke="#2FB39A" strokeWidth="4" />
-        <circle cx="127" cy="82" r="17" fill="none" stroke="#2FB39A" strokeWidth="4" />
-        <path d="M109 80 q1 -3 2 0" stroke="#2FB39A" strokeWidth="4" fill="none" />
+        <circle cx="93" cy="82" r="18" fill="none" stroke="#2FB39A" strokeWidth="6" />
+        <circle cx="127" cy="82" r="18" fill="none" stroke="#2FB39A" strokeWidth="6" />
+        <path d="M110 82 q1 -3 2 0" stroke="#2FB39A" strokeWidth="5" fill="none" strokeLinecap="round" />
         <ellipse cx="80" cy="98" rx="7" ry="4" fill="#C77E5A" opacity=".5" />
         <ellipse cx="140" cy="98" rx="7" ry="4" fill="#C77E5A" opacity=".5" />
         <ellipse cx="110" cy="100" rx="5" ry="4" fill="#FB6A1E" />
