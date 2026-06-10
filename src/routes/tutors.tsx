@@ -38,8 +38,8 @@ function BotSymbols() {
         <path d="M110 38 C108 26 118 24 113 14" stroke="#E2D6BD" strokeWidth="3" fill="none" strokeLinecap="round" />
         <circle cx="112" cy="12" r="7" fill="#FB6A1E" />
         <rect x="56" y="36" width="108" height="92" rx="40" fill="#F7F2E8" stroke="#E2D6BD" strokeWidth="2.4" />
-        <circle cx="56" cy="84" r="9" fill="#5BD0B4" />
-        <circle cx="164" cy="84" r="9" fill="#5BD0B4" />
+        <circle cx="56" cy="84" r="9" fill="#FB6A1E" />
+        <circle cx="164" cy="84" r="9" fill="#FB6A1E" />
         <rect x="68" y="52" width="84" height="62" rx="26" fill="#26323B" />
         <circle cx="93" cy="82" r="12" fill="#fff" />
         <circle cx="96" cy="84" r="6" fill="#1F2A30" />
@@ -634,8 +634,8 @@ const css = `
 .tp-ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
 .tp-ms .scr{fill:#26323B}
 .tp-ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
-.tp-ms .ant{fill:#FFB454}
-.tp-ms .ac{fill:#FFB454}
+.tp-ms .ant{fill:var(--orange)}
+.tp-ms .ac{fill:var(--orange)}
 .tp-ms .fc{fill:#26323B}
 .tp-ms .ew{fill:#fff}
 .tp-ms .ep{fill:#26323B}
