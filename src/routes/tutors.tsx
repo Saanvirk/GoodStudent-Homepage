@@ -221,8 +221,8 @@ const preCreated: Tutor[] = [
 
 const myTutors: Tutor[] = [
   { id: "eng-notes", title: "English · my notes", subtitle: "Built from 24 pages",
-    support: "Trained on your Form 5 essays and vocab lists.",
-    scene: "notes", meta: "Last edited 2d ago" },
+    support: "Your custom tutor built on your notes and resources.",
+    scene: "notes" },
 ];
 
 function TutorRow({
