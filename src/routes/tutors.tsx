@@ -320,6 +320,8 @@ function TutorsPage() {
 
   return (
     <div className="tp-root">
+      <BotSymbols />
+
       <aside className="tp-side">
         <div className="tp-brand">
           <LogoMark className="tp-brand-mark" />
