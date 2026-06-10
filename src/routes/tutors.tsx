@@ -206,7 +206,7 @@ type Tutor = {
 
 const preCreated: Tutor[] = [
   { id: "eng", title: "DSE English", subtitle: "Paper 1–4",
-    support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
+    support: "Plan essays, and train for all 4 papers to ace your HKDSE English exams.",
     scene: "english" },
   { id: "mat", title: "DSE Maths", subtitle: "Core · M1 · M2",
     support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
@@ -221,8 +221,8 @@ const preCreated: Tutor[] = [
 
 const myTutors: Tutor[] = [
   { id: "eng-notes", title: "English · my notes", subtitle: "Built from 24 pages",
-    support: "Trained on your Form 5 essays and vocab lists.",
-    scene: "notes", meta: "Last edited 2d ago" },
+    support: "Your custom tutor built on your notes and resources.",
+    scene: "notes" },
 ];
 
 function TutorRow({
@@ -280,7 +280,6 @@ function TutorRow({
         </div>
         {t.support && <p className="tp-row-support">{t.support}</p>}
         <div className="tp-row-foot">
-          <span className="tp-row-meta">{t.meta ?? (isMine ? "" : "Ready to go")}</span>
           <button className="tp-card-act tp-card-act--primary">Open <ArrowRight size={13} /></button>
         </div>
       </div>
