@@ -394,7 +394,27 @@ function TutorsPage() {
         </header>
 
         <div className="tp-top-actions">
-          <button className="tp-btn tp-btn-ghost"><Search size={15} /> Search tutors</button>
+          <div className={`tp-search${searchOpen || query ? " is-open" : ""}`}>
+            <Search size={15} />
+            <input
+              type="text"
+              placeholder="Search tutors by name or topic…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setSearchOpen(true)}
+              onBlur={() => setSearchOpen(false)}
+              aria-label="Search tutors"
+            />
+            {query && (
+              <button
+                type="button"
+                className="tp-search-clear"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+              ><X size={13} /></button>
+            )}
+          </div>
           <button className="tp-btn tp-btn-primary"><Plus size={15} /> New tutor</button>
         </div>
 
@@ -408,8 +428,25 @@ function TutorsPage() {
               {favList.map((t) => (
                 <TutorRow
                   key={"fav-" + t.id} t={t} fav onFav={() => toggleFav(t.id)}
-                  image={imgFor(t)} onImage={(u) => setImage(t.id, u)}
+                  customImage={images[t.id]} onImage={(u) => setImage(t.id, u)}
                   isMine={myIds.has(t.id)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {preFiltered.length > 0 && (
+          <section className="tp-section">
+            <div className="tp-section-head">
+              <span className="tp-section-label">Pre-made tutors</span>
+              <span className="tp-section-count">{preFiltered.length}</span>
+            </div>
+            <div className="tp-rowgrid">
+              {preFiltered.map((t) => (
+                <TutorRow
+                  key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
+                  customImage={images[t.id]} onImage={(u) => setImage(t.id, u)}
                 />
               ))}
             </div>
@@ -418,40 +455,35 @@ function TutorsPage() {
 
         <section className="tp-section">
           <div className="tp-section-head">
-            <span className="tp-section-label">Pre-made tutors</span>
-            <span className="tp-section-count">{preCreated.length}</span>
+            <span className="tp-section-label">My tutors</span>
+            <span className="tp-section-count">{myFiltered.length}</span>
           </div>
           <div className="tp-rowgrid">
-            {preCreated.map((t) => (
+            {myFiltered.map((t) => (
               <TutorRow
                 key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
-                image={imgFor(t)} onImage={(u) => setImage(t.id, u)}
+                customImage={images[t.id]} onImage={(u) => setImage(t.id, u)} isMine
               />
             ))}
+            {!q && (
+              <button className="tp-build">
+                <div className="tp-build-ic"><Plus size={22} strokeWidth={2.4} /></div>
+                <div>
+                  <p className="tp-build-title">Build a new tutor</p>
+                  <p className="tp-build-sub">Upload notes, pick a vibe, go <Sparkles size={12} /></p>
+                </div>
+              </button>
+            )}
           </div>
         </section>
 
-        <section className="tp-section">
-          <div className="tp-section-head">
-            <span className="tp-section-label">My tutors</span>
-            <span className="tp-section-count">{myTutors.length}</span>
+        {q && preFiltered.length === 0 && myFiltered.length === 0 && (
+          <div className="tp-empty">
+            <p>No tutors match "<b>{query}</b>".</p>
+            <button className="tp-btn tp-btn-ghost" onClick={() => setQuery("")}>Clear search</button>
           </div>
-          <div className="tp-rowgrid">
-            {myTutors.map((t) => (
-              <TutorRow
-                key={t.id} t={t} fav={!!favs[t.id]} onFav={() => toggleFav(t.id)}
-                image={imgFor(t)} onImage={(u) => setImage(t.id, u)} isMine
-              />
-            ))}
-            <button className="tp-build">
-              <div className="tp-build-ic"><Plus size={22} strokeWidth={2.4} /></div>
-              <div>
-                <p className="tp-build-title">Build a new tutor</p>
-                <p className="tp-build-sub">Upload notes, pick a vibe, go <Sparkles size={12} /></p>
-              </div>
-            </button>
-          </div>
-        </section>
+        )}
+
       </main>
 
       <style>{css}</style>
