@@ -303,6 +303,7 @@ function TutorsPage() {
   const [images, setImages] = useState<Record<string, string>>({});
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [builderOpen, setBuilderOpen] = useState(false);
 
 
   const nav = [
