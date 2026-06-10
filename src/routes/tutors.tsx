@@ -200,36 +200,36 @@ type Tutor = {
   title: string;
   subtitle?: string;
   support?: string;
-  image: string;     // default editorial photo
+  scene: SceneKey;
   meta?: string;
 };
 
 const preCreated: Tutor[] = [
   { id: "eng", title: "DSE English", subtitle: "Paper 1–4",
     support: "Plan essays, rehearse speaking and tear apart reading passages line by line.",
-    image: imgEnglish },
+    scene: "english" },
   { id: "mat", title: "DSE Maths", subtitle: "Core · M1 · M2",
     support: "Step-by-step working, past-paper drills and intuition for tricky proofs.",
-    image: imgMaths },
+    scene: "maths" },
   { id: "civ", title: "DSE Citizenship", subtitle: "HK & the world",
     support: "Frameworks for source questions, case studies and short-answer structure.",
-    image: imgCivics },
+    scene: "civics" },
   { id: "chi", title: "DSE 中文", subtitle: "閱讀 · 寫作 · 聆聽說話",
     support: "範文精讀、作文骨架同說話卷練習，一齊由零開始拆解。",
-    image: imgChinese },
+    scene: "chinese" },
 ];
 
 const myTutors: Tutor[] = [
   { id: "eng-notes", title: "English · my notes", subtitle: "Built from 24 pages",
     support: "Trained on your Form 5 essays and vocab lists.",
-    image: imgNotes, meta: "Last edited 2d ago" },
+    scene: "notes", meta: "Last edited 2d ago" },
 ];
 
 function TutorRow({
-  t, fav, onFav, image, onImage, isMine,
+  t, fav, onFav, customImage, onImage, isMine,
 }: {
   t: Tutor; fav: boolean; onFav: () => void;
-  image: string; onImage: (url: string) => void; isMine?: boolean;
+  customImage?: string; onImage: (url: string) => void; isMine?: boolean;
 }) {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const pick = () => fileRef.current?.click();
@@ -242,7 +242,9 @@ function TutorRow({
   return (
     <article className="tp-row">
       <div className="tp-row-media">
-        <img src={image} alt="" loading="lazy" />
+        {customImage
+          ? <img src={customImage} alt="" loading="lazy" />
+          : <Scene k={t.scene} />}
         <button
           type="button"
           className="tp-row-editimg"
@@ -294,6 +296,9 @@ function TutorsPage() {
   const [userOpen, setUserOpen] = useState(false);
   const [favs, setFavs] = useState<Record<string, boolean>>({ eng: true });
   const [images, setImages] = useState<Record<string, string>>({});
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+
 
   const nav = [
     { id: "home", label: "Home", icon: Home, to: "/" as const },
