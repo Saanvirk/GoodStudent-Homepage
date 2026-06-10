@@ -81,7 +81,7 @@ function Mascot({ className = "" }: { className?: string }) {
 }
 
 /* ===== Hand-drawn line icons — no emoji ===== */
-type GlyphKey = "english" | "maths" | "civics" | "chinese" | "biology" | "physics" | "history";
+type GlyphKey = "english" | "maths" | "civics" | "chinese";
 
 function Glyph({ k }: { k: GlyphKey }) {
   const s = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
