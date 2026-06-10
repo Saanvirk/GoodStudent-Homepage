@@ -81,7 +81,7 @@ function Mascot({ className = "" }: { className?: string }) {
 }
 
 /* ===== Hand-drawn line icons — no emoji ===== */
-type GlyphKey = "english" | "maths" | "civics" | "chinese" | "biology" | "physics" | "history";
+type GlyphKey = "english" | "maths" | "civics" | "chinese";
 
 function Glyph({ k }: { k: GlyphKey }) {
   const s = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
@@ -118,29 +118,6 @@ function Glyph({ k }: { k: GlyphKey }) {
           <path d="M11 10h10M11 22h10" />
         </svg>
       );
-    case "biology":
-      return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <path d="M9 6c8 6 8 14 0 20M23 6c-8 6-8 14 0 20" fill="rgba(255,255,255,.25)" />
-          <path d="M11 10h10M13 16h6M11 22h10" />
-        </svg>
-      );
-    case "physics":
-      return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <ellipse cx="16" cy="16" rx="11" ry="5" />
-          <ellipse cx="16" cy="16" rx="11" ry="5" transform="rotate(60 16 16)" />
-          <ellipse cx="16" cy="16" rx="11" ry="5" transform="rotate(120 16 16)" />
-          <circle cx="16" cy="16" r="2.2" fill="currentColor" />
-        </svg>
-      );
-    case "history":
-      return (
-        <svg viewBox="0 0 32 32" {...s}>
-          <circle cx="16" cy="16" r="10" fill="rgba(255,255,255,.3)" />
-          <path d="M16 9v7l5 3" />
-        </svg>
-      );
   }
 }
 
@@ -159,13 +136,10 @@ const preCreated: Tutor[] = [
   { id: "mat",  glyph: "maths",   title: "DSE Maths",       subtitle: "Core • M1 • M2",               tint: "#3D5A6C", ink: "#E8EEF2" },
   { id: "civ",  glyph: "civics",  title: "DSE Citizenship", subtitle: "Hong Kong & the world",        tint: "#6B8E4E", ink: "#EEF3E6" },
   { id: "chi",  glyph: "chinese", title: "DSE 中文",         subtitle: "閱讀 • 寫作 • 聆聽說話",          tint: "#8C5E7A", ink: "#F2E8EE" },
-  { id: "bio",  glyph: "biology", title: "DSE Biology",     subtitle: "Cells, ecology, genetics",      tint: "#B8893A", ink: "#F5EBD9" },
-  { id: "phy",  glyph: "physics", title: "DSE Physics",     subtitle: "Mechanics & waves",             tint: "#506B7A", ink: "#E6EEF2" },
-  { id: "his",  glyph: "history", title: "DSE History",     subtitle: "Sources, essays, themes",       tint: "#9C6B3F", ink: "#F2E6D8" },
 ];
 
 const myTutors: Tutor[] = [
-  { id: "bio-notes", glyph: "biology", title: "Biology · my notes", subtitle: "Built from 24 pages", tint: "#6B5B95", ink: "#ECE8F2", meta: "Last edited 2d ago" },
+  { id: "eng-notes", glyph: "english", title: "English · my notes", subtitle: "Built from 24 pages", tint: "#6B5B95", ink: "#ECE8F2", meta: "Last edited 2d ago" },
 ];
 
 function TutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
