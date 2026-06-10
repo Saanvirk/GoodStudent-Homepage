@@ -139,7 +139,7 @@ const preCreated: Tutor[] = [
 ];
 
 const myTutors: Tutor[] = [
-  { id: "bio-notes", glyph: "biology", title: "Biology · my notes", subtitle: "Built from 24 pages", tint: "#6B5B95", ink: "#ECE8F2", meta: "Last edited 2d ago" },
+  { id: "eng-notes", glyph: "english", title: "English · my notes", subtitle: "Built from 24 pages", tint: "#6B5B95", ink: "#ECE8F2", meta: "Last edited 2d ago" },
 ];
 
 function TutorCard({ t, fav, onFav }: { t: Tutor; fav: boolean; onFav: () => void }) {
