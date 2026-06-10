@@ -309,10 +309,14 @@ function TutorsPage() {
 
   const toggleFav = (id: string) => setFavs((f) => ({ ...f, [id]: !f[id] }));
   const setImage = (id: string, url: string) => setImages((m) => ({ ...m, [id]: url }));
-  const imgFor = (t: Tutor) => images[t.id] ?? t.image;
   const myIds = useMemo(() => new Set(myTutors.map((t) => t.id)), []);
-  const allTutors = useMemo(() => [...preCreated, ...myTutors], []);
-  const favList = allTutors.filter((t) => favs[t.id]);
+  const q = query.trim().toLowerCase();
+  const match = (t: Tutor) =>
+    !q || t.title.toLowerCase().includes(q) || (t.subtitle ?? "").toLowerCase().includes(q) || (t.support ?? "").toLowerCase().includes(q);
+  const preFiltered = preCreated.filter(match);
+  const myFiltered = myTutors.filter(match);
+  const favList = [...preCreated, ...myTutors].filter((t) => favs[t.id] && match(t));
+
 
   return (
     <div className="tp-root">
