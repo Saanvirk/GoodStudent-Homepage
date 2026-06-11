@@ -334,74 +334,90 @@ function MascotScene({ bg, accent, prop }: SceneProps & { prop: PropKey }) {
 
 /* ===== Category tab icons — soft flat illustration style ===== */
 function CatIcon({ k }: { k: CatIconKey; color?: string }) {
-  // Flat, friendly pictograms — no outlines, layered pastel fills with a soft
-  // shadow shape, matching the flat-illustration look used across the brand.
+  // Chunky cartoon pictograms — flat fills with two tones and a small accent
+  // shape per icon, inspired by the reference flat-illustration sticker style.
   switch (k) {
     case "palette":
+      // Cartoon camera — Picture Lab
       return (
-        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
-          {/* photo frame */}
-          <rect x="7" y="9" width="34" height="30" rx="6" fill="#FFF3E4"/>
-          <rect x="7" y="9" width="34" height="30" rx="6" fill="#FFE3C4" opacity=".5"/>
-          <rect x="10" y="12" width="28" height="24" rx="4" fill="#FFD9AE"/>
-          {/* sun */}
-          <circle cx="18" cy="20" r="3.6" fill="#FFB454"/>
-          {/* mountains, two tones */}
-          <path d="M10 36 L21 24 L28 31 L33 26 L38 31 V32 a4 4 0 0 1 -4 4 H14 a4 4 0 0 1 -4 -4 Z" fill="#F58A3C"/>
-          <path d="M22 36 L30 28 L38 35 V32 a4 4 0 0 1 -4 4 Z" fill="#E8650F"/>
+        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+          <ellipse cx="24" cy="43" rx="13" ry="2.2" fill="#2A1F18" opacity=".1"/>
+          {/* top hump */}
+          <path d="M18 12 h12 l2.2 4 h-16.4 z" fill="#F0973C"/>
+          {/* body */}
+          <rect x="7" y="15" width="34" height="22" rx="4" fill="#F0973C"/>
+          <rect x="7" y="15" width="34" height="7" rx="4" fill="#FFB454"/>
+          {/* lens outer */}
+          <circle cx="24" cy="27" r="8" fill="#FFE3C4"/>
+          <circle cx="24" cy="27" r="6.2" fill="#E8650F"/>
+          <circle cx="24" cy="27" r="3.4" fill="#FFB454"/>
+          <circle cx="22" cy="25.2" r="1.3" fill="#FFF3E4"/>
+          {/* flash */}
+          <rect x="11" y="18" width="4" height="2.6" rx="1" fill="#FFE3C4"/>
         </svg>
       );
     case "pencil":
+      // Cartoon open book with pencil — Word Play
       return (
-        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
-          {/* page */}
-          <path d="M10 11 a4 4 0 0 1 4 -4 h13 l9 9 v21 a4 4 0 0 1 -4 4 H14 a4 4 0 0 1 -4 -4 Z" fill="#EAF6F1"/>
-          <path d="M27 7 l9 9 h-6 a3 3 0 0 1 -3 -3 Z" fill="#C8E8DC"/>
-          {/* text lines */}
-          <rect x="15" y="20" width="14" height="2.6" rx="1.3" fill="#9BD4C0"/>
-          <rect x="15" y="25" width="17" height="2.6" rx="1.3" fill="#BCE2D4"/>
-          <rect x="15" y="30" width="11" height="2.6" rx="1.3" fill="#BCE2D4"/>
-          {/* pencil resting across the corner */}
-          <g transform="rotate(-42 36 32)">
-            <rect x="27" y="29" width="17" height="5.4" rx="1.6" fill="#37C2A0"/>
-            <rect x="27" y="29" width="4" height="5.4" rx="1.4" fill="#2FA38A"/>
-            <path d="M44 29 l4.6 2.7 l-4.6 2.7 z" fill="#F2C48C"/>
-            <path d="M47.2 30.9 l1.4 .8 l-1.4 .8 z" fill="#7A5A3A"/>
+        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+          <ellipse cx="24" cy="43" rx="13" ry="2.2" fill="#2A1F18" opacity=".1"/>
+          {/* book base */}
+          <path d="M6 14 h16 a2 2 0 0 1 2 2 v22 a2 2 0 0 0 -2 -2 H6 z" fill="#2FA38A"/>
+          <path d="M42 14 h-16 a2 2 0 0 0 -2 2 v22 a2 2 0 0 1 2 -2 h16 z" fill="#37C2A0"/>
+          {/* pages */}
+          <path d="M8 16 h14 v20 H8 z" fill="#EAF6F1"/>
+          <path d="M26 16 h14 v20 H26 z" fill="#F4FBF8"/>
+          <rect x="10" y="20" width="10" height="1.8" rx=".9" fill="#9BD4C0"/>
+          <rect x="10" y="24" width="8"  height="1.8" rx=".9" fill="#BCE2D4"/>
+          <rect x="28" y="20" width="10" height="1.8" rx=".9" fill="#9BD4C0"/>
+          <rect x="28" y="24" width="9"  height="1.8" rx=".9" fill="#BCE2D4"/>
+          {/* pencil on top */}
+          <g transform="rotate(-18 30 12)">
+            <rect x="14" y="7" width="22" height="5" rx="1.4" fill="#E59A2F"/>
+            <rect x="14" y="7" width="5"  height="5" rx="1.4" fill="#C67A1B"/>
+            <path d="M36 7 l5 2.5 l-5 2.5 z" fill="#FFE3C4"/>
+            <path d="M39.3 8.6 l1.7 .9 l-1.7 .9 z" fill="#2A1F18"/>
           </g>
         </svg>
       );
     case "mic":
+      // Cartoon character with speech bubble — Sound Zone (matches reference)
       return (
-        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
+        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+          <ellipse cx="24" cy="43" rx="13" ry="2.2" fill="#2A1F18" opacity=".1"/>
+          {/* shoulders / shirt */}
+          <path d="M6 40 c1 -7 7 -10 12 -10 c5 0 11 3 12 10 z" fill="#4A90C9"/>
+          {/* head */}
+          <circle cx="18" cy="22" r="7" fill="#F2C48C"/>
+          {/* hair / cap */}
+          <path d="M11 21 a7 7 0 0 1 14 0 v-1 c0 -1.6 -1.4 -3 -3 -3 h-8 c-1.6 0 -3 1.4 -3 3 z" fill="#2F4F7A"/>
           {/* speech bubble */}
-          <path d="M8 13 a6 6 0 0 1 6 -6 h20 a6 6 0 0 1 6 6 v12 a6 6 0 0 1 -6 6 H22 l-7 6 v-6 h-1 a6 6 0 0 1 -6 -6 Z" fill="#BBDDF5"/>
-          <path d="M8 13 a6 6 0 0 1 6 -6 h20 a6 6 0 0 1 6 6 v4 H8 Z" fill="#CFE8F8" opacity=".7"/>
-          {/* sound bars inside */}
-          <rect x="15" y="16" width="3.2" height="7" rx="1.6" fill="#4A90C9"/>
-          <rect x="20.5" y="13" width="3.2" height="13" rx="1.6" fill="#3E7FB5"/>
-          <rect x="26" y="15" width="3.2" height="9" rx="1.6" fill="#4A90C9"/>
-          <rect x="31.5" y="17" width="3.2" height="5" rx="1.6" fill="#6FB3F2"/>
+          <path d="M30 8 h12 a3 3 0 0 1 3 3 v8 a3 3 0 0 1 -3 3 h-7 l-4 4 v-4 h-1 a3 3 0 0 1 -3 -3 v-8 a3 3 0 0 1 3 -3 z" fill="#37C2A0"/>
+          <rect x="33" y="13" width="9" height="1.6" rx=".8" fill="#EAF6F1"/>
+          <rect x="33" y="16" width="9" height="1.6" rx=".8" fill="#EAF6F1"/>
+          <rect x="33" y="19" width="6" height="1.6" rx=".8" fill="#EAF6F1"/>
         </svg>
       );
     case "spark":
+      // Cartoon gift with star burst — Surprise Me
       return (
-        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
-          {/* gift box */}
-          <rect x="9" y="20" width="30" height="20" rx="3" fill="#FFE2B0"/>
-          <rect x="9" y="20" width="30" height="9" rx="3" fill="#FFD592"/>
-          <rect x="7.5" y="15" width="33" height="7" rx="2.4" fill="#FFB454"/>
-          <rect x="21" y="15" width="6" height="25" fill="#F0973C"/>
+        <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true">
+          <ellipse cx="24" cy="43" rx="13" ry="2.2" fill="#2A1F18" opacity=".1"/>
+          {/* burst behind */}
+          <path d="M24 4 l2.4 4.4 l4.8 -1.2 l-1.2 4.8 l4.4 2.4 l-4.4 2.4 l1.2 4.8 l-4.8 -1.2 l-2.4 4.4 l-2.4 -4.4 l-4.8 1.2 l1.2 -4.8 l-4.4 -2.4 l4.4 -2.4 l-1.2 -4.8 l4.8 1.2 z" fill="#E59A2F" opacity=".25"/>
+          {/* box body */}
+          <rect x="8" y="22" width="32" height="18" rx="2.4" fill="#E59A2F"/>
+          <rect x="8" y="22" width="32" height="6" rx="2.4" fill="#F2B656"/>
+          {/* lid */}
+          <rect x="6" y="17" width="36" height="7" rx="2" fill="#D9912A"/>
+          {/* ribbon */}
+          <rect x="21" y="17" width="6" height="23" fill="#C67A1B"/>
           {/* bow */}
-          <path d="M24 15 c-5 -6 -11 -2 -6.5 2.6 z" fill="#F0973C"/>
-          <path d="M24 15 c5 -6 11 -2 6.5 2.6 z" fill="#F0973C"/>
-          <circle cx="24" cy="15.4" r="2.1" fill="#FFD592"/>
-          {/* sparkles */}
-          <path d="M40 6 l1.1 2.6 l2.6 1.1 l-2.6 1.1 l-1.1 2.6 l-1.1 -2.6 l-2.6 -1.1 l2.6 -1.1 z" fill="#FFB454"/>
-          <circle cx="7" cy="10" r="1.9" fill="#5BD0B4"/>
+          <path d="M24 17 c-6 -7 -12 -2 -6.5 3 z" fill="#C67A1B"/>
+          <path d="M24 17 c6 -7 12 -2 6.5 3 z" fill="#C67A1B"/>
+          <circle cx="24" cy="17.4" r="2.2" fill="#F2B656"/>
+          {/* tiny sparkle */}
+          <path d="M40 7 l.9 2 l2 .9 l-2 .9 l-.9 2 l-.9 -2 l-2 -.9 l2 -.9 z" fill="#FFD592"/>
         </svg>
       );
   }
