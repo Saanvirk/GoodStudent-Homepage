@@ -591,7 +591,7 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
         <div className="tp-mo-head">
           <div className="tp-eyebrow"><span className="tp-dot" /> Build a tutor</div>
           <h2 className="tp-mo-title">Let's spin up your new tutor</h2>
-          <p className="tp-mo-sub">Five quick steps. You can edit anything later.</p>
+          <p className="tp-mo-sub">Four quick steps. You can edit anything later.</p>
         </div>
 
         <ol className="tp-stepper">
