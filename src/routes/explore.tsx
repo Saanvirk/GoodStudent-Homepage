@@ -5,28 +5,26 @@ import {
   Pencil,
   Wrench,
   Globe,
-  Search,
   ChevronsUpDown,
   User,
   Settings,
   LogOut,
-  ArrowUpRight,
-  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
       { title: "Explore — Good Student" },
-      { name: "description", content: "A playful menu of AI experiments — make pictures, words, voices and surprises. Pick one and go." },
+      { name: "description", content: "A playful menu of AI experiments — paint pictures, play with words, hear voices, and try curious challenges." },
       { property: "og:title", content: "Explore — Good Student" },
-      { property: "og:description", content: "A playful menu of AI experiments — make pictures, words, voices and surprises." },
+      { property: "og:description", content: "Paint pictures, play with words, hear voices and try curious challenges." },
     ],
   }),
   component: ExplorePage,
 });
 
-/* ===== Shared brand mark (same as tools/tutors page) ===== */
+/* ===== Logo (same as other pages) ===== */
 function LogoMark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 56 56" className={className} aria-hidden="true">
@@ -54,7 +52,7 @@ function LogoMark({ className = "" }: { className?: string }) {
   );
 }
 
-/* ===== Mascot (same as index/tutors) ===== */
+/* ===== Mascot ===== */
 function Mascot({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 220 246" className={`ex-ms ${className}`} aria-hidden="true">
@@ -89,6 +87,189 @@ function Mascot({ className = "" }: { className?: string }) {
   );
 }
 
+/* ===== Mini scene illustrations (one per experiment) ===== */
+/* Each is a small playful scene drawn directly in SVG, not a flat icon. */
+type SceneProps = { bg: string };
+
+function S_Create({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <circle cx="170" cy="22" r="14" fill="#FFD79A" />
+      <rect x="30" y="32" width="110" height="78" rx="8" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2"/>
+      <path d="M36 96 L66 64 L86 84 L106 70 L134 102 Z" fill="#FFB07A"/>
+      <circle cx="58" cy="52" r="6" fill="#FF6B5A"/>
+      <rect x="120" y="92" width="46" height="20" rx="10" fill="#fff" stroke="#2A1F18" strokeWidth="2"/>
+      <rect x="126" y="98" width="12" height="8" rx="2" fill="#FB6A1E"/>
+      <rect x="142" y="98" width="12" height="8" rx="2" fill="#5BD0B4"/>
+    </svg>
+  );
+}
+function S_Edit({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="34" y="28" width="86" height="68" rx="6" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2" transform="rotate(-6 77 62)"/>
+      <circle cx="64" cy="50" r="6" fill="#FFB454"/>
+      <path d="M48 80 L66 62 L82 78 L98 70" stroke="#2A1F18" strokeWidth="2" fill="none" transform="rotate(-6 77 62)"/>
+      <path d="M120 96 L160 56 L172 68 L132 108 Z" fill="#5BD0B4" stroke="#2A1F18" strokeWidth="2"/>
+      <path d="M158 54 L172 40 L186 54 L172 68 Z" fill="#FB6A1E" stroke="#2A1F18" strokeWidth="2"/>
+      <path d="M120 108 L132 108 L120 120 Z" fill="#2A1F18"/>
+      <circle cx="40" cy="22" r="3" fill="#FF6B5A"/><circle cx="50" cy="18" r="2" fill="#5BD0B4"/><circle cx="60" cy="22" r="2" fill="#FFB454"/>
+    </svg>
+  );
+}
+function S_Extract({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="40" y="24" width="58" height="80" rx="6" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2" transform="rotate(-8 69 64)"/>
+      <line x1="46" y1="46" x2="92" y2="38" stroke="#C8553D" strokeWidth="2.4" transform="rotate(-8 69 64)"/>
+      <line x1="46" y1="58" x2="88" y2="50" stroke="#C8553D" strokeWidth="2.4" transform="rotate(-8 69 64)"/>
+      <line x1="46" y1="70" x2="80" y2="62" stroke="#C8553D" strokeWidth="2.4" transform="rotate(-8 69 64)"/>
+      <rect x="110" y="38" width="64" height="68" rx="10" fill="#26323B" stroke="#2A1F18" strokeWidth="2.2"/>
+      <circle cx="142" cy="56" r="14" fill="none" stroke="#46D6AE" strokeWidth="2.4"/>
+      <path d="M152 66 L168 80" stroke="#46D6AE" strokeWidth="2.6"/>
+      <text x="142" y="98" textAnchor="middle" fontFamily="Fredoka,system-ui" fontSize="11" fontWeight="700" fill="#46D6AE">abc</text>
+    </svg>
+  );
+}
+function S_Poem({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="44" y="22" width="100" height="86" rx="6" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2"/>
+      <line x1="54" y1="40" x2="118" y2="40" stroke="#3D7068" strokeWidth="2.2"/>
+      <line x1="54" y1="54" x2="132" y2="54" stroke="#3D7068" strokeWidth="2.2"/>
+      <line x1="54" y1="68" x2="108" y2="68" stroke="#3D7068" strokeWidth="2.2"/>
+      <line x1="54" y1="82" x2="124" y2="82" stroke="#3D7068" strokeWidth="2.2"/>
+      <path d="M150 30 q12 -8 18 6 q4 14 -10 18 q-8 -2 -8 -10 z" fill="#5BD0B4" stroke="#2A1F18" strokeWidth="2"/>
+      <path d="M152 50 L168 36" stroke="#2A1F18" strokeWidth="1.6"/>
+    </svg>
+  );
+}
+function S_Haiku({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <circle cx="44" cy="32" r="14" fill="#FFD79A"/>
+      <path d="M0 96 q40 -20 80 0 q40 20 80 0 q20 -10 40 0 L200 130 L0 130 Z" fill="#6B8E4E"/>
+      <path d="M0 108 q50 -10 100 0 q50 10 100 0 L200 130 L0 130 Z" fill="#4A6B36"/>
+      <path d="M110 70 q10 -30 30 -10 q14 14 -4 28" fill="none" stroke="#2A1F18" strokeWidth="2"/>
+      <ellipse cx="118" cy="72" rx="4" ry="6" fill="#9CCB7E"/>
+      <ellipse cx="132" cy="64" rx="4" ry="6" fill="#9CCB7E"/>
+      <ellipse cx="142" cy="78" rx="4" ry="6" fill="#9CCB7E"/>
+    </svg>
+  );
+}
+function S_Joke({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <circle cx="100" cy="68" r="38" fill="#FFD261" stroke="#2A1F18" strokeWidth="2.4"/>
+      <circle cx="86" cy="60" r="3.5" fill="#2A1F18"/>
+      <circle cx="114" cy="60" r="3.5" fill="#2A1F18"/>
+      <path d="M82 76 q18 18 36 0 q-18 8 -36 0 z" fill="#fff" stroke="#2A1F18" strokeWidth="2"/>
+      <path d="M82 76 q18 18 36 0" fill="none" stroke="#2A1F18" strokeWidth="2"/>
+      <path d="M40 30 L48 38 M52 24 L56 32 M160 26 L154 34 M168 34 L160 40" stroke="#FB6A1E" strokeWidth="2.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function S_Comic({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="22" y="20" width="74" height="44" rx="4" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2"/>
+      <rect x="104" y="20" width="74" height="44" rx="4" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2"/>
+      <rect x="22" y="72" width="156" height="40" rx="4" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.2"/>
+      <path d="M34 30 q14 -8 24 0 L60 42 L54 38 Z" fill="#fff" stroke="#2A1F18" strokeWidth="1.6"/>
+      <path d="M124 32 q18 -8 30 4 L150 50 L144 44 Z" fill="#fff" stroke="#2A1F18" strokeWidth="1.6"/>
+      <circle cx="42" cy="52" r="6" fill="#FFB454"/>
+      <circle cx="140" cy="52" r="6" fill="#5BD0B4"/>
+      <path d="M40 88 q24 -12 48 0 q24 12 48 0" stroke="#2A1F18" strokeWidth="1.8" fill="none"/>
+    </svg>
+  );
+}
+function S_Twist({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="86" y="34" width="28" height="46" rx="14" fill="#FB6A1E" stroke="#2A1F18" strokeWidth="2.4"/>
+      <path d="M70 70 a30 30 0 0 0 60 0" fill="none" stroke="#2A1F18" strokeWidth="2.4"/>
+      <line x1="100" y1="98" x2="100" y2="110" stroke="#2A1F18" strokeWidth="2.4"/>
+      <line x1="84" y1="110" x2="116" y2="110" stroke="#2A1F18" strokeWidth="2.4"/>
+      <path d="M30 56 q10 -8 0 -16 M30 76 q14 -10 0 -22 M30 96 q18 -14 0 -28" stroke="#3D5A6C" strokeWidth="2.2" fill="none"/>
+      <path d="M170 56 q-10 -8 0 -16 M170 76 q-14 -10 0 -22 M170 96 q-18 -14 0 -28" stroke="#3D5A6C" strokeWidth="2.2" fill="none"/>
+    </svg>
+  );
+}
+function S_Hear({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <path d="M40 56 L62 56 L92 32 V100 L62 76 L40 76 Z" fill="#5BD0B4" stroke="#2A1F18" strokeWidth="2.4"/>
+      <path d="M108 44 q14 14 0 44" fill="none" stroke="#2A1F18" strokeWidth="2.4"/>
+      <path d="M124 32 q22 22 0 68" fill="none" stroke="#2A1F18" strokeWidth="2.4"/>
+      <path d="M140 22 q30 30 0 88" fill="none" stroke="#FB6A1E" strokeWidth="2.6"/>
+    </svg>
+  );
+}
+function S_Phrases({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <circle cx="100" cy="66" r="36" fill="#A8D7C9" stroke="#2A1F18" strokeWidth="2.4"/>
+      <ellipse cx="100" cy="66" rx="14" ry="36" fill="none" stroke="#2A1F18" strokeWidth="1.6"/>
+      <line x1="64" y1="66" x2="136" y2="66" stroke="#2A1F18" strokeWidth="1.6"/>
+      <path d="M40 30 q16 -6 24 4 L60 44 L54 42 Z" fill="#fff" stroke="#2A1F18" strokeWidth="1.8"/>
+      <text x="52" y="38" fontFamily="Fredoka,system-ui" fontSize="9" fontWeight="700" fill="#2A1F18">Hi</text>
+      <path d="M158 96 q-16 -6 -24 4 L138 110 L144 108 Z" fill="#fff" stroke="#2A1F18" strokeWidth="1.8"/>
+      <text x="146" y="106" fontFamily="Fredoka,system-ui" fontSize="9" fontWeight="700" fill="#2A1F18">你好</text>
+    </svg>
+  );
+}
+function S_News({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="30" y="22" width="140" height="86" rx="6" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.4"/>
+      <rect x="40" y="32" width="58" height="40" rx="3" fill="#9C6B3F"/>
+      <circle cx="60" cy="50" r="8" fill="#FFD79A"/>
+      <path d="M44 70 q14 -10 26 0 q14 8 28 -2" stroke="#FFD79A" strokeWidth="2.4" fill="none"/>
+      <line x1="106" y1="36" x2="160" y2="36" stroke="#2A1F18" strokeWidth="2.2"/>
+      <line x1="106" y1="48" x2="158" y2="48" stroke="#2A1F18" strokeWidth="1.6"/>
+      <line x1="106" y1="56" x2="152" y2="56" stroke="#2A1F18" strokeWidth="1.6"/>
+      <line x1="106" y1="64" x2="156" y2="64" stroke="#2A1F18" strokeWidth="1.6"/>
+      <line x1="40" y1="84" x2="160" y2="84" stroke="#2A1F18" strokeWidth="1.6"/>
+      <line x1="40" y1="94" x2="140" y2="94" stroke="#2A1F18" strokeWidth="1.6"/>
+    </svg>
+  );
+}
+function S_Riddle({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <circle cx="100" cy="62" r="36" fill="#A04545" stroke="#2A1F18" strokeWidth="2.4"/>
+      <path d="M88 54 a14 14 0 0 1 24 8 c0 8 -12 8 -12 18" stroke="#fff" strokeWidth="3.4" fill="none" strokeLinecap="round"/>
+      <circle cx="100" cy="92" r="3.4" fill="#fff"/>
+      <path d="M40 30 L48 38 M152 30 L144 38 M40 100 L48 92 M152 100 L144 92" stroke="#FFB454" strokeWidth="2.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function S_Faf({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="30" y="38" width="62" height="60" rx="6" fill="#6B5B95" stroke="#2A1F18" strokeWidth="2.4" transform="rotate(-6 61 68)"/>
+      <text x="61" y="78" textAnchor="middle" fontFamily="Fredoka,system-ui" fontSize="22" fontWeight="700" fill="#fff" transform="rotate(-6 61 68)">✓</text>
+      <rect x="108" y="38" width="62" height="60" rx="6" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.4" transform="rotate(6 139 68)"/>
+      <text x="139" y="78" textAnchor="middle" fontFamily="Fredoka,system-ui" fontSize="22" fontWeight="700" fill="#A04545" transform="rotate(6 139 68)">✗</text>
+    </svg>
+  );
+}
+function S_Finish({ bg }: SceneProps) {
+  return (
+    <svg className="ex-scene" viewBox="0 0 200 130" preserveAspectRatio="xMidYMid slice" style={{ background: bg }}>
+      <rect x="34" y="34" width="132" height="62" rx="8" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="2.4"/>
+      <line x1="44" y1="52" x2="120" y2="52" stroke="#7A6B4F" strokeWidth="2.2"/>
+      <line x1="44" y1="64" x2="138" y2="64" stroke="#7A6B4F" strokeWidth="2.2"/>
+      <line x1="44" y1="76" x2="100" y2="76" stroke="#7A6B4F" strokeWidth="2.2"/>
+      <rect x="104" y="72" width="2" height="10" fill="#FB6A1E">
+        <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="155" cy="78" r="2" fill="#7A6B4F"/>
+      <circle cx="162" cy="78" r="2" fill="#7A6B4F"/>
+    </svg>
+  );
+}
+
 /* ===== Data ===== */
 type Cat = "picture" | "words" | "voice" | "surprise";
 
@@ -96,116 +277,71 @@ type Item = {
   id: string;
   title: string;
   sub: string;
-  glyph: GKey;
-  tint: string;
-  ink: string;
-  verb: string;
+  Scene: (p: SceneProps) => JSX.Element;
+  bg: string;
 };
 
-type GKey =
-  | "frame" | "wand" | "scanner"
-  | "feather" | "leaf" | "smile" | "panel"
-  | "twist" | "speaker" | "phrases" | "news"
-  | "riddle" | "faf" | "dots";
-
-const SECTIONS: { id: Cat; title: string; tag: string; sub: string; rail: string; items: Item[] }[] = [
-  {
-    id: "picture",
+const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: string; items: Item[] }> = {
+  picture: {
     tag: "Picture Lab",
     title: "Make a picture",
-    sub: "Paint with words, remix a photo, or pull text out of a snap.",
+    sub: "Paint with words, remix a photo, or pull text from a snap.",
     rail: "#C8553D",
     items: [
-      { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",     glyph: "frame",   tint: "#C8553D", ink: "#FBEFE8", verb: "Start painting" },
-      { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",    glyph: "wand",    tint: "#A65A4B", ink: "#F3E4DF", verb: "Remix a photo" },
-      { id: "extract", title: "Extract text", sub: "Snap a picture and pull the words inside.",      glyph: "scanner", tint: "#7A4A5A", ink: "#F0E2E8", verb: "Read a snap" },
+      { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",   Scene: S_Create,  bg: "#FBE5D8" },
+      { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",  Scene: S_Edit,    bg: "#F8D6CE" },
+      { id: "extract", title: "Extract text", sub: "Snap a picture and pull the words inside.",    Scene: S_Extract, bg: "#F2E0DA" },
     ],
   },
-  {
-    id: "words",
+  words: {
     tag: "Word Play",
     title: "Play with words",
     sub: "Poems, haiku, jokes and comic strips — written together.",
     rail: "#3D7068",
     items: [
-      { id: "poem",   title: "Poem",        sub: "A playful poem about anything you like.",    glyph: "feather", tint: "#3D7068", ink: "#E2EDE9", verb: "Write a poem" },
-      { id: "haiku",  title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",           glyph: "leaf",    tint: "#6B8E4E", ink: "#EEF3E6", verb: "Try a haiku" },
-      { id: "joke",   title: "Jokes",       sub: "Silly jokes that'll make you laugh.",        glyph: "smile",   tint: "#B8893A", ink: "#F5EBD9", verb: "Tell me one" },
-      { id: "comic",  title: "Comic strip", sub: "A short comic with speech bubbles.",         glyph: "panel",   tint: "#8C5E7A", ink: "#F2E8EE", verb: "Draw a strip" },
+      { id: "poem",   title: "Poem",        sub: "A playful poem about anything you like.",    Scene: S_Poem,  bg: "#E2EDE9" },
+      { id: "haiku",  title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",           Scene: S_Haiku, bg: "#E8EFD9" },
+      { id: "joke",   title: "Jokes",       sub: "Silly jokes that'll make you laugh.",        Scene: S_Joke,  bg: "#FBEFD3" },
+      { id: "comic",  title: "Comic strip", sub: "A short comic with speech bubbles.",         Scene: S_Comic, bg: "#F2E5EE" },
     ],
   },
-  {
-    id: "voice",
+  voice: {
     tag: "Sound Zone",
     title: "Listen & speak",
     sub: "Train your ear, your tongue, and meet voices from around the world.",
     rail: "#3D5A6C",
     items: [
-      { id: "twist",   title: "Tongue Twister",          sub: "Pronunciation challenge — say it right, fast.", glyph: "twist",   tint: "#3D5A6C", ink: "#E8EEF2", verb: "Take the challenge" },
-      { id: "hear",    title: "Hear It Spoken",          sub: "Type a word or phrase, hear it spoken aloud.",  glyph: "speaker", tint: "#506B7A", ink: "#E6EEF2", verb: "Play it" },
-      { id: "phrases", title: "Common Phrases",          sub: "Everyday phrases in many languages.",           glyph: "phrases", tint: "#4A5D52", ink: "#E5ECE7", verb: "Pick a language" },
-      { id: "news",    title: "Kidz News Network",       sub: "Today's news, told friendly for kids.",         glyph: "news",    tint: "#9C6B3F", ink: "#F2E6D8", verb: "Read today" },
+      { id: "twist",   title: "Tongue Twister", sub: "Say it right, fast — pronunciation challenge.", Scene: S_Twist,   bg: "#E5ECF1" },
+      { id: "hear",    title: "Hear It Spoken", sub: "Type a word or phrase, hear it spoken aloud.",  Scene: S_Hear,    bg: "#DEEAEF" },
+      { id: "phrases", title: "Common Phrases", sub: "Everyday phrases in many languages.",           Scene: S_Phrases, bg: "#E0EBE6" },
+      { id: "news",    title: "Kidz News",      sub: "Today's news, told friendly for kids.",         Scene: S_News,    bg: "#F2E6D8" },
     ],
   },
-  {
-    id: "surprise",
+  surprise: {
     tag: "Surprise Me",
-    title: "Try something curious",
+    title: "Curious challenges",
     sub: "Little prompts that twist your brain in a happy way.",
     rail: "#A04545",
     items: [
-      { id: "riddle",  title: "Riddle Me",          sub: "A riddle a minute — guess before the timer.",     glyph: "riddle", tint: "#A04545", ink: "#F2E0E0", verb: "Solve a riddle" },
-      { id: "faf",     title: "Fact or Fiction?",   sub: "Real fact or a clever made-up one?",              glyph: "faf",    tint: "#6B5B95", ink: "#ECE8F2", verb: "Take a guess" },
-      { id: "finish",  title: "Finish the Sentence", sub: "We start, you finish — story unfolds together.", glyph: "dots",   tint: "#7A6B4F", ink: "#EFEAD9", verb: "Keep going" },
+      { id: "riddle", title: "Riddle Me",           sub: "Guess before the timer runs out.",            Scene: S_Riddle, bg: "#F2DDDD" },
+      { id: "faf",    title: "Fact or Fiction?",    sub: "Real fact or a clever made-up one?",          Scene: S_Faf,    bg: "#E5E0EE" },
+      { id: "finish", title: "Finish the Sentence", sub: "We start, you finish — story unfolds.",       Scene: S_Finish, bg: "#EFEAD9" },
     ],
   },
+};
+
+const TABS: { id: Cat; label: string; emoji: string }[] = [
+  { id: "picture",  label: "Picture",  emoji: "🎨" },
+  { id: "words",    label: "Words",    emoji: "✏️" },
+  { id: "voice",    label: "Voice",    emoji: "🎙" },
+  { id: "surprise", label: "Surprise", emoji: "✨" },
 ];
 
-/* ===== Glyphs ===== */
-function Glyph({ k }: { k: GKey }) {
-  const s = { stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
-  switch (k) {
-    case "frame":   return (<svg viewBox="0 0 32 32" {...s}><rect x="5" y="6" width="22" height="20" rx="2" fill="rgba(255,255,255,.25)"/><circle cx="11" cy="12" r="1.6" fill="currentColor"/><path d="M5 22l6-6 5 5 4-3 7 7"/></svg>);
-    case "wand":    return (<svg viewBox="0 0 32 32" {...s}><path d="M6 26l14-14M19 7l2 2M24 4l1 1M26 9l1 1" /><path d="M22 13l3 3" /><circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="27" cy="20" r="1.5" fill="currentColor"/></svg>);
-    case "scanner": return (<svg viewBox="0 0 32 32" {...s}><path d="M8 6h12l4 4v16H8z" fill="rgba(255,255,255,.25)"/><path d="M20 6v4h4"/><path d="M12 16h10M12 20h8M12 24h6"/><circle cx="6" cy="14" r="2" fill="currentColor" stroke="none"/></svg>);
-    case "feather": return (<svg viewBox="0 0 32 32" {...s}><path d="M6 26l4-1L24 11a5 5 0 0 0-7-7L4 17l-1 8z" fill="rgba(255,255,255,.3)"/><path d="M10 22l6-6M14 18h4M16 14h4"/></svg>);
-    case "leaf":    return (<svg viewBox="0 0 32 32" {...s}><path d="M6 26c0-11 6-19 20-20-1 14-9 20-20 20z" fill="rgba(255,255,255,.3)"/><path d="M6 26L20 12"/></svg>);
-    case "smile":   return (<svg viewBox="0 0 32 32" {...s}><circle cx="16" cy="16" r="11" fill="rgba(255,255,255,.25)"/><circle cx="12" cy="14" r="1.4" fill="currentColor"/><circle cx="20" cy="14" r="1.4" fill="currentColor"/><path d="M11 19c1.5 2.5 8.5 2.5 10 0"/></svg>);
-    case "panel":   return (<svg viewBox="0 0 32 32" {...s}><rect x="4" y="6" width="10" height="9" rx="2" fill="rgba(255,255,255,.25)"/><rect x="16" y="6" width="12" height="9" rx="2" fill="rgba(255,255,255,.25)"/><rect x="4" y="17" width="14" height="9" rx="2" fill="rgba(255,255,255,.25)"/><rect x="20" y="17" width="8" height="9" rx="2" fill="rgba(255,255,255,.25)"/></svg>);
-    case "twist":   return (<svg viewBox="0 0 32 32" {...s}><path d="M6 11c4-4 16-4 20 0s-4 4-10 8 4 6-4 6c-6 0-6-4-2-6"/><circle cx="11" cy="9" r="1.4" fill="currentColor"/><circle cx="22" cy="13" r="1.4" fill="currentColor"/></svg>);
-    case "speaker": return (<svg viewBox="0 0 32 32" {...s}><path d="M5 12h5l7-5v18l-7-5H5z" fill="rgba(255,255,255,.3)"/><path d="M22 11c2 2 2 8 0 10M25 8c4 3 4 13 0 16"/></svg>);
-    case "phrases": return (<svg viewBox="0 0 32 32" {...s}><path d="M5 8h14a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6l-5 4v-4H8a3 3 0 0 1-3-3z" fill="rgba(255,255,255,.3)"/><path d="M27 14h-3M27 18h-3M27 22h-3M27 26h-3"/></svg>);
-    case "news":    return (<svg viewBox="0 0 32 32" {...s}><rect x="5" y="7" width="22" height="18" rx="2" fill="rgba(255,255,255,.3)"/><path d="M9 12h7v6H9zM18 12h6M18 16h6M9 21h15"/></svg>);
-    case "riddle":  return (<svg viewBox="0 0 32 32" {...s}><circle cx="16" cy="14" r="9" fill="rgba(255,255,255,.3)"/><path d="M12 12a4 4 0 0 1 8 0c0 3-4 3-4 6"/><circle cx="16" cy="24" r="1.3" fill="currentColor"/></svg>);
-    case "faf":     return (<svg viewBox="0 0 32 32" {...s}><path d="M16 4l3 9h9l-7 5 3 9-8-5-8 5 3-9-7-5h9z" fill="rgba(255,255,255,.3)"/></svg>);
-    case "dots":    return (<svg viewBox="0 0 32 32" {...s}><path d="M5 14h22M5 20h14"/><circle cx="23" cy="20" r="1.6" fill="currentColor"/><circle cx="27" cy="20" r="1.6" fill="currentColor"/></svg>);
-  }
-}
-
-/* ===== Row (the "ticket" — replaces a card) ===== */
-function Row({ item, num }: { item: Item; num: string }) {
-  return (
-    <button className="ex-row">
-      <span className="ex-row-num">{num}</span>
-      <span className="ex-row-glyph" style={{ background: item.tint, color: item.ink }}>
-        <Glyph k={item.glyph} />
-      </span>
-      <span className="ex-row-text">
-        <span className="ex-row-title">{item.title}</span>
-        <span className="ex-row-sub">{item.sub}</span>
-      </span>
-      <span className="ex-row-leader" aria-hidden="true" />
-      <span className="ex-row-cta">
-        {item.verb} <ArrowUpRight size={14} />
-      </span>
-    </button>
-  );
-}
-
+/* ===== Page ===== */
 function ExplorePage() {
   const [active, setActive] = useState("explore");
   const [userOpen, setUserOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [tab, setTab] = useState<Cat>("picture");
 
   const nav = [
     { id: "home",  label: "Home",  icon: Home,   to: "/" as const },
@@ -214,15 +350,11 @@ function ExplorePage() {
     { id: "explore", label: "Explore", icon: Globe, to: "/explore" as const },
   ];
 
-  const filteredSections = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return SECTIONS;
-    return SECTIONS
-      .map((s) => ({ ...s, items: s.items.filter((i) => i.title.toLowerCase().includes(q) || i.sub.toLowerCase().includes(q)) }))
-      .filter((s) => s.items.length > 0);
-  }, [query]);
-
-  const totalCount = SECTIONS.reduce((n, s) => n + s.items.length, 0);
+  const section = useMemo(() => SECTIONS[tab], [tab]);
+  const totalCount = useMemo(
+    () => (Object.values(SECTIONS) as { items: Item[] }[]).reduce((n, s) => n + s.items.length, 0),
+    [],
+  );
 
   return (
     <div className="ex-root">
@@ -274,61 +406,69 @@ function ExplorePage() {
       </aside>
 
       <main className="ex-main">
-        {/* Hero */}
-        <header className="ex-top">
-          <div className="ex-top-text">
+        {/* Hero — same shape as home page */}
+        <header className="ex-hero">
+          <div className="ex-hero-text">
             <div className="ex-eyebrow"><span className="ex-dot" /> Explore AI</div>
             <h1 className="ex-title">
-              A little menu of <span className="ex-hl">curious things</span> to try.
+              A little menu of <span className="ex-hl">curious things</span>.
             </h1>
             <p className="ex-subtitle">
-              {totalCount} mini experiments — paint pictures, play with words, listen to voices and tease your brain.
+              {totalCount} mini experiments to try — paint, write, listen, or be surprised.
             </p>
-            <div className="ex-search-wrap">
-              <Search size={15} className="ex-search-ic" />
-              <input
-                className="ex-search"
-                placeholder="Search the menu — try ‘haiku’ or ‘riddle’…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </div>
           </div>
-
           <div className="ex-mascot-card">
             <div className="ex-mascot-bubble">
               <b>Where to today?</b>
-              <span>Maybe a riddle, or a quick haiku?</span>
+              <span>Try a haiku, or maybe a riddle?</span>
             </div>
             <div className="ex-mascot-art"><Mascot /></div>
           </div>
         </header>
 
-        {/* Sections */}
-        <div className="ex-menu">
-          {filteredSections.map((sec, sIdx) => (
-            <section className="ex-sec" key={sec.id} style={{ ["--rail" as never]: sec.rail }}>
-              <aside className="ex-sec-aside">
-                <span className="ex-sec-tag">{sec.tag}</span>
-                <h2 className="ex-sec-title">{sec.title}</h2>
-                <p className="ex-sec-sub">{sec.sub}</p>
-                <span className="ex-sec-count">{sec.items.length} to try</span>
-              </aside>
-
-              <div className="ex-rows">
-                {sec.items.map((item, i) => (
-                  <Row key={item.id} item={item} num={`${sIdx + 1}.${(i + 1).toString().padStart(2, "0")}`} />
-                ))}
-              </div>
-            </section>
+        {/* Tabs */}
+        <div className="ex-tabs" role="tablist">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              role="tab"
+              aria-selected={tab === t.id}
+              className={`ex-tab${tab === t.id ? " is-on" : ""}`}
+              onClick={() => setTab(t.id)}
+              style={{ ["--rail" as never]: SECTIONS[t.id].rail }}
+            >
+              <span className="ex-tab-emoji" aria-hidden="true">{t.emoji}</span>
+              <span className="ex-tab-label">{t.label}</span>
+              <span className="ex-tab-count">{SECTIONS[t.id].items.length}</span>
+            </button>
           ))}
+        </div>
 
-          {filteredSections.length === 0 && (
-            <div className="ex-empty">
-              <Sparkles size={20} />
-              <p>Nothing on the menu matches "<b>{query}</b>" — try another word.</p>
-            </div>
-          )}
+        {/* Section header strip */}
+        <div className="ex-sec-strip" style={{ ["--rail" as never]: section.rail }}>
+          <div>
+            <div className="ex-sec-tag">{section.tag}</div>
+            <h2 className="ex-sec-title">{section.title}</h2>
+          </div>
+          <p className="ex-sec-sub">{section.sub}</p>
+        </div>
+
+        {/* Tiles — same anatomy as home page direction cards */}
+        <div className={`ex-grid ex-grid-${section.items.length}`}>
+          {section.items.map((item) => (
+            <button key={item.id} className="ex-tile">
+              <div className="ex-tile-media">
+                <item.Scene bg={item.bg} />
+              </div>
+              <div className="ex-tile-body">
+                <div>
+                  <h3 className="ex-tile-title">{item.title}</h3>
+                  <p className="ex-tile-sub">{item.sub}</p>
+                </div>
+                <span className="ex-tile-arrow"><ArrowRight size={16} /></span>
+              </div>
+            </button>
+          ))}
         </div>
       </main>
 
@@ -358,29 +498,17 @@ const css = `
 }
 .ex-root h1,.ex-root h2,.ex-root h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.015em;line-height:1.1;margin:0}
 
-/* sidebar */
-.ex-side{
-  width:248px;flex-shrink:0;position:sticky;top:0;height:100vh;
-  display:flex;flex-direction:column;padding:22px 18px;
-  background:rgba(255,247,239,.7);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-right:1px solid var(--line);z-index:5;
-}
+/* sidebar (same as other pages) */
+.ex-side{width:248px;flex-shrink:0;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 18px;background:rgba(255,247,239,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-right:1px solid var(--line);z-index:5}
 .ex-brand{display:flex;align-items:center;gap:11px;padding:0 8px;margin-bottom:32px;text-decoration:none}
 .ex-brand-mark{width:38px;height:38px;display:block;filter:drop-shadow(0 6px 14px rgba(224,78,7,.32));transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 .ex-brand:hover .ex-brand-mark{transform:rotate(-10deg) scale(1.08)}
-.ex-brand-name{font-family:var(--font-display);font-weight:700;font-size:1.18rem;letter-spacing:-.02em;
-  background:linear-gradient(180deg,var(--ink) 60%,var(--orange-deep));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.ex-brand-name{font-family:var(--font-display);font-weight:700;font-size:1.18rem;letter-spacing:-.02em;background:linear-gradient(180deg,var(--ink) 60%,var(--orange-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .ex-nav{display:flex;flex-direction:column;gap:3px;flex:1}
-.ex-nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;
-  font-family:var(--font-body);font-weight:500;font-size:.94rem;color:var(--ink-soft);
-  background:transparent;border:none;cursor:pointer;text-align:left;text-decoration:none;
-  transition:background .18s,color .18s;}
+.ex-nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;font-family:var(--font-body);font-weight:500;font-size:.94rem;color:var(--ink-soft);background:transparent;border:none;cursor:pointer;text-align:left;text-decoration:none;transition:background .18s,color .18s}
 .ex-nav-item:hover{background:rgba(255,255,255,.7);color:var(--ink)}
 .ex-nav-item.is-active{background:#fff;color:var(--orange-deep);box-shadow:var(--shadow-sm);font-weight:600}
 .ex-nav-item.is-active svg{color:var(--orange)}
-
 .ex-side-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px}
 .ex-user-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
 .ex-user-head{display:flex;align-items:center;gap:10px}
@@ -399,26 +527,21 @@ const css = `
 .ex-user-switch>svg{color:var(--ink-faint);flex-shrink:0}
 
 /* main */
-.ex-main{flex:1;min-width:0;padding:34px 56px 80px;position:relative;z-index:1}
+.ex-main{flex:1;min-width:0;padding:26px 48px 36px;position:relative;z-index:1;display:flex;flex-direction:column;gap:18px}
 
-/* Hero */
-.ex-top{display:grid;grid-template-columns:1fr auto;gap:36px;align-items:end;margin-bottom:34px}
-.ex-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:14px}
+/* hero — mirrors home page */
+.ex-hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.ex-hero-text{max-width:640px}
+.ex-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:10px}
 .ex-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:ex-ping 2s infinite}
 @keyframes ex-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
-.ex-title{font-size:clamp(2.1rem,3.8vw,3.1rem)}
+.ex-title{font-size:clamp(1.9rem,3.2vw,2.6rem)}
 .ex-hl{color:var(--orange-deep);position:relative;display:inline-block}
 .ex-hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.32em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1}
-.ex-subtitle{margin-top:12px;color:var(--ink-soft);font-size:1.02rem;max-width:38em}
+.ex-subtitle{margin-top:8px;color:var(--ink-soft);font-size:.98rem;max-width:38em}
 
-.ex-search-wrap{position:relative;display:flex;align-items:center;margin-top:18px;max-width:440px}
-.ex-search-ic{position:absolute;left:16px;color:var(--ink-faint);pointer-events:none}
-.ex-search{width:100%;background:#fff;border:1px solid var(--line);border-radius:999px;padding:12px 16px 12px 40px;font-family:inherit;font-size:.93rem;color:var(--ink);box-shadow:var(--shadow-sm);outline:none;transition:border-color .15s,box-shadow .15s}
-.ex-search:focus{border-color:var(--orange-2);box-shadow:0 0 0 4px rgba(251,106,30,.12),var(--shadow-sm)}
-
-/* mascot card */
 .ex-mascot-card{position:relative;display:flex;align-items:flex-end;gap:10px;flex-shrink:0}
-.ex-mascot-art{width:118px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:ex-bob 4s ease-in-out infinite}
+.ex-mascot-art{width:110px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:ex-bob 4s ease-in-out infinite}
 @keyframes ex-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .ex-mascot-bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow-sm);max-width:180px;margin-bottom:36px}
 .ex-mascot-bubble b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.88rem;display:block;margin-bottom:2px}
@@ -439,91 +562,72 @@ const css = `
 .ex-ms .gl{fill:none;stroke:#2FB39A;stroke-width:5;stroke-linecap:round}
 .ex-ms .bl{fill:#FF9A57;opacity:.7}
 
-/* menu sections — editorial, NOT cards */
-.ex-menu{display:flex;flex-direction:column;gap:18px}
-.ex-sec{
-  position:relative;
-  display:grid;grid-template-columns:260px 1fr;gap:32px;
-  padding:26px 4px 26px 22px;
-  border-top:1px solid var(--line);
+/* tabs */
+.ex-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ex-tab{
+  display:flex;align-items:center;gap:10px;
+  background:#fffdf9;border:1px solid var(--line);border-radius:16px;
+  padding:12px 16px;cursor:pointer;font-family:inherit;color:var(--ink-soft);
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s,border-color .2s,color .2s,background .2s;
+  text-align:left;position:relative;overflow:hidden;
 }
-.ex-sec:first-child{border-top:none;padding-top:6px}
-.ex-sec::before{
-  content:"";position:absolute;left:0;top:30px;bottom:30px;width:3px;border-radius:3px;
-  background:var(--rail);opacity:.85;
-}
-.ex-sec-aside{position:sticky;top:24px;align-self:start;display:flex;flex-direction:column;gap:8px}
-.ex-sec-tag{font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rail)}
-.ex-sec-title{font-size:1.7rem;color:var(--ink)}
-.ex-sec-sub{font-size:.9rem;color:var(--ink-soft);max-width:22em;line-height:1.5}
-.ex-sec-count{margin-top:6px;font-family:var(--font-display);font-weight:600;font-size:.72rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.12em}
+.ex-tab:hover{transform:translateY(-2px);color:var(--ink);border-color:var(--orange-2)}
+.ex-tab.is-on{background:#fff;color:var(--ink);border-color:transparent;box-shadow:0 14px 26px -16px color-mix(in oklab,var(--rail) 70%,transparent),var(--shadow-sm)}
+.ex-tab.is-on::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--rail)}
+.ex-tab-emoji{font-size:1.3rem;flex-shrink:0;filter:saturate(.9)}
+.ex-tab-label{flex:1;font-family:var(--font-display);font-weight:600;font-size:.98rem;letter-spacing:-.01em}
+.ex-tab-count{font-family:var(--font-display);font-weight:600;font-size:.72rem;background:var(--cream-2);color:var(--orange-deep);padding:3px 9px;border-radius:999px}
+.ex-tab.is-on .ex-tab-count{background:color-mix(in oklab,var(--rail) 14%,#fff);color:var(--rail)}
 
-.ex-rows{display:flex;flex-direction:column}
+/* section strip */
+.ex-sec-strip{
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+  padding:0 4px;
+}
+.ex-sec-tag{font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rail);margin-bottom:2px}
+.ex-sec-title{font-size:1.4rem;color:var(--ink)}
+.ex-sec-sub{font-size:.88rem;color:var(--ink-soft);margin:0;text-align:right;max-width:32em;justify-self:end}
 
-/* the "ticket" row — replaces a card */
-.ex-row{
-  display:grid;
-  grid-template-columns:56px 50px 1fr auto auto;
-  align-items:center;gap:14px;
-  padding:18px 4px;
-  border:none;background:transparent;cursor:pointer;
-  font-family:inherit;color:inherit;text-align:left;
-  border-bottom:1px dashed var(--line);
-  transition:transform .25s, background .25s;
-  border-radius:14px;
+/* tile grid — matches home page direction cards */
+.ex-grid{display:grid;gap:16px}
+.ex-grid-3{grid-template-columns:repeat(3,1fr)}
+.ex-grid-4{grid-template-columns:repeat(4,1fr)}
+.ex-tile{
+  display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);
+  border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);
+  text-decoration:none;color:inherit;cursor:pointer;text-align:left;font:inherit;padding:0;
+  transition:transform .22s,box-shadow .22s,border-color .22s;
 }
-.ex-row:last-child{border-bottom:none}
-.ex-row:hover{background:linear-gradient(90deg,rgba(255,255,255,.85),rgba(255,255,255,0));transform:translateX(4px)}
-.ex-row-num{
-  font-family:var(--font-display);font-weight:600;font-size:1.25rem;
-  color:transparent;-webkit-text-stroke:1.2px var(--orange-deep);
-  letter-spacing:.04em;
-}
-.ex-row:hover .ex-row-num{color:var(--orange-deep);-webkit-text-stroke:1.2px transparent}
-.ex-row-glyph{
-  width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18), 0 6px 14px -8px rgba(60,30,10,.35);
-  transform:rotate(-3deg);transition:transform .3s;
-}
-.ex-row-glyph svg{width:24px;height:24px;display:block}
-.ex-row:hover .ex-row-glyph{transform:rotate(5deg) scale(1.06)}
-.ex-row-text{display:flex;flex-direction:column;min-width:0}
-.ex-row-title{font-family:var(--font-display);font-weight:600;font-size:1.06rem;color:var(--ink)}
-.ex-row-sub{font-size:.85rem;color:var(--ink-soft);margin-top:2px}
-.ex-row-leader{
-  height:1px;min-width:30px;
-  background-image:radial-gradient(circle,var(--ink-faint) 1px,transparent 1.5px);
-  background-size:6px 6px;background-repeat:repeat-x;background-position:center;
-  opacity:.4;
-}
-.ex-row-cta{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--font-display);font-weight:600;font-size:.82rem;color:var(--orange-deep);
-  padding:8px 12px;border-radius:999px;background:transparent;border:1px solid transparent;
-  transition:background .18s,border-color .18s,transform .18s;
-  white-space:nowrap;
-}
-.ex-row:hover .ex-row-cta{background:#fff;border-color:var(--orange-2);box-shadow:var(--shadow-sm)}
+.ex-tile:hover{transform:translateY(-3px);border-color:var(--orange-2);box-shadow:var(--shadow)}
+.ex-tile-media{position:relative;width:100%;overflow:hidden;display:block;aspect-ratio:5/3}
+.ex-scene{width:100%;height:100%;display:block}
+.ex-tile-body{flex:1;padding:14px 16px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.ex-tile-body > div{min-width:0;flex:1}
+.ex-tile-title{font-family:var(--font-display);font-weight:700;font-size:1.08rem;color:var(--ink);line-height:1.2}
+.ex-tile-sub{font-size:.8rem;color:var(--ink-soft);margin:4px 0 0;line-height:1.4}
+.ex-tile-arrow{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--orange-deep);display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);transition:transform .2s,background .2s}
+.ex-tile:hover .ex-tile-arrow{transform:translateX(4px);background:var(--cream-2)}
 
-.ex-empty{text-align:center;padding:60px 20px;color:var(--ink-soft);background:#fff;border:1px dashed var(--line);border-radius:20px}
-.ex-empty svg{color:var(--orange);margin-bottom:8px}
-
-@media (max-width:1020px){
-  .ex-sec{grid-template-columns:1fr;gap:14px}
-  .ex-sec-aside{position:static}
+@media (max-width:1100px){
+  .ex-grid-4{grid-template-columns:repeat(2,1fr)}
+  .ex-grid-3{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:960px){
-  .ex-main{padding:24px 22px 64px}
-  .ex-top{grid-template-columns:1fr;gap:18px;align-items:start}
+  .ex-main{padding:22px 22px 40px}
+  .ex-hero{grid-template-columns:1fr;gap:14px}
   .ex-mascot-card{justify-content:flex-end}
   .ex-mascot-bubble{margin-bottom:24px}
+  .ex-tabs{grid-template-columns:repeat(2,1fr)}
+  .ex-sec-strip{grid-template-columns:1fr;gap:6px}
+  .ex-sec-sub{text-align:left;justify-self:start}
+  .ex-grid-3,.ex-grid-4{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:720px){
   .ex-root{flex-direction:column}
   .ex-side{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--line);padding:14px 16px}
   .ex-nav{flex-direction:row;flex-wrap:wrap;gap:4px}
   .ex-side-foot{margin-top:12px}
-  .ex-row{grid-template-columns:42px 42px 1fr;grid-auto-flow:row}
-  .ex-row-leader,.ex-row-cta{display:none}
+  .ex-grid-3,.ex-grid-4{grid-template-columns:1fr 1fr}
 }
 `;
