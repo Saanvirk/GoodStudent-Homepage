@@ -384,8 +384,9 @@ type Item = {
   id: string;
   title: string;
   sub: string;
-  Scene: (p: SceneProps) => React.ReactElement;
+  prop: PropKey;
   bg: string;
+  accent: string;
 };
 
 const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: string; items: Item[] }> = {
@@ -395,9 +396,9 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     sub: "Paint with words, remix a photo, or pull text from a snap.",
     rail: "#C8553D",
     items: [
-      { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",   Scene: S_Create,  bg: "#FBE5D8" },
-      { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",  Scene: S_Edit,    bg: "#F8D6CE" },
-      { id: "extract", title: "Extract text", sub: "Snap a picture and pull the words inside.",    Scene: S_Extract, bg: "#F2E0DA" },
+      { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",   prop: "brush", bg: "#FBE5D8", accent: "#C8553D" },
+      { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",  prop: "wand",  bg: "#F8D6CE", accent: "#A65A4B" },
+      { id: "extract", title: "Extract text", sub: "Snap a picture and pull the words inside.",    prop: "scan",  bg: "#F2E0DA", accent: "#7A4A5A" },
     ],
   },
   words: {
@@ -406,10 +407,10 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     sub: "Poems, haiku, jokes and comic strips — written together.",
     rail: "#3D7068",
     items: [
-      { id: "poem",   title: "Poem",        sub: "A playful poem about anything you like.",    Scene: S_Poem,  bg: "#E2EDE9" },
-      { id: "haiku",  title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",           Scene: S_Haiku, bg: "#E8EFD9" },
-      { id: "joke",   title: "Jokes",       sub: "Silly jokes that'll make you laugh.",        Scene: S_Joke,  bg: "#FBEFD3" },
-      { id: "comic",  title: "Comic strip", sub: "A short comic with speech bubbles.",         Scene: S_Comic, bg: "#F2E5EE" },
+      { id: "poem",  title: "Poem",        sub: "A playful poem about anything you like.", prop: "scroll", bg: "#E2EDE9", accent: "#3D7068" },
+      { id: "haiku", title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",        prop: "leaf",   bg: "#E8EFD9", accent: "#6B8E4E" },
+      { id: "joke",  title: "Jokes",       sub: "Silly jokes that'll make you laugh.",     prop: "laugh",  bg: "#FBEFD3", accent: "#B8893A" },
+      { id: "comic", title: "Comic strip", sub: "A short comic with speech bubbles.",      prop: "panels", bg: "#F2E5EE", accent: "#8C5E7A" },
     ],
   },
   voice: {
@@ -418,10 +419,10 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     sub: "Train your ear, your tongue, and meet voices from around the world.",
     rail: "#3D5A6C",
     items: [
-      { id: "twist",   title: "Tongue Twister", sub: "Say it right, fast — pronunciation challenge.", Scene: S_Twist,   bg: "#E5ECF1" },
-      { id: "hear",    title: "Hear It Spoken", sub: "Type a word or phrase, hear it spoken aloud.",  Scene: S_Hear,    bg: "#DEEAEF" },
-      { id: "phrases", title: "Common Phrases", sub: "Everyday phrases in many languages.",           Scene: S_Phrases, bg: "#E0EBE6" },
-      { id: "news",    title: "Kidz News",      sub: "Today's news, told friendly for kids.",         Scene: S_News,    bg: "#F2E6D8" },
+      { id: "twist",   title: "Tongue Twister", sub: "Say it right, fast — pronunciation challenge.", prop: "twister", bg: "#E5ECF1", accent: "#3D5A6C" },
+      { id: "hear",    title: "Hear It Spoken", sub: "Type a word or phrase, hear it spoken aloud.",  prop: "waves",   bg: "#DEEAEF", accent: "#506B7A" },
+      { id: "phrases", title: "Common Phrases", sub: "Everyday phrases in many languages.",           prop: "globe",   bg: "#E0EBE6", accent: "#4A5D52" },
+      { id: "news",    title: "Kidz News",      sub: "Today's news, told friendly for kids.",         prop: "news",    bg: "#F2E6D8", accent: "#9C6B3F" },
     ],
   },
   surprise: {
@@ -430,18 +431,18 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     sub: "Little prompts that twist your brain in a happy way.",
     rail: "#A04545",
     items: [
-      { id: "riddle", title: "Riddle Me",           sub: "Guess before the timer runs out.",            Scene: S_Riddle, bg: "#F2DDDD" },
-      { id: "faf",    title: "Fact or Fiction?",    sub: "Real fact or a clever made-up one?",          Scene: S_Faf,    bg: "#E5E0EE" },
-      { id: "finish", title: "Finish the Sentence", sub: "We start, you finish — story unfolds.",       Scene: S_Finish, bg: "#EFEAD9" },
+      { id: "riddle", title: "Riddle Me",           sub: "Guess before the timer runs out.",      prop: "qmark",    bg: "#F2DDDD", accent: "#A04545" },
+      { id: "faf",    title: "Fact or Fiction?",    sub: "Real fact or a clever made-up one?",    prop: "checkx",   bg: "#E5E0EE", accent: "#6B5B95" },
+      { id: "finish", title: "Finish the Sentence", sub: "We start, you finish — story unfolds.", prop: "ellipsis", bg: "#EFEAD9", accent: "#7A6B4F" },
     ],
   },
 };
 
-const TABS: { id: Cat; label: string; emoji: string }[] = [
-  { id: "picture",  label: "Picture",  emoji: "🎨" },
-  { id: "words",    label: "Words",    emoji: "✏️" },
-  { id: "voice",    label: "Voice",    emoji: "🎙" },
-  { id: "surprise", label: "Surprise", emoji: "✨" },
+const TABS: { id: Cat; label: string; sub: string; icon: CatIconKey }[] = [
+  { id: "picture",  label: "Picture Lab",   sub: "Create, edit, extract", icon: "palette" },
+  { id: "words",    label: "Word Play",     sub: "Poems, jokes, comics",  icon: "pencil"  },
+  { id: "voice",    label: "Sound Zone",    sub: "Listen, speak, learn",  icon: "mic"     },
+  { id: "surprise", label: "Surprise Me",   sub: "Riddles & challenges",  icon: "spark"   },
 ];
 
 /* ===== Page ===== */
