@@ -181,27 +181,8 @@ function SceneExplore() {
   );
 }
 
-/* Tutor scene (English) for tutor-of-day featured panel */
-function SceneEnglish() {
-  return (
-    <svg viewBox="0 0 280 220" className="gh-scene">
-      <rect width="280" height="220" rx="16" fill="#F7E4DE" />
-      <circle cx="140" cy="116" r="100" fill="none" stroke="#B5462F" strokeDasharray="2 7" opacity=".35" />
-      <use href="#gh-bot" x="65" y="40" width="150" height="170" />
-      <rect x="94" y="150" width="92" height="36" rx="4" fill="#9E3B27" />
-      <path d="M100 152 h38 v32 h-38 z" fill="#FBF6EC" />
-      <path d="M142 152 h38 v32 h-38 z" fill="#FFFDF7" />
-      <line x1="140" y1="150" x2="140" y2="186" stroke="#7E2C1C" strokeWidth="2" />
-      <g stroke="#C9B3AC" strokeWidth="2" strokeLinecap="round">
-        <line x1="106" y1="160" x2="132" y2="160" />
-        <line x1="106" y1="168" x2="132" y2="168" />
-        <line x1="106" y1="176" x2="126" y2="176" />
-        <line x1="148" y1="160" x2="174" y2="160" />
-        <line x1="148" y1="168" x2="174" y2="168" />
-      </g>
-    </svg>
-  );
-}
+
+
 
 /* ===== data ===== */
 const monthLabel = "June 2026";
