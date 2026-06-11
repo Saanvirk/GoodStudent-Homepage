@@ -508,20 +508,22 @@ function TutorsPage() {
 
 type BuilderData = {
   name: string;
+  subject: string;
   objectives: string;
   files: { name: string; size: number }[];
-  instructions: string;
   image: { kind: "preset"; preset: "notes" } | { kind: "custom"; url: string };
 };
+
+const SUBJECTS = ["Maths", "English", "Citizenship", "Chinese", "Physics", "Biology", "Chemistry", "General Studies"];
 
 function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d: BuilderData) => void }) {
   const [step, setStep] = useState(0);
   const [generating, setGenerating] = useState(false);
   const [data, setData] = useState<BuilderData>({
     name: "",
+    subject: "",
     objectives: "",
     files: [],
-    instructions: "",
     image: { kind: "preset", preset: "notes" },
   });
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -531,20 +533,18 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
     { id: "name", label: "Name", icon: TypeIcon },
     { id: "files", label: "Resources", icon: UploadCloud },
     { id: "obj", label: "Goals", icon: Target },
-    { id: "inst", label: "Instructions", icon: MessageSquare },
     { id: "img", label: "Image", icon: ImageIcon },
   ];
 
   const bubbles = [
-    { b: "First things first…", s: "What should we call your tutor?" },
+    { b: "First things first…", s: "Name your tutor and pick a subject." },
     { b: "Feed me anything!", s: "Notes, past papers, slides — the more the merrier." },
     { b: "What's the goal?", s: data.files.length > 0 ? "Type it out, or let me draft it from your resources." : "Tell me what success looks like for you." },
-    { b: "Any house rules?", s: "Tone, language, things to avoid — totally optional." },
     { b: "Almost there!", s: "Pick a look for your tutor." },
   ];
 
   const canNext = () => {
-    if (step === 0) return data.name.trim().length > 0;
+    if (step === 0) return data.name.trim().length > 0 && data.subject.length > 0;
     if (step === 2) return data.objectives.trim().length > 0;
     return true;
   };
@@ -591,7 +591,7 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
         <div className="tp-mo-head">
           <div className="tp-eyebrow"><span className="tp-dot" /> Build a tutor</div>
           <h2 className="tp-mo-title">Let's spin up your new tutor</h2>
-          <p className="tp-mo-sub">Five quick steps. You can edit anything later.</p>
+          <p className="tp-mo-sub">Four quick steps. You can edit anything later.</p>
         </div>
 
         <ol className="tp-stepper">
@@ -632,6 +632,20 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
                   onChange={(e) => setData({ ...data, name: e.target.value })}
                   maxLength={60}
                 />
+                <label className="tp-label" style={{ marginTop: 18 }}>Subject</label>
+                <p className="tp-help">Pick the subject this tutor will help with.</p>
+                <div className="tp-subjects">
+                  {SUBJECTS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className={`tp-subject${data.subject === s ? " is-on" : ""}`}
+                      onClick={() => setData({ ...data, subject: s })}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -701,23 +715,6 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
             )}
 
             {step === 3 && (
-              <div className="tp-field">
-                <label className="tp-label">Any specific instructions?</label>
-                <p className="tp-help">Tone, language, what to avoid, how to explain. Optional but helpful.</p>
-                <textarea
-                  autoFocus
-                  className="tp-textarea"
-                  rows={6}
-                  placeholder="e.g. Be encouraging, use simple analogies, quiz me after each topic, reply in Cantonese when I ask…"
-                  value={data.instructions}
-                  onChange={(e) => setData({ ...data, instructions: e.target.value })}
-                  maxLength={600}
-                />
-                <div className="tp-counter">{data.instructions.length}/600</div>
-              </div>
-            )}
-
-            {step === 4 && (
               <div className="tp-field">
                 <label className="tp-label">Customise tutor image</label>
                 <p className="tp-help">Pick the default mascot scene or upload your own.</p>
@@ -1016,6 +1013,10 @@ const css = `
 .tp-help{font-size:.84rem;color:var(--ink-soft);margin-bottom:8px}
 .tp-input,.tp-textarea{width:100%;font-family:var(--font-body);font-size:.95rem;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;resize:vertical}
 .tp-input:focus,.tp-textarea:focus{border-color:var(--orange-2);box-shadow:0 0 0 4px rgba(255,138,61,.18)}
+.tp-subjects{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tp-subject{font-family:var(--font-body);font-weight:500;font-size:.88rem;color:var(--ink-soft);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:all .15s}
+.tp-subject:hover{border-color:var(--orange-2);color:var(--ink);transform:translateY(-1px)}
+.tp-subject.is-on{background:linear-gradient(150deg,var(--orange-2),var(--orange));border-color:var(--orange);color:#fff;box-shadow:0 6px 16px -6px rgba(224,78,7,.45)}
 .tp-counter{align-self:flex-end;font-size:.72rem;color:var(--ink-faint);margin-top:4px}
 
 .tp-drop{width:100%;border:2px dashed var(--orange-2);background:var(--cream);border-radius:18px;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--ink);transition:background .15s,border-color .15s}
