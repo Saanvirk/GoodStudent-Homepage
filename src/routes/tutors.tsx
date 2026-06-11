@@ -1013,6 +1013,10 @@ const css = `
 .tp-help{font-size:.84rem;color:var(--ink-soft);margin-bottom:8px}
 .tp-input,.tp-textarea{width:100%;font-family:var(--font-body);font-size:.95rem;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;resize:vertical}
 .tp-input:focus,.tp-textarea:focus{border-color:var(--orange-2);box-shadow:0 0 0 4px rgba(255,138,61,.18)}
+.tp-subjects{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tp-subject{font-family:var(--font-body);font-weight:500;font-size:.88rem;color:var(--ink-soft);background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:all .15s}
+.tp-subject:hover{border-color:var(--orange-2);color:var(--ink);transform:translateY(-1px)}
+.tp-subject.is-on{background:linear-gradient(150deg,var(--orange-2),var(--orange));border-color:var(--orange);color:#fff;box-shadow:0 6px 16px -6px rgba(224,78,7,.45)}
 .tp-counter{align-self:flex-end;font-size:.72rem;color:var(--ink-faint);margin-top:4px}
 
 .tp-drop{width:100%;border:2px dashed var(--orange-2);background:var(--cream);border-radius:18px;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--ink);transition:background .15s,border-color .15s}
