@@ -508,20 +508,22 @@ function TutorsPage() {
 
 type BuilderData = {
   name: string;
+  subject: string;
   objectives: string;
   files: { name: string; size: number }[];
-  instructions: string;
   image: { kind: "preset"; preset: "notes" } | { kind: "custom"; url: string };
 };
+
+const SUBJECTS = ["Maths", "English", "Citizenship", "Chinese", "Physics", "Biology", "Chemistry", "General Studies"];
 
 function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d: BuilderData) => void }) {
   const [step, setStep] = useState(0);
   const [generating, setGenerating] = useState(false);
   const [data, setData] = useState<BuilderData>({
     name: "",
+    subject: "",
     objectives: "",
     files: [],
-    instructions: "",
     image: { kind: "preset", preset: "notes" },
   });
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -531,20 +533,18 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
     { id: "name", label: "Name", icon: TypeIcon },
     { id: "files", label: "Resources", icon: UploadCloud },
     { id: "obj", label: "Goals", icon: Target },
-    { id: "inst", label: "Instructions", icon: MessageSquare },
     { id: "img", label: "Image", icon: ImageIcon },
   ];
 
   const bubbles = [
-    { b: "First things first…", s: "What should we call your tutor?" },
+    { b: "First things first…", s: "Name your tutor and pick a subject." },
     { b: "Feed me anything!", s: "Notes, past papers, slides — the more the merrier." },
     { b: "What's the goal?", s: data.files.length > 0 ? "Type it out, or let me draft it from your resources." : "Tell me what success looks like for you." },
-    { b: "Any house rules?", s: "Tone, language, things to avoid — totally optional." },
     { b: "Almost there!", s: "Pick a look for your tutor." },
   ];
 
   const canNext = () => {
-    if (step === 0) return data.name.trim().length > 0;
+    if (step === 0) return data.name.trim().length > 0 && data.subject.length > 0;
     if (step === 2) return data.objectives.trim().length > 0;
     return true;
   };
