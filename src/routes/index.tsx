@@ -275,10 +275,11 @@ function HomePage() {
     to?: "/tutors" | "/tools";
     scene: React.ReactNode;
     icon: typeof Pencil;
+    bg: string;
   }> = [
-    { id: "tut", tag: "Tutors", title: "Sit with a tutor", sub: "Ready-made DSE tutors or build your own.", to: "/tutors", scene: <SceneTutors />, icon: Pencil },
-    { id: "tol", tag: "Tools", title: "Grab a tool", sub: "Flashcards, mind maps, speaking practice.", to: "/tools", scene: <SceneTools />, icon: Wrench },
-    { id: "exp", tag: "Explore", title: "Discover what's new", sub: "Generate stories, haiku, remix pictures and more.", scene: <SceneExplore />, icon: Globe },
+    { id: "tut", tag: "Tutors", title: "Sit with a tutor", sub: "Ready-made DSE tutors or build your own.", to: "/tutors", scene: <SceneTutors />, icon: Pencil, bg: "#F7E4DE" },
+    { id: "tol", tag: "Tools", title: "Grab a tool", sub: "Flashcards, mind maps, speaking practice.", to: "/tools", scene: <SceneTools />, icon: Wrench, bg: "#FFE7CF" },
+    { id: "exp", tag: "Explore", title: "Discover what's new", sub: "Generate stories, haiku, remix pictures and more.", scene: <SceneExplore />, icon: Globe, bg: "#D9F0E8" },
   ];
 
   return (
@@ -316,9 +317,9 @@ function HomePage() {
           {userOpen && (
             <div className="gh-user-card">
               <div className="gh-user-head">
-                <div className="gh-ava">TC</div>
+                <div className="gh-ava">SK</div>
                 <div>
-                  <div className="gh-user-name">Tiffany Chiu</div>
+                  <div className="gh-user-name">Saanvi K</div>
                   <div className="gh-user-mail">tks@goodstudent.app</div>
                 </div>
               </div>
@@ -330,9 +331,9 @@ function HomePage() {
             </div>
           )}
           <button className="gh-user-switch" onClick={() => setUserOpen((v) => !v)}>
-            <div className="gh-ava gh-ava-sm">TC</div>
+            <div className="gh-ava gh-ava-sm">SK</div>
             <div className="gh-user-switch-meta">
-              <div className="gh-user-name">Tiffany Chiu</div>
+              <div className="gh-user-name">Saanvi K</div>
               <div className="gh-user-mail">Student — Year 12</div>
             </div>
             <ChevronsUpDown size={15} />
@@ -346,7 +347,7 @@ function HomePage() {
           <div className="gh-hero-text">
             <div className="gh-eyebrow"><span className="gh-dot" /> Thursday — welcome back</div>
             <h1 className="gh-title">
-              Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is alive.
+              Hi Saanvi — your <span className="gh-hl">{streak}-day streak</span> is alive.
             </h1>
             <p className="gh-subtitle">A quick look at today and the week, then pick your direction.</p>
           </div>
@@ -457,7 +458,7 @@ function HomePage() {
             {directions.map((d) => {
               const Inner = (
                 <>
-                  <div className="gh-dir-media">{d.scene}</div>
+                  <div className="gh-dir-media" style={{ background: d.bg }}>{d.scene}</div>
                   <div className="gh-dir-body">
                     <div className="gh-dir-row">
                       <div>
@@ -627,8 +628,8 @@ const css = `
 .gh-dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gh-dir{display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;cursor:pointer;text-align:left;font:inherit;padding:0;transition:transform .22s,box-shadow .22s,border-color .22s}
 .gh-dir:hover{transform:translateY(-3px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.gh-dir-media{position:relative;width:100%;background:var(--cream-2);overflow:hidden;display:block;aspect-ratio:16/10}
-.gh-dir-media .gh-scene{width:100%;height:100%}
+.gh-dir-media{position:relative;width:100%;overflow:hidden;display:block;aspect-ratio:5/4}
+.gh-dir-media .gh-scene{width:100%;height:100%;display:block}
 .gh-dir-body{flex:1;padding:14px 16px 16px;display:flex;flex-direction:column}
 .gh-dir-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;width:100%}
 .gh-dir-row > div{min-width:0;flex:1}
