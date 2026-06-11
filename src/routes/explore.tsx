@@ -424,7 +424,7 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     tag: "Picture Lab",
     title: "Make a picture",
     sub: "Paint with words, remix a photo, or pull text from a snap.",
-    rail: "#D9534F",
+    rail: "#C8553D",
     items: [
       { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",   prop: "brush", bg: "#FBE5D8", accent: "#C8553D" },
       { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",  prop: "wand",  bg: "#F8D6CE", accent: "#A65A4B" },
@@ -435,7 +435,7 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     tag: "Word Play",
     title: "Play with words",
     sub: "Poems, haiku, jokes and comic strips — written together.",
-    rail: "#2E8F66",
+    rail: "#3D7068",
     items: [
       { id: "poem",  title: "Poem",        sub: "A playful poem about anything you like.", prop: "scroll", bg: "#E2EDE9", accent: "#3D7068" },
       { id: "haiku", title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",        prop: "leaf",   bg: "#E8EFD9", accent: "#6B8E4E" },
@@ -447,7 +447,7 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     tag: "Sound Zone",
     title: "Listen & speak",
     sub: "Train your ear, your tongue, and meet voices from around the world.",
-    rail: "#6B5B95",
+    rail: "#3D5A6C",
     items: [
       { id: "twist",   title: "Tongue Twister", sub: "Say it right, fast — pronunciation challenge.", prop: "twister", bg: "#E5ECF1", accent: "#3D5A6C" },
       { id: "hear",    title: "Hear It Spoken", sub: "Type a word or phrase, hear it spoken aloud.",  prop: "waves",   bg: "#DEEAEF", accent: "#506B7A" },
@@ -459,7 +459,7 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     tag: "Surprise Me",
     title: "Curious challenges",
     sub: "Little prompts that twist your brain in a happy way.",
-    rail: "#D4A017",
+    rail: "#A04545",
     items: [
       { id: "riddle", title: "Riddle Me",           sub: "Guess before the timer runs out.",      prop: "qmark",    bg: "#F2DDDD", accent: "#A04545" },
       { id: "faf",    title: "Fact or Fiction?",    sub: "Real fact or a clever made-up one?",    prop: "checkx",   bg: "#E5E0EE", accent: "#6B5B95" },
