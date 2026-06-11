@@ -339,133 +339,91 @@ function HomePage() {
           <p className="gh-subtitle">A quick look at today and the week — then pick your direction.</p>
         </header>
 
-        {/* Row 1: streak (calendar) + time (ring) */}
-        <section className="gh-row-2">
-          <article className="gh-card gh-card--streak">
-            <div className="gh-card-head">
-              <span className="gh-card-eyebrow"><Flame size={12} /> Study streak</span>
-              <span className="gh-cal-month">{monthLabel}</span>
-            </div>
-            <div className="gh-streak-top">
-              <div className="gh-streak-num">
-                <span className="gh-streak-big">{streak}</span>
-                <span className="gh-streak-unit">days<br/>in a row</span>
+        {/* Mission Control — integrated activity bar (no cards) */}
+        <section className="gh-mc">
+          {/* Stats region: streak + time */}
+          <div className="gh-mc-stats">
+            <div className="gh-mc-stat gh-mc-streak">
+              <div className="gh-mc-streak-num">
+                <span className="gh-mc-big">{streak}</span>
+                <span className="gh-mc-unit">days</span>
               </div>
-              <div className="gh-cal">
-                <div className="gh-cal-heads">
-                  {weekdayHeads.map((w, i) => <span key={i}>{w}</span>)}
-                </div>
-                <div className="gh-cal-grid">
-                  {calendarDays.map((c, i) => (
-                    <div
+              <div className="gh-mc-dots" aria-label="14-day activity">
+                {Array.from({ length: 14 }).map((_, i) => {
+                  // last 14 days from calendarDays
+                  const cell = calendarDays[14 + i];
+                  const on = cell?.on;
+                  const today = cell?.today;
+                  return (
+                    <span
                       key={i}
-                      className={`gh-cal-cell${c.on ? " on" : ""}${c.today ? " is-today" : ""}${c.future ? " is-future" : ""}`}
-                      title={c.future ? "" : c.on ? "Studied" : "No study"}
-                    >
-                      {c.on && <Flame size={11} className="gh-cal-flame" />}
-                      <span className="gh-cal-d">{c.d}</span>
-                    </div>
-                  ))}
-                </div>
+                      className={`gh-mc-dot${on ? " on" : ""}${today ? " is-today" : ""}`}
+                    />
+                  );
+                })}
               </div>
             </div>
-          </article>
 
-          <article className="gh-card gh-card--time">
-            <div className="gh-card-head">
-              <span className="gh-card-eyebrow"><Clock size={12} /> Time today</span>
-              <span className="gh-card-chip gh-card-chip--soft">Goal {timeGoal}m</span>
-            </div>
-            <div className="gh-card-body gh-time-body">
-              <div className="gh-ring-wrap">
-                <svg viewBox="0 0 100 100" className="gh-ring">
+            <div className="gh-mc-divider" />
+
+            <div className="gh-mc-stat gh-mc-time">
+              <div className="gh-mc-ring-wrap">
+                <svg viewBox="0 0 100 100" className="gh-mc-ring">
                   <defs>
-                    <linearGradient id="gh-ring-g" x1="0" y1="0" x2="1" y2="1">
+                    <linearGradient id="gh-mc-ring-g" x1="0" y1="0" x2="1" y2="1">
                       <stop offset="0%" stopColor="#FFD56B" />
                       <stop offset="100%" stopColor="#FB6A1E" />
                     </linearGradient>
                   </defs>
-                  <circle cx="50" cy="50" r={ringR} fill="none" stroke="#FFEEDD" strokeWidth="10" />
-                  <circle cx="50" cy="50" r={ringR} fill="none" stroke="url(#gh-ring-g)" strokeWidth="10" strokeLinecap="round"
+                  <circle cx="50" cy="50" r={ringR} fill="none" stroke="#FFEEDD" strokeWidth="9" />
+                  <circle cx="50" cy="50" r={ringR} fill="none" stroke="url(#gh-mc-ring-g)" strokeWidth="9" strokeLinecap="round"
                     strokeDasharray={ringC} strokeDashoffset={ringOffset} transform="rotate(-90 50 50)" />
                 </svg>
-                <div className="gh-ring-text">
-                  <div className="gh-ring-num">{timeMinutes}<span>m</span></div>
-                  <div className="gh-ring-sub">{timePct}% of goal</div>
+                <span className="gh-mc-ring-pct">{timePct}%</span>
+              </div>
+              <div className="gh-mc-time-meta">
+                <div className="gh-mc-time-num">
+                  {timeMinutes}m <span>/ {timeGoal}m</span>
                 </div>
-              </div>
-              <div className="gh-time-meta">
-                <div className="gh-time-stat"><TrendingUp size={14} /> 18m more than yesterday</div>
-                <div className="gh-time-stat gh-time-stat--muted">{timeGoal - timeMinutes}m left to hit your goal</div>
+                <div className="gh-mc-time-sub"><TrendingUp size={11} /> +18m vs yesterday</div>
               </div>
             </div>
-          </article>
-        </section>
-
-        {/* Row 2: tutor of the day — with a daily challenge */}
-        <section className="gh-row-1">
-          <article className="gh-feat gh-feat--tutor">
-            <div className="gh-feat-head">
-              <span className="gh-card-eyebrow"><Crown size={12} /> Tutor of the day</span>
-            </div>
-            <div className="gh-feat-body">
-              <div className="gh-feat-media">
-                <SceneEnglish />
-                <span className="gh-feat-crown"><Crown size={14} /></span>
-              </div>
-              <div className="gh-feat-meta">
-                <h3 className="gh-feat-title">DSE English</h3>
-                <div className="gh-challenge">
-                  <div className="gh-challenge-tag"><Sparkles size={11} /> Today's challenge</div>
-                  <p className="gh-challenge-text">
-                    Write a 250-word argumentative response on “Should AI tools be allowed in DSE exams?”
-                  </p>
-                  <div className="gh-quote">
-                    <Quote size={13} />
-                    <span>“You don't have to be great to start, but you have to start to be great.”</span>
-                  </div>
-                </div>
-                <Link to="/tutors" className="gh-feat-cta">Accept the challenge <ArrowRight size={14} /></Link>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        {/* Row 3: tool of the week — banner (no card) */}
-        <section className="gh-tow-section">
-          <div className="gh-tow-head">
-            <span className="gh-card-eyebrow"><Sparkles size={12} /> Tool of the week</span>
           </div>
-          <div className="gh-tow">
-            <div className="gh-tow-left">
-              <div className="gh-tow-ic">
-                <img src={sayItRight.url} alt="Say It Right" />
+
+          {/* Spotlight region: tutor challenge + tool of the week */}
+          <div className="gh-mc-spots">
+            <Link to="/tutors" className="gh-mc-spot gh-mc-spot--tutor">
+              <div className="gh-mc-spot-ic">
+                <Crown size={20} />
               </div>
-              <div className="gh-tow-meta">
-                <h3 className="gh-tow-title">Say It Right</h3>
-                <p className="gh-tow-sub">Practice English speaking with instant AI feedback.</p>
-                <div className="gh-tow-phrase">
-                  <span className="gh-tow-phrase-lbl">Try saying</span>
-                  <span className="gh-tow-phrase-text">“The weather in Hong Kong is rather humid today.”</span>
-                </div>
+              <div className="gh-mc-spot-meta">
+                <div className="gh-mc-spot-lbl">Favourite tutor challenge</div>
+                <div className="gh-mc-spot-title">DSE English · AI tools in exams?</div>
               </div>
-            </div>
-            <div className="gh-tow-right">
-              <div className="gh-wave" aria-hidden="true">
+              <span className="gh-mc-spot-cta">Solve</span>
+            </Link>
+
+            <Link to="/tools" className="gh-mc-spot gh-mc-spot--tool">
+              <div className="gh-mc-spot-ic gh-mc-spot-ic--img">
+                <img src={sayItRight.url} alt="" />
+              </div>
+              <div className="gh-mc-spot-meta">
+                <div className="gh-mc-spot-lbl">Tool of the week</div>
+                <div className="gh-mc-spot-title">Say It Right <span>· AI Speech</span></div>
+              </div>
+              <div className="gh-mc-wave" aria-hidden="true">
                 {weekUsage.map((v, i) => (
                   <span
                     key={i}
-                    className={`gh-wave-bar${i === todayIdx ? " is-today" : ""}`}
-                    style={{ height: `${28 + (v / peakUsage) * 56}px` }}
+                    className={`gh-mc-wave-bar${i === todayIdx ? " is-today" : ""}`}
+                    style={{ height: `${10 + (v / peakUsage) * 22}px` }}
                   />
                 ))}
               </div>
-              <Link to="/tools" className="gh-tow-cta">
-                <Play size={14} fill="currentColor" /> Try it now
-              </Link>
-            </div>
+            </Link>
           </div>
         </section>
+
 
         {/* Pick your direction — 3 vertical cards in one row */}
         <section className="gh-section">
