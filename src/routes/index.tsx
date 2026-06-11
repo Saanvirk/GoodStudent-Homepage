@@ -458,7 +458,7 @@ function HomePage() {
             {directions.map((d) => {
               const Inner = (
                 <>
-                  <div className="gh-dir-media">{d.scene}</div>
+                  <div className="gh-dir-media" style={{ background: d.bg }}>{d.scene}</div>
                   <div className="gh-dir-body">
                     <div className="gh-dir-row">
                       <div>
