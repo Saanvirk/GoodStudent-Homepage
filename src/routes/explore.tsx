@@ -719,6 +719,19 @@ const css = `
 .ex-tile:hover{transform:translateY(-4px);border-color:var(--orange-2);box-shadow:var(--shadow)}
 .ex-tile-media{position:relative;width:100%;overflow:hidden;display:block;aspect-ratio:13/9}
 .ex-scene{width:100%;height:100%;display:block}
+.ex-scene .sh{fill:rgba(49,28,16,.12)}
+.ex-scene .bf{fill:#FFF6EC}
+.ex-scene .st{stroke:#E2D6BD;stroke-width:2.2;fill:#FFF6EC}
+.ex-scene .scr{fill:#26323B}
+.ex-scene .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
+.ex-scene .ant{fill:#FB6A1E}
+.ex-scene .ac{fill:#5BD0B4}
+.ex-scene .fc{fill:#26323B}
+.ex-scene .ep{fill:#1F2A30}
+.ex-scene .ew{fill:#fff}
+.ex-scene .mo{fill:#FB6A1E}
+.ex-scene .gl{fill:none;stroke:#2FB39A;stroke-width:5;stroke-linecap:round}
+.ex-scene .bl{fill:#C77E5A;opacity:.5}
 .ex-tile-body{flex:1;padding:16px 18px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .ex-tile-body > div{min-width:0;flex:1}
 .ex-tile-title{font-family:var(--font-display);font-weight:700;font-size:1.12rem;color:var(--ink);line-height:1.2}
