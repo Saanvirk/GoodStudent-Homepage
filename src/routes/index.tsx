@@ -11,10 +11,10 @@ import {
   LogOut,
   ArrowRight,
   BookOpen,
-  Layers,
   TrendingUp,
   Compass,
 } from "lucide-react";
+import sayItRight from "@/assets/say-it-right.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -380,12 +380,12 @@ function HomePage() {
             </Link>
 
             <Link to="/tools" className="gh-mc-spot gh-mc-spot--tool">
-              <div className="gh-mc-spot-ic gh-mc-spot-ic--flash">
-                <Layers size={20} />
+              <div className="gh-mc-spot-ic gh-mc-spot-ic--img">
+                <img src={sayItRight.url} alt="" />
               </div>
               <div className="gh-mc-spot-meta">
                 <div className="gh-mc-spot-lbl">Tool of the week</div>
-                <div className="gh-mc-spot-title">Flashcards — your most-used this week</div>
+                <div className="gh-mc-spot-title">Say It Right — your most-used this week</div>
               </div>
               <div className="gh-mc-wave" aria-hidden="true">
                 {weekUsage.map((v, i) => (
@@ -531,20 +531,23 @@ const css = `
 .gh-mc-spots{display:flex;flex-direction:column;gap:10px}
 .gh-mc-spot{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:24px;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;border:1px solid transparent;cursor:pointer;flex:1;min-height:64px}
 .gh-mc-spot:hover{transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(180,110,60,.4)}
-.gh-mc-spot--tutor{background:linear-gradient(120deg,#FFF5EC 0%,#FCE6D4 100%);border-color:#F4E0CC}
-.gh-mc-spot--tool{background:linear-gradient(120deg,#FFF8F0 0%,#FBEAD8 100%);border-color:#F4E0CC}
+.gh-mc-spot--tutor{background:linear-gradient(120deg,#FBEFEA 0%,#F6DDD2 100%);border-color:#F0D4C4}
+.gh-mc-spot--tool{background:linear-gradient(120deg,#FBF1E4 0%,#F5DEC4 100%);border-color:#EFD9BC}
 .gh-mc-spot-ic{width:42px;height:42px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;color:#C76A2F;flex-shrink:0;box-shadow:0 6px 14px -8px rgba(180,110,60,.3);border:1px solid #F4E0CC}
-.gh-mc-spot--tutor .gh-mc-spot-ic{background:linear-gradient(150deg,#FFC8A0,#F5996A);color:#fff;border-color:transparent}
-.gh-mc-spot--tool .gh-mc-spot-ic{background:linear-gradient(150deg,#FFD9BC,#F5B58A);color:#8A4A20;border-color:transparent}
+.gh-mc-spot--tutor .gh-mc-spot-ic{background:linear-gradient(150deg,#F4B6A1,#D9805F);color:#fff;border-color:transparent}
+.gh-mc-spot-ic--img{padding:4px;background:#fff}
+.gh-mc-spot-ic--img img{width:100%;height:100%;object-fit:contain}
+.gh-mc-spot--tutor .gh-mc-spot-lbl{color:#B05A3D}
+.gh-mc-spot--tool .gh-mc-spot-lbl{color:#B86838}
 .gh-mc-spot-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.gh-mc-spot-lbl{font-family:var(--font-display);font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#B86838;opacity:.9}
+.gh-mc-spot-lbl{font-family:var(--font-display);font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
 .gh-mc-spot-title{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gh-mc-spot-title span{font-weight:500;color:var(--ink-soft);font-size:.85rem}
-.gh-mc-spot-cta{font-family:var(--font-display);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(150deg,#F5996A,#E07A45);padding:8px 14px;border-radius:999px;box-shadow:0 6px 14px -6px rgba(224,122,69,.45);flex-shrink:0;transition:transform .15s}
+.gh-mc-spot-cta{font-family:var(--font-display);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(150deg,#E8967A,#C96B47);padding:8px 14px;border-radius:999px;box-shadow:0 6px 14px -6px rgba(201,107,71,.45);flex-shrink:0;transition:transform .15s}
 .gh-mc-spot:hover .gh-mc-spot-cta{transform:scale(1.05)}
 .gh-mc-wave{display:flex;align-items:flex-end;gap:3px;height:34px;flex-shrink:0}
-.gh-mc-wave-bar{width:4px;border-radius:3px;background:linear-gradient(180deg,#FFC8A0,#F5996A);opacity:.7}
-.gh-mc-wave-bar.is-today{background:linear-gradient(180deg,#F5996A,#D9602A);opacity:1;box-shadow:0 2px 6px -2px rgba(217,96,42,.5)}
+.gh-mc-wave-bar{width:4px;border-radius:3px;background:linear-gradient(180deg,#F0B58E,#D9805F);opacity:.65}
+.gh-mc-wave-bar.is-today{background:linear-gradient(180deg,#D9805F,#B05A3D);opacity:1;box-shadow:0 2px 6px -2px rgba(176,90,61,.5)}
 
 /* section header */
 .gh-section{margin-top:28px;margin-bottom:48px}
