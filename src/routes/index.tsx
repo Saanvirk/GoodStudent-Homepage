@@ -10,13 +10,11 @@ import {
   Settings,
   LogOut,
   ArrowRight,
-  Flame,
-  Crown,
+  BookOpen,
+  Layers,
   TrendingUp,
   Compass,
-
 } from "lucide-react";
-import sayItRight from "@/assets/say-it-right.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
