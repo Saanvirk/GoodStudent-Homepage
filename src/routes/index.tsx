@@ -243,7 +243,7 @@ function HomePage() {
   }> = [
     { id: "tut", tag: "Tutors", title: "Sit with a tutor", sub: "Ready-made DSE tutors or build your own.", to: "/tutors", scene: <SceneTutors />, icon: Pencil },
     { id: "tol", tag: "Tools", title: "Grab a tool", sub: "Flashcards, mind maps, speaking practice.", to: "/tools", scene: <SceneTools />, icon: Wrench },
-    { id: "exp", tag: "Explore", title: "Discover what's new", sub: "Curated packs and fresh experiments.", scene: <SceneExplore />, icon: Globe },
+    { id: "exp", tag: "Explore", title: "Discover what's new", sub: "Generate stories, haiku, remix pictures and more.", scene: <SceneExplore />, icon: Globe },
   ];
 
   return (
