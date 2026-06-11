@@ -49,6 +49,41 @@ function LogoMark({ className = "" }: { className?: string }) {
   );
 }
 
+/* ===== Mascot (matches tutors page) ===== */
+function Mascot({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 220 246" className={`gh-ms ${className}`} aria-hidden="true">
+      <ellipse className="sh" cx="110" cy="234" rx="54" ry="7" />
+      <rect className="bf st" x="88" y="188" width="14" height="36" rx="7" />
+      <rect className="bf st" x="118" y="188" width="14" height="36" rx="7" />
+      <ellipse className="bf st" cx="95" cy="226" rx="13" ry="6" />
+      <ellipse className="bf st" cx="125" cy="226" rx="13" ry="6" />
+      <g><rect className="bf st" x="50" y="138" width="14" height="46" rx="7" transform="rotate(14 57 161)" /><circle className="bf st" cx="52" cy="184" r="10" /></g>
+      <g><rect className="bf st" x="156" y="138" width="14" height="46" rx="7" transform="rotate(-14 163 161)" /><circle className="bf st" cx="168" cy="184" r="10" /></g>
+      <rect className="bf st" x="66" y="118" width="88" height="82" rx="30" />
+      <rect className="scr" x="85" y="138" width="50" height="36" rx="11" />
+      <text className="scrt" x="110" y="162" textAnchor="middle">{"</>"}</text>
+      <rect className="bf st" x="104" y="110" width="12" height="12" rx="3" />
+      <path className="st" d="M110 36 C108 24 118 22 113 12" fill="none" strokeLinecap="round" />
+      <circle className="ant" cx="112" cy="10" r="7" />
+      <rect className="bf st" x="56" y="34" width="108" height="92" rx="40" />
+      <circle className="ac" cx="56" cy="82" r="9" />
+      <circle className="ac" cx="164" cy="82" r="9" />
+      <rect className="fc" x="68" y="50" width="84" height="62" rx="26" />
+      <circle className="ew" cx="93" cy="80" r="11" />
+      <circle className="ep" cx="96" cy="82" r="5" />
+      <circle className="ew" cx="127" cy="80" r="11" />
+      <circle className="ep" cx="124" cy="82" r="5" />
+      <circle className="gl" cx="93" cy="80" r="15" />
+      <circle className="gl" cx="127" cy="80" r="15" />
+      <path className="gl" d="M108 78 q1 -3 4 0" />
+      <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
+      <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
+      <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
+    </svg>
+  );
+}
+
 /* ===== Shared mascot symbol (matches tutors page) ===== */
 function BotSymbols() {
   return (
@@ -308,11 +343,20 @@ function HomePage() {
       <main className="gh-main">
         {/* Hero */}
         <header className="gh-hero">
-          <div className="gh-eyebrow"><span className="gh-dot" /> Thursday — welcome back</div>
-          <h1 className="gh-title">
-            Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is alive.
-          </h1>
-          <p className="gh-subtitle">A quick look at today and the week, then pick your direction.</p>
+          <div className="gh-hero-text">
+            <div className="gh-eyebrow"><span className="gh-dot" /> Thursday — welcome back</div>
+            <h1 className="gh-title">
+              Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is alive.
+            </h1>
+            <p className="gh-subtitle">A quick look at today and the week, then pick your direction.</p>
+          </div>
+          <div className="gh-mascot-card">
+            <div className="gh-mascot-bubble">
+              <b>Welcome back!</b>
+              <span>Where to today?</span>
+            </div>
+            <div className="gh-mascot-art"><Mascot /></div>
+          </div>
         </header>
 
         {/* Mission Control — integrated activity bar (no cards) */}
@@ -491,20 +535,44 @@ const css = `
 .gh-user-switch>svg{color:var(--ink-faint);flex-shrink:0}
 
 /* main */
-.gh-main{flex:1;min-width:0;padding:40px 56px 80px;position:relative;z-index:1}
+.gh-main{flex:1;min-width:0;padding:28px 48px 40px;position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
 
-/* hero */
-.gh-hero{margin-bottom:28px;max-width:780px}
-.gh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:14px}
+/* hero — text + mascot with bubble */
+.gh-hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-bottom:20px}
+.gh-hero-text{max-width:640px}
+.gh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:10px}
 .gh-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:gh-ping 2s infinite}
 @keyframes gh-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
-.gh-title{font-size:clamp(2rem,3.4vw,2.85rem)}
+.gh-title{font-size:clamp(1.7rem,2.6vw,2.3rem)}
 .gh-hl{color:var(--orange-deep);position:relative;display:inline-block;white-space:nowrap}
 .gh-hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.32em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1}
-.gh-subtitle{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:36em}
+.gh-subtitle{margin-top:10px;color:var(--ink-soft);font-size:.94rem;max-width:36em}
+
+/* mascot card on hero */
+.gh-mascot-card{position:relative;display:flex;align-items:flex-end;gap:10px;flex-shrink:0}
+.gh-mascot-art{width:118px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:gh-bob 4s ease-in-out infinite}
+@keyframes gh-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.gh-mascot-bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow-sm);max-width:170px;margin-bottom:36px}
+.gh-mascot-bubble b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.88rem;display:block;margin-bottom:2px}
+.gh-mascot-bubble span{font-size:.78rem;color:var(--ink-soft);line-height:1.4}
+.gh-mascot-bubble::after{content:"";position:absolute;top:50%;right:-7px;transform:translateY(-50%) rotate(45deg);width:14px;height:14px;background:#fff;border-right:1px solid var(--line);border-top:1px solid var(--line)}
+.gh-ms{width:100%;height:auto;display:block}
+.gh-ms .sh{fill:rgba(49,28,16,.12)}
+.gh-ms .bf{fill:#FFF6EC}
+.gh-ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
+.gh-ms .scr{fill:#26323B}
+.gh-ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
+.gh-ms .ant{fill:var(--orange)}
+.gh-ms .ac{fill:#5BD0B4}
+.gh-ms .fc{fill:#26323B}
+.gh-ms .ep{fill:#1F2A30}
+.gh-ms .ew{fill:#fff}
+.gh-ms .mo{fill:#FB6A1E}
+.gh-ms .gl{fill:none;stroke:#2FB39A;stroke-width:5;stroke-linecap:round}
+.gh-ms .bl{fill:#FF9A57;opacity:.7}
 
 /* === Mission Control (integrated activity bar, no cards) === */
-.gh-mc{display:grid;grid-template-columns:1.05fr 1.15fr;gap:14px;margin-bottom:36px;padding:10px;background:rgba(255,252,247,.7);border:1px solid #F4E4D2;border-radius:32px;box-shadow:0 4px 18px -10px rgba(180,110,60,.15);backdrop-filter:blur(10px)}
+.gh-mc{display:grid;grid-template-columns:1.05fr 1.15fr;gap:12px;margin-bottom:20px;padding:9px;background:rgba(255,252,247,.7);border:1px solid #F4E4D2;border-radius:28px;box-shadow:0 4px 18px -10px rgba(180,110,60,.15);backdrop-filter:blur(10px)}
 .gh-mc-stats{background:#FFFDFA;border-radius:24px;padding:18px 22px;display:flex;align-items:center;gap:18px;border:1px solid #F4E4D2}
 .gh-mc-stat{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
 .gh-mc-divider{width:1px;align-self:stretch;background:linear-gradient(180deg,transparent,#EFD9C2,transparent);margin:6px 0}
@@ -550,27 +618,32 @@ const css = `
 .gh-mc-wave-bar.is-today{background:linear-gradient(180deg,#D9805F,#B05A3D);opacity:1;box-shadow:0 2px 6px -2px rgba(176,90,61,.5)}
 
 /* section header */
-.gh-section{margin-top:28px;margin-bottom:48px}
-.gh-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
-.gh-section-eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:6px}
-.gh-section-title{font-size:1.55rem;color:var(--ink)}
+.gh-section{margin-top:8px;margin-bottom:16px}
+.gh-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px}
+.gh-section-eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:4px}
+.gh-section-title{font-size:1.4rem;color:var(--ink)}
 
-/* direction cards — 3 in same row, vertical layout */
-.gh-dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.gh-dir{display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;cursor:pointer;text-align:left;font:inherit;padding:0;transition:transform .22s,box-shadow .22s,border-color .22s}
+/* direction cards — 3 in same row, compact */
+.gh-dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gh-dir{display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;cursor:pointer;text-align:left;font:inherit;padding:0;transition:transform .22s,box-shadow .22s,border-color .22s}
 .gh-dir:hover{transform:translateY(-3px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.gh-dir-media{position:relative;width:100%;background:var(--cream-2);overflow:hidden;display:block;aspect-ratio:280/260}
+.gh-dir-media{position:relative;width:100%;background:var(--cream-2);overflow:hidden;display:block;aspect-ratio:16/10}
 .gh-dir-media .gh-scene{width:100%;height:100%}
-.gh-dir-body{flex:1;padding:18px 20px 20px;display:flex;flex-direction:column}
-.gh-dir-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%}
+.gh-dir-body{flex:1;padding:14px 16px 16px;display:flex;flex-direction:column}
+.gh-dir-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;width:100%}
 .gh-dir-row > div{min-width:0;flex:1}
-.gh-dir-tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:600;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);background:var(--cream-2);padding:4px 10px;border-radius:999px;margin-bottom:8px}
-.gh-dir-title{font-family:var(--font-display);font-weight:700;font-size:1.18rem;color:var(--ink);line-height:1.2}
-.gh-dir-sub{font-size:.82rem;color:var(--ink-soft);margin:4px 0 0;line-height:1.4}
-.gh-dir-arrow{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--orange-deep);display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);transition:transform .2s,background .2s}
+.gh-dir-tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:600;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);background:var(--cream-2);padding:3px 9px;border-radius:999px;margin-bottom:6px}
+.gh-dir-title{font-family:var(--font-display);font-weight:700;font-size:1.08rem;color:var(--ink);line-height:1.2}
+.gh-dir-sub{font-size:.78rem;color:var(--ink-soft);margin:3px 0 0;line-height:1.4}
+.gh-dir-arrow{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--orange-deep);display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);transition:transform .2s,background .2s}
 .gh-dir:hover .gh-dir-arrow{transform:translateX(4px);background:var(--cream-2)}
 
 /* responsive */
+@media (max-width:1280px){
+  .gh-hero{grid-template-columns:1fr;gap:14px}
+  .gh-mascot-card{justify-content:flex-end}
+  .gh-mascot-bubble{margin-bottom:24px}
+}
 @media (max-width:1180px){
   .gh-mc{grid-template-columns:1fr}
 }
@@ -578,7 +651,7 @@ const css = `
   .gh-dir-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:680px){
-  .gh-main{padding:28px 24px 64px}
+  .gh-main{padding:24px 20px 48px}
   .gh-mc-stats{flex-direction:column;align-items:stretch;gap:14px}
   .gh-mc-divider{width:auto;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0}
 }
