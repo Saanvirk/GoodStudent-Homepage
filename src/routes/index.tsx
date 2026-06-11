@@ -511,21 +511,21 @@ const css = `
 
 /* streak */
 .gh-mc-streak-num{display:flex;flex-direction:column;align-items:flex-start;line-height:1;flex-shrink:0}
-.gh-mc-big{font-family:var(--font-display);font-weight:700;font-size:2.4rem;line-height:.9;background:linear-gradient(160deg,#F08A4B,#D9602A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.gh-mc-unit{font-family:var(--font-display);font-weight:600;font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:#C76A2F;margin-top:4px}
-.gh-mc-dots{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:1;min-width:0;padding:8px 10px;background:#FFF4EA;border-radius:12px}
-.gh-mc-dot{width:100%;aspect-ratio:1/1;border-radius:50%;background:#FBE4D0;transition:transform .15s}
-.gh-mc-dot.on{background:linear-gradient(160deg,#FFB98A,#F08A4B);box-shadow:0 2px 5px -2px rgba(240,138,75,.45)}
-.gh-mc-dot.is-today{outline:2px solid #D9602A;outline-offset:2px;transform:scale(1.15)}
+.gh-mc-big{font-family:var(--font-display);font-weight:700;font-size:2.4rem;line-height:.9;background:linear-gradient(160deg,#D26A4E,#A8392A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.gh-mc-unit{font-family:var(--font-display);font-weight:600;font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:#A8392A;margin-top:4px}
+.gh-mc-dots{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:1;min-width:0;padding:8px 10px;background:#FBEDE4;border-radius:12px}
+.gh-mc-dot{width:100%;aspect-ratio:1/1;border-radius:50%;background:#F2D9CB;transition:transform .15s}
+.gh-mc-dot.on{background:linear-gradient(160deg,#E08266,#C24A30);box-shadow:0 2px 5px -2px rgba(194,74,48,.45)}
+.gh-mc-dot.is-today{outline:2px solid #A8392A;outline-offset:2px;transform:scale(1.15)}
 
-/* time */
+/* time — warm apricot/gold, distinct from streak's terracotta */
 .gh-mc-ring-wrap{position:relative;width:62px;height:62px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .gh-mc-ring{width:100%;height:100%}
-.gh-mc-ring-pct{position:absolute;font-family:var(--font-display);font-weight:700;font-size:.72rem;color:#C76A2F}
+.gh-mc-ring-pct{position:absolute;font-family:var(--font-display);font-weight:700;font-size:.72rem;color:#B07028}
 .gh-mc-time-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
 .gh-mc-time-num{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:var(--ink);line-height:1}
 .gh-mc-time-num span{font-size:.78rem;color:var(--ink-faint);font-weight:500}
-.gh-mc-time-sub{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:600;font-size:.7rem;color:#C76A2F;letter-spacing:.02em}
+.gh-mc-time-sub{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:700;font-size:.7rem;color:#2E8F66;letter-spacing:.02em}
 
 /* spotlights — soft cream/peach tones, no heavy orange */
 .gh-mc-spots{display:flex;flex-direction:column;gap:10px}
