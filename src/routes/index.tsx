@@ -594,20 +594,15 @@ const css = `
 
 /* responsive */
 @media (max-width:1180px){
-  .gh-row-2{grid-template-columns:1fr}
-  .gh-streak-top{flex-direction:column;align-items:stretch;gap:18px}
-  .gh-streak-num{flex-direction:row;align-items:flex-end;gap:10px;border-right:none;border-bottom:1px dashed var(--line);padding-right:0;padding-bottom:10px}
+  .gh-mc{grid-template-columns:1fr}
 }
 @media (max-width:980px){
   .gh-dir-grid{grid-template-columns:1fr 1fr}
-  .gh-tow{flex-direction:column;align-items:stretch}
-  .gh-tow-right{align-items:center}
 }
-@media (max-width:820px){
+@media (max-width:680px){
   .gh-main{padding:28px 24px 64px}
-  .gh-time-body{flex-direction:column;align-items:flex-start}
-  .gh-feat-body{flex-direction:column;align-items:stretch}
-  .gh-feat-media{width:100%;height:200px}
+  .gh-mc-stats{flex-direction:column;align-items:stretch;gap:14px}
+  .gh-mc-divider{width:auto;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0}
 }
 @media (max-width:560px){
   .gh-side{display:none}
