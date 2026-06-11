@@ -545,8 +545,13 @@ function ExplorePage() {
               onClick={() => setTab(t.id)}
               style={{ ["--rail" as never]: SECTIONS[t.id].rail }}
             >
-              <span className="ex-tab-emoji" aria-hidden="true">{t.emoji}</span>
-              <span className="ex-tab-label">{t.label}</span>
+              <span className="ex-tab-ic" aria-hidden="true">
+                <CatIcon k={t.icon} color={SECTIONS[t.id].rail} />
+              </span>
+              <span className="ex-tab-meta">
+                <span className="ex-tab-label">{t.label}</span>
+                <span className="ex-tab-sub">{t.sub}</span>
+              </span>
               <span className="ex-tab-count">{SECTIONS[t.id].items.length}</span>
             </button>
           ))}
@@ -566,7 +571,7 @@ function ExplorePage() {
           {section.items.map((item) => (
             <button key={item.id} className="ex-tile">
               <div className="ex-tile-media">
-                <item.Scene bg={item.bg} />
+                <MascotScene bg={item.bg} accent={item.accent} prop={item.prop} />
               </div>
               <div className="ex-tile-body">
                 <div>
