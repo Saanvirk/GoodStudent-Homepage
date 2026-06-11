@@ -49,6 +49,41 @@ function LogoMark({ className = "" }: { className?: string }) {
   );
 }
 
+/* ===== Mascot (matches tutors page) ===== */
+function Mascot({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 220 246" className={`gh-ms ${className}`} aria-hidden="true">
+      <ellipse className="sh" cx="110" cy="234" rx="54" ry="7" />
+      <rect className="bf st" x="88" y="188" width="14" height="36" rx="7" />
+      <rect className="bf st" x="118" y="188" width="14" height="36" rx="7" />
+      <ellipse className="bf st" cx="95" cy="226" rx="13" ry="6" />
+      <ellipse className="bf st" cx="125" cy="226" rx="13" ry="6" />
+      <g><rect className="bf st" x="50" y="138" width="14" height="46" rx="7" transform="rotate(14 57 161)" /><circle className="bf st" cx="52" cy="184" r="10" /></g>
+      <g><rect className="bf st" x="156" y="138" width="14" height="46" rx="7" transform="rotate(-14 163 161)" /><circle className="bf st" cx="168" cy="184" r="10" /></g>
+      <rect className="bf st" x="66" y="118" width="88" height="82" rx="30" />
+      <rect className="scr" x="85" y="138" width="50" height="36" rx="11" />
+      <text className="scrt" x="110" y="162" textAnchor="middle">{"</>"}</text>
+      <rect className="bf st" x="104" y="110" width="12" height="12" rx="3" />
+      <path className="st" d="M110 36 C108 24 118 22 113 12" fill="none" strokeLinecap="round" />
+      <circle className="ant" cx="112" cy="10" r="7" />
+      <rect className="bf st" x="56" y="34" width="108" height="92" rx="40" />
+      <circle className="ac" cx="56" cy="82" r="9" />
+      <circle className="ac" cx="164" cy="82" r="9" />
+      <rect className="fc" x="68" y="50" width="84" height="62" rx="26" />
+      <circle className="ew" cx="93" cy="80" r="11" />
+      <circle className="ep" cx="96" cy="82" r="5" />
+      <circle className="ew" cx="127" cy="80" r="11" />
+      <circle className="ep" cx="124" cy="82" r="5" />
+      <circle className="gl" cx="93" cy="80" r="15" />
+      <circle className="gl" cx="127" cy="80" r="15" />
+      <path className="gl" d="M108 78 q1 -3 4 0" />
+      <ellipse className="bl" cx="80" cy="98" rx="7" ry="4" />
+      <ellipse className="bl" cx="140" cy="98" rx="7" ry="4" />
+      <ellipse className="mo" cx="110" cy="100" rx="6" ry="5" />
+    </svg>
+  );
+}
+
 /* ===== Shared mascot symbol (matches tutors page) ===== */
 function BotSymbols() {
   return (
