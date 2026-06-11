@@ -535,17 +535,41 @@ const css = `
 .gh-user-switch>svg{color:var(--ink-faint);flex-shrink:0}
 
 /* main */
-.gh-main{flex:1;min-width:0;padding:40px 56px 80px;position:relative;z-index:1}
+.gh-main{flex:1;min-width:0;padding:28px 48px 40px;position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
 
-/* hero */
-.gh-hero{margin-bottom:28px;max-width:780px}
-.gh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:14px}
+/* hero — text + mascot with bubble */
+.gh-hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-bottom:20px}
+.gh-hero-text{max-width:640px}
+.gh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:10px}
 .gh-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:gh-ping 2s infinite}
 @keyframes gh-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
-.gh-title{font-size:clamp(2rem,3.4vw,2.85rem)}
+.gh-title{font-size:clamp(1.7rem,2.6vw,2.3rem)}
 .gh-hl{color:var(--orange-deep);position:relative;display:inline-block;white-space:nowrap}
 .gh-hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.32em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1}
-.gh-subtitle{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:36em}
+.gh-subtitle{margin-top:10px;color:var(--ink-soft);font-size:.94rem;max-width:36em}
+
+/* mascot card on hero */
+.gh-mascot-card{position:relative;display:flex;align-items:flex-end;gap:10px;flex-shrink:0}
+.gh-mascot-art{width:118px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:gh-bob 4s ease-in-out infinite}
+@keyframes gh-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.gh-mascot-bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow-sm);max-width:170px;margin-bottom:36px}
+.gh-mascot-bubble b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:.88rem;display:block;margin-bottom:2px}
+.gh-mascot-bubble span{font-size:.78rem;color:var(--ink-soft);line-height:1.4}
+.gh-mascot-bubble::after{content:"";position:absolute;top:50%;right:-7px;transform:translateY(-50%) rotate(45deg);width:14px;height:14px;background:#fff;border-right:1px solid var(--line);border-top:1px solid var(--line)}
+.gh-ms{width:100%;height:auto;display:block}
+.gh-ms .sh{fill:rgba(49,28,16,.12)}
+.gh-ms .bf{fill:#FFF6EC}
+.gh-ms .st{stroke:#EBD2B6;stroke-width:2.2;fill:#FFF6EC}
+.gh-ms .scr{fill:#26323B}
+.gh-ms .scrt{fill:#46D6AE;font-family:monospace;font-size:17px;font-weight:700}
+.gh-ms .ant{fill:var(--orange)}
+.gh-ms .ac{fill:#5BD0B4}
+.gh-ms .fc{fill:#26323B}
+.gh-ms .ep{fill:#1F2A30}
+.gh-ms .ew{fill:#fff}
+.gh-ms .mo{fill:#FB6A1E}
+.gh-ms .gl{fill:none;stroke:#2FB39A;stroke-width:5;stroke-linecap:round}
+.gh-ms .bl{fill:#FF9A57;opacity:.7}
 
 /* === Mission Control (integrated activity bar, no cards) === */
 .gh-mc{display:grid;grid-template-columns:1.05fr 1.15fr;gap:14px;margin-bottom:36px;padding:10px;background:rgba(255,252,247,.7);border:1px solid #F4E4D2;border-radius:32px;box-shadow:0 4px 18px -10px rgba(180,110,60,.15);backdrop-filter:blur(10px)}
