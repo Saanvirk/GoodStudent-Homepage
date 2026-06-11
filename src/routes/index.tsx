@@ -308,11 +308,11 @@ function HomePage() {
       <main className="gh-main">
         {/* Hero */}
         <header className="gh-hero">
-          <div className="gh-eyebrow"><span className="gh-dot" /> Thursday · Welcome back</div>
+          <div className="gh-eyebrow"><span className="gh-dot" /> Thursday — welcome back</div>
           <h1 className="gh-title">
             Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is alive.
           </h1>
-          <p className="gh-subtitle">A quick look at today and the week — then pick your direction.</p>
+          <p className="gh-subtitle">A quick look at today and the week, then pick your direction.</p>
         </header>
 
         {/* Mission Control — integrated activity bar (no cards) */}
