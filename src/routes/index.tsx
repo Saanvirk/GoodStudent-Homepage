@@ -347,8 +347,8 @@ function HomePage() {
                 <svg viewBox="0 0 100 100" className="gh-mc-ring">
                   <defs>
                     <linearGradient id="gh-mc-ring-g" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#FFC8A0" />
-                      <stop offset="100%" stopColor="#F5996A" />
+                      <stop offset="0%" stopColor="#F7CE7B" />
+                      <stop offset="100%" stopColor="#D9962E" />
                     </linearGradient>
                   </defs>
                   <circle cx="50" cy="50" r={ringR} fill="none" stroke="#FFEEDD" strokeWidth="9" />
@@ -511,27 +511,27 @@ const css = `
 
 /* streak */
 .gh-mc-streak-num{display:flex;flex-direction:column;align-items:flex-start;line-height:1;flex-shrink:0}
-.gh-mc-big{font-family:var(--font-display);font-weight:700;font-size:2.4rem;line-height:.9;background:linear-gradient(160deg,#F08A4B,#D9602A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.gh-mc-unit{font-family:var(--font-display);font-weight:600;font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:#C76A2F;margin-top:4px}
-.gh-mc-dots{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:1;min-width:0;padding:8px 10px;background:#FFF4EA;border-radius:12px}
-.gh-mc-dot{width:100%;aspect-ratio:1/1;border-radius:50%;background:#FBE4D0;transition:transform .15s}
-.gh-mc-dot.on{background:linear-gradient(160deg,#FFB98A,#F08A4B);box-shadow:0 2px 5px -2px rgba(240,138,75,.45)}
-.gh-mc-dot.is-today{outline:2px solid #D9602A;outline-offset:2px;transform:scale(1.15)}
+.gh-mc-big{font-family:var(--font-display);font-weight:700;font-size:2.4rem;line-height:.9;background:linear-gradient(160deg,#D26A4E,#A8392A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.gh-mc-unit{font-family:var(--font-display);font-weight:600;font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:#A8392A;margin-top:4px}
+.gh-mc-dots{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:1;min-width:0;padding:8px 10px;background:#FBEDE4;border-radius:12px}
+.gh-mc-dot{width:100%;aspect-ratio:1/1;border-radius:50%;background:#F2D9CB;transition:transform .15s}
+.gh-mc-dot.on{background:linear-gradient(160deg,#E08266,#C24A30);box-shadow:0 2px 5px -2px rgba(194,74,48,.45)}
+.gh-mc-dot.is-today{outline:2px solid #A8392A;outline-offset:2px;transform:scale(1.15)}
 
-/* time */
+/* time — warm apricot/gold, distinct from streak's terracotta */
 .gh-mc-ring-wrap{position:relative;width:62px;height:62px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .gh-mc-ring{width:100%;height:100%}
-.gh-mc-ring-pct{position:absolute;font-family:var(--font-display);font-weight:700;font-size:.72rem;color:#C76A2F}
+.gh-mc-ring-pct{position:absolute;font-family:var(--font-display);font-weight:700;font-size:.72rem;color:#B07028}
 .gh-mc-time-meta{display:flex;flex-direction:column;gap:3px;min-width:0}
 .gh-mc-time-num{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:var(--ink);line-height:1}
 .gh-mc-time-num span{font-size:.78rem;color:var(--ink-faint);font-weight:500}
-.gh-mc-time-sub{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:600;font-size:.7rem;color:#C76A2F;letter-spacing:.02em}
+.gh-mc-time-sub{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:700;font-size:.7rem;color:#2E8F66;letter-spacing:.02em}
 
 /* spotlights — soft cream/peach tones, no heavy orange */
 .gh-mc-spots{display:flex;flex-direction:column;gap:10px}
 .gh-mc-spot{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:24px;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;border:1px solid transparent;cursor:pointer;flex:1;min-height:64px}
 .gh-mc-spot:hover{transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(180,110,60,.4)}
-.gh-mc-spot--tutor{background:linear-gradient(120deg,#FBEFEA 0%,#F6DDD2 100%);border-color:#F0D4C4}
+.gh-mc-spot--tutor{background:linear-gradient(120deg,#FEF8F4 0%,#FCEDE3 100%);border-color:#F7E4D5}
 .gh-mc-spot--tool{background:linear-gradient(120deg,#FBF1E4 0%,#F5DEC4 100%);border-color:#EFD9BC}
 .gh-mc-spot-ic{width:42px;height:42px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;color:#C76A2F;flex-shrink:0;box-shadow:0 6px 14px -8px rgba(180,110,60,.3);border:1px solid #F4E0CC}
 .gh-mc-spot--tutor .gh-mc-spot-ic{background:linear-gradient(150deg,#F4B6A1,#D9805F);color:#fff;border-color:transparent}
