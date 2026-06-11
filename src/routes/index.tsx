@@ -298,17 +298,10 @@ function HomePage() {
             const Icon = n.icon;
             const isActive = active === n.id;
             const cls = `gh-nav-item${isActive ? " is-active" : ""}`;
-            if (n.to) {
-              return (
-                <Link key={n.id} to={n.to} className={cls} onClick={() => setActive(n.id)}>
-                  <Icon size={17} /> <span>{n.label}</span>
-                </Link>
-              );
-            }
             return (
-              <button key={n.id} className={cls} onClick={() => setActive(n.id)}>
+              <Link key={n.id} to={n.to} className={cls} onClick={() => setActive(n.id)}>
                 <Icon size={17} /> <span>{n.label}</span>
-              </button>
+              </Link>
             );
           })}
         </nav>
