@@ -632,6 +632,20 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
                   onChange={(e) => setData({ ...data, name: e.target.value })}
                   maxLength={60}
                 />
+                <label className="tp-label" style={{ marginTop: 18 }}>Subject</label>
+                <p className="tp-help">Pick the subject this tutor will help with.</p>
+                <div className="tp-subjects">
+                  {SUBJECTS.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className={`tp-subject${data.subject === s ? " is-on" : ""}`}
+                      onClick={() => setData({ ...data, subject: s })}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
