@@ -366,26 +366,26 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Spotlight region: tutor challenge + tool of the week */}
+          {/* Spotlight region: favourite tutor + tool of the week */}
           <div className="gh-mc-spots">
             <Link to="/tutors" className="gh-mc-spot gh-mc-spot--tutor">
               <div className="gh-mc-spot-ic">
-                <Crown size={20} />
+                <BookOpen size={20} />
               </div>
               <div className="gh-mc-spot-meta">
-                <div className="gh-mc-spot-lbl">Favourite tutor challenge</div>
-                <div className="gh-mc-spot-title">DSE English · AI tools in exams?</div>
+                <div className="gh-mc-spot-lbl">Favourite tutor</div>
+                <div className="gh-mc-spot-title">DSE English — pick up where you left off</div>
               </div>
-              <span className="gh-mc-spot-cta">Solve</span>
+              <span className="gh-mc-spot-cta">Resume</span>
             </Link>
 
             <Link to="/tools" className="gh-mc-spot gh-mc-spot--tool">
-              <div className="gh-mc-spot-ic gh-mc-spot-ic--img">
-                <img src={sayItRight.url} alt="" />
+              <div className="gh-mc-spot-ic gh-mc-spot-ic--flash">
+                <Layers size={20} />
               </div>
               <div className="gh-mc-spot-meta">
                 <div className="gh-mc-spot-lbl">Tool of the week</div>
-                <div className="gh-mc-spot-title">Say It Right <span>· AI Speech</span></div>
+                <div className="gh-mc-spot-title">Flashcards — your most-used this week</div>
               </div>
               <div className="gh-mc-wave" aria-hidden="true">
                 {weekUsage.map((v, i) => (
