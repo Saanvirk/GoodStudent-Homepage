@@ -316,9 +316,9 @@ function HomePage() {
           {userOpen && (
             <div className="gh-user-card">
               <div className="gh-user-head">
-                <div className="gh-ava">TC</div>
+                <div className="gh-ava">SK</div>
                 <div>
-                  <div className="gh-user-name">Tiffany Chiu</div>
+                  <div className="gh-user-name">Saanvi K</div>
                   <div className="gh-user-mail">tks@goodstudent.app</div>
                 </div>
               </div>
@@ -330,9 +330,9 @@ function HomePage() {
             </div>
           )}
           <button className="gh-user-switch" onClick={() => setUserOpen((v) => !v)}>
-            <div className="gh-ava gh-ava-sm">TC</div>
+            <div className="gh-ava gh-ava-sm">SK</div>
             <div className="gh-user-switch-meta">
-              <div className="gh-user-name">Tiffany Chiu</div>
+              <div className="gh-user-name">Saanvi K</div>
               <div className="gh-user-mail">Student — Year 12</div>
             </div>
             <ChevronsUpDown size={15} />
@@ -346,7 +346,7 @@ function HomePage() {
           <div className="gh-hero-text">
             <div className="gh-eyebrow"><span className="gh-dot" /> Thursday — welcome back</div>
             <h1 className="gh-title">
-              Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is alive.
+              Hi Saanvi — your <span className="gh-hl">{streak}-day streak</span> is alive.
             </h1>
             <p className="gh-subtitle">A quick look at today and the week, then pick your direction.</p>
           </div>
