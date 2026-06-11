@@ -257,7 +257,7 @@ function HomePage() {
     { id: "home",  label: "Home",  icon: Home,   to: "/" as const },
     { id: "tutor", label: "Tutor", icon: Pencil, to: "/tutors" as const },
     { id: "tools", label: "Tools", icon: Wrench, to: "/tools" as const },
-    { id: "explore", label: "Explore", icon: Globe },
+    { id: "explore", label: "Explore", icon: Globe, to: "/explore" as const },
   ];
 
   const streak = 17; // current streak (days in a row)
@@ -298,17 +298,10 @@ function HomePage() {
             const Icon = n.icon;
             const isActive = active === n.id;
             const cls = `gh-nav-item${isActive ? " is-active" : ""}`;
-            if (n.to) {
-              return (
-                <Link key={n.id} to={n.to} className={cls} onClick={() => setActive(n.id)}>
-                  <Icon size={17} /> <span>{n.label}</span>
-                </Link>
-              );
-            }
             return (
-              <button key={n.id} className={cls} onClick={() => setActive(n.id)}>
+              <Link key={n.id} to={n.to} className={cls} onClick={() => setActive(n.id)}>
                 <Icon size={17} /> <span>{n.label}</span>
-              </button>
+              </Link>
             );
           })}
         </nav>

@@ -310,7 +310,7 @@ function TutorsPage() {
     { id: "home", label: "Home", icon: Home, to: "/" as const },
     { id: "tutor", label: "Tutor", icon: Pencil },
     { id: "tools", label: "Tools", icon: Wrench, to: "/tools" as const },
-    { id: "explore", label: "Explore", icon: Globe },
+    { id: "explore", label: "Explore", icon: Globe, to: "/explore" as const },
   ];
 
   const toggleFav = (id: string) => setFavs((f) => ({ ...f, [id]: !f[id] }));
