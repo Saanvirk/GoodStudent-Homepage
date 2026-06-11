@@ -716,23 +716,6 @@ function BuilderModal({ onClose, onCreate }: { onClose: () => void; onCreate: (d
 
             {step === 3 && (
               <div className="tp-field">
-                <label className="tp-label">Any specific instructions?</label>
-                <p className="tp-help">Tone, language, what to avoid, how to explain. Optional but helpful.</p>
-                <textarea
-                  autoFocus
-                  className="tp-textarea"
-                  rows={6}
-                  placeholder="e.g. Be encouraging, use simple analogies, quiz me after each topic, reply in Cantonese when I ask…"
-                  value={data.instructions}
-                  onChange={(e) => setData({ ...data, instructions: e.target.value })}
-                  maxLength={600}
-                />
-                <div className="tp-counter">{data.instructions.length}/600</div>
-              </div>
-            )}
-
-            {step === 4 && (
-              <div className="tp-field">
                 <label className="tp-label">Customise tutor image</label>
                 <p className="tp-help">Pick the default mascot scene or upload your own.</p>
                 <div className="tp-imgpick">
