@@ -531,7 +531,7 @@ const css = `
 .gh-mc-spots{display:flex;flex-direction:column;gap:10px}
 .gh-mc-spot{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:24px;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;border:1px solid transparent;cursor:pointer;flex:1;min-height:64px}
 .gh-mc-spot:hover{transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(180,110,60,.4)}
-.gh-mc-spot--tutor{background:linear-gradient(120deg,#FBEFEA 0%,#F6DDD2 100%);border-color:#F0D4C4}
+.gh-mc-spot--tutor{background:linear-gradient(120deg,#FEF8F4 0%,#FCEDE3 100%);border-color:#F7E4D5}
 .gh-mc-spot--tool{background:linear-gradient(120deg,#FBF1E4 0%,#F5DEC4 100%);border-color:#EFD9BC}
 .gh-mc-spot-ic{width:42px;height:42px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;color:#C76A2F;flex-shrink:0;box-shadow:0 6px 14px -8px rgba(180,110,60,.3);border:1px solid #F4E0CC}
 .gh-mc-spot--tutor .gh-mc-spot-ic{background:linear-gradient(150deg,#F4B6A1,#D9805F);color:#fff;border-color:transparent}
