@@ -332,104 +332,76 @@ function MascotScene({ bg, accent, prop }: SceneProps & { prop: PropKey }) {
   );
 }
 
-/* ===== Category tab icons — custom drawn, not emoji ===== */
-function CatIcon({ k, color }: { k: CatIconKey; color: string }) {
-  // Chunky cartoon illustrations — black outlines, off-white shape highlights,
-  // tiny faces for personality. Tuned for ~56px tab plates.
-  const ink = "#2A1F18";
+/* ===== Category tab icons — soft flat illustration style ===== */
+function CatIcon({ k }: { k: CatIconKey; color?: string }) {
+  // Flat, friendly pictograms — no outlines, layered pastel fills with a soft
+  // shadow shape, matching the flat-illustration look used across the brand.
   switch (k) {
     case "palette":
       return (
         <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          {/* drop shadow */}
-          <ellipse cx="24" cy="42" rx="14" ry="2" fill={ink} opacity=".12"/>
-          {/* palette body */}
-          <path d="M24 7C14 7 6 13 6 22c0 6 5 10 11 10 2 0 3-1 3-3 0-2 1-3 3-3h5a9 9 0 0 0 9-9c0-6-5-10-13-10z"
-                fill={color} stroke={ink} strokeWidth="2.2" strokeLinejoin="round"/>
-          {/* highlight */}
-          <path d="M11 16c2-3 6-5 10-5" stroke="#FFF6EC" strokeWidth="2" strokeLinecap="round" opacity=".5" fill="none"/>
-          {/* paint dabs */}
-          <circle cx="13" cy="22" r="2.6" fill="#FFF6EC" stroke={ink} strokeWidth="1.4"/>
-          <circle cx="20" cy="14" r="2.6" fill="#FFD261" stroke={ink} strokeWidth="1.4"/>
-          <circle cx="28" cy="14" r="2.6" fill="#5BD0B4" stroke={ink} strokeWidth="1.4"/>
-          <circle cx="32" cy="21" r="2.6" fill="#A06CC9" stroke={ink} strokeWidth="1.4"/>
-          {/* brush */}
-          <g transform="rotate(38 32 36)">
-            <rect x="22" y="34" width="16" height="4" rx="2" fill="#A86A3A" stroke={ink} strokeWidth="1.6"/>
-            <rect x="36" y="33.5" width="3" height="5" fill="#E7C58A" stroke={ink} strokeWidth="1.4"/>
-            <path d="M39 33 l8 1 l-8 5 z" fill={color} stroke={ink} strokeWidth="1.6" strokeLinejoin="round"/>
-          </g>
+          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
+          {/* photo frame */}
+          <rect x="7" y="9" width="34" height="30" rx="6" fill="#FFF3E4"/>
+          <rect x="7" y="9" width="34" height="30" rx="6" fill="#FFE3C4" opacity=".5"/>
+          <rect x="10" y="12" width="28" height="24" rx="4" fill="#FFD9AE"/>
+          {/* sun */}
+          <circle cx="18" cy="20" r="3.6" fill="#FFB454"/>
+          {/* mountains, two tones */}
+          <path d="M10 36 L21 24 L28 31 L33 26 L38 31 V32 a4 4 0 0 1 -4 4 H14 a4 4 0 0 1 -4 -4 Z" fill="#F58A3C"/>
+          <path d="M22 36 L30 28 L38 35 V32 a4 4 0 0 1 -4 4 Z" fill="#E8650F"/>
         </svg>
       );
     case "pencil":
       return (
         <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="44" rx="14" ry="2" fill={ink} opacity=".12"/>
-          {/* paper with face */}
-          <path d="M9 10 q0 -3 3 -3 h18 q3 0 3 3 v28 q0 3 -3 3 h-18 q-3 0 -3 -3 z"
-                fill="#FFF6EC" stroke={ink} strokeWidth="2.2"/>
-          <line x1="13" y1="17" x2="28" y2="17" stroke={color} strokeWidth="2" strokeLinecap="round"/>
-          <line x1="13" y1="22" x2="26" y2="22" stroke={color} strokeWidth="2" strokeLinecap="round" opacity=".7"/>
-          {/* tiny smile on the paper */}
-          <circle cx="17" cy="30" r="1.2" fill={ink}/>
-          <circle cx="25" cy="30" r="1.2" fill={ink}/>
-          <path d="M17 33 q4 3 8 0" stroke={ink} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-          {/* pencil */}
-          <g transform="rotate(38 36 22)">
-            <rect x="22" y="19" width="20" height="6.5" rx="1.6" fill={color} stroke={ink} strokeWidth="1.8"/>
-            <rect x="22" y="19" width="5" height="6.5" fill="#FFD261" stroke={ink} strokeWidth="1.8"/>
-            <rect x="20" y="20" width="2.5" height="4.5" rx=".8" fill="#E07A5F" stroke={ink} strokeWidth="1.4"/>
-            <path d="M42 19 l5 3.2 l-5 3.3 z" fill="#F2C48C" stroke={ink} strokeWidth="1.6" strokeLinejoin="round"/>
-            <path d="M46 21.5 l1.6 1 l-1.6 1 z" fill={ink}/>
+          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
+          {/* page */}
+          <path d="M10 11 a4 4 0 0 1 4 -4 h13 l9 9 v21 a4 4 0 0 1 -4 4 H14 a4 4 0 0 1 -4 -4 Z" fill="#EAF6F1"/>
+          <path d="M27 7 l9 9 h-6 a3 3 0 0 1 -3 -3 Z" fill="#C8E8DC"/>
+          {/* text lines */}
+          <rect x="15" y="20" width="14" height="2.6" rx="1.3" fill="#9BD4C0"/>
+          <rect x="15" y="25" width="17" height="2.6" rx="1.3" fill="#BCE2D4"/>
+          <rect x="15" y="30" width="11" height="2.6" rx="1.3" fill="#BCE2D4"/>
+          {/* pencil resting across the corner */}
+          <g transform="rotate(-42 36 32)">
+            <rect x="27" y="29" width="17" height="5.4" rx="1.6" fill="#37C2A0"/>
+            <rect x="27" y="29" width="4" height="5.4" rx="1.4" fill="#2FA38A"/>
+            <path d="M44 29 l4.6 2.7 l-4.6 2.7 z" fill="#F2C48C"/>
+            <path d="M47.2 30.9 l1.4 .8 l-1.4 .8 z" fill="#7A5A3A"/>
           </g>
-          {/* sparkle */}
-          <path d="M40 8 l1.4 3.2 l3.4 .4 l-2.4 2.2 l.6 3.2 l-3 -1.7 l-3 1.7 l.6 -3.2 l-2.4 -2.2 l3.4 -.4 z"
-                fill="#FFD261" stroke={ink} strokeWidth="1.2" strokeLinejoin="round"/>
         </svg>
       );
     case "mic":
       return (
         <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="44" rx="14" ry="2" fill={ink} opacity=".12"/>
-          {/* mic body */}
-          <rect x="17" y="6" width="14" height="22" rx="7" fill={color} stroke={ink} strokeWidth="2.2"/>
-          <path d="M19 9 q5 -3 10 0" stroke="#FFF6EC" strokeWidth="1.8" fill="none" strokeLinecap="round" opacity=".55"/>
-          {/* face on mic */}
-          <circle cx="21" cy="17" r="1.4" fill={ink}/>
-          <circle cx="27" cy="17" r="1.4" fill={ink}/>
-          <path d="M21 21 q3 3 6 0" stroke={ink} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
-          <circle cx="21" cy="17" r=".5" fill="#fff"/>
-          <circle cx="27" cy="17" r=".5" fill="#fff"/>
-          {/* stand */}
-          <path d="M10 22 a14 14 0 0 0 28 0" fill="none" stroke={ink} strokeWidth="2.2" strokeLinecap="round"/>
-          <line x1="24" y1="36" x2="24" y2="41" stroke={ink} strokeWidth="2.4" strokeLinecap="round"/>
-          <line x1="17" y1="41" x2="31" y2="41" stroke={ink} strokeWidth="2.4" strokeLinecap="round"/>
-          {/* sound waves */}
-          <path d="M38 14 q4 6 0 14" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"/>
-          <path d="M43 9 q6 11 0 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" opacity=".55"/>
-          <path d="M10 14 q-4 6 0 14" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"/>
+          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
+          {/* speech bubble */}
+          <path d="M8 13 a6 6 0 0 1 6 -6 h20 a6 6 0 0 1 6 6 v12 a6 6 0 0 1 -6 6 H22 l-7 6 v-6 h-1 a6 6 0 0 1 -6 -6 Z" fill="#BBDDF5"/>
+          <path d="M8 13 a6 6 0 0 1 6 -6 h20 a6 6 0 0 1 6 6 v4 H8 Z" fill="#CFE8F8" opacity=".7"/>
+          {/* sound bars inside */}
+          <rect x="15" y="16" width="3.2" height="7" rx="1.6" fill="#4A90C9"/>
+          <rect x="20.5" y="13" width="3.2" height="13" rx="1.6" fill="#3E7FB5"/>
+          <rect x="26" y="15" width="3.2" height="9" rx="1.6" fill="#4A90C9"/>
+          <rect x="31.5" y="17" width="3.2" height="5" rx="1.6" fill="#6FB3F2"/>
         </svg>
       );
     case "spark":
       return (
         <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
-          <ellipse cx="24" cy="44" rx="14" ry="2" fill={ink} opacity=".12"/>
+          <ellipse cx="24" cy="43" rx="13" ry="2.4" fill="#2A1F18" opacity=".08"/>
           {/* gift box */}
-          <rect x="8" y="20" width="32" height="22" rx="2.5" fill="#FFF6EC" stroke={ink} strokeWidth="2.2"/>
-          <rect x="7" y="16" width="34" height="7" rx="2" fill={color} stroke={ink} strokeWidth="2.2"/>
-          <rect x="21" y="16" width="6" height="26" fill={color} stroke={ink} strokeWidth="2"/>
-          {/* tiny face on the box */}
-          <circle cx="15" cy="32" r="1.2" fill={ink}/>
-          <circle cx="33" cy="32" r="1.2" fill={ink}/>
-          <path d="M16 36 q8 4 16 0" stroke={ink} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+          <rect x="9" y="20" width="30" height="20" rx="3" fill="#FFE2B0"/>
+          <rect x="9" y="20" width="30" height="9" rx="3" fill="#FFD592"/>
+          <rect x="7.5" y="15" width="33" height="7" rx="2.4" fill="#FFB454"/>
+          <rect x="21" y="15" width="6" height="25" fill="#F0973C"/>
           {/* bow */}
-          <path d="M24 16 c-5 -7 -12 -2 -7 3 z" fill={color} stroke={ink} strokeWidth="1.8" strokeLinejoin="round"/>
-          <path d="M24 16 c5 -7 12 -2 7 3 z" fill={color} stroke={ink} strokeWidth="1.8" strokeLinejoin="round"/>
-          <circle cx="24" cy="16" r="2" fill="#FFD261" stroke={ink} strokeWidth="1.4"/>
+          <path d="M24 15 c-5 -6 -11 -2 -6.5 2.6 z" fill="#F0973C"/>
+          <path d="M24 15 c5 -6 11 -2 6.5 2.6 z" fill="#F0973C"/>
+          <circle cx="24" cy="15.4" r="2.1" fill="#FFD592"/>
           {/* sparkles */}
-          <path d="M41 7 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z"
-                fill="#FFD261" stroke={ink} strokeWidth="1.1" strokeLinejoin="round"/>
-          <circle cx="6" cy="10" r="2" fill="#5BD0B4" stroke={ink} strokeWidth="1.2"/>
+          <path d="M40 6 l1.1 2.6 l2.6 1.1 l-2.6 1.1 l-1.1 2.6 l-1.1 -2.6 l-2.6 -1.1 l2.6 -1.1 z" fill="#FFB454"/>
+          <circle cx="7" cy="10" r="1.9" fill="#5BD0B4"/>
         </svg>
       );
   }
@@ -453,46 +425,46 @@ const SECTIONS: Record<Cat, { tag: string; title: string; sub: string; rail: str
     tag: "Picture Lab",
     title: "Make a picture",
     sub: "Paint with words, remix a photo, or pull text from a snap.",
-    rail: "#C8553D",
+    rail: "#E8650F",
     items: [
-      { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",   prop: "brush", bg: "#FBE5D8", accent: "#C8553D" },
-      { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",  prop: "wand",  bg: "#F8D6CE", accent: "#A65A4B" },
-      { id: "extract", title: "Extract text", sub: "Snap a picture and pull the words inside.",    prop: "scan",  bg: "#F2E0DA", accent: "#7A4A5A" },
+      { id: "create",  title: "Create",       sub: "Describe anything — watch the AI paint it.",   prop: "brush", bg: "#FFE7CF", accent: "#E8650F" },
+      { id: "edit",    title: "Edit",         sub: "Upload a photo or drawing and transform it.",  prop: "wand",  bg: "#FFDDC2", accent: "#D85C12" },
+      { id: "extract", title: "Extract text", sub: "Snap a picture and pull the words inside.",    prop: "scan",  bg: "#F9E8D6", accent: "#C07A2E" },
     ],
   },
   words: {
     tag: "Word Play",
     title: "Play with words",
     sub: "Poems, haiku, jokes and comic strips — written together.",
-    rail: "#3D7068",
+    rail: "#2FA38A",
     items: [
-      { id: "poem",  title: "Poem",        sub: "A playful poem about anything you like.", prop: "scroll", bg: "#E2EDE9", accent: "#3D7068" },
-      { id: "haiku", title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",        prop: "leaf",   bg: "#E8EFD9", accent: "#6B8E4E" },
-      { id: "joke",  title: "Jokes",       sub: "Silly jokes that'll make you laugh.",     prop: "laugh",  bg: "#FBEFD3", accent: "#B8893A" },
-      { id: "comic", title: "Comic strip", sub: "A short comic with speech bubbles.",      prop: "panels", bg: "#F2E5EE", accent: "#8C5E7A" },
+      { id: "poem",  title: "Poem",        sub: "A playful poem about anything you like.", prop: "scroll", bg: "#D9F0E8", accent: "#1F9D82" },
+      { id: "haiku", title: "Haiku",       sub: "Tiny three-line poems — 5, 7, 5.",        prop: "leaf",   bg: "#E3F1D9", accent: "#5E9B4D" },
+      { id: "joke",  title: "Jokes",       sub: "Silly jokes that'll make you laugh.",     prop: "laugh",  bg: "#FBEFD3", accent: "#C08A2E" },
+      { id: "comic", title: "Comic strip", sub: "A short comic with speech bubbles.",      prop: "panels", bg: "#E4F0EC", accent: "#3C8C74" },
     ],
   },
   voice: {
     tag: "Sound Zone",
     title: "Listen & speak",
-    sub: "Train your ear, your tongue, and meet voices from around the world.",
-    rail: "#3D5A6C",
+    sub: "Catch up on what's going on around the world, while training your communication!",
+    rail: "#4A90C9",
     items: [
-      { id: "twist",   title: "Tongue Twister", sub: "Say it right, fast — pronunciation challenge.", prop: "twister", bg: "#E5ECF1", accent: "#3D5A6C" },
-      { id: "hear",    title: "Hear It Spoken", sub: "Type a word or phrase, hear it spoken aloud.",  prop: "waves",   bg: "#DEEAEF", accent: "#506B7A" },
-      { id: "phrases", title: "Common Phrases", sub: "Everyday phrases in many languages.",           prop: "globe",   bg: "#E0EBE6", accent: "#4A5D52" },
-      { id: "news",    title: "Kidz News",      sub: "Today's news, told friendly for kids.",         prop: "news",    bg: "#F2E6D8", accent: "#9C6B3F" },
+      { id: "twist",   title: "Tongue Twister", sub: "Say it right, fast — pronunciation challenge.", prop: "twister", bg: "#E0EEF9", accent: "#4A90C9" },
+      { id: "hear",    title: "Hear It Spoken", sub: "Type a word or phrase, hear it spoken aloud.",  prop: "waves",   bg: "#D8E9F3", accent: "#3E7FB5" },
+      { id: "phrases", title: "Common Phrases", sub: "Everyday phrases in many languages.",           prop: "globe",   bg: "#DDF0EA", accent: "#2FA38A" },
+      { id: "news",    title: "Kidz News",      sub: "Today's news, told friendly for kids.",         prop: "news",    bg: "#FFEAD2", accent: "#D97A1F" },
     ],
   },
   surprise: {
     tag: "Surprise Me",
     title: "Curious challenges",
     sub: "Little prompts that twist your brain in a happy way.",
-    rail: "#A04545",
+    rail: "#E59A2F",
     items: [
-      { id: "riddle", title: "Riddle Me",           sub: "Guess before the timer runs out.",      prop: "qmark",    bg: "#F2DDDD", accent: "#A04545" },
-      { id: "faf",    title: "Fact or Fiction?",    sub: "Real fact or a clever made-up one?",    prop: "checkx",   bg: "#E5E0EE", accent: "#6B5B95" },
-      { id: "finish", title: "Finish the Sentence", sub: "We start, you finish — story unfolds.", prop: "ellipsis", bg: "#EFEAD9", accent: "#7A6B4F" },
+      { id: "riddle", title: "Riddle Me",           sub: "Guess before the timer runs out.",      prop: "qmark",    bg: "#FBEFD3", accent: "#D9912A" },
+      { id: "faf",    title: "Fact or Fiction?",    sub: "Real fact or a clever made-up one?",    prop: "checkx",   bg: "#DDF0EA", accent: "#2FA38A" },
+      { id: "finish", title: "Finish the Sentence", sub: "We start, you finish — story unfolds.", prop: "ellipsis", bg: "#F4E9D5", accent: "#A8804A" },
     ],
   },
 };
