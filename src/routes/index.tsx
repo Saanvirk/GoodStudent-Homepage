@@ -11,40 +11,29 @@ import {
   LogOut,
   ArrowRight,
   Flame,
-  Trophy,
-  Target,
   Sparkles,
-  Zap,
-  Star,
-  Calendar,
-  CheckCircle2,
+  Clock,
   PlayCircle,
   BookOpen,
-  Calculator,
-  Languages,
   Layers,
-  Mic,
-  FileText,
-  Brain,
-  Headphones,
-  PenTool,
-  Award,
-  Lock,
+  Crown,
+  TrendingUp,
+  Compass,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Home — Good Student" },
-      { name: "description", content: "Your study home — pick up where you left off, jump into a tutor, open a favourite tool, and keep your streak alive." },
+      { name: "description", content: "Your study home — keep your streak alive, see today's favourite tutor and the tool of the week, and choose where to head next." },
       { property: "og:title", content: "Home — Good Student" },
-      { property: "og:description", content: "Your study home — tutors, tools and daily quests." },
+      { property: "og:description", content: "Your study home — streak, time today, favourites and where to go next." },
     ],
   }),
   component: HomePage,
 });
 
-/* ===== Brand mark + mascot (matched to tutors page) ===== */
+/* ===== Brand mark + mascot ===== */
 function LogoMark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 56 56" className={className} aria-hidden="true">
@@ -65,9 +54,9 @@ function LogoMark({ className = "" }: { className?: string }) {
   );
 }
 
-function Mascot() {
+function Mascot({ scale = 1 }: { scale?: number }) {
   return (
-    <svg viewBox="0 0 220 246" className="gh-ms" aria-hidden="true">
+    <svg viewBox="0 0 220 246" className="gh-ms" aria-hidden="true" style={{ transform: `scale(${scale})` }}>
       <ellipse cx="110" cy="234" rx="54" ry="7" fill="rgba(60,40,20,.12)" />
       <rect x="88" y="188" width="14" height="36" rx="7" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" />
       <rect x="118" y="188" width="14" height="36" rx="7" fill="#FFF7EF" stroke="#E2D6BD" strokeWidth="2" />
@@ -99,41 +88,42 @@ function Mascot() {
   );
 }
 
+/* ===== Mini tutor head (matches tutor cards) ===== */
+function TutorHead({ accent = "#F7B27A" }: { accent?: string }) {
+  return (
+    <svg viewBox="0 0 120 120" className="gh-th" aria-hidden="true">
+      <circle cx="60" cy="60" r="56" fill={accent} opacity=".35" />
+      <rect x="30" y="36" width="60" height="56" rx="22" fill="#FFFCF5" stroke="#E2D6BD" strokeWidth="2" />
+      <path d="M60 28 C58 20 66 18 62 12" stroke="#E2D6BD" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+      <circle cx="62" cy="10" r="6" fill="#FB6A1E" />
+      <rect x="40" y="46" width="40" height="34" rx="14" fill="#26323B" />
+      <circle cx="52" cy="63" r="7" fill="#fff" />
+      <circle cx="54" cy="65" r="3" fill="#1F2A30" />
+      <circle cx="68" cy="63" r="7" fill="#fff" />
+      <circle cx="66" cy="65" r="3" fill="#1F2A30" />
+      <circle cx="52" cy="63" r="9" fill="none" stroke="#2FB39A" strokeWidth="3" />
+      <circle cx="68" cy="63" r="9" fill="none" stroke="#2FB39A" strokeWidth="3" />
+      <circle cx="30" cy="58" r="6" fill="#5BD0B4" />
+      <circle cx="90" cy="58" r="6" fill="#5BD0B4" />
+      <ellipse cx="60" cy="80" rx="4" ry="3" fill="#FB6A1E" />
+    </svg>
+  );
+}
+
 /* ===== data ===== */
-const quickTutors = [
-  { id: "eng", title: "DSE English", sub: "Paper 1–4", tint: "#F7E4DE", ink: "#9E3B27", icon: BookOpen, last: "Resumed yesterday" },
-  { id: "mat", title: "DSE Maths", sub: "Core · M1 · M2", tint: "#FBEED1", ink: "#A4742A", icon: Calculator, last: "2 quizzes today" },
-  { id: "chi", title: "DSE 中文", sub: "閱讀 · 寫作", tint: "#FAE6E8", ink: "#9E2B2B", icon: Languages, last: "New past paper" },
-  { id: "notes", title: "English · my notes", sub: "Built from 24 pages", tint: "#E6EEF7", ink: "#3D5A6C", icon: PenTool, last: "Custom tutor" },
-];
+const weekLabels = ["M", "T", "W", "T", "F", "S", "S"];
+const streakDays = [true, true, true, true, true, true, true]; // 7-day streak
+const todayIdx = 3; // Thursday highlight
 
-const favTools = [
-  { id: "flash", title: "Flashcards", sub: "From any topic", tint: "#F2E8EE", ink: "#8C5E7A", icon: Layers },
-  { id: "say",   title: "Say It Right!", sub: "Speaking practice", tint: "#E8EEF2", ink: "#3D5A6C", icon: Mic },
-  { id: "hear",  title: "Hear It Right!", sub: "Listening drills", tint: "#FBEFE8", ink: "#C8553D", icon: Headphones },
-  { id: "doc",   title: "Doc Summariser", sub: "PDFs → key points", tint: "#EFEAD9", ink: "#7A6B4F", icon: FileText },
-  { id: "mind",  title: "Mind Maps", sub: "Revise visually", tint: "#F2E6D8", ink: "#9C6B3F", icon: Brain },
-];
+const timeMinutes = 64;
+const timeGoal = 90;
 
-const quests = [
-  { id: "q1", label: "Finish 1 English reading set", xp: 40, done: true },
-  { id: "q2", label: "5 Maths quiz questions", xp: 30, done: true },
-  { id: "q3", label: "Try a speaking prompt", xp: 50, done: false },
-];
-
-const badges = [
-  { id: "b1", label: "7-day streak", icon: Flame, on: true,  tint: "linear-gradient(150deg,#FF8A3D,#E04E07)" },
-  { id: "b2", label: "First quiz",   icon: Star,  on: true,  tint: "linear-gradient(150deg,#FFD56B,#F2A93D)" },
-  { id: "b3", label: "Note ninja",   icon: PenTool, on: true, tint: "linear-gradient(150deg,#8A7BE8,#6F5FE0)" },
-  { id: "b4", label: "Listener",     icon: Headphones, on: false, tint: "linear-gradient(150deg,#A8B8C2,#7C8A95)" },
-  { id: "b5", label: "Polyglot",     icon: Languages, on: false, tint: "linear-gradient(150deg,#A8B8C2,#7C8A95)" },
-];
+const weekUsage = [22, 38, 14, 46, 30, 12, 20]; // tool usage minutes per day this week
 
 /* ===== page ===== */
 function HomePage() {
   const [active, setActive] = useState("home");
   const [userOpen, setUserOpen] = useState(false);
-  const [questState, setQuestState] = useState(quests);
 
   const nav = [
     { id: "home",  label: "Home",  icon: Home,   to: "/" as const },
@@ -142,18 +132,17 @@ function HomePage() {
     { id: "explore", label: "Explore", icon: Globe },
   ];
 
-  const totalXp = questState.reduce((s, q) => s + q.xp, 0);
-  const earnedXp = questState.filter((q) => q.done).reduce((s, q) => s + q.xp, 0);
-  const pct = Math.round((earnedXp / totalXp) * 100);
-  const level = 6;
-  const streak = 7;
+  const streak = streakDays.filter(Boolean).length;
+  const timePct = Math.min(100, Math.round((timeMinutes / timeGoal) * 100));
+  const ringR = 38;
+  const ringC = 2 * Math.PI * ringR;
+  const ringOffset = ringC - (ringC * timePct) / 100;
 
-  const toggleQuest = (id: string) =>
-    setQuestState((qs) => qs.map((q) => (q.id === id ? { ...q, done: !q.done } : q)));
+  const peakUsage = Math.max(...weekUsage);
 
   return (
     <div className="gh-root">
-      {/* Sidebar (matches tutors/tools) */}
+      {/* Sidebar */}
       <aside className="gh-side">
         <Link to="/" className="gh-brand">
           <LogoMark className="gh-brand-mark" />
@@ -209,226 +198,212 @@ function HomePage() {
       </aside>
 
       <main className="gh-main">
-        {/* ===== Hero greeting + gamification ===== */}
+        {/* ===== Hero ===== */}
         <header className="gh-hero">
           <div className="gh-hero-copy">
-            <div className="gh-eyebrow"><span className="gh-dot" /> Welcome back</div>
+            <div className="gh-eyebrow"><span className="gh-dot" /> Thursday · Welcome back</div>
             <h1 className="gh-title">
-              Hi Tiffany — let's keep that <span className="gh-hl">streak</span> alive.
+              Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is on fire.
             </h1>
             <p className="gh-subtitle">
-              You're {100 - pct}% away from finishing today's quests. Pick up where you left
-              off, or jump into something new.
+              A quick snapshot of today and the week — and three places to head next.
             </p>
-            <div className="gh-hero-cta">
-              <button className="gh-btn gh-btn-primary">
-                <PlayCircle size={17} /> Resume English · Paper 2
-              </button>
-              <Link to="/tutors" className="gh-btn gh-btn-ghost">
-                Browse tutors <ArrowRight size={15} />
-              </Link>
-            </div>
           </div>
 
           <div className="gh-mascot-card">
             <div className="gh-mascot-art"><Mascot /></div>
             <div className="gh-mascot-bubble">
-              <b>Day {streak} — nice!</b>
-              <span>Two quick wins and you'll level up to <b>Lv {level + 1}</b>.</span>
+              <b>Looking good!</b>
+              <span>{timeGoal - timeMinutes} more minutes today and you hit your goal.</span>
             </div>
           </div>
         </header>
 
-        {/* ===== Gamification strip ===== */}
-        <section className="gh-stats">
-          <div className="gh-stat gh-stat--streak">
-            <div className="gh-stat-ic"><Flame size={20} /></div>
-            <div className="gh-stat-body">
-              <div className="gh-stat-num">{streak}<span>days</span></div>
-              <div className="gh-stat-lbl">Study streak</div>
+        {/* ===== Four metric cards ===== */}
+        <section className="gh-metrics">
+          {/* Study streak */}
+          <article className="gh-m gh-m--streak">
+            <div className="gh-m-head">
+              <span className="gh-m-eyebrow"><Flame size={12} /> Study streak</span>
+              <span className="gh-m-chip">+1 today</span>
             </div>
-            <div className="gh-streak-row">
-              {Array.from({ length: 7 }).map((_, i) => (
-                <span key={i} className={`gh-streak-dot${i < streak ? " on" : ""}`} />
+            <div className="gh-m-streak-num">
+              <span className="gh-m-big">{streak}</span>
+              <span className="gh-m-unit">days<br/>in a row</span>
+              <div className="gh-m-flame" aria-hidden="true">
+                <Flame size={64} />
+              </div>
+            </div>
+            <div className="gh-m-week">
+              {weekLabels.map((d, i) => (
+                <div key={i} className={`gh-m-day${streakDays[i] ? " on" : ""}${i === todayIdx ? " is-today" : ""}`}>
+                  <span className="gh-m-day-dot">{streakDays[i] ? <Flame size={11} /> : null}</span>
+                  <span className="gh-m-day-lbl">{d}</span>
+                </div>
               ))}
             </div>
-          </div>
+          </article>
 
-          <div className="gh-stat gh-stat--xp">
-            <div className="gh-stat-ic"><Zap size={20} /></div>
-            <div className="gh-stat-body">
-              <div className="gh-stat-num">{earnedXp}<span>/ {totalXp} XP</span></div>
-              <div className="gh-stat-lbl">Today's progress</div>
+          {/* Time today */}
+          <article className="gh-m gh-m--time">
+            <div className="gh-m-head">
+              <span className="gh-m-eyebrow"><Clock size={12} /> Time today</span>
+              <span className="gh-m-chip gh-m-chip--soft">Goal {timeGoal}m</span>
             </div>
-            <div className="gh-bar"><span style={{ width: `${pct}%` }} /></div>
-          </div>
+            <div className="gh-m-ring-wrap">
+              <svg viewBox="0 0 100 100" className="gh-m-ring">
+                <defs>
+                  <linearGradient id="gh-ring-g" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#FFD56B" />
+                    <stop offset="100%" stopColor="#FB6A1E" />
+                  </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r={ringR} fill="none" stroke="#FFEEDD" strokeWidth="10" />
+                <circle
+                  cx="50" cy="50" r={ringR} fill="none"
+                  stroke="url(#gh-ring-g)" strokeWidth="10" strokeLinecap="round"
+                  strokeDasharray={ringC} strokeDashoffset={ringOffset}
+                  transform="rotate(-90 50 50)"
+                />
+              </svg>
+              <div className="gh-m-ring-text">
+                <div className="gh-m-ring-num">{timeMinutes}<span>m</span></div>
+                <div className="gh-m-ring-sub">{timePct}% of goal</div>
+              </div>
+            </div>
+            <div className="gh-m-foot">
+              <TrendingUp size={13} /> 18m more than yesterday
+            </div>
+          </article>
 
-          <div className="gh-stat gh-stat--lv">
-            <div className="gh-stat-ic"><Trophy size={20} /></div>
-            <div className="gh-stat-body">
-              <div className="gh-stat-num">Lv {level}<span>Scholar</span></div>
-              <div className="gh-stat-lbl">240 XP to Lv {level + 1}</div>
+          {/* Tutor of the day */}
+          <article className="gh-m gh-m--tutor">
+            <div className="gh-m-head">
+              <span className="gh-m-eyebrow"><Crown size={12} /> Tutor of the day</span>
+              <span className="gh-m-chip gh-m-chip--gold">MVP</span>
             </div>
-            <div className="gh-bar gh-bar--alt"><span style={{ width: "62%" }} /></div>
-          </div>
-
-          <div className="gh-stat gh-stat--quest">
-            <div className="gh-stat-ic"><Target size={20} /></div>
-            <div className="gh-stat-body">
-              <div className="gh-stat-num">{questState.filter(q=>q.done).length}<span>/ {questState.length} quests</span></div>
-              <div className="gh-stat-lbl">Daily quests</div>
-            </div>
-            <div className="gh-quest-mini">
-              {questState.map((q) => (
-                <span key={q.id} className={`gh-quest-pill${q.done ? " done" : ""}`} title={q.label}>
-                  {q.done ? <CheckCircle2 size={12} /> : <span className="gh-quest-empty" />}
+            <div className="gh-m-tutor">
+              <div className="gh-m-tutor-art">
+                <TutorHead accent="#F7B27A" />
+                <span className="gh-m-tutor-crown" aria-hidden="true">
+                  <Crown size={16} />
                 </span>
+              </div>
+              <div className="gh-m-tutor-meta">
+                <div className="gh-m-tutor-name">DSE English</div>
+                <div className="gh-m-tutor-sub">3 sessions · 42 min</div>
+                <div className="gh-m-tutor-bar"><span style={{ width: "78%" }} /></div>
+              </div>
+            </div>
+            <Link to="/tutors" className="gh-m-link">Open tutor <ArrowRight size={13} /></Link>
+          </article>
+
+          {/* Tool of the week */}
+          <article className="gh-m gh-m--tool">
+            <div className="gh-m-head">
+              <span className="gh-m-eyebrow"><Sparkles size={12} /> Tool of the week</span>
+              <span className="gh-m-chip gh-m-chip--violet">Top pick</span>
+            </div>
+            <div className="gh-m-tool">
+              <div className="gh-m-tool-ic"><Layers size={28} strokeWidth={1.8} /></div>
+              <div className="gh-m-tool-meta">
+                <div className="gh-m-tool-name">Flashcards</div>
+                <div className="gh-m-tool-sub">182 cards reviewed</div>
+              </div>
+            </div>
+            <div className="gh-m-spark" aria-hidden="true">
+              {weekUsage.map((v, i) => (
+                <span
+                  key={i}
+                  className={`gh-m-spark-bar${i === todayIdx ? " is-today" : ""}`}
+                  style={{ height: `${20 + (v / peakUsage) * 36}px` }}
+                />
               ))}
             </div>
-          </div>
+            <div className="gh-m-spark-lbl">
+              {weekLabels.map((d, i) => <span key={i}>{d}</span>)}
+            </div>
+          </article>
         </section>
 
-        {/* ===== Quick access tutors ===== */}
+        {/* ===== Where to go next ===== */}
         <section className="gh-section">
           <div className="gh-section-head">
             <div>
-              <div className="gh-section-eyebrow"><Sparkles size={13} /> Quick access</div>
-              <h2 className="gh-section-title">Your tutors</h2>
+              <div className="gh-section-eyebrow"><Compass size={13} /> Where to go next</div>
+              <h2 className="gh-section-title">Pick your direction</h2>
             </div>
-            <Link to="/tutors" className="gh-section-link">See all <ArrowRight size={14} /></Link>
           </div>
-          <div className="gh-tutor-grid">
-            {quickTutors.map((t) => {
-              const Icon = t.icon;
-              return (
-                <Link key={t.id} to="/tutors" className="gh-tutor-card">
-                  <div className="gh-tutor-media" style={{ background: t.tint, color: t.ink }}>
-                    <Icon size={34} strokeWidth={1.8} />
-                  </div>
-                  <div className="gh-tutor-body">
-                    <h3>{t.title}</h3>
-                    <p className="gh-tutor-sub">{t.sub}</p>
-                    <p className="gh-tutor-last"><Calendar size={11} /> {t.last}</p>
-                  </div>
-                  <ArrowRight size={16} className="gh-tutor-arrow" />
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ===== Favourite tools ===== */}
-        <section className="gh-section">
-          <div className="gh-section-head">
-            <div>
-              <div className="gh-section-eyebrow"><Star size={13} /> Favourites</div>
-              <h2 className="gh-section-title">Tools you keep coming back to</h2>
-            </div>
-            <Link to="/tools" className="gh-section-link">All tools <ArrowRight size={14} /></Link>
-          </div>
-          <div className="gh-tool-grid">
-            {favTools.map((t) => {
-              const Icon = t.icon;
-              return (
-                <Link key={t.id} to="/tools" className="gh-tool-card">
-                  <div className="gh-tool-ic" style={{ background: t.tint, color: t.ink }}>
-                    <Icon size={22} strokeWidth={1.8} />
-                  </div>
-                  <div>
-                    <div className="gh-tool-title">{t.title}</div>
-                    <div className="gh-tool-sub">{t.sub}</div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ===== Quests + Badges (two-up) ===== */}
-        <section className="gh-twoup">
-          <div className="gh-panel">
-            <div className="gh-panel-head">
-              <div>
-                <div className="gh-section-eyebrow"><Target size={13} /> Daily quests</div>
-                <h2 className="gh-section-title">Knock these out for XP</h2>
+          <div className="gh-next-grid">
+            {/* Tutors */}
+            <Link to="/tutors" className="gh-next gh-next--tutors">
+              <div className="gh-next-bg" aria-hidden="true">
+                <div className="gh-next-blob gh-next-blob--1" />
+                <div className="gh-next-blob gh-next-blob--2" />
               </div>
-              <span className="gh-panel-meta">Resets at midnight</span>
-            </div>
-            <ul className="gh-quest-list">
-              {questState.map((q) => (
-                <li key={q.id} className={`gh-quest${q.done ? " is-done" : ""}`}>
-                  <button
-                    type="button"
-                    className="gh-quest-check"
-                    aria-label={q.done ? "Mark incomplete" : "Mark complete"}
-                    onClick={() => toggleQuest(q.id)}
-                  >
-                    {q.done ? <CheckCircle2 size={20} /> : <span className="gh-quest-empty gh-quest-empty--lg" />}
-                  </button>
-                  <div className="gh-quest-text">{q.label}</div>
-                  <span className="gh-quest-xp">+{q.xp} XP</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="gh-panel">
-            <div className="gh-panel-head">
-              <div>
-                <div className="gh-section-eyebrow"><Award size={13} /> Achievements</div>
-                <h2 className="gh-section-title">Badges you've earned</h2>
+              <div className="gh-next-art">
+                <div className="gh-next-mascot"><Mascot /></div>
               </div>
-              <span className="gh-panel-meta">{badges.filter(b=>b.on).length} / {badges.length}</span>
-            </div>
-            <div className="gh-badges">
-              {badges.map((b) => {
-                const Icon = b.icon;
-                return (
-                  <div key={b.id} className={`gh-badge${b.on ? "" : " is-locked"}`}>
-                    <div className="gh-badge-ic" style={{ background: b.tint }}>
-                      {b.on ? <Icon size={22} /> : <Lock size={18} />}
-                    </div>
-                    <div className="gh-badge-lbl">{b.label}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ===== About the app (no Explore) ===== */}
-        <section className="gh-section">
-          <div className="gh-section-head">
-            <div>
-              <div className="gh-section-eyebrow"><BookOpen size={13} /> Around the app</div>
-              <h2 className="gh-section-title">Where to go next</h2>
-            </div>
-          </div>
-          <div className="gh-about-grid">
-            <Link to="/tutors" className="gh-about-card">
-              <div className="gh-about-ic" style={{ background: "linear-gradient(150deg,#FF8A3D,#E04E07)" }}>
-                <Pencil size={20} />
+              <div className="gh-next-body">
+                <div className="gh-next-tag"><Pencil size={11} /> Tutors</div>
+                <h3>Sit with a tutor</h3>
+                <p>Ready-made DSE tutors, or build your own from notes and past papers.</p>
+                <span className="gh-next-cta">Meet your tutors <ArrowRight size={14} /></span>
               </div>
-              <h3>Tutors</h3>
-              <p>Pick a ready-made DSE tutor or build your own from notes, past papers and slides.</p>
-              <span className="gh-about-cta">Open tutors <ArrowRight size={14} /></span>
             </Link>
-            <Link to="/tools" className="gh-about-card">
-              <div className="gh-about-ic" style={{ background: "linear-gradient(150deg,#8A7BE8,#6F5FE0)" }}>
-                <Wrench size={20} />
+
+            {/* Tools */}
+            <Link to="/tools" className="gh-next gh-next--tools">
+              <div className="gh-next-bg" aria-hidden="true">
+                <div className="gh-next-blob gh-next-blob--3" />
+                <div className="gh-next-blob gh-next-blob--4" />
               </div>
-              <h3>Tools</h3>
-              <p>Flashcards, mind maps, speaking practice, summarisers — open the right tool for now.</p>
-              <span className="gh-about-cta">Open tools <ArrowRight size={14} /></span>
-            </Link>
-            <Link to="/welcome" className="gh-about-card">
-              <div className="gh-about-ic" style={{ background: "linear-gradient(150deg,#37C2A0,#13A483)" }}>
-                <Sparkles size={20} />
+              <div className="gh-next-art gh-next-art--tools">
+                <span className="gh-tool-chip gh-tool-chip--a"><Layers size={18} /></span>
+                <span className="gh-tool-chip gh-tool-chip--b"><BookOpen size={18} /></span>
+                <span className="gh-tool-chip gh-tool-chip--c"><PlayCircle size={18} /></span>
+                <span className="gh-tool-chip gh-tool-chip--d"><Sparkles size={16} /></span>
               </div>
-              <h3>About Good Student</h3>
-              <p>What we believe about AI literacy, how the tutor thinks, and the team behind it.</p>
-              <span className="gh-about-cta">Read more <ArrowRight size={14} /></span>
+              <div className="gh-next-body">
+                <div className="gh-next-tag"><Wrench size={11} /> Tools</div>
+                <h3>Grab a tool</h3>
+                <p>Flashcards, mind maps, speaking practice, summarisers — one click to the right one.</p>
+                <span className="gh-next-cta">Open the workshop <ArrowRight size={14} /></span>
+              </div>
             </Link>
+
+            {/* Explore */}
+            <button type="button" className="gh-next gh-next--explore">
+              <div className="gh-next-bg" aria-hidden="true">
+                <div className="gh-next-blob gh-next-blob--5" />
+                <div className="gh-next-blob gh-next-blob--6" />
+              </div>
+              <div className="gh-next-art gh-next-art--explore">
+                <svg viewBox="0 0 160 160" className="gh-globe" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="gh-globe-g" cx="35%" cy="30%">
+                      <stop offset="0%" stopColor="#7BE3C8" />
+                      <stop offset="100%" stopColor="#13A483" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="80" cy="80" r="58" fill="url(#gh-globe-g)" />
+                  <ellipse cx="80" cy="80" rx="58" ry="22" fill="none" stroke="#fff" strokeOpacity=".55" strokeWidth="2" />
+                  <ellipse cx="80" cy="80" rx="22" ry="58" fill="none" stroke="#fff" strokeOpacity=".55" strokeWidth="2" />
+                  <circle cx="80" cy="22" r="4" fill="#FB6A1E" />
+                  <circle cx="42" cy="96" r="3" fill="#FFD56B" />
+                  <circle cx="118" cy="64" r="3" fill="#FFD56B" />
+                </svg>
+                <span className="gh-explore-pin gh-explore-pin--a" />
+                <span className="gh-explore-pin gh-explore-pin--b" />
+                <span className="gh-explore-pin gh-explore-pin--c" />
+              </div>
+              <div className="gh-next-body">
+                <div className="gh-next-tag"><Globe size={11} /> Explore</div>
+                <h3>Discover what's new</h3>
+                <p>Curated study packs, community tutors and fresh experiments from the Good Student team.</p>
+                <span className="gh-next-cta">Start exploring <ArrowRight size={14} /></span>
+              </div>
+            </button>
           </div>
         </section>
       </main>
@@ -444,6 +419,7 @@ const css = `
   --cream:#FFF7EF;--cream-2:#FFEEDD;--paper:#FFFCF8;
   --ink:#311C10;--ink-soft:#7A6453;--ink-faint:#A8978A;
   --teal:#13A483;--line:#F0DEC9;
+  --violet:#6F5FE0;--violet-2:#8A7BE8;
   --shadow-sm:0 4px 16px -6px rgba(120,60,20,.22);
   --shadow:0 22px 50px -24px rgba(176,72,12,.42);
   --font-display:'Fredoka',system-ui,sans-serif;
@@ -491,7 +467,7 @@ const css = `
 .gh-main{flex:1;min-width:0;padding:38px 56px 80px;position:relative;z-index:1}
 
 /* hero */
-.gh-hero{display:grid;grid-template-columns:1.5fr .9fr;gap:36px;align-items:center;margin-bottom:28px}
+.gh-hero{display:grid;grid-template-columns:1.6fr .9fr;gap:36px;align-items:center;margin-bottom:30px}
 .gh-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:14px}
 .gh-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:gh-ping 2s infinite}
 @keyframes gh-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
@@ -499,12 +475,6 @@ const css = `
 .gh-hl{color:var(--orange-deep);position:relative;display:inline-block;white-space:nowrap}
 .gh-hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.32em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1}
 .gh-subtitle{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:34em}
-.gh-hero-cta{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-.gh-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font-weight:600;font-size:.92rem;cursor:pointer;border:none;font-family:var(--font-display);transition:transform .18s,box-shadow .18s,border-color .18s;text-decoration:none}
-.gh-btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:var(--shadow-sm)}
-.gh-btn-ghost:hover{transform:translateY(-2px);border-color:var(--orange-2);color:var(--orange-deep)}
-.gh-btn-primary{background:linear-gradient(160deg,var(--orange-2),var(--orange));color:#fff;box-shadow:var(--shadow-sm)}
-.gh-btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow)}
 
 .gh-mascot-card{position:relative;display:flex;justify-content:flex-end;align-items:flex-end;min-height:170px}
 .gh-mascot-art{width:150px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:gh-bob 4s ease-in-out infinite}
@@ -514,102 +484,142 @@ const css = `
 .gh-mascot-bubble span{font-size:.82rem;color:var(--ink-soft);line-height:1.45}
 .gh-mascot-bubble::after{content:"";position:absolute;bottom:-9px;right:32px;width:18px;height:18px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
 
-/* stats strip */
-.gh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px}
-.gh-stat{background:#fffdf9;border:1px solid var(--line);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px;min-height:128px}
-.gh-stat::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,138,61,.05),transparent 60%);pointer-events:none}
-.gh-stat-ic{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(150deg,var(--orange-2),var(--orange));box-shadow:var(--shadow-sm)}
-.gh-stat--xp .gh-stat-ic{background:linear-gradient(150deg,#FFD56B,#F2A93D)}
-.gh-stat--lv .gh-stat-ic{background:linear-gradient(150deg,#8A7BE8,#6F5FE0)}
-.gh-stat--quest .gh-stat-ic{background:linear-gradient(150deg,#37C2A0,#13A483)}
-.gh-stat-body{display:flex;flex-direction:column;gap:1px}
-.gh-stat-num{font-family:var(--font-display);font-weight:700;font-size:1.45rem;line-height:1;color:var(--ink);display:flex;align-items:baseline;gap:6px}
-.gh-stat-num span{font-size:.72rem;font-weight:500;color:var(--ink-faint);letter-spacing:.02em;text-transform:uppercase}
-.gh-stat-lbl{font-size:.78rem;color:var(--ink-soft)}
-.gh-streak-row{display:flex;gap:5px;margin-top:auto}
-.gh-streak-dot{flex:1;height:6px;border-radius:999px;background:var(--cream-2)}
-.gh-streak-dot.on{background:linear-gradient(90deg,var(--orange-2),var(--orange))}
-.gh-bar{height:8px;border-radius:999px;background:var(--cream-2);overflow:hidden;margin-top:auto}
-.gh-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#FFD56B,#F2A93D);transition:width .3s}
-.gh-bar--alt span{background:linear-gradient(90deg,#8A7BE8,#6F5FE0)}
-.gh-quest-mini{display:flex;gap:6px;margin-top:auto}
-.gh-quest-pill{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--cream-2);color:var(--ink-faint)}
-.gh-quest-pill.done{background:linear-gradient(150deg,#37C2A0,#13A483);color:#fff}
-.gh-quest-empty{width:10px;height:10px;border-radius:50%;border:1.6px solid currentColor;display:block}
-.gh-quest-empty--lg{width:16px;height:16px;border-width:2px}
+/* ===== Metric cards ===== */
+.gh-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:52px}
+.gh-m{background:#fffdf9;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:12px;min-height:240px;transition:transform .2s,box-shadow .2s}
+.gh-m:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.gh-m-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gh-m-eyebrow{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:600;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--orange-deep)}
+.gh-m-chip{font-family:var(--font-display);font-weight:600;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:linear-gradient(150deg,var(--orange-2),var(--orange));color:#fff;box-shadow:var(--shadow-sm)}
+.gh-m-chip--soft{background:var(--cream-2);color:var(--orange-deep);box-shadow:none}
+.gh-m-chip--gold{background:linear-gradient(150deg,#FFD56B,#F2A93D)}
+.gh-m-chip--violet{background:linear-gradient(150deg,var(--violet-2),var(--violet))}
 
-/* generic section */
-.gh-section{margin-bottom:44px}
-.gh-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+/* streak card */
+.gh-m--streak{background:linear-gradient(165deg,#FFF1E0 0%,#FFFCF8 60%)}
+.gh-m-streak-num{position:relative;display:flex;align-items:flex-end;gap:8px;padding:6px 4px 0}
+.gh-m-big{font-family:var(--font-display);font-weight:700;font-size:3.4rem;line-height:.9;color:var(--ink);background:linear-gradient(160deg,var(--orange-deep),#B33D04);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.gh-m-unit{font-size:.72rem;color:var(--ink-soft);line-height:1.2;padding-bottom:6px;letter-spacing:.02em}
+.gh-m-flame{position:absolute;right:-6px;top:-8px;color:#FB6A1E;opacity:.25;transform:rotate(8deg)}
+.gh-m-week{display:flex;gap:5px;margin-top:auto}
+.gh-m-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 0 6px;border-radius:11px;background:var(--cream);border:1px solid transparent;transition:background .2s}
+.gh-m-day.on{background:#fff;border-color:var(--line)}
+.gh-m-day.is-today{background:linear-gradient(160deg,var(--orange-2),var(--orange));border-color:transparent;box-shadow:var(--shadow-sm)}
+.gh-m-day-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,180,84,.25);color:var(--orange-deep)}
+.gh-m-day.on .gh-m-day-dot{background:linear-gradient(150deg,#FFD56B,var(--orange));color:#fff}
+.gh-m-day.is-today .gh-m-day-dot{background:#fff;color:var(--orange-deep)}
+.gh-m-day-lbl{font-family:var(--font-display);font-weight:600;font-size:.66rem;color:var(--ink-faint);letter-spacing:.05em}
+.gh-m-day.is-today .gh-m-day-lbl{color:#fff}
+
+/* time card */
+.gh-m--time{background:linear-gradient(165deg,#FFF6E0 0%,#FFFCF8 60%)}
+.gh-m-ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;flex:1;padding:4px 0}
+.gh-m-ring{width:140px;height:140px}
+.gh-m-ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gh-m-ring-num{font-family:var(--font-display);font-weight:700;font-size:2rem;color:var(--ink);line-height:1;display:flex;align-items:baseline;gap:2px}
+.gh-m-ring-num span{font-size:.85rem;color:var(--ink-soft);font-weight:500}
+.gh-m-ring-sub{font-size:.7rem;color:var(--ink-soft);margin-top:3px}
+.gh-m-foot{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;color:var(--teal);font-weight:600;font-family:var(--font-display)}
+
+/* tutor of the day */
+.gh-m--tutor{background:linear-gradient(165deg,#FFEDDD 0%,#FFFCF8 60%)}
+.gh-m-tutor{display:flex;align-items:center;gap:14px;padding:4px 0;flex:1}
+.gh-m-tutor-art{position:relative;width:78px;height:78px;flex-shrink:0}
+.gh-th{width:100%;height:100%;filter:drop-shadow(0 8px 14px rgba(120,40,0,.18))}
+.gh-m-tutor-crown{position:absolute;top:-6px;right:-4px;background:linear-gradient(150deg,#FFD56B,#F2A93D);color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);border:2px solid #fffdf9}
+.gh-m-tutor-meta{flex:1;min-width:0}
+.gh-m-tutor-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--ink)}
+.gh-m-tutor-sub{font-size:.76rem;color:var(--ink-soft);margin-top:2px}
+.gh-m-tutor-bar{height:6px;border-radius:999px;background:var(--cream-2);overflow:hidden;margin-top:10px}
+.gh-m-tutor-bar span{display:block;height:100%;background:linear-gradient(90deg,#FFD56B,var(--orange))}
+.gh-m-link{font-family:var(--font-display);font-weight:600;font-size:.78rem;color:var(--orange-deep);text-decoration:none;display:inline-flex;align-items:center;gap:5px;align-self:flex-start}
+.gh-m-link:hover{gap:8px}
+
+/* tool of the week */
+.gh-m--tool{background:linear-gradient(165deg,#EFEAFB 0%,#FFFCF8 60%)}
+.gh-m-tool{display:flex;align-items:center;gap:12px}
+.gh-m-tool-ic{width:54px;height:54px;border-radius:14px;background:linear-gradient(150deg,var(--violet-2),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);flex-shrink:0}
+.gh-m-tool-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--ink)}
+.gh-m-tool-sub{font-size:.76rem;color:var(--ink-soft);margin-top:2px}
+.gh-m-spark{display:flex;align-items:flex-end;gap:6px;height:56px;margin-top:auto}
+.gh-m-spark-bar{flex:1;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,var(--violet-2),var(--violet));opacity:.7;transition:transform .2s}
+.gh-m-spark-bar.is-today{opacity:1;background:linear-gradient(180deg,#FFD56B,var(--orange));box-shadow:0 4px 12px -4px rgba(251,106,30,.5)}
+.gh-m:hover .gh-m-spark-bar{transform:translateY(-2px)}
+.gh-m-spark-lbl{display:flex;gap:6px;font-family:var(--font-display);font-weight:600;font-size:.62rem;color:var(--ink-faint);letter-spacing:.05em}
+.gh-m-spark-lbl span{flex:1;text-align:center}
+
+/* section header */
+.gh-section{margin-bottom:48px}
+.gh-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
 .gh-section-eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:6px}
-.gh-section-title{font-size:1.35rem;color:var(--ink)}
-.gh-section-link{font-family:var(--font-display);font-weight:600;font-size:.82rem;color:var(--orange-deep);text-decoration:none;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;transition:background .15s}
-.gh-section-link:hover{background:var(--cream-2)}
+.gh-section-title{font-size:1.55rem;color:var(--ink)}
 
-/* tutor quick cards */
-.gh-tutor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.gh-tutor-card{display:flex;align-items:center;gap:14px;padding:14px;background:#fffdf9;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
-.gh-tutor-card:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.gh-tutor-media{flex-shrink:0;width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center}
-.gh-tutor-body{flex:1;min-width:0}
-.gh-tutor-body h3{font-size:1rem;color:var(--ink)}
-.gh-tutor-sub{font-size:.76rem;color:var(--ink-faint);margin-top:2px}
-.gh-tutor-last{font-size:.72rem;color:var(--ink-soft);margin-top:6px;display:inline-flex;align-items:center;gap:5px}
-.gh-tutor-arrow{color:var(--ink-faint);transition:color .15s,transform .15s}
-.gh-tutor-card:hover .gh-tutor-arrow{color:var(--orange-deep);transform:translateX(3px)}
+/* ===== Where to go next cards ===== */
+.gh-next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.gh-next{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;min-height:340px;padding:22px;border-radius:26px;border:1px solid var(--line);background:#fffdf9;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;cursor:pointer;text-align:left;font:inherit;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.gh-next:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--orange-2)}
+.gh-next-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.gh-next-blob{position:absolute;border-radius:50%;filter:blur(8px);opacity:.55;transition:transform .6s}
+.gh-next:hover .gh-next-blob{transform:scale(1.1)}
 
-/* tool grid */
-.gh-tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.gh-tool-card{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fffdf9;border:1px solid var(--line);border-radius:16px;text-decoration:none;color:inherit;transition:transform .18s,border-color .18s,box-shadow .18s;box-shadow:var(--shadow-sm)}
-.gh-tool-card:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.gh-tool-ic{flex-shrink:0;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center}
-.gh-tool-title{font-family:var(--font-display);font-weight:600;font-size:.94rem;color:var(--ink)}
-.gh-tool-sub{font-size:.76rem;color:var(--ink-faint);margin-top:1px}
+/* Tutors variant */
+.gh-next--tutors{background:linear-gradient(165deg,#FFE8D2 0%,#FFFCF8 70%)}
+.gh-next-blob--1{width:200px;height:200px;background:radial-gradient(circle,#FF8A3D,transparent 70%);top:-60px;right:-40px}
+.gh-next-blob--2{width:140px;height:140px;background:radial-gradient(circle,#FFD56B,transparent 70%);bottom:-30px;left:-30px}
 
-/* two-up: quests + badges */
-.gh-twoup{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-bottom:44px}
-.gh-panel{background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow-sm)}
-.gh-panel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:14px}
-.gh-panel-meta{font-size:.72rem;font-family:var(--font-display);font-weight:600;color:var(--ink-faint);background:var(--cream-2);padding:4px 10px;border-radius:999px}
+/* Tools variant */
+.gh-next--tools{background:linear-gradient(165deg,#EFEAFB 0%,#FFFCF8 70%)}
+.gh-next-blob--3{width:200px;height:200px;background:radial-gradient(circle,#8A7BE8,transparent 70%);top:-60px;right:-40px}
+.gh-next-blob--4{width:140px;height:140px;background:radial-gradient(circle,#B8AEEF,transparent 70%);bottom:-30px;left:-30px}
 
-.gh-quest-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
-.gh-quest{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--cream);border:1px solid var(--line);transition:background .18s}
-.gh-quest:hover{background:#fff}
-.gh-quest-check{background:transparent;border:none;cursor:pointer;color:var(--ink-faint);display:flex;align-items:center;justify-content:center;padding:0}
-.gh-quest.is-done .gh-quest-check{color:var(--teal)}
-.gh-quest-text{flex:1;font-size:.92rem;color:var(--ink)}
-.gh-quest.is-done .gh-quest-text{color:var(--ink-soft);text-decoration:line-through}
-.gh-quest-xp{font-family:var(--font-display);font-weight:600;font-size:.76rem;color:var(--orange-deep);background:var(--cream-2);padding:4px 10px;border-radius:999px}
+/* Explore variant */
+.gh-next--explore{background:linear-gradient(165deg,#D9F3EA 0%,#FFFCF8 70%)}
+.gh-next-blob--5{width:200px;height:200px;background:radial-gradient(circle,#37C2A0,transparent 70%);top:-60px;right:-40px}
+.gh-next-blob--6{width:140px;height:140px;background:radial-gradient(circle,#7BE3C8,transparent 70%);bottom:-30px;left:-30px}
 
-.gh-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:12px}
-.gh-badge{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
-.gh-badge-ic{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow-sm);transition:transform .2s}
-.gh-badge:hover .gh-badge-ic{transform:scale(1.06) rotate(-4deg)}
-.gh-badge.is-locked .gh-badge-ic{filter:saturate(.3) opacity(.7)}
-.gh-badge-lbl{font-size:.72rem;color:var(--ink-soft);font-weight:500}
-.gh-badge.is-locked .gh-badge-lbl{color:var(--ink-faint)}
+.gh-next-art{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;height:160px}
+.gh-next-mascot{width:130px;filter:drop-shadow(0 14px 22px rgba(120,40,0,.22));animation:gh-bob 4.4s ease-in-out infinite}
 
-/* about cards */
-.gh-about-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.gh-about-card{display:flex;flex-direction:column;gap:8px;padding:20px;background:#fffdf9;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);transition:transform .2s,border-color .2s,box-shadow .2s}
-.gh-about-card:hover{transform:translateY(-2px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.gh-about-ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow-sm);margin-bottom:6px}
-.gh-about-card h3{font-size:1.08rem;color:var(--ink)}
-.gh-about-card p{font-size:.86rem;color:var(--ink-soft);line-height:1.5;margin:0}
-.gh-about-cta{margin-top:6px;font-family:var(--font-display);font-weight:600;font-size:.82rem;color:var(--orange-deep);display:inline-flex;align-items:center;gap:5px}
+/* tools art — floating chips */
+.gh-next-art--tools{position:relative}
+.gh-tool-chip{position:absolute;width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.gh-tool-chip--a{background:linear-gradient(150deg,#8A7BE8,#6F5FE0);top:20px;left:30%;transform:rotate(-8deg)}
+.gh-tool-chip--b{background:linear-gradient(150deg,#FF8A3D,#E04E07);top:54px;left:54%;transform:rotate(6deg)}
+.gh-tool-chip--c{background:linear-gradient(150deg,#37C2A0,#13A483);top:84px;left:30%;transform:rotate(4deg)}
+.gh-tool-chip--d{background:linear-gradient(150deg,#FFD56B,#F2A93D);top:14px;left:62%;width:38px;height:38px;border-radius:12px;transform:rotate(-10deg)}
+.gh-next--tools:hover .gh-tool-chip--a{transform:rotate(-12deg) translateY(-4px)}
+.gh-next--tools:hover .gh-tool-chip--b{transform:rotate(10deg) translateY(-6px)}
+.gh-next--tools:hover .gh-tool-chip--c{transform:rotate(8deg) translateY(-3px)}
+.gh-next--tools:hover .gh-tool-chip--d{transform:rotate(-16deg) translateY(-5px)}
+
+/* explore art — globe */
+.gh-next-art--explore{position:relative}
+.gh-globe{width:150px;height:150px;filter:drop-shadow(0 14px 22px rgba(19,164,131,.32));animation:gh-spin 22s linear infinite}
+@keyframes gh-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.gh-explore-pin{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(251,106,30,.25);animation:gh-ping 2s infinite}
+.gh-explore-pin--a{top:30px;left:36%}
+.gh-explore-pin--b{top:80px;left:70%;animation-delay:.4s;background:var(--amber);box-shadow:0 0 0 4px rgba(255,180,84,.3)}
+.gh-explore-pin--c{top:118px;left:42%;animation-delay:.9s;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.3)}
+
+.gh-next-body{position:relative;z-index:1;display:flex;flex-direction:column;gap:6px;margin-top:auto}
+.gh-next-tag{display:inline-flex;align-items:center;gap:5px;align-self:flex-start;font-family:var(--font-display);font-weight:600;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:#fff;color:var(--orange-deep);box-shadow:var(--shadow-sm);margin-bottom:4px}
+.gh-next h3{font-size:1.4rem;color:var(--ink)}
+.gh-next p{font-size:.88rem;color:var(--ink-soft);line-height:1.5;margin:0}
+.gh-next-cta{margin-top:8px;font-family:var(--font-display);font-weight:600;font-size:.86rem;color:var(--orange-deep);display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.gh-next:hover .gh-next-cta{gap:10px}
 
 /* responsive */
-@media (max-width:1080px){
-  .gh-stats{grid-template-columns:repeat(2,1fr)}
-  .gh-twoup{grid-template-columns:1fr}
+@media (max-width:1180px){
+  .gh-metrics{grid-template-columns:repeat(2,1fr)}
+  .gh-next-grid{grid-template-columns:1fr}
 }
 @media (max-width:820px){
   .gh-main{padding:28px 24px 64px}
   .gh-hero{grid-template-columns:1fr}
   .gh-mascot-card{justify-content:flex-start}
 }
-@media (max-width:640px){
+@media (max-width:560px){
   .gh-side{display:none}
-  .gh-stats{grid-template-columns:1fr 1fr}
+  .gh-metrics{grid-template-columns:1fr}
 }
 `;
