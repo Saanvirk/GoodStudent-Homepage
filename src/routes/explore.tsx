@@ -334,43 +334,73 @@ function MascotScene({ bg, accent, prop }: SceneProps & { prop: PropKey }) {
 
 /* ===== Category tab icons — custom drawn, not emoji ===== */
 function CatIcon({ k, color }: { k: CatIconKey; color: string }) {
-  const s = { stroke: color, strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
+  // Filled, multi-tone illustrations rendered inside the tab's tinted plate.
   switch (k) {
     case "palette":
       return (
-        <svg viewBox="0 0 32 32" width="22" height="22">
-          <path {...s} d="M16 4a12 12 0 1 0 0 24c3 0 3-3 5-3h3a4 4 0 0 0 4-4 12 12 0 0 0-12-17z" fill={color} fillOpacity=".14"/>
-          <circle cx="10" cy="14" r="2" fill="#FF6B5A"/>
-          <circle cx="14" cy="9"  r="2" fill="#FFB454"/>
-          <circle cx="20" cy="9"  r="2" fill="#5BD0B4"/>
-          <circle cx="23" cy="15" r="2" fill="#6B5B95"/>
+        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+          {/* artist palette */}
+          <path d="M22 7c-8 0-15 6-15 14 0 5 4 9 9 9 2 0 3-1 3-3 0-2 1-3 3-3h4a8 8 0 0 0 8-8c0-5-5-9-12-9z"
+                fill={color} stroke="#2A1F18" strokeWidth="1.6" strokeLinejoin="round"/>
+          <circle cx="14" cy="18" r="2.4" fill="#FFF6EC"/>
+          <circle cx="20" cy="13" r="2.4" fill="#FFD261"/>
+          <circle cx="27" cy="13" r="2.4" fill="#5BD0B4"/>
+          <circle cx="31" cy="20" r="2.4" fill="#6B5B95"/>
+          {/* brush */}
+          <g transform="rotate(35 30 32)">
+            <rect x="22" y="30" width="14" height="3.2" rx="1.6" fill="#8B5A2B"/>
+            <path d="M36 28 l6 1.6 l-6 5 z" fill={color} stroke="#2A1F18" strokeWidth="1.2" strokeLinejoin="round"/>
+          </g>
         </svg>
       );
     case "pencil":
       return (
-        <svg viewBox="0 0 32 32" width="22" height="22">
-          <path {...s} d="M6 24 L9 27 L12 27 L26 13 L21 8 L7 22 Z" fill={color} fillOpacity=".14"/>
-          <path {...s} d="M20 9 L25 14"/>
-          <path {...s} d="M7 22 L12 27"/>
-          <path d="M6 24 L9 27 L8 28 L5 27 Z" fill={color}/>
+        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+          {/* paper */}
+          <rect x="8" y="9" width="22" height="28" rx="3" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="1.6"/>
+          <line x1="12" y1="16" x2="26" y2="16" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
+          <line x1="12" y1="21" x2="24" y2="21" stroke={color} strokeWidth="1.6" strokeLinecap="round" opacity=".7"/>
+          <line x1="12" y1="26" x2="22" y2="26" stroke={color} strokeWidth="1.6" strokeLinecap="round" opacity=".5"/>
+          {/* pencil */}
+          <g transform="rotate(35 32 24)">
+            <rect x="24" y="20" width="18" height="6" rx="1.5" fill={color} stroke="#2A1F18" strokeWidth="1.4"/>
+            <path d="M42 20 l5 3 l-5 3 z" fill="#2A1F18"/>
+            <rect x="24" y="20" width="4" height="6" fill="#FFD261" stroke="#2A1F18" strokeWidth="1.4"/>
+          </g>
+          {/* sparkle */}
+          <path d="M34 10 l1.4 3.2 l3.4 .4 l-2.4 2.2 l.6 3.2 l-3 -1.7 l-3 1.7 l.6 -3.2 l-2.4 -2.2 l3.4 -.4 z" fill="#FFD261" stroke="#2A1F18" strokeWidth="1"/>
         </svg>
       );
     case "mic":
       return (
-        <svg viewBox="0 0 32 32" width="22" height="22">
-          <rect x="13" y="5" width="6" height="14" rx="3" fill={color} fillOpacity=".18" stroke={color} strokeWidth="1.8"/>
-          <path {...s} d="M9 15a7 7 0 0 0 14 0"/>
-          <path {...s} d="M16 22v5"/>
-          <path {...s} d="M11 27h10"/>
-          <circle cx="16" cy="11" r="1.2" fill={color}/>
+        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+          {/* mic body */}
+          <rect x="17" y="6" width="11" height="20" rx="5.5" fill={color} stroke="#2A1F18" strokeWidth="1.6"/>
+          <line x1="17" y1="13" x2="28" y2="13" stroke="#2A1F18" strokeWidth="1" opacity=".5"/>
+          <line x1="17" y1="18" x2="28" y2="18" stroke="#2A1F18" strokeWidth="1" opacity=".5"/>
+          {/* stand */}
+          <path d="M11 22 a11 11 0 0 0 22 0" fill="none" stroke="#2A1F18" strokeWidth="1.8" strokeLinecap="round"/>
+          <line x1="22" y1="33" x2="22" y2="38" stroke="#2A1F18" strokeWidth="1.8" strokeLinecap="round"/>
+          <line x1="16" y1="38" x2="28" y2="38" stroke="#2A1F18" strokeWidth="1.8" strokeLinecap="round"/>
+          {/* waves */}
+          <path d="M36 14 q3 4 0 10" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+          <path d="M40 10 q5 8 0 18" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" opacity=".6"/>
+          <path d="M8 14 q-3 4 0 10" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
         </svg>
       );
     case "spark":
       return (
-        <svg viewBox="0 0 32 32" width="22" height="22">
-          <path d="M16 4 L19 13 L28 16 L19 19 L16 28 L13 19 L4 16 L13 13 Z" fill={color} fillOpacity=".18" stroke={color} strokeWidth="1.8" strokeLinejoin="round"/>
-          <circle cx="6" cy="6" r="1.3" fill={color}/>
-          <circle cx="26" cy="26" r="1.3" fill={color}/>
+        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+          {/* gift box */}
+          <rect x="8" y="18" width="28" height="20" rx="2" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="1.6"/>
+          <rect x="7" y="15" width="30" height="6" rx="1.6" fill={color} stroke="#2A1F18" strokeWidth="1.6"/>
+          <rect x="20" y="15" width="4" height="23" fill={color} stroke="#2A1F18" strokeWidth="1.4"/>
+          {/* bow */}
+          <path d="M22 15 c-4 -6 -10 -2 -6 2 z M22 15 c4 -6 10 -2 6 2 z" fill={color} stroke="#2A1F18" strokeWidth="1.4" strokeLinejoin="round"/>
+          <circle cx="22" cy="15" r="1.8" fill="#2A1F18"/>
+          {/* sparkles */}
+          <path d="M38 8 l1 2.4 l2.4 1 l-2.4 1 l-1 2.4 l-1 -2.4 l-2.4 -1 l2.4 -1 z" fill="#FFD261" stroke="#2A1F18" strokeWidth=".9"/>
+          <circle cx="6" cy="10" r="1.6" fill="#5BD0B4" stroke="#2A1F18" strokeWidth=".9"/>
         </svg>
       );
   }
