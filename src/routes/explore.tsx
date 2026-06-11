@@ -326,8 +326,8 @@ function MascotScene({ bg, accent, prop }: SceneProps & { prop: PropKey }) {
       <g transform="translate(8 14)">
         <Prop k={prop} accent={accent} />
       </g>
-      {/* mascot on the right */}
-      <MascotInScene x={138} y={6} scale={0.74} />
+      {/* mascot on the right — sized so arms & feet stay inside the frame */}
+      <MascotInScene x={122} y={22} scale={0.6} />
     </svg>
   );
 }
@@ -709,8 +709,8 @@ const css = `
 .ex-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .ex-tab{
   display:flex;align-items:center;gap:16px;
-  background:#fffdf9;border:1px solid var(--line);border-radius:20px;
-  padding:18px 22px;min-height:96px;cursor:pointer;font-family:inherit;color:var(--ink-soft);
+  background:#fffdf9;border:1px solid var(--line);border-radius:22px;
+  padding:22px 26px;min-height:116px;cursor:pointer;font-family:inherit;color:var(--ink-soft);
   box-shadow:var(--shadow-sm);
   transition:transform .2s,border-color .2s,color .2s,background .2s,box-shadow .25s;
   text-align:left;position:relative;overflow:hidden;
