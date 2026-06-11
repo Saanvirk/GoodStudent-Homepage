@@ -334,73 +334,102 @@ function MascotScene({ bg, accent, prop }: SceneProps & { prop: PropKey }) {
 
 /* ===== Category tab icons — custom drawn, not emoji ===== */
 function CatIcon({ k, color }: { k: CatIconKey; color: string }) {
-  // Filled, multi-tone illustrations rendered inside the tab's tinted plate.
+  // Chunky cartoon illustrations — black outlines, off-white shape highlights,
+  // tiny faces for personality. Tuned for ~56px tab plates.
+  const ink = "#2A1F18";
   switch (k) {
     case "palette":
       return (
-        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
-          {/* artist palette */}
-          <path d="M22 7c-8 0-15 6-15 14 0 5 4 9 9 9 2 0 3-1 3-3 0-2 1-3 3-3h4a8 8 0 0 0 8-8c0-5-5-9-12-9z"
-                fill={color} stroke="#2A1F18" strokeWidth="1.6" strokeLinejoin="round"/>
-          <circle cx="14" cy="18" r="2.4" fill="#FFF6EC"/>
-          <circle cx="20" cy="13" r="2.4" fill="#FFD261"/>
-          <circle cx="27" cy="13" r="2.4" fill="#5BD0B4"/>
-          <circle cx="31" cy="20" r="2.4" fill="#6B5B95"/>
+        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
+          {/* drop shadow */}
+          <ellipse cx="24" cy="42" rx="14" ry="2" fill={ink} opacity=".12"/>
+          {/* palette body */}
+          <path d="M24 7C14 7 6 13 6 22c0 6 5 10 11 10 2 0 3-1 3-3 0-2 1-3 3-3h5a9 9 0 0 0 9-9c0-6-5-10-13-10z"
+                fill={color} stroke={ink} strokeWidth="2.2" strokeLinejoin="round"/>
+          {/* highlight */}
+          <path d="M11 16c2-3 6-5 10-5" stroke="#FFF6EC" strokeWidth="2" strokeLinecap="round" opacity=".5" fill="none"/>
+          {/* paint dabs */}
+          <circle cx="13" cy="22" r="2.6" fill="#FFF6EC" stroke={ink} strokeWidth="1.4"/>
+          <circle cx="20" cy="14" r="2.6" fill="#FFD261" stroke={ink} strokeWidth="1.4"/>
+          <circle cx="28" cy="14" r="2.6" fill="#5BD0B4" stroke={ink} strokeWidth="1.4"/>
+          <circle cx="32" cy="21" r="2.6" fill="#A06CC9" stroke={ink} strokeWidth="1.4"/>
           {/* brush */}
-          <g transform="rotate(35 30 32)">
-            <rect x="22" y="30" width="14" height="3.2" rx="1.6" fill="#8B5A2B"/>
-            <path d="M36 28 l6 1.6 l-6 5 z" fill={color} stroke="#2A1F18" strokeWidth="1.2" strokeLinejoin="round"/>
+          <g transform="rotate(38 32 36)">
+            <rect x="22" y="34" width="16" height="4" rx="2" fill="#A86A3A" stroke={ink} strokeWidth="1.6"/>
+            <rect x="36" y="33.5" width="3" height="5" fill="#E7C58A" stroke={ink} strokeWidth="1.4"/>
+            <path d="M39 33 l8 1 l-8 5 z" fill={color} stroke={ink} strokeWidth="1.6" strokeLinejoin="round"/>
           </g>
         </svg>
       );
     case "pencil":
       return (
-        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
-          {/* paper */}
-          <rect x="8" y="9" width="22" height="28" rx="3" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="1.6"/>
-          <line x1="12" y1="16" x2="26" y2="16" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
-          <line x1="12" y1="21" x2="24" y2="21" stroke={color} strokeWidth="1.6" strokeLinecap="round" opacity=".7"/>
-          <line x1="12" y1="26" x2="22" y2="26" stroke={color} strokeWidth="1.6" strokeLinecap="round" opacity=".5"/>
+        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
+          <ellipse cx="24" cy="44" rx="14" ry="2" fill={ink} opacity=".12"/>
+          {/* paper with face */}
+          <path d="M9 10 q0 -3 3 -3 h18 q3 0 3 3 v28 q0 3 -3 3 h-18 q-3 0 -3 -3 z"
+                fill="#FFF6EC" stroke={ink} strokeWidth="2.2"/>
+          <line x1="13" y1="17" x2="28" y2="17" stroke={color} strokeWidth="2" strokeLinecap="round"/>
+          <line x1="13" y1="22" x2="26" y2="22" stroke={color} strokeWidth="2" strokeLinecap="round" opacity=".7"/>
+          {/* tiny smile on the paper */}
+          <circle cx="17" cy="30" r="1.2" fill={ink}/>
+          <circle cx="25" cy="30" r="1.2" fill={ink}/>
+          <path d="M17 33 q4 3 8 0" stroke={ink} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
           {/* pencil */}
-          <g transform="rotate(35 32 24)">
-            <rect x="24" y="20" width="18" height="6" rx="1.5" fill={color} stroke="#2A1F18" strokeWidth="1.4"/>
-            <path d="M42 20 l5 3 l-5 3 z" fill="#2A1F18"/>
-            <rect x="24" y="20" width="4" height="6" fill="#FFD261" stroke="#2A1F18" strokeWidth="1.4"/>
+          <g transform="rotate(38 36 22)">
+            <rect x="22" y="19" width="20" height="6.5" rx="1.6" fill={color} stroke={ink} strokeWidth="1.8"/>
+            <rect x="22" y="19" width="5" height="6.5" fill="#FFD261" stroke={ink} strokeWidth="1.8"/>
+            <rect x="20" y="20" width="2.5" height="4.5" rx=".8" fill="#E07A5F" stroke={ink} strokeWidth="1.4"/>
+            <path d="M42 19 l5 3.2 l-5 3.3 z" fill="#F2C48C" stroke={ink} strokeWidth="1.6" strokeLinejoin="round"/>
+            <path d="M46 21.5 l1.6 1 l-1.6 1 z" fill={ink}/>
           </g>
           {/* sparkle */}
-          <path d="M34 10 l1.4 3.2 l3.4 .4 l-2.4 2.2 l.6 3.2 l-3 -1.7 l-3 1.7 l.6 -3.2 l-2.4 -2.2 l3.4 -.4 z" fill="#FFD261" stroke="#2A1F18" strokeWidth="1"/>
+          <path d="M40 8 l1.4 3.2 l3.4 .4 l-2.4 2.2 l.6 3.2 l-3 -1.7 l-3 1.7 l.6 -3.2 l-2.4 -2.2 l3.4 -.4 z"
+                fill="#FFD261" stroke={ink} strokeWidth="1.2" strokeLinejoin="round"/>
         </svg>
       );
     case "mic":
       return (
-        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
+          <ellipse cx="24" cy="44" rx="14" ry="2" fill={ink} opacity=".12"/>
           {/* mic body */}
-          <rect x="17" y="6" width="11" height="20" rx="5.5" fill={color} stroke="#2A1F18" strokeWidth="1.6"/>
-          <line x1="17" y1="13" x2="28" y2="13" stroke="#2A1F18" strokeWidth="1" opacity=".5"/>
-          <line x1="17" y1="18" x2="28" y2="18" stroke="#2A1F18" strokeWidth="1" opacity=".5"/>
+          <rect x="17" y="6" width="14" height="22" rx="7" fill={color} stroke={ink} strokeWidth="2.2"/>
+          <path d="M19 9 q5 -3 10 0" stroke="#FFF6EC" strokeWidth="1.8" fill="none" strokeLinecap="round" opacity=".55"/>
+          {/* face on mic */}
+          <circle cx="21" cy="17" r="1.4" fill={ink}/>
+          <circle cx="27" cy="17" r="1.4" fill={ink}/>
+          <path d="M21 21 q3 3 6 0" stroke={ink} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
+          <circle cx="21" cy="17" r=".5" fill="#fff"/>
+          <circle cx="27" cy="17" r=".5" fill="#fff"/>
           {/* stand */}
-          <path d="M11 22 a11 11 0 0 0 22 0" fill="none" stroke="#2A1F18" strokeWidth="1.8" strokeLinecap="round"/>
-          <line x1="22" y1="33" x2="22" y2="38" stroke="#2A1F18" strokeWidth="1.8" strokeLinecap="round"/>
-          <line x1="16" y1="38" x2="28" y2="38" stroke="#2A1F18" strokeWidth="1.8" strokeLinecap="round"/>
-          {/* waves */}
-          <path d="M36 14 q3 4 0 10" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
-          <path d="M40 10 q5 8 0 18" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" opacity=".6"/>
-          <path d="M8 14 q-3 4 0 10" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+          <path d="M10 22 a14 14 0 0 0 28 0" fill="none" stroke={ink} strokeWidth="2.2" strokeLinecap="round"/>
+          <line x1="24" y1="36" x2="24" y2="41" stroke={ink} strokeWidth="2.4" strokeLinecap="round"/>
+          <line x1="17" y1="41" x2="31" y2="41" stroke={ink} strokeWidth="2.4" strokeLinecap="round"/>
+          {/* sound waves */}
+          <path d="M38 14 q4 6 0 14" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"/>
+          <path d="M43 9 q6 11 0 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" opacity=".55"/>
+          <path d="M10 14 q-4 6 0 14" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round"/>
         </svg>
       );
     case "spark":
       return (
-        <svg viewBox="0 0 44 44" width="34" height="34" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="38" height="38" aria-hidden="true">
+          <ellipse cx="24" cy="44" rx="14" ry="2" fill={ink} opacity=".12"/>
           {/* gift box */}
-          <rect x="8" y="18" width="28" height="20" rx="2" fill="#FFF6EC" stroke="#2A1F18" strokeWidth="1.6"/>
-          <rect x="7" y="15" width="30" height="6" rx="1.6" fill={color} stroke="#2A1F18" strokeWidth="1.6"/>
-          <rect x="20" y="15" width="4" height="23" fill={color} stroke="#2A1F18" strokeWidth="1.4"/>
+          <rect x="8" y="20" width="32" height="22" rx="2.5" fill="#FFF6EC" stroke={ink} strokeWidth="2.2"/>
+          <rect x="7" y="16" width="34" height="7" rx="2" fill={color} stroke={ink} strokeWidth="2.2"/>
+          <rect x="21" y="16" width="6" height="26" fill={color} stroke={ink} strokeWidth="2"/>
+          {/* tiny face on the box */}
+          <circle cx="15" cy="32" r="1.2" fill={ink}/>
+          <circle cx="33" cy="32" r="1.2" fill={ink}/>
+          <path d="M16 36 q8 4 16 0" stroke={ink} strokeWidth="1.4" fill="none" strokeLinecap="round"/>
           {/* bow */}
-          <path d="M22 15 c-4 -6 -10 -2 -6 2 z M22 15 c4 -6 10 -2 6 2 z" fill={color} stroke="#2A1F18" strokeWidth="1.4" strokeLinejoin="round"/>
-          <circle cx="22" cy="15" r="1.8" fill="#2A1F18"/>
+          <path d="M24 16 c-5 -7 -12 -2 -7 3 z" fill={color} stroke={ink} strokeWidth="1.8" strokeLinejoin="round"/>
+          <path d="M24 16 c5 -7 12 -2 7 3 z" fill={color} stroke={ink} strokeWidth="1.8" strokeLinejoin="round"/>
+          <circle cx="24" cy="16" r="2" fill="#FFD261" stroke={ink} strokeWidth="1.4"/>
           {/* sparkles */}
-          <path d="M38 8 l1 2.4 l2.4 1 l-2.4 1 l-1 2.4 l-1 -2.4 l-2.4 -1 l2.4 -1 z" fill="#FFD261" stroke="#2A1F18" strokeWidth=".9"/>
-          <circle cx="6" cy="10" r="1.6" fill="#5BD0B4" stroke="#2A1F18" strokeWidth=".9"/>
+          <path d="M41 7 l1.2 2.8 l2.8 1.2 l-2.8 1.2 l-1.2 2.8 l-1.2 -2.8 l-2.8 -1.2 l2.8 -1.2 z"
+                fill="#FFD261" stroke={ink} strokeWidth="1.1" strokeLinejoin="round"/>
+          <circle cx="6" cy="10" r="2" fill="#5BD0B4" stroke={ink} strokeWidth="1.2"/>
         </svg>
       );
   }
