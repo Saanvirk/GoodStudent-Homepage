@@ -159,7 +159,7 @@ function ToolsPage() {
     { id: "home", label: "Home", icon: Home, to: "/" as const },
     { id: "tutor", label: "Tutor", icon: Pencil, to: "/tutors" as const },
     { id: "tools", label: "Tools", icon: Wrench },
-    { id: "explore", label: "Explore", icon: Globe },
+    { id: "explore", label: "Explore", icon: Globe, to: "/explore" as const },
   ];
 
   const filtered = useMemo(() => {
