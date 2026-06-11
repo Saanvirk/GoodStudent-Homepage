@@ -277,7 +277,7 @@ type Item = {
   id: string;
   title: string;
   sub: string;
-  Scene: (p: SceneProps) => JSX.Element;
+  Scene: (p: SceneProps) => React.ReactElement;
   bg: string;
 };
 
