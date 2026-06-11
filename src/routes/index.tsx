@@ -628,8 +628,8 @@ const css = `
 .gh-dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gh-dir{display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;cursor:pointer;text-align:left;font:inherit;padding:0;transition:transform .22s,box-shadow .22s,border-color .22s}
 .gh-dir:hover{transform:translateY(-3px);border-color:var(--orange-2);box-shadow:var(--shadow)}
-.gh-dir-media{position:relative;width:100%;background:var(--cream-2);overflow:hidden;display:block;aspect-ratio:16/10}
-.gh-dir-media .gh-scene{width:100%;height:100%}
+.gh-dir-media{position:relative;width:100%;overflow:hidden;display:block;aspect-ratio:5/4}
+.gh-dir-media .gh-scene{width:100%;height:100%;display:block}
 .gh-dir-body{flex:1;padding:14px 16px 16px;display:flex;flex-direction:column}
 .gh-dir-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;width:100%}
 .gh-dir-row > div{min-width:0;flex:1}
