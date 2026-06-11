@@ -347,8 +347,8 @@ function HomePage() {
                 <svg viewBox="0 0 100 100" className="gh-mc-ring">
                   <defs>
                     <linearGradient id="gh-mc-ring-g" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#FFC8A0" />
-                      <stop offset="100%" stopColor="#F5996A" />
+                      <stop offset="0%" stopColor="#F7CE7B" />
+                      <stop offset="100%" stopColor="#D9962E" />
                     </linearGradient>
                   </defs>
                   <circle cx="50" cy="50" r={ringR} fill="none" stroke="#FFEEDD" strokeWidth="9" />
