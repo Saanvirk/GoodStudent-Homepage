@@ -10,13 +10,11 @@ import {
   Settings,
   LogOut,
   ArrowRight,
-  Flame,
-  Crown,
+  BookOpen,
+  Layers,
   TrendingUp,
   Compass,
-
 } from "lucide-react";
-import sayItRight from "@/assets/say-it-right.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -245,7 +243,7 @@ function HomePage() {
   }> = [
     { id: "tut", tag: "Tutors", title: "Sit with a tutor", sub: "Ready-made DSE tutors or build your own.", to: "/tutors", scene: <SceneTutors />, icon: Pencil },
     { id: "tol", tag: "Tools", title: "Grab a tool", sub: "Flashcards, mind maps, speaking practice.", to: "/tools", scene: <SceneTools />, icon: Wrench },
-    { id: "exp", tag: "Explore", title: "Discover what's new", sub: "Curated packs and fresh experiments.", scene: <SceneExplore />, icon: Globe },
+    { id: "exp", tag: "Explore", title: "Discover what's new", sub: "Generate stories, haiku, remix pictures and more.", scene: <SceneExplore />, icon: Globe },
   ];
 
   return (
@@ -300,7 +298,7 @@ function HomePage() {
             <div className="gh-ava gh-ava-sm">TC</div>
             <div className="gh-user-switch-meta">
               <div className="gh-user-name">Tiffany Chiu</div>
-              <div className="gh-user-mail">Student · Yr 12</div>
+              <div className="gh-user-mail">Student — Year 12</div>
             </div>
             <ChevronsUpDown size={15} />
           </button>
@@ -310,11 +308,11 @@ function HomePage() {
       <main className="gh-main">
         {/* Hero */}
         <header className="gh-hero">
-          <div className="gh-eyebrow"><span className="gh-dot" /> Thursday · Welcome back</div>
+          <div className="gh-eyebrow"><span className="gh-dot" /> Thursday — welcome back</div>
           <h1 className="gh-title">
             Hi Tiffany — your <span className="gh-hl">{streak}-day streak</span> is alive.
           </h1>
-          <p className="gh-subtitle">A quick look at today and the week — then pick your direction.</p>
+          <p className="gh-subtitle">A quick look at today and the week, then pick your direction.</p>
         </header>
 
         {/* Mission Control — integrated activity bar (no cards) */}
@@ -368,26 +366,26 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Spotlight region: tutor challenge + tool of the week */}
+          {/* Spotlight region: favourite tutor + tool of the week */}
           <div className="gh-mc-spots">
             <Link to="/tutors" className="gh-mc-spot gh-mc-spot--tutor">
               <div className="gh-mc-spot-ic">
-                <Crown size={20} />
+                <BookOpen size={20} />
               </div>
               <div className="gh-mc-spot-meta">
-                <div className="gh-mc-spot-lbl">Favourite tutor challenge</div>
-                <div className="gh-mc-spot-title">DSE English · AI tools in exams?</div>
+                <div className="gh-mc-spot-lbl">Favourite tutor</div>
+                <div className="gh-mc-spot-title">DSE English — pick up where you left off</div>
               </div>
-              <span className="gh-mc-spot-cta">Solve</span>
+              <span className="gh-mc-spot-cta">Resume</span>
             </Link>
 
             <Link to="/tools" className="gh-mc-spot gh-mc-spot--tool">
-              <div className="gh-mc-spot-ic gh-mc-spot-ic--img">
-                <img src={sayItRight.url} alt="" />
+              <div className="gh-mc-spot-ic gh-mc-spot-ic--flash">
+                <Layers size={20} />
               </div>
               <div className="gh-mc-spot-meta">
                 <div className="gh-mc-spot-lbl">Tool of the week</div>
-                <div className="gh-mc-spot-title">Say It Right <span>· AI Speech</span></div>
+                <div className="gh-mc-spot-title">Flashcards — your most-used this week</div>
               </div>
               <div className="gh-mc-wave" aria-hidden="true">
                 {weekUsage.map((v, i) => (
@@ -533,21 +531,22 @@ const css = `
 .gh-mc-spots{display:flex;flex-direction:column;gap:10px}
 .gh-mc-spot{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:24px;text-decoration:none;color:inherit;transition:transform .18s,box-shadow .18s;border:1px solid transparent;cursor:pointer;flex:1;min-height:64px}
 .gh-mc-spot:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
-.gh-mc-spot--tutor{background:linear-gradient(120deg,#FFF1DE 0%,#FFE2C9 100%);border-color:rgba(251,106,30,.18)}
-.gh-mc-spot--tool{background:linear-gradient(120deg,#FFE9D2 0%,#FFD2B0 100%);border-color:rgba(224,78,7,.22)}
-.gh-mc-spot-ic{width:42px;height:42px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--orange-deep);flex-shrink:0;box-shadow:0 6px 14px -6px rgba(176,72,12,.25);border:1px solid rgba(240,222,201,.6)}
-.gh-mc-spot--tutor .gh-mc-spot-ic{background:linear-gradient(150deg,#FFD56B,var(--orange));color:#fff;border-color:transparent}
-.gh-mc-spot-ic--img{padding:4px}
-.gh-mc-spot-ic--img img{width:100%;height:100%;object-fit:contain}
+.gh-mc-spot--tutor{background:linear-gradient(120deg,#E6F5EF 0%,#CDEBDF 100%);border-color:rgba(19,164,131,.22)}
+.gh-mc-spot--tool{background:linear-gradient(120deg,#FFF4DC 0%,#FFE4B5 100%);border-color:rgba(255,180,84,.35)}
+.gh-mc-spot-ic{width:42px;height:42px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0;box-shadow:0 6px 14px -6px rgba(60,40,20,.22);border:1px solid rgba(240,222,201,.6)}
+.gh-mc-spot--tutor .gh-mc-spot-ic{background:linear-gradient(150deg,#37C2A0,var(--teal));color:#fff;border-color:transparent}
+.gh-mc-spot--tool .gh-mc-spot-ic{background:linear-gradient(150deg,#FFD56B,var(--amber));color:#6B3A0E;border-color:transparent}
+.gh-mc-spot--tutor .gh-mc-spot-lbl{color:var(--teal)}
+.gh-mc-spot--tool .gh-mc-spot-lbl{color:#B8761B}
 .gh-mc-spot-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.gh-mc-spot-lbl{font-family:var(--font-display);font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);opacity:.85}
+.gh-mc-spot-lbl{font-family:var(--font-display);font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
 .gh-mc-spot-title{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gh-mc-spot-title span{font-weight:500;color:var(--ink-soft);font-size:.85rem}
-.gh-mc-spot-cta{font-family:var(--font-display);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(150deg,var(--orange-2),var(--orange));padding:8px 14px;border-radius:999px;box-shadow:var(--shadow-sm);flex-shrink:0;transition:transform .15s}
+.gh-mc-spot-cta{font-family:var(--font-display);font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(150deg,#37C2A0,var(--teal));padding:8px 14px;border-radius:999px;box-shadow:var(--shadow-sm);flex-shrink:0;transition:transform .15s}
 .gh-mc-spot:hover .gh-mc-spot-cta{transform:scale(1.05)}
 .gh-mc-wave{display:flex;align-items:flex-end;gap:3px;height:34px;flex-shrink:0}
-.gh-mc-wave-bar{width:4px;border-radius:3px;background:linear-gradient(180deg,#FFD56B,var(--orange));opacity:.75}
-.gh-mc-wave-bar.is-today{background:linear-gradient(180deg,var(--orange),var(--orange-deep));opacity:1;box-shadow:0 2px 6px -2px rgba(251,106,30,.6)}
+.gh-mc-wave-bar{width:4px;border-radius:3px;background:linear-gradient(180deg,#FFD56B,#E89A20);opacity:.7}
+.gh-mc-wave-bar.is-today{background:linear-gradient(180deg,#E89A20,#B8761B);opacity:1;box-shadow:0 2px 6px -2px rgba(184,118,27,.6)}
 
 /* section header */
 .gh-section{margin-top:28px;margin-bottom:48px}
