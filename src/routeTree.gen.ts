@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as TutorsRouteImport } from './routes/tutors'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WelcomeRoute = WelcomeRouteImport.update({
@@ -29,6 +30,11 @@ const ToolsRoute = ToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
   '/tools': typeof ToolsRoute
   '/tutors': typeof TutorsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
   '/tools': typeof ToolsRoute
   '/tutors': typeof TutorsRoute
   '/welcome': typeof WelcomeRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
   '/tools': typeof ToolsRoute
   '/tutors': typeof TutorsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tools' | '/tutors' | '/welcome'
+  fullPaths: '/' | '/explore' | '/tools' | '/tutors' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tools' | '/tutors' | '/welcome'
-  id: '__root__' | '/' | '/tools' | '/tutors' | '/welcome'
+  to: '/' | '/explore' | '/tools' | '/tutors' | '/welcome'
+  id: '__root__' | '/' | '/explore' | '/tools' | '/tutors' | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ExploreRoute: typeof ExploreRoute
   ToolsRoute: typeof ToolsRoute
   TutorsRoute: typeof TutorsRoute
   WelcomeRoute: typeof WelcomeRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ExploreRoute: ExploreRoute,
   ToolsRoute: ToolsRoute,
   TutorsRoute: TutorsRoute,
   WelcomeRoute: WelcomeRoute,
