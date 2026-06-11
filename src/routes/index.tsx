@@ -11,13 +11,10 @@ import {
   LogOut,
   ArrowRight,
   Flame,
-  Sparkles,
-  Clock,
   Crown,
   TrendingUp,
   Compass,
-  Quote,
-  Play,
+
 } from "lucide-react";
 import sayItRight from "@/assets/say-it-right.png.asset.json";
 
