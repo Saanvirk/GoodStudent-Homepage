@@ -298,7 +298,7 @@ function HomePage() {
             <div className="gh-ava gh-ava-sm">TC</div>
             <div className="gh-user-switch-meta">
               <div className="gh-user-name">Tiffany Chiu</div>
-              <div className="gh-user-mail">Student · Yr 12</div>
+              <div className="gh-user-mail">Student — Year 12</div>
             </div>
             <ChevronsUpDown size={15} />
           </button>
