@@ -380,12 +380,12 @@ function HomePage() {
             </Link>
 
             <Link to="/tools" className="gh-mc-spot gh-mc-spot--tool">
-              <div className="gh-mc-spot-ic gh-mc-spot-ic--flash">
-                <Layers size={20} />
+              <div className="gh-mc-spot-ic gh-mc-spot-ic--img">
+                <img src={sayItRight.url} alt="" />
               </div>
               <div className="gh-mc-spot-meta">
                 <div className="gh-mc-spot-lbl">Tool of the week</div>
-                <div className="gh-mc-spot-title">Flashcards — your most-used this week</div>
+                <div className="gh-mc-spot-title">Say It Right — your most-used this week</div>
               </div>
               <div className="gh-mc-wave" aria-hidden="true">
                 {weekUsage.map((v, i) => (
