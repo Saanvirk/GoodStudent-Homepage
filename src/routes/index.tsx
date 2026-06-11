@@ -572,7 +572,7 @@ const css = `
 .gh-ms .bl{fill:#FF9A57;opacity:.7}
 
 /* === Mission Control (integrated activity bar, no cards) === */
-.gh-mc{display:grid;grid-template-columns:1.05fr 1.15fr;gap:14px;margin-bottom:36px;padding:10px;background:rgba(255,252,247,.7);border:1px solid #F4E4D2;border-radius:32px;box-shadow:0 4px 18px -10px rgba(180,110,60,.15);backdrop-filter:blur(10px)}
+.gh-mc{display:grid;grid-template-columns:1.05fr 1.15fr;gap:12px;margin-bottom:20px;padding:9px;background:rgba(255,252,247,.7);border:1px solid #F4E4D2;border-radius:28px;box-shadow:0 4px 18px -10px rgba(180,110,60,.15);backdrop-filter:blur(10px)}
 .gh-mc-stats{background:#FFFDFA;border-radius:24px;padding:18px 22px;display:flex;align-items:center;gap:18px;border:1px solid #F4E4D2}
 .gh-mc-stat{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
 .gh-mc-divider{width:1px;align-self:stretch;background:linear-gradient(180deg,transparent,#EFD9C2,transparent);margin:6px 0}
