@@ -405,11 +405,18 @@ function PrimaryHomePage() {
             </div>
             <div className="ph-sky-progress">
               <div className="ph-sky-progress-bar"><span style={{ width: `${(COLLECTED / TOTAL_STARS) * 100}%` }} /></div>
-              <div className="ph-sky-progress-lbl">{COLLECTED} / {TOTAL_STARS} stars</div>
             </div>
           </div>
         </section>
+
+        {/* Parent section */}
+        <section className="ph-parent-section">
+          <button className="ph-parent-btn" type="button">
+            <Lock size={16} /> Parent
+          </button>
+        </section>
       </main>
+
 
       <style>{css}</style>
     </div>
