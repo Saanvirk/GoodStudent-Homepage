@@ -13,6 +13,7 @@ import {
   Sparkles,
   Star,
   Heart,
+  Lock,
 } from "lucide-react";
 
 export const Route = createFileRoute("/primary")({
