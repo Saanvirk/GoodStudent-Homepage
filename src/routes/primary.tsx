@@ -578,7 +578,7 @@ const css = `
 .ph-sky-from-text svg{color:#F0A93A}
 
 .ph-sky{
-  position:relative;height:150px;border-radius:20px;overflow:hidden;
+  position:relative;flex:1;min-height:130px;border-radius:20px;overflow:hidden;
   background:
     radial-gradient(120% 90% at 80% 20%,rgba(255,200,120,.25),transparent 55%),
     radial-gradient(80% 60% at 10% 90%,rgba(126,98,217,.4),transparent 60%),
