@@ -167,10 +167,10 @@ function PropGeneral() {
 
 function SubjectScene({ bg, ring, prop }: { bg: string; ring: string; prop: React.ReactNode }) {
   return (
-    <svg viewBox="0 0 280 220" className="ph-scene">
-      <rect width="280" height="220" rx="20" fill={bg} />
-      <circle cx="140" cy="120" r="98" fill="none" stroke={ring} strokeDasharray="2 7" opacity=".45" />
-      <use href="#ph-bot" x="78" y="32" width="124" height="170" />
+    <svg viewBox="0 0 280 180" preserveAspectRatio="xMidYMax meet" className="ph-scene">
+      <rect width="280" height="180" rx="20" fill={bg} />
+      <circle cx="140" cy="108" r="88" fill="none" stroke={ring} strokeDasharray="2 7" opacity=".45" />
+      <use href="#ph-bot" x="84" y="14" width="112" height="170" />
       {prop}
     </svg>
   );
