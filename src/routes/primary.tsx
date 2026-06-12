@@ -329,7 +329,7 @@ function PrimaryHomePage() {
         <section className="ph-section">
           <div className="ph-section-head">
             <div>
-              <div className="ph-section-eyebrow"><BookOpenSimple /> Your subjects</div>
+              <div className="ph-section-eyebrow"><Sparkles size={13} /> Your subjects</div>
               <h2 className="ph-section-title">Choose where to begin</h2>
             </div>
           </div>
