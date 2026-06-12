@@ -283,35 +283,49 @@ function PrimaryHomePage() {
       </aside>
 
       <main className="ph-main">
-        {/* Hero — title + mascot only, no subtitle */}
+        {/* Level chip */}
+        <div className="ph-level-chip">
+          <span className="ph-level-stars" aria-hidden="true">
+            <Star size={14} fill="currentColor" />
+            <Star size={14} fill="currentColor" />
+            <Star size={14} fill="currentColor" />
+          </span>
+          <span className="ph-level-count">{COLLECTED} stars</span>
+          <span className="ph-level-dot" aria-hidden="true" />
+          <span className="ph-level-tag">Level 3</span>
+        </div>
+
+        {/* Hero — title + mascot with speech bubble */}
         <header className="ph-hero">
           <div className="ph-hero-text">
             <div className="ph-eyebrow"><span className="ph-dot" /> Hi {studentName.toLowerCase()}</div>
             <h1 className="ph-title">
-              Pick a <span className="ph-hl">subject</span> to start.
+              Let's learn more <span className="ph-hl">today</span>.
             </h1>
+            <p className="ph-subtitle">and collect more stars <Sparkles size={16} className="ph-spark" /></p>
           </div>
           <div className="ph-mascot-card">
+            <div className="ph-bubble">You've earned a new star today <Star size={13} fill="#F0A93A" stroke="#F0A93A" /></div>
             <div className="ph-mascot-art"><Mascot /></div>
           </div>
         </header>
 
-        {/* Tutor pick — recommended subject banner */}
+        {/* Tutor pick — cuter, shorter */}
         <section className="ph-pick">
           <div className="ph-pick-mascot" aria-hidden="true">
             <svg viewBox="0 0 220 250" width="64" height="72"><use href="#ph-bot" /></svg>
           </div>
           <div className="ph-pick-body">
-            <div className="ph-pick-lbl"><Sparkles size={12} /> Your tutor picked this for you</div>
             <div className="ph-pick-title">
-              Let's try <span style={{ color: recommended.accent }}>{recommended.name}</span> today —
-              you haven't visited in a while.
+              <Sparkles size={16} className="ph-pick-spark" />
+              {recommended.name} misses you!
             </div>
           </div>
           <button className="ph-pick-cta" type="button" style={{ background: recommended.accent }}>
-            Start <ArrowRight size={15} />
+            Let's go <ArrowRight size={15} />
           </button>
         </section>
+
 
         {/* Subjects grid */}
         <section className="ph-section">
