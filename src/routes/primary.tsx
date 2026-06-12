@@ -555,32 +555,32 @@ const css = `
 
 
 /* subjects grid */
-.ph-sub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.ph-sub{display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-sm);text-align:left;font:inherit;padding:0;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;color:inherit}
+.ph-sub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ph-sub{display:flex;flex-direction:column;background:#fffdf9;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);text-align:left;font:inherit;padding:0;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;color:inherit}
 .ph-sub:hover{transform:translateY(-4px);border-color:var(--orange-2);box-shadow:var(--shadow)}
 .ph-sub.is-rec{border-color:#E0A24A;box-shadow:0 14px 30px -16px rgba(217,145,42,.45)}
-.ph-sub-media{position:relative;width:100%;aspect-ratio:5/4;overflow:hidden}
+.ph-sub-media{position:relative;width:100%;aspect-ratio:7/4;overflow:hidden}
 .ph-sub-media .ph-scene{width:100%;height:100%;display:block}
-.ph-sub-rec-pill{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:5px;background:#fff;color:#C77F1F;font-family:var(--font-display);font-weight:700;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:999px;box-shadow:var(--shadow-sm);border:1px solid #F4E0BD}
-.ph-sub-fav{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink-faint);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
-.ph-sub-body{padding:14px 16px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.ph-sub-name{font-family:var(--font-display);font-weight:700;font-size:1.15rem;color:var(--ink)}
-.ph-sub-open{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.ph-sub-rec-pill{position:absolute;top:8px;left:8px;display:inline-flex;align-items:center;gap:5px;background:#fff;color:#C77F1F;font-family:var(--font-display);font-weight:700;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:999px;box-shadow:var(--shadow-sm);border:1px solid #F4E0BD}
+.ph-sub-fav{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink-faint);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+.ph-sub-body{padding:10px 14px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ph-sub-name{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--ink)}
+.ph-sub-open{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-display);font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
 
 /* star sky */
-.ph-sky-section{margin-top:6px}
-.ph-sky-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.ph-sky-section{margin-top:2px}
+.ph-sky-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:10px;flex-wrap:wrap}
 .ph-sky-eyebrow{color:#7E62D9}
-.ph-sky-title{font-size:1.55rem}
+.ph-sky-title{font-size:1.3rem}
 .ph-sky-num{color:#F0A93A;background:linear-gradient(160deg,#FFC76A,#E68B16);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.ph-sky-sub{margin:6px 0 0;color:var(--ink-soft);font-size:.92rem}
-.ph-sky-from{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;box-shadow:var(--shadow-sm)}
-.ph-sky-from-lbl{font-family:var(--font-display);font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
-.ph-sky-from-text{font-family:var(--font-display);font-weight:600;font-size:.85rem;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.ph-sky-sub{margin:4px 0 0;color:var(--ink-soft);font-size:.86rem}
+.ph-sky-from{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 5px;box-shadow:var(--shadow-sm)}
+.ph-sky-from-lbl{font-family:var(--font-display);font-weight:600;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+.ph-sky-from-text{font-family:var(--font-display);font-weight:600;font-size:.8rem;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
 .ph-sky-from-text svg{color:#F0A93A}
 
 .ph-sky{
-  position:relative;height:340px;border-radius:32px;overflow:hidden;
+  position:relative;height:200px;border-radius:24px;overflow:hidden;
   background:
     radial-gradient(120% 90% at 80% 20%,rgba(255,200,120,.25),transparent 55%),
     radial-gradient(80% 60% at 10% 90%,rgba(126,98,217,.4),transparent 60%),
@@ -588,10 +588,11 @@ const css = `
   border:1px solid #3A2C7A;
   box-shadow:0 24px 50px -28px rgba(40,20,80,.6), inset 0 0 60px rgba(255,255,255,.04);
 }
-.ph-sky-moon{position:absolute;top:32px;right:50px;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 32% 32%,#FFF6D9,#F2C66B 70%,#C28A2E);box-shadow:0 0 60px rgba(255,210,120,.45),inset -8px -10px 0 rgba(0,0,0,.08)}
+.ph-sky-moon{position:absolute;top:20px;right:32px;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 32% 32%,#FFF6D9,#F2C66B 70%,#C28A2E);box-shadow:0 0 60px rgba(255,210,120,.45),inset -6px -8px 0 rgba(0,0,0,.08)}
 .ph-sky-cloud{position:absolute;background:rgba(255,255,255,.06);border-radius:999px;filter:blur(2px)}
-.ph-sky-cloud-1{width:220px;height:36px;bottom:42px;left:-40px}
-.ph-sky-cloud-2{width:160px;height:28px;bottom:70px;left:180px;opacity:.7}
+.ph-sky-cloud-1{width:180px;height:28px;bottom:30px;left:-40px}
+.ph-sky-cloud-2{width:130px;height:22px;bottom:54px;left:160px;opacity:.7}
+
 .ph-sky-stars{position:absolute;inset:0}
 .ph-star{position:absolute;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.18);transform:translate(-50%,-50%);transition:transform .2s}
 .ph-star svg{width:100%;height:100%;display:block;fill:currentColor}
