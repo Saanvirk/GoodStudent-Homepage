@@ -13,6 +13,7 @@ import {
   BookOpen,
   TrendingUp,
   Compass,
+  Sparkles,
 } from "lucide-react";
 import sayItRight from "@/assets/say-it-right.png.asset.json";
 
