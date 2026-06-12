@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as TutorsRouteImport } from './routes/tutors'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as PrimaryRouteImport } from './routes/primary'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const ToolsRoute = ToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrimaryRoute = PrimaryRouteImport.update({
+  id: '/primary',
+  path: '/primary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
+  '/primary': typeof PrimaryRoute
   '/tools': typeof ToolsRoute
   '/tutors': typeof TutorsRoute
   '/welcome': typeof WelcomeRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
+  '/primary': typeof PrimaryRoute
   '/tools': typeof ToolsRoute
   '/tutors': typeof TutorsRoute
   '/welcome': typeof WelcomeRoute
@@ -59,21 +67,30 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
+  '/primary': typeof PrimaryRoute
   '/tools': typeof ToolsRoute
   '/tutors': typeof TutorsRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/tools' | '/tutors' | '/welcome'
+  fullPaths: '/' | '/explore' | '/primary' | '/tools' | '/tutors' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/tools' | '/tutors' | '/welcome'
-  id: '__root__' | '/' | '/explore' | '/tools' | '/tutors' | '/welcome'
+  to: '/' | '/explore' | '/primary' | '/tools' | '/tutors' | '/welcome'
+  id:
+    | '__root__'
+    | '/'
+    | '/explore'
+    | '/primary'
+    | '/tools'
+    | '/tutors'
+    | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExploreRoute: typeof ExploreRoute
+  PrimaryRoute: typeof PrimaryRoute
   ToolsRoute: typeof ToolsRoute
   TutorsRoute: typeof TutorsRoute
   WelcomeRoute: typeof WelcomeRoute
@@ -102,6 +119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/primary': {
+      id: '/primary'
+      path: '/primary'
+      fullPath: '/primary'
+      preLoaderRoute: typeof PrimaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore': {
       id: '/explore'
       path: '/explore'
@@ -122,6 +146,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExploreRoute: ExploreRoute,
+  PrimaryRoute: PrimaryRoute,
   ToolsRoute: ToolsRoute,
   TutorsRoute: TutorsRoute,
   WelcomeRoute: WelcomeRoute,
