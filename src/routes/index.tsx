@@ -253,8 +253,9 @@ function HomePage() {
   const [active, setActive] = useState("home");
   const [userOpen, setUserOpen] = useState(false);
 
-  const nav = [
+    const nav = [
     { id: "home",  label: "Home",  icon: Home,   to: "/" as const },
+    { id: "primary", label: "Primary Home", icon: Sparkles, to: "/primary" as const },
     { id: "tutor", label: "Tutor", icon: Pencil, to: "/tutors" as const },
     { id: "tools", label: "Tools", icon: Wrench, to: "/tools" as const },
     { id: "explore", label: "Explore", icon: Globe, to: "/explore" as const },
