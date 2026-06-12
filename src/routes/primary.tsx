@@ -523,12 +523,13 @@ const css = `
 .ph-bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 12px;font-family:var(--font-display);font-weight:600;font-size:.78rem;color:var(--ink);box-shadow:var(--shadow-sm);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .ph-bubble::after{content:"";position:absolute;bottom:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:12px;height:12px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 
-/* level chip — floated top right of main */
-.ph-level-chip{position:absolute;top:14px;right:32px;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px;box-shadow:var(--shadow-sm);font-family:var(--font-display);font-weight:700;z-index:2}
-.ph-level-stars{display:inline-flex;color:#F0A93A;gap:1px}
-.ph-level-count{color:var(--ink);font-size:.82rem}
-.ph-level-dot{width:4px;height:4px;border-radius:50%;background:var(--ink-faint)}
-.ph-level-tag{color:var(--orange-deep);font-size:.82rem}
+/* level chip — speech bubble from mascot */
+.ph-level-chip{position:relative;display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;box-shadow:var(--shadow);font-family:var(--font-display);font-weight:700;z-index:2}
+.ph-level-chip::after{content:"";position:absolute;bottom:-7px;left:50%;transform:translateX(-50%) rotate(45deg);width:14px;height:14px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ph-level-stars{display:inline-flex;color:#F0A93A;gap:2px}
+.ph-level-count{color:var(--ink);font-size:.98rem}
+.ph-level-dot{width:5px;height:5px;border-radius:50%;background:var(--ink-faint)}
+.ph-level-tag{color:var(--orange-deep);font-size:.98rem}
 
 /* tutor pick banner */
 .ph-pick{display:flex;align-items:center;gap:14px;padding:8px 12px 8px 8px;background:linear-gradient(120deg,#FFFBF4 0%,#FFEFD9 100%);border:1px solid #F4E0BD;border-radius:18px;box-shadow:0 8px 22px -16px rgba(180,110,60,.35)}
