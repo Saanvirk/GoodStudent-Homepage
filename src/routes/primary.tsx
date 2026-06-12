@@ -127,7 +127,7 @@ function BotSymbols() {
 /* ===== Per-subject prop badges ===== */
 function PropEnglish() {
   return (
-    <g transform="translate(150 96)">
+    <g transform="translate(170 96)">
       <rect width="44" height="34" rx="10" fill="#fff" stroke="#E6CFC8" strokeWidth="2" />
       <text x="22" y="24" textAnchor="middle" fontFamily="Fredoka,sans-serif" fontSize="18" fontWeight="700" fill="#B5462F">Aa</text>
     </g>
@@ -135,7 +135,7 @@ function PropEnglish() {
 }
 function PropMaths() {
   return (
-    <g transform="translate(154 96)">
+    <g transform="translate(174 96)">
       <rect width="40" height="34" rx="10" fill="#fff" stroke="#E6CFC8" strokeWidth="2" />
       <text x="13" y="24" textAnchor="middle" fontFamily="Fredoka,sans-serif" fontSize="16" fontWeight="700" fill="#C28028">7+</text>
       <path d="M28 9 l8 8 l-8 8 l-8 -8 z" fill="none" stroke="#C28028" strokeWidth="2" />
@@ -144,7 +144,7 @@ function PropMaths() {
 }
 function PropChinese() {
   return (
-    <g transform="translate(154 96)">
+    <g transform="translate(174 96)">
       <rect width="36" height="36" rx="8" fill="#B0402E" />
       <text x="18" y="26" textAnchor="middle" fontFamily="serif" fontSize="20" fontWeight="700" fill="#FFE8D6">福</text>
     </g>
@@ -152,7 +152,7 @@ function PropChinese() {
 }
 function PropGeneral() {
   return (
-    <g transform="translate(150 88)">
+    <g transform="translate(170 88)">
       <circle cx="22" cy="22" r="10" fill="#F08AB1" />
       <circle cx="22" cy="22" r="3.5" fill="#FFDFB5" />
       <g stroke="#F08AB1" strokeWidth="3" strokeLinecap="round">
