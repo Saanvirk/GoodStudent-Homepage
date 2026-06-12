@@ -566,7 +566,7 @@ const css = `
 .ph-sub-open{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-display);font-weight:700;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase}
 
 /* star sky */
-.ph-sky-section{margin-top:0;display:flex;flex-direction:column;min-height:0}
+.ph-sky-section{margin-top:0;display:flex;flex-direction:column;flex:1;min-height:0}
 .ph-sky-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:6px;flex-wrap:wrap}
 .ph-sky-eyebrow{color:#7E62D9}
 .ph-sky-title{font-size:1.1rem}
