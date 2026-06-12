@@ -482,19 +482,20 @@ const css = `
 .ph-user-switch>svg{color:var(--ink-faint);flex-shrink:0}
 
 /* main */
-.ph-main{flex:1;min-width:0;padding:28px 48px 40px;position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;gap:22px}
+.ph-main{flex:1;min-width:0;padding:18px 36px 24px;position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;gap:14px}
 
 /* hero — title + mascot only */
-.ph-hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.ph-hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
 .ph-hero-text{max-width:680px}
-.ph-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:12px}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:8px}
 .ph-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(19,164,131,.22);animation:ph-ping 2s infinite}
 @keyframes ph-ping{0%,100%{box-shadow:0 0 0 4px rgba(19,164,131,.22)}50%{box-shadow:0 0 0 8px rgba(19,164,131,0)}}
-.ph-title{font-size:clamp(2rem,3.6vw,3.1rem);font-weight:700}
+.ph-title{font-size:clamp(1.6rem,2.6vw,2.3rem);font-weight:700}
 .ph-hl{color:var(--orange-deep);position:relative;display:inline-block;white-space:nowrap}
 .ph-hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.32em;background:var(--amber);opacity:.5;border-radius:8px;z-index:-1}
 .ph-mascot-card{position:relative;flex-shrink:0}
-.ph-mascot-art{width:160px;filter:drop-shadow(0 18px 28px rgba(120,40,0,.22));animation:ph-bob 4s ease-in-out infinite}
+.ph-mascot-art{width:120px;filter:drop-shadow(0 18px 28px rgba(120,40,0,.22));animation:ph-bob 4s ease-in-out infinite}
+
 @keyframes ph-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .ph-ms{width:100%;height:auto;display:block}
 .ph-ms .sh{fill:rgba(49,28,16,.12)}
